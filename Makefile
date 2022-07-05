@@ -1,4 +1,4 @@
-###_*_*_*_*_*_*_*_*_*_*_*_Makefile_Minishell_*_*_*_*_*_*_*_*_*_*_*_###
+###_*_*_*_*_*_*_*_*_*_*_*_*_Makefile_minishell_*_*_*_*_*_*_*_*_*_*_*_*_###
 ###-------------------------# VARIABLES ##-------------------------###
 NAME = minishell
 
@@ -19,7 +19,6 @@ INCLUDE 	= $(addprefix $(INCLUDE_DIR), $(INCLUDE_FILES))
 OBJS 		= $(SRCS_FILES:.c=.o)
 
 ### Colour var ###
-
 CURSOR_UP	= \033[0A
 CURSOR_DOWN	= \033[0B
 
@@ -57,14 +56,16 @@ $(NAME): $(OBJS)
 	@mkdir -p $(OBJS_DIR)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
 	@mv -f *.o $(OBJS_DIR)
-	@echo "${GREEN}${BOLD}Compilation done: it was so_long 🎮${END}\n"
+	@echo "MINISHELL	| STATUS: \033[0;32mOK\033[0;00m"
+	@echo "---------------------------------------------"
 
 $(BONUS): $(OBJS)
 	@echo "$(BLUE)Compiling $(BONUS)...$(END)"
 	@mkdir -p $(OBJS_DIR)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(BONUS)
 	@mv -f *.o $(OBJS_DIR)
-	@echo "${GREEN}${BOLD}Compilation done: it was so_long 🎮${END}\n"
+	@echo "MINISHELL	| STATUS: \033[0;32mOK\033[0;00m"
+	@echo "---------------------------------------------"
 
 %.o: $(SRCS_DIR)%.c
 	@echo "$(BLUE)Compiling object $< ..$(END)"
@@ -75,12 +76,10 @@ bonus: $(BONUS)
 clean:
 	@rm -f *.o
 	@rm -rf $(OBJS_DIR)
-	@echo "${GREEN}${BOLD}🛁 Objects Cleaned 🛁 ${END}\n"
-
+	@echo "MINISHELL	| STATUS: \033[0;36mOBJECTS CLEANED\033[0;00m"
 fclean:	clean
 	@rm -rf $(NAME) $(BONUS)
-	@echo "$(GREEN)${BOLD}🚮 Exectuable deleted 🚮${END}\n"
-
+	@echo "MINISHELL	| STATUS: \033[0;36mEXECUTABLE CLEANED\033[0;00m"
 leak:
 	leaks --atExit -- ./minishell
 
@@ -90,4 +89,3 @@ purge:
 #	rm -rf *
 
 .PHONY: all clean fclean re
-

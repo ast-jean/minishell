@@ -3,16 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: ast-jean <ast-jean@student.42quebec.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 11:18:39 by ast-jean          #+#    #+#             */
 /*   Updated: 2021/11/02 12:23:58 by ast-jean         ###   ########.fr       */
+=======
+/*   By: xchouina <marvin@42quebec.com>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/14 16:31:21 by xchouina          #+#    #+#             */
+/*   Updated: 2021/10/19 14:56:16 by xchouina         ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
 int	ft_isalpha(int c)
+<<<<<<< HEAD
 {	
+=======
+{
+>>>>>>> main
 	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
 		return (1);
 	else

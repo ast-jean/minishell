@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: ast-jean <ast-jean@student.42quebec.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 14:24:50 by ast-jean          #+#    #+#             */
 /*   Updated: 2021/11/02 13:33:03 by ast-jean         ###   ########.fr       */
+=======
+/*   By: xchouina <marvin@42quebec.com>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/15 19:11:21 by xchouina          #+#    #+#             */
+/*   Updated: 2021/10/19 14:57:51 by xchouina         ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -14,6 +21,10 @@
 int	ft_tolower(int c)
 {
 	if (c >= 'A' && c <= 'Z')
+<<<<<<< HEAD
 		return (c + 32);
+=======
+		c += 32;
+>>>>>>> main
 	return (c);
 }
