@@ -1,11 +1,33 @@
 #include "../include/minishell.h"
 
-int	main(void)
+
+void	executing_command(char *line)
 {
-	char *str;
+	creating_token(line);
+
+}
+
+void *access_ptr(t_vars *vars, int i)
+{
+	int count;
+
+	count = 0;
+	vars->token = vars->token->first;
+	while (count <= i)
+	{
+		vars->token = vars->token->next;
+	}
+}
+
+int main(void)
+{
+	char *line;
 
 	while(1)
 	{
-		printf("%s\n",readline());
+		line = readline("");
+		executing_command(line);
+		printf( "%s\n", line);
 	}
+	return 0;
 }
