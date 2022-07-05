@@ -1,11 +1,10 @@
-###_*_*_*_*_*_*_*_*_*_*_*_*_Makefile_ft_printf_*_*_*_*_*_*_*_*_*_*_*_*_###
+###_*_*_*_*_*_*_*_*_*_*_*_*_Makefile_minishell_*_*_*_*_*_*_*_*_*_*_*_*_###
 ###-------------------------# VARIABLES ##-------------------------###
 NAME = minishell
 
 SRCS_FILES 		=	minishell.c \
 					
-
-INCLUDE_FILES	= 	so_long.h
+INCLUDE_FILES	= 	minishell.h
 
 LIBS = include/libft/libft.a
 
@@ -20,7 +19,6 @@ INCLUDE 	= $(addprefix $(INCLUDE_DIR), $(INCLUDE_FILES))
 OBJS 		= $(SRCS_FILES:.c=.o)
 
 ### Colour var ###
-
 CURSOR_UP	= \033[0A
 CURSOR_DOWN	= \033[0B
 
@@ -44,7 +42,6 @@ WHITE		= \033[37m
 ### Compilations et archivage ###
 CC 			= gcc
 CFLAGS 		= -g -Wall -Wextra -Werror 
-MLXFLAGS	= -lmlx -framework OpenGL -framework AppKit
 ### Autres Fonctions ###
 NORMINETTE 	= norminette
 ###------------------------## LEAK CHECK ##------------------------###
@@ -57,34 +54,34 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@echo "$(BLUE)Compiling $(NAME)...$(END)"
 	@mkdir -p $(OBJS_DIR)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(MLXFLAGS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
 	@mv -f *.o $(OBJS_DIR)
-	@echo "${GREEN}${BOLD}Compilation done: it was so_long 🎮${END}\n"
+	@echo "MINISHELL	| STATUS: \033[0;32mOK\033[0;00m"
+	@echo "---------------------------------------------"
 
 $(BONUS): $(OBJS)
 	@echo "$(BLUE)Compiling $(BONUS)...$(END)"
 	@mkdir -p $(OBJS_DIR)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(MLXFLAGS) -o $(BONUS)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(BONUS)
 	@mv -f *.o $(OBJS_DIR)
-	@echo "${GREEN}${BOLD}Compilation done: it was so_long 🎮${END}\n"
+	@echo "MINISHELL	| STATUS: \033[0;32mOK\033[0;00m"
+	@echo "---------------------------------------------"
 
 %.o: $(SRCS_DIR)%.c
 	@echo "$(BLUE)Compiling object $< ..$(END)"
-	@$(CC) $(CFLAGS) -Imlx -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 bonus: $(BONUS)
 
 clean:
 	@rm -f *.o
 	@rm -rf $(OBJS_DIR)
-	@echo "${GREEN}${BOLD}🛁 Objects Cleaned 🛁 ${END}\n"
-
+	@echo "MINISHELL	| STATUS: \033[0;36mOBJECTS CLEANED\033[0;00m"
 fclean:	clean
 	@rm -rf $(NAME) $(BONUS)
-	@echo "$(GREEN)${BOLD}🚮 Exectuable deleted 🚮${END}\n"
-
+	@echo "MINISHELL	| STATUS: \033[0;36mEXECUTABLE CLEANED\033[0;00m"
 leak:
-	leaks --atExit -- ./so_long maps/big.ber
+	leaks --atExit -- ./minishell
 
 re:	fclean all
 
@@ -92,4 +89,3 @@ purge:
 #	rm -rf *
 
 .PHONY: all clean fclean re
-
