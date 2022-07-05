@@ -3,6 +3,8 @@
 NAME = minishell
 
 SRCS_FILES 		=	minishell.c \
+					parsing.c	\
+					
 					
 INCLUDE_FILES	= 	minishell.h
 
