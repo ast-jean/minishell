@@ -1,6 +1,11 @@
 #include "../include/minishell.h"
 
+int	main(void)
+{
+	char *str;
 
-
-
-hello from xavier
+	while(1)
+	{
+		printf("%s\n",readline());
+	}
+}
