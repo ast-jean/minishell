@@ -2,7 +2,7 @@
 ###-------------------------# VARIABLES ##-------------------------###
 NAME = minishell
 
-SRCS_FILES 		=	minishell.c \
+SRCS_FILES 		=	minishell.c
 
 INCLUDE_FILES	= 	minishell.h
 
@@ -54,24 +54,14 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@echo "$(BLUE)Compiling $(NAME)...$(END)"
 	@mkdir -p $(OBJS_DIR)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
+	@$(CC) $(CFLAGS) -lreadline $(OBJS) $(LIBS) -o $(NAME)
 	@mv -f *.o $(OBJS_DIR)
 	@echo "MINISHELL	| STATUS: \033[0;32mOK\033[0;00m"
 	@echo "---------------------------------------------"
 
-$(BONUS): $(OBJS)
-	@echo "$(BLUE)Compiling $(BONUS)...$(END)"
-	@mkdir -p $(OBJS_DIR)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(BONUS)
-	@mv -f *.o $(OBJS_DIR)
-	@echo "MINISHELL	| STATUS: \033[0;32mOK\033[0;00m"
-	@echo "---------------------------------------------"
-
-%.o: $(SRCS_DIR)%.c
-	@echo "$(BLUE)Compiling object $< ..$(END)"
+.o : $(SRCS_DIR)%.c
+	@echo "$(BLUE)Compiling object $@ ..$(END)"
 	@$(CC) $(CFLAGS) -c $< -o $@
-
-bonus: $(BONUS)
 
 clean:
 	@rm -f *.o
@@ -88,4 +78,6 @@ re:	fclean all
 purge:
 #	rm -rf *
 
-.PHONY: all clean fclean re
+help:
+	@echo "Rules: all clean fclean re"
+
