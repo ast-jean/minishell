@@ -1,11 +1,10 @@
-###_*_*_*_*_*_*_*_*_*_*_*_*_Makefile_ft_printf_*_*_*_*_*_*_*_*_*_*_*_*_###
+###_*_*_*_*_*_*_*_*_*_*_*_Makefile_Minishell_*_*_*_*_*_*_*_*_*_*_*_###
 ###-------------------------# VARIABLES ##-------------------------###
 NAME = minishell
 
 SRCS_FILES 		=	minishell.c \
-					
 
-INCLUDE_FILES	= 	so_long.h
+INCLUDE_FILES	= 	minishell.h
 
 LIBS = include/libft/libft.a
 
@@ -44,7 +43,6 @@ WHITE		= \033[37m
 ### Compilations et archivage ###
 CC 			= gcc
 CFLAGS 		= -g -Wall -Wextra -Werror 
-MLXFLAGS	= -lmlx -framework OpenGL -framework AppKit
 ### Autres Fonctions ###
 NORMINETTE 	= norminette
 ###------------------------## LEAK CHECK ##------------------------###
@@ -57,20 +55,20 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@echo "$(BLUE)Compiling $(NAME)...$(END)"
 	@mkdir -p $(OBJS_DIR)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(MLXFLAGS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
 	@mv -f *.o $(OBJS_DIR)
 	@echo "${GREEN}${BOLD}Compilation done: it was so_long 🎮${END}\n"
 
 $(BONUS): $(OBJS)
 	@echo "$(BLUE)Compiling $(BONUS)...$(END)"
 	@mkdir -p $(OBJS_DIR)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(MLXFLAGS) -o $(BONUS)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(BONUS)
 	@mv -f *.o $(OBJS_DIR)
 	@echo "${GREEN}${BOLD}Compilation done: it was so_long 🎮${END}\n"
 
 %.o: $(SRCS_DIR)%.c
 	@echo "$(BLUE)Compiling object $< ..$(END)"
-	@$(CC) $(CFLAGS) -Imlx -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 bonus: $(BONUS)
 
@@ -84,7 +82,7 @@ fclean:	clean
 	@echo "$(GREEN)${BOLD}🚮 Exectuable deleted 🚮${END}\n"
 
 leak:
-	leaks --atExit -- ./so_long maps/big.ber
+	leaks --atExit -- ./minishell
 
 re:	fclean all
 
@@ -93,63 +91,3 @@ purge:
 
 .PHONY: all clean fclean re
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-##-----------------## Weird things below ##------------------##
-sus:
-	@echo "   🟥🟥🟥"
-	@echo " 🟥🟥🟦🟦 "
-	@echo " 🟥🟥🟥🟥"
-	@echo " 🟥🟥🟥🟥"
-	@echo "   🟥  🟥"
-
-
-
-arrow:
-	@echo "      ____"
-	@echo "     |####|"
-	@echo "     |####|"
-	@echo "     |####|"
-	@echo "     |####|"
-	@echo "     |####|"
-	@echo "     |####|"
-	@echo "     |####|"
-	@echo "     |####|"
-	@echo "     |####|"
-	@echo "     |####|"
-	@echo "     |####|"
-	@echo "     |####|"
-	@echo "     |####|"
-	@echo "     |####|"
-	@echo "     |####|"
-	@echo "     |####|"
-	@echo "     |####|"
-	@echo "     |####|"
-	@echo "     |####|"
-	@echo "     |####|"
-	@echo "     |####|"
-	@echo " ____|####|____ "
-	@echo " \############/"
-	@echo "   \########/"
-	@echo "     \####/"
-	@echo "       \/"
-
-
-h: arrow
-	@echo " | ￣￣￣￣￣￣|"
-	@echo " |Start is here|"
-	@echo " |_____________|"
-	@echo " (\__/) || "
-	@echo " (•ㅅ•) ||" 
-	@echo " /    づ"
