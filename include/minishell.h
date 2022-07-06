@@ -8,6 +8,14 @@
 
 
 // STRUCTS
+typedef struct s_token
+{
+	char			*cont;
+	char 			*type;
+	struct s_token	*next;
+	struct s_token	*prev;
+	struct s_token	*first;
+}	t_token;
 
 typedef struct s_vars
 {
@@ -15,23 +23,18 @@ typedef struct s_vars
 	char	**av;
 	char 	**env;
 	t_token	*token;
-}	t_vars
+}	t_vars;
 
-typedef struct s_token
-{
-	char	*cont;
-	char 	*type;
-	void	*next;
-	void	*first;
-	void	*last;
-}	t_token
 
 // FUNCTIONS (SELON FILENAME)----------------------
 
 // MINISHELL.C
 
 // PARSING.C
-void	creating_tokens(char *line);
+
+
+//INIT_TOKEN.C
+void	*creating_tokens(char *line, t_vars *vars);
 
 
 // ------------------------------------------------
