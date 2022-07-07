@@ -38,7 +38,7 @@ int	nbr_of_words(char const *s)
 	return (count);
 }
 
-char	*unquoted_wrd_array(char *s, int n)
+char	*unquoted_wrd_array(char *s, int *n)
 {
 	char	*str;
 	int		len;
@@ -47,42 +47,43 @@ char	*unquoted_wrd_array(char *s, int n)
 	i = 0;
 	if (!s)
 		return (NULL);
-	len = len_of_this_word(s, n);
+	len = len_of_this_word(s, *n);
 	str = malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (NULL);
-	while (s[n] && !ft_iswhitespace(s[n]))
+	while (s[*n] && !ft_iswhitespace(s[*n]))
 	{
-		str[i] = s[n];
+		str[i] = s[*n];
 		i++;
-		n++;
+		(*n)++;
 	}
 	str[i] = '\0';
 	return (str);
 }
 
-char	*quoted_wrd_array(char *line, int n)
+char	*quoted_wrd_array(char *line, int *n)
 {
 	char	*str;
 	int		len;
 	int		i;
 
-	i = 1;
+	i = 0;
 	len = 0;
 	if (!line)
 		return (NULL);
-	len = len_of_this_quoted_word(line, n);
+	len = len_of_this_quoted_word(line, *n);
 	printf("---> %d <---\n", len);
 	str = malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (NULL);
-	while (line[n] && !ft_isquote(line[n]))
+	while (line[++(*n)] && !ft_isquote(line[*n]))
 	{
-		str[i] = line[n];
+		// printf("%c", line[n]);
+		str[i] = line[*n];
 		i++;
-		n++;
 	}
 	str[i] = '\0';
+	// printf("\n");
 	return (str);
 }
 
@@ -96,6 +97,7 @@ char	**new_split(char *line)
 	i = 0;
 	x = 0;
 	wc = nbr_of_words(line);
+	printf("wc = %d\n", wc);
 	tab = malloc(sizeof(char *) * (wc + 1));
 	if (!tab)
 		return (NULL);
@@ -104,9 +106,9 @@ char	**new_split(char *line)
 		while (line[i] && ft_iswhitespace(line[i])) //skipping whitespaces
 			i++;
 		if (ft_isquote(line[i]))
-			tab[x] = quoted_wrd_array(line, i);
-		else
-			tab[x] = unquoted_wrd_array(line, i);
+			tab[x] = quoted_wrd_array(line, &i);
+		else if (line[i])
+			tab[x] = unquoted_wrd_array(line, &i);
 		x++;
 		while (line[i] && !ft_iswhitespace(line[i]))
 			i++;
@@ -184,10 +186,9 @@ char	**ft_split(char const *s, char c)
 }
 // ----------------------------------------------------------------------------
 
-
 int	main(void)
 {
-	char *one_string = "Hello 'childen' i wish you happy morning";
+	char *one_string = "'Hello' childen i \"wish you\" happy morning";
 	char **tokens;
 	char **true_str;
 	tokens = new_split(one_string);

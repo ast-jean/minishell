@@ -30,6 +30,14 @@ bool	ft_isuneven(const int c)
 	return (false);
 }
 
+int	ft_isprint(int c)
+{
+	if (c >= 32 && c <= 126)
+		return (1);
+	else
+		return (0);
+}
+
 int	how_many_quotes(char *str)
 {
 	int	i;
@@ -44,14 +52,6 @@ int	how_many_quotes(char *str)
 		i++;
 	}
 	return (g);
-}
-
-int	ft_isprint(int c)
-{
-	if (c >= 32 && c <= 126)
-		return (1);
-	else
-		return (0);
 }
 
 int	len_of_this_word(char *line, int i)
