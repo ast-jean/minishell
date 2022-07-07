@@ -3,7 +3,7 @@
 void	creating_tokens(char *line)
 {
 	t_vars	*vars;
-	char **line_content
+	char	**line_content;
 
 	int i;
 	line_content = ft_split_tk(line); //Change split later
