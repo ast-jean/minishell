@@ -4,6 +4,8 @@ NAME = minishell
 
 SRCS_FILES 		=	minishell.c \
 					parsing.c	\
+					init_token.c \
+					token_op.c
 					
 					
 INCLUDE_FILES	= 	minishell.h
@@ -16,9 +18,10 @@ OBJS_DIR	= objs/
 INCLUDE_DIR = include/
 
 ## Naming files ##
+OBJS 		= $(SRCS_FILES:.c=.o)
+OBJS_IN_DIR	= $(addprefix $(OBJS_DIR), $(OBJS))
 SRCS 		= $(addprefix $(SRCS_DIR), $(SRCS_FILES))
 INCLUDE 	= $(addprefix $(INCLUDE_DIR), $(INCLUDE_FILES))
-OBJS 		= $(SRCS_FILES:.c=.o)
 
 ### Colour var ###
 CURSOR_UP	= \033[0A
@@ -47,38 +50,40 @@ CFLAGS 		= -g -Wall -Wextra -Werror
 ### Autres Fonctions ###
 NORMINETTE 	= norminette
 ###------------------------## LEAK CHECK ##------------------------###
-LEAK =  #working if exits
-VALGRING = valgrind --track-fds=yes --track-origins=yes  --leak-check=full ./so_long maps/map.ber
+LEAK = leaks --atExit -- ./minishell
+VALGRING = valgrind --track-fds=yes --track-origins=yes  --leak-check=full ./minishell
 ###--------------------------## REGLES ##--------------------------###
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME) : $(OBJS_IN_DIR)
 	@echo "$(BLUE)Compiling $(NAME)...$(END)"
-	@mkdir -p $(OBJS_DIR)
-	@$(CC) $(CFLAGS) -lreadline $(OBJS) $(LIBS) -o $(NAME)
-	@mv -f *.o $(OBJS_DIR)
+	@$(CC) $(CFLAGS) $(OBJS_IN_DIR) -lreadline $(LIBS) -o $(NAME)
 	@echo "MINISHELL	| STATUS: \033[0;32mOK\033[0;00m"
 	@echo "---------------------------------------------"
 
-%.o : $(SRCS_DIR)%.c
-	@echo "$(BLUE)Compiling object $@ ..$(END)"
+$(OBJS_DIR)%.o : $(SRCS_DIR)%.c
+	@mkdir -p $(OBJS_DIR)
+	@echo "$(BLUE)Compiling object $< ..$(END)"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@rm -f *.o
 	@rm -rf $(OBJS_DIR)
-	@echo "MINISHELL	| STATUS: \033[0;36mOBJECTS CLEANED\033[0;00m"
+	@echo "MINISHELL	| STATUS: \033[0;36m🛁OBJECTS CLEANED🛁\033[0;00m"
+
 fclean:	clean
 	@rm -rf $(NAME) $(BONUS)
-	@echo "MINISHELL	| STATUS: \033[0;36mEXECUTABLE CLEANED\033[0;00m"
+	@echo "MINISHELL	| STATUS: \033[0;36m🚮EXECUTABLE CLEANED🚮\033[0;00m"
+
 leak:
-	leaks --atExit -- ./minishell
+	$(LEAK)
 
-re:	fclean all
+valgrind:
+	$(VALGRIND)
 
-purge:
-#	rm -rf *
+re:	fclean all 
+	./$(NAME)
 
 help:
 	@echo "Rules: all clean fclean re"

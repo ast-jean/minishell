@@ -34,8 +34,14 @@ typedef struct s_vars
 
 
 //INIT_TOKEN.C
-void	*creating_tokens(char *line, t_vars *vars);
+void	creating_tokens(char *line, t_vars *vars);
+void	push_tk(char *cont, t_token *token, t_token *first, t_token *prev, int i, int count);
+void	executing_command(char *line, t_vars *vars);
+char	*defining_token_type(t_token *token);
 
+//TOKEN_OP.C
+void	debug_print_tokens(t_vars *vars);
+void	*access_ptr(t_vars *vars, int i);
 
 // ------------------------------------------------
 #endif

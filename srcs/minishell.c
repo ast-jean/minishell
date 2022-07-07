@@ -10,40 +10,30 @@ void	quit_shell(t_vars *vars)
 
 }
 
-void	executing_command(char *line)
+void	executing_command(char *line, t_vars *vars)
 {
-	(void)line;
-//	creating_token(line);
+	
+	creating_tokens(line, vars);
 	printf("Executing command\n");
 }
 
-void *access_ptr(t_vars *vars, int i)
-{
-	int count;
 
-	count = 0;
-	vars->token = vars->token->first;
-	while (count <= i)
-	{
-		vars->token = vars->token->next;
-	}
-	return (vars->token);
-}
+
 
 int main(void)
 {
 	char *line;
 	t_vars	vars;
 
-	(void)vars;
-
-
-	while(1)
+	while (1)
 	{
 		line = readline("");
 		//malloc char **line = parse_split
-		executing_command(line);
-		printf( "%s\n", line);
+		executing_command(line, &vars);
+		// printf( "%s\n", line);
+		printf("Fault1?\n");
+		debug_print_tokens(&vars);
 	}
+
 	return 0;
 }
