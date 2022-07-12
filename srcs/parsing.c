@@ -4,6 +4,7 @@ void	creating_tokens(char *line)
 {
 	t_vars	*vars;
 	char	**line_content;
+	char 	*token;
 
 	int i;
 	line_content = ft_split_tk(line); //Change split later
@@ -27,4 +28,3 @@ void	defining_token_type(t_token token)
 	//else if cmd
 		return ("cmd");
 }
-

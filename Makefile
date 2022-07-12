@@ -61,7 +61,7 @@ $(NAME): $(OBJS)
 	@echo "MINISHELL	| STATUS: \033[0;32mOK\033[0;00m"
 	@echo "---------------------------------------------"
 
-.o : $(SRCS_DIR)%.c
+%.o : $(SRCS_DIR)%.c
 	@echo "$(BLUE)Compiling object $@ ..$(END)"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
