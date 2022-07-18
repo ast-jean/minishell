@@ -7,6 +7,7 @@
 
 
 // STRUCTS
+
 typedef struct s_token
 {
 	char			*cont;
