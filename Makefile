@@ -2,20 +2,11 @@
 ###-------------------------# VARIABLES ##-------------------------###
 NAME = minishell
 
-<<<<<<< HEAD
-SRCS_FILES 		=	minishell.c \
-					parsing.c	\
-					init_token.c \
-					token_op.c
-					
-=======
-SRCS_FILES 		=	srcs/execution/minishell.c 		\
-					srcs/parsing/parsing.c			\
-					srcs/parsing/new_split.c		\
-					srcs/parsing/new_split_utils.c	\
-					srcs/parsing/init_token.c		\
->>>>>>> acba837d5d4b0e837a9ae58b25303a747f2aea83
-					
+SRCS_FILES 		=	parsing/parsing.c			\
+					parsing/new_split.c			\
+					parsing/new_split_utils.c	\
+					# parsing/init_token.c		\
+
 INCLUDE_FILES	= 	minishell.h
 
 LIBS = include/libft/libft.a
@@ -58,7 +49,7 @@ CFLAGS 		= -g -Wall -Wextra -Werror
 ### Autres Fonctions ###
 NORMINETTE 	= norminette
 ###------------------------## LEAK CHECK ##------------------------###
-LEAK = leaks --atExit -- ./minishell
+LEAK = leaks -q --atExit -- ./minishell
 VALGRING = valgrind --track-fds=yes --track-origins=yes  --leak-check=full ./minishell
 ###--------------------------## REGLES ##--------------------------###
 
@@ -71,16 +62,22 @@ $(NAME) : $(OBJS_IN_DIR)
 	@echo "---------------------------------------------"
 
 $(OBJS_DIR)%.o : $(SRCS_DIR)%.c
+	@$(MAKE) -C include/libft
 	@mkdir -p $(OBJS_DIR)
+	@mkdir -p $(OBJS_DIR)/parsing
+	@mkdir -p $(OBJS_DIR)/execution
+	@mkdir -p $(OBJS_DIR)/built_ins
 	@echo "$(BLUE)Compiling object $< ..$(END)"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
+	@$(MAKE) -C include/libft clean
 	@rm -f *.o
 	@rm -rf $(OBJS_DIR)
 	@echo "MINISHELL	| STATUS: \033[0;36m🛁OBJECTS CLEANED🛁\033[0;00m"
 
 fclean:	clean
+	@$(MAKE) -C include/libft fclean
 	@rm -rf $(NAME) $(BONUS)
 	@echo "MINISHELL	| STATUS: \033[0;36m🚮EXECUTABLE CLEANED🚮\033[0;00m"
 
