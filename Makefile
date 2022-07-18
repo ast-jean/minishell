@@ -2,11 +2,19 @@
 ###-------------------------# VARIABLES ##-------------------------###
 NAME = minishell
 
+<<<<<<< HEAD
 SRCS_FILES 		=	minishell.c \
 					parsing.c	\
 					init_token.c \
 					token_op.c
 					
+=======
+SRCS_FILES 		=	srcs/execution/minishell.c 		\
+					srcs/parsing/parsing.c			\
+					srcs/parsing/new_split.c		\
+					srcs/parsing/new_split_utils.c	\
+					srcs/parsing/init_token.c		\
+>>>>>>> acba837d5d4b0e837a9ae58b25303a747f2aea83
 					
 INCLUDE_FILES	= 	minishell.h
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/19 14:46:17 by xchouina          #+#    #+#             */
+/*   Updated: 2022/07/18 11:04:07 by xchouina         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LIBFT_H
 # define LIBFT_H
 
@@ -6,6 +18,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
+#include <stdbool.h>
 
 typedef struct s_list
 {
@@ -35,6 +48,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	*ft_strdup(const char *s1);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strchr(const char *s, int t);
+
 void	*ft_memset(void *b, int c, size_t len);
 void	*ft_memmove(void *dst, const void *src, size_t len);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
@@ -70,10 +84,12 @@ void	ft_pt_swap(int *a, int *b);
 long	ft_atol(const char *str);
 
 char	*get_next_line(int fd);
-// int		ft_strlen(char *str);
-// char	*ft_strchr(char *s, int c);
-// char	*ft_strjoin(char *rmd, char *buff);
 char	*ft_get_temp(char *rmd);
 char	*ft_new_rmd(char *rmd);
+
+int		ft_isquote(const int c);
+bool	ft_iswhitespace(const int c);
+bool	ft_iseven(const int c);
+bool	ft_isuneven(const int c);
 
 #endif
