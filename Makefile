@@ -88,7 +88,6 @@ valgrind:
 	$(VALGRIND)
 
 re:	fclean all 
-	./$(NAME)
 
 help:
 	@echo "Rules: all clean fclean re"

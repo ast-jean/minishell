@@ -34,7 +34,8 @@ typedef struct s_vars
 
 // NEW_SPLIT.C
 char	*unquoted_wrd_array(char *s, int *n);
-char	*quoted_wrd_array(char *line, int *n);
+char	*single_quoted_wrd_array(char *line, int *n);
+char	*double_quoted_wrd_array(char *line, int *n);
 char	**new_split(char *line);
 
 // PARSING_UTILS.C

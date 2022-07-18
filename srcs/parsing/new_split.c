@@ -24,7 +24,7 @@ char	*unquoted_wrd_array(char *s, int *n)
 	return (str);
 }
 
-char	*quoted_wrd_array(char *line, int *n)
+char	*double_quoted_wrd_array(char *line, int *n)
 {
 	char	*str;
 	int		len;
@@ -39,7 +39,31 @@ char	*quoted_wrd_array(char *line, int *n)
 	str = malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (NULL);
-	while (line[++(*n)] && !ft_isquote(line[*n]))
+	while (line[++(*n)] && ft_isquote(line[*n] != 2))
+	{
+		str[i] = line[*n];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
+
+char	*single_quoted_wrd_array(char *line, int *n)
+{
+	char	*str;
+	int		len;
+	int		i;
+
+	i = 0;
+	len = 0;
+	if (!line)
+		return (NULL);
+	len = len_of_this_quoted_word(line, *n);
+	printf("---> %d <---\n", len);
+	str = malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (NULL);
+	while (line[++(*n)] && ft_isquote(line[*n] != 1))
 	{
 		str[i] = line[*n];
 		i++;
@@ -66,8 +90,10 @@ char	**new_split(char *line)
 	{
 		while (line[i] && ft_iswhitespace(line[i])) //skipping whitespaces
 			i++;
-		if (ft_isquote(line[i]))
-			tab[x] = quoted_wrd_array(line, &i);
+		if (ft_isquote(line[i]) == 2)
+			tab[x] = double_quoted_wrd_array(line, &i);
+		else if (ft_isquote(line[i]) == 1)
+			tab[x] = single_quoted_wrd_array(line, &i);
 		else if (line[i])
 			tab[x] = unquoted_wrd_array(line, &i);
 		x++;
