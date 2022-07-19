@@ -41,9 +41,10 @@ char	**new_split(char *line);
 // PARSING_UTILS.C
 int	how_many_quotes(char *str);
 int	len_of_this_word(char *line, int i);
-int	len_of_this_quoted_word(char *line, int i);
-int	nbr_of_words(char const *s);
-
+int	len_single_quoted_word(char *line, int i);
+int	len_double_quoted_word(char *line, int i);
+int	nbr_of_words(char *s);
+int	nbr_of_letters(char *s, int i, int code);
 
 //INIT_TOKEN.C
 void	creating_tokens(char *line, t_vars *vars);

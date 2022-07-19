@@ -79,7 +79,8 @@ clean:
 fclean:	clean
 	@$(MAKE) -C include/libft fclean
 	@rm -rf $(NAME) $(BONUS)
-	@echo "MINISHELL	| STATUS: \033[0;36m🚮EXECUTABLE CLEANED🚮\033[0;00m"
+
+# @echo "MINISHELL	| STATUS: \033[0;36m🚮EXECUTABLE CLEANED🚮\033[0;00m"
 
 leak:
 	$(LEAK)
