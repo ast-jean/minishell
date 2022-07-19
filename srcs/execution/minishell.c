@@ -1,4 +1,4 @@
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 
 void	quit_shell(t_vars *vars)
@@ -17,9 +17,6 @@ void	executing_command(char *line, t_vars *vars)
 	printf("Executing command\n");
 }
 
-
-
-
 int main(void)
 {
 	char *line;
@@ -33,6 +30,7 @@ int main(void)
 		// printf( "%s\n", line);
 		printf("Fault1?\n");
 		debug_print_tokens(&vars);
+		printf("after DPT\n");
 	}
 
 	return 0;
