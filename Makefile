@@ -2,10 +2,12 @@
 ###-------------------------# VARIABLES ##-------------------------###
 NAME = minishell
 
-SRCS_FILES 		=	parsing/parsing.c			\
+SRCS_FILES 		=	parsing/token_op.c			\
+					execution/minishell.c		\
+					parsing/init_token.c		\
+					parsing/parsing.c			\
 					parsing/new_split.c			\
 					parsing/new_split_utils.c	\
-					# parsing/init_token.c		\
 
 INCLUDE_FILES	= 	minishell.h
 
@@ -59,10 +61,9 @@ all: $(NAME)
 $(NAME) : $(OBJS_IN_DIR)
 # @echo "                                        "
 	@echo "$(CURSOR_UP_1)$(SELECTED)MINISHELL$(END)                                     "
-	@echo "$(GREEN)Compiling DONE!                                  $(END)"
-	@echo "$(BLUE)Executable $(NAME) created                 $(END)"
+	@echo "$(GREEN)Compiling DONE! ✅                                 $(END)"
 	@$(CC) $(CFLAGS) $(OBJS_IN_DIR) -lreadline $(LIBS) -o $(NAME)
-	@echo "MINISHELL       | STATUS: $(GREEN)OK$(END)       "
+	@echo "$(BLUE)Executable $(NAME) created                 $(END)"
 	@echo "----------------------------"
 
 $(OBJS_DIR)%.o : $(SRCS_DIR)%.c

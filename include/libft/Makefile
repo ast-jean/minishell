@@ -50,6 +50,7 @@ SRC =	ft_memset.c				\
 		ft_iswhitespace.c		\
 		ft_iseven.c				\
 		ft_isuneven.c			\
+		ft_strcmp.c
 
 NAME = libft.a
 CC = gcc
@@ -92,10 +93,9 @@ OBJS_IN_DIR = $(addprefix $(OBJS_DIR), $(OBJS))
 all: start
 
 $(NAME) : $(OBJS_IN_DIR)
-	@echo "$(CURSOR_UP)$(GREEN)Compiling DONE!                   $(END)$(CURSOR_DOWN)"
+	@echo "$(CURSOR_UP)$(GREEN)Compiling DONE! ✅                   $(END)$(CURSOR_DOWN)"
 	@echo "$(BLUE)$(CURSOR_UP_1)Creating archive $(NAME)     $(END)"
 	@ar -rc $(NAME) $^
-	@echo "LIBFT		| STATUS: $(GREEN)OK$(END)"
 	@echo "----------------------------"
 	@echo "\n"
 

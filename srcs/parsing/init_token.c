@@ -49,7 +49,7 @@ void	creating_tokens(char *line, t_vars *vars)
 	while (line_content[i])
 	{
 		push_tk(line_content[i], vars->token, first_first, prev_prev, i, count);
-		printf("Token %d\nptr=	%p\nCont=	>%s<\ntype=	%s\nnext=	%p\nfirst=	%p\n",i,vars->token, vars->token->cont, vars->token->type, vars->token->next, vars->token->first);
+		// printf("Token %d\nptr=	%p\nCont=	>%s<\ntype=	%s\nnext=	%p\nfirst=	%p\n",i,vars->token, vars->token->cont, vars->token->type, vars->token->next, vars->token->first);
 		prev_prev = vars->token;
 		vars->token = vars->token->next;
 		init_token_null(vars->token, first_first);

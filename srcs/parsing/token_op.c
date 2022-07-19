@@ -31,9 +31,7 @@ void	debug_print_tokens(t_vars *vars)
 	int i;
 
 	i = 0;
-	printf("Where vars->token->first=->%p<-\n", vars->token->first);
 	current = vars->token->first;
-	printf("Where Current=->%p<-\n", current);
 	while (current->cont != NULL)
 	{
 		printf("----------------\n");

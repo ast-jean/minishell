@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:46:17 by xchouina          #+#    #+#             */
-/*   Updated: 2022/07/18 11:04:07 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/07/19 14:47:29 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		ft_isalpha(int c);
 int		ft_isalnum(int c);
 int		ft_atoi(const char *str);
 int		ft_strncmp(char *s1, char *s2, unsigned int n);
-
+int		ft_strcmp(char *s1, char *s2);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	*ft_strdup(const char *s1);
 char	*ft_strrchr(const char *s, int c);
