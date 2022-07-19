@@ -37,7 +37,7 @@ void	debug_print_tokens(t_vars *vars)
 		printf("----------------\n");
 		printf("Token %d\n",i);
 		printf("Cont=->%s<-\n", current->cont);
-		printf("Type=->%s<-\n", current->cont);
+		printf("Type=->%s<-\n", current->type);
 		current = current->next;
 		i++;
 	}
