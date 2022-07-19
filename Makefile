@@ -23,8 +23,9 @@ SRCS 		= $(addprefix $(SRCS_DIR), $(SRCS_FILES))
 INCLUDE 	= $(addprefix $(INCLUDE_DIR), $(INCLUDE_FILES))
 
 ### Colour var ###
-CURSOR_UP	= \033[0A
-CURSOR_DOWN	= \033[0B
+CURSOR_UP_1	= \033[1A
+CURSOR_UP	= \033[2A
+CURSOR_DOWN	= \033[1B
 
 END			= \033[0m
 BOLD		= \033[1m
@@ -56,10 +57,13 @@ VALGRING = valgrind --track-fds=yes --track-origins=yes  --leak-check=full ./min
 all: $(NAME)
 
 $(NAME) : $(OBJS_IN_DIR)
-	@echo "$(BLUE)Compiling $(NAME)...$(END)"
+# @echo "                                        "
+	@echo "$(CURSOR_UP_1)$(SELECTED)MINISHELL$(END)                                     "
+	@echo "$(GREEN)Compiling DONE!                                  $(END)"
+	@echo "$(BLUE)Executable $(NAME) created                 $(END)"
 	@$(CC) $(CFLAGS) $(OBJS_IN_DIR) -lreadline $(LIBS) -o $(NAME)
-	@echo "MINISHELL	| STATUS: \033[0;32mOK\033[0;00m"
-	@echo "---------------------------------------------"
+	@echo "MINISHELL       | STATUS: $(GREEN)OK$(END)       "
+	@echo "----------------------------"
 
 $(OBJS_DIR)%.o : $(SRCS_DIR)%.c
 	@$(MAKE) -C include/libft
@@ -67,19 +71,19 @@ $(OBJS_DIR)%.o : $(SRCS_DIR)%.c
 	@mkdir -p $(OBJS_DIR)/parsing
 	@mkdir -p $(OBJS_DIR)/execution
 	@mkdir -p $(OBJS_DIR)/built_ins
-	@echo "$(BLUE)Compiling object $< ..$(END)"
+	@echo "$(CURSOR_UP)Compiling $< ..           "
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@$(MAKE) -C include/libft clean
 	@rm -f *.o
 	@rm -rf $(OBJS_DIR)
-	@echo "MINISHELL	| STATUS: \033[0;36m🛁OBJECTS CLEANED🛁\033[0;00m"
+	@echo "MINISHELL	| STATUS: $(YELLOW)OBJECTS CLEANED$(END)"
 
 fclean:	clean
 	@$(MAKE) -C include/libft fclean
-	@rm -rf $(NAME) $(BONUS)
-	@echo "MINISHELL	| STATUS: \033[0;36m🚮EXECUTABLE CLEANED🚮\033[0;00m"
+	@rm -rf $(NAME)
+	@echo "MINISHELL	| STATUS: $(BLUE)EXECUTABLE CLEANED$(END)"
 
 leak:
 	$(LEAK)
@@ -88,7 +92,6 @@ valgrind:
 	$(VALGRIND)
 
 re:	fclean all 
-	./$(NAME)
 
 help:
 	@echo "Rules: all clean fclean re"

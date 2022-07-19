@@ -1,16 +1,4 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/09/16 13:11:12 by xchouina          #+#    #+#              #
-#    Updated: 2022/07/18 11:05:01 by xchouina         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-SRCS =	ft_memset.c				\
+SRC =	ft_memset.c				\
 		ft_bzero.c				\
 		ft_memcpy.c				\
 		ft_memmove.c			\
@@ -64,30 +52,80 @@ SRCS =	ft_memset.c				\
 		ft_isuneven.c			\
 
 NAME = libft.a
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
+HEADER =-I  libft.h
 
-OBJS_DIR = objs/
-OBJS = $(SRCS:.c=.o)
-OBJECTS_PREFIXED = $(addprefix $(OBJS_DIR), $(OBJS))
+### Repertoires ###
+SRCS_DIR 	= srcs/
+OBJS_DIR	= objs/
+INCLUDE_DIR = include/
 
-CC = clang
+### Colour var ###
+CURSOR_UP_1	= \033[1A
+CURSOR_UP	= \033[2A#change 0 to change number of lignes
+CURSOR_DOWN	= \033[1B
 
-CC_FLAGS = -Wall -Wextra -Werror
+END			= \033[0m
+BOLD		= \033[1m
+ITALIC		= \033[3m
+URL			= \033[4m
+BLINK		= \033[5m
+BLINK2		= \033[6m
+SELECTED	= \033[7m
 
-$(OBJS_DIR)%.o : %.c libft.h
+BLACK		= \033[30m
+RED			= \033[31m
+GREEN		= \033[32m
+YELLOW		= \033[33m
+BLUE		= \033[34m
+VIOLET		= \033[35m
+CYAN		= \033[36m
+WHITE		= \033[37m
+
+OBJS = $(SRC:.c=.o)
+
+SRC_IN_DIR = $(addprefix $(SRCS_DIR), $(SRC))
+OBJS_IN_DIR = $(addprefix $(OBJS_DIR), $(OBJS))
+
+###--------------------------## RULES ##--------------------------###
+all: start
+
+$(NAME) : $(OBJS_IN_DIR)
+	@echo "$(CURSOR_UP)$(GREEN)Compiling DONE!                   $(END)$(CURSOR_DOWN)"
+	@echo "$(BLUE)$(CURSOR_UP_1)Creating archive $(NAME)     $(END)"
+	@ar -rc $(NAME) $^
+	@echo "LIBFT		| STATUS: $(GREEN)OK$(END)"
+	@echo "----------------------------"
+	@echo "\n"
+
+$(OBJS_DIR)%.o : $(SRCS_DIR)%.c 
 	@mkdir -p $(OBJS_DIR)
-	@clang $(CC_FLAGS) -c $< -o $@
+	@echo "$(CURSOR_UP)Compiling $@         $(CURSOR_DOWN)"
+	@$(CC) $(CFLAGS) $(HEADER) -c $< -o $@
 
-$(NAME): $(OBJECTS_PREFIXED)
-	@ar r $(NAME) $(OBJECTS_PREFIXED)
-	@echo "LIBFT		| STATUS: \033[0;32mOK\033[0;00m"
 
-all: $(NAME)
+start:
+ifeq ($(wildcard $(NAME)),)
+	@echo "----------------------------"
+	@echo "$(SELECTED)LIBFT$(END)"
+	@echo " "
+	@echo "----------------------------"
+	@$(MAKE) $(NAME)
+else
+	@echo "$(NAME) already exist. try:'make re'"
+endif
+
+re: fclean
+	@$(MAKE) $(NAME)
+# restart:
+# 	@echo " "
 
 clean:
 	@rm -rf $(OBJS_DIR)
-	@echo "LIBFT		| STATUS: \033[0;36mCLEANED\033[0;00m"
+	@echo "LIBFT		| STATUS: $(YELLOW)OBJECTS CLEANED$(END)"
 
 fclean: clean
 	@rm -f $(NAME)
-
+	@echo "$(CURSOR_UP_1)LIBFT		| STATUS: $(BLUE)LIBRARY CLEANED$(END)"
 re: fclean all
