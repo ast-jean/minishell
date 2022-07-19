@@ -78,7 +78,7 @@ clean:
 	@$(MAKE) -C include/libft clean
 	@rm -f *.o
 	@rm -rf $(OBJS_DIR)
-	@echo "MINISHELL	| STATUS: $(YELLOW)OBJECTS CLEANED$(END)"
+	@echo "MINISHELL	| STATUS: $(CYAN)OBJECTS CLEANED$(END)"
 
 fclean:	clean
 	@$(MAKE) -C include/libft fclean

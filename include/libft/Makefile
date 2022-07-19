@@ -123,7 +123,7 @@ re: fclean
 
 clean:
 	@rm -rf $(OBJS_DIR)
-	@echo "LIBFT		| STATUS: $(YELLOW)OBJECTS CLEANED$(END)"
+	@echo "LIBFT		| STATUS: $(CYAN)OBJECTS CLEANED$(END)"
 
 fclean: clean
 	@rm -f $(NAME)
