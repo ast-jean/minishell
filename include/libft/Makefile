@@ -118,9 +118,7 @@ endif
 
 re: fclean
 	@$(MAKE) $(NAME)
-# restart:
-# 	@echo " "
-
+	
 clean:
 	@rm -rf $(OBJS_DIR)
 	@echo "LIBFT		| STATUS: $(CYAN)OBJECTS CLEANED$(END)"

@@ -2,10 +2,13 @@
 ###-------------------------# VARIABLES ##-------------------------###
 NAME = minishell
 
-SRCS_FILES 		=	parsing/parsing.c			\
+SRCS_FILES 		=	execution/minishell.c		\
+					execution/execution.c		\
+					parsing/parsing.c			\
 					parsing/new_split.c			\
 					parsing/new_split_utils.c	\
-					# parsing/init_token.c		\
+					parsing/init_token.c		\
+					parsing/token_op.c			\
 
 INCLUDE_FILES	= 	minishell.h
 
@@ -53,11 +56,9 @@ NORMINETTE 	= norminette
 LEAK = leaks -q --atExit -- ./minishell
 VALGRING = valgrind --track-fds=yes --track-origins=yes  --leak-check=full ./minishell
 ###--------------------------## REGLES ##--------------------------###
-
 all: $(NAME)
 
 $(NAME) : $(OBJS_IN_DIR)
-# @echo "                                        "
 	@echo "$(CURSOR_UP_1)$(SELECTED)MINISHELL$(END)                                     "
 	@echo "$(GREEN)Compiling DONE!                                  $(END)"
 	@echo "$(BLUE)Executable $(NAME) created                 $(END)"
@@ -92,7 +93,7 @@ valgrind:
 	$(VALGRIND)
 
 re:	fclean all 
-
+	./$(NAME)
 help:
 	@echo "Rules: all clean fclean re"
 
