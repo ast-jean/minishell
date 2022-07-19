@@ -29,3 +29,27 @@
 // 	printf("<%s> ", true_str[6]);
 // 	printf("<%s>\n", true_str[7]);
 // }
+
+
+
+
+
+
+// int	main(void)
+// {
+
+// 	int i = 0;
+// 	char **tokens;
+// 	char *one_string = 
+// 		"\"Hello    children\"   i 'wish you' happy 'morning'";
+// 		// "Hello      'children i' wish you happy morning";
+// 		// "Hello      'children i' wish you 'happy' morning";
+// 		// "Hello children i wish you happy morning";
+	
+// 	tokens = new_split(one_string);
+	
+// 	while (tokens[i])
+// 		printf("<%s> ", tokens[i++]);
+// 	printf("\n");
+
+// }
