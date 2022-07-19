@@ -30,13 +30,13 @@ int	len_of_this_word(char *line, int i)
 	return (l);
 }
 
-int	len_of_this_quoted_word(char *line, int i)
+int	len_single_quoted_word(char *line, int i)
 {
 	int	l;
 
 	l = 0;
 	i++;
-	while (!ft_isquote(line[i]))
+	while (ft_isquote(line[i]) != 1)
 	{
 		i++;
 		l++;
@@ -44,29 +44,16 @@ int	len_of_this_quoted_word(char *line, int i)
 	return (l);
 }
 
-int	nbr_of_words(char const *s)
+int	len_double_quoted_word(char *line, int i)
 {
-	int	count;
-	int	i;
+	int	l;
 
-	count = 0;
-	i = 0;
-	while (s[i])
+	l = 0;
+	i++;
+	while (ft_isquote(line[i]) != 2)
 	{
-		if (ft_isquote(s[i]))
-		{
-			i++;
-			while (!ft_isquote(s[i]))
-				i++;
-			count++;
-			i++;
-		}
-		while (s[i] && ft_iswhitespace(s[i]))
-			i++;
-		if (s[i] && !ft_iswhitespace(s[i]) && !ft_isquote(s[i]))
-			count++;
-		while (s[i] && !ft_iswhitespace(s[i]) && !ft_isquote(s[i]))
-			i++;
+		i++;
+		l++;
 	}
-	return (count);
+	return (l);
 }
