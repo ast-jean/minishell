@@ -6,14 +6,26 @@ void init_shell(t_vars *vars)
 	printf("*******************************\n*          MINISHELL          *\n*******************************\n");
 }
 
+void free_tokens(t_vars *vars)
+{
+	t_token *temp;
+
+	temp = vars->token->first;
+	while (temp->next)
+	{
+		printf("token->%s\n", temp->cont);
+		temp = temp->next;
+		free((temp->prev));
+	}
+}
+
 void	quit_shell(t_vars *vars)
 {
 	(void)vars;
-	//free() every token after being used
-	
+	// free_tokens(vars);
 	exit(0);
-
 }
+
 
 void	executing_command(char *line, t_vars *vars)
 {
@@ -23,7 +35,6 @@ void	executing_command(char *line, t_vars *vars)
 	if (ft_strlen(line) == 0)
 	{
 		printf("nothing\n");
-		line = "";
 		return ;
 	}
 	creating_tokens(line, vars);
@@ -36,8 +47,8 @@ void	executing_command(char *line, t_vars *vars)
 	//Built-in exit-------------
 
 
-
-	//to be continued
+	if(current)
+		free_tokens(vars);
 }
 
 int main(int argc, char **argv, char **env)
@@ -54,7 +65,7 @@ int main(int argc, char **argv, char **env)
 	{
 		line = readline("$>");
 		executing_command(line, &vars);
-		debug_print_tokens(&vars);
+		// debug_print_tokens(&vars); //causes segfault if no tokens
 		printf("The End\n");
 	}
 
