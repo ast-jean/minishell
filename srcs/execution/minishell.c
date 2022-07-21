@@ -1,6 +1,13 @@
 #include "../../include/minishell.h"
 
+void init_shell(t_vars *vars)
+{
 
+	(void)vars;
+
+	printf("*******************************\n*          MINISHELL          *\n*******************************\n");
+
+}
 
 void	quit_shell(t_vars *vars)
 {
@@ -27,14 +34,18 @@ void	executing_command(char *line, t_vars *vars)
 	//to be continued
 }
 
-int main(void)
+int main(int argc, char **argv, char **env)
 {
 	char *line;
 	t_vars	vars;
 
+	(void)argc;
+	(void)argv;
+	(void)env;
+	init_shell(&vars);
 	while (1)
 	{
-		line = readline("");
+		line = readline("$>");
 		executing_command(line, &vars);
 		debug_print_tokens(&vars);
 		printf("The End\n");

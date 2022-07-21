@@ -37,8 +37,8 @@ void	creating_tokens(char *line, t_vars *vars)
 	int count;
 	t_token *first_first;
 	t_token *prev_prev;
-	// line_content = splitting_tokens(line); //Change split later
 	line_content = new_split(line);
+		// line_content = ft_split(line,' ');
 	//----------------------------------------
 	count = count_list(line_content);
 	i = 0;
