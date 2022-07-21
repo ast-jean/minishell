@@ -36,8 +36,12 @@ void	debug_print_tokens(t_vars *vars)
 	{
 		printf("----------------\n");
 		printf("Token %d\n",i);
-		printf("Cont=->%s<-\n", current->cont);
-		printf("Type=->%s<-\n", current->type);
+		printf("Cont=	->%s<-\n", current->cont);
+		printf("Type=	->%s<-\n", current->type);
+		printf("Ptr=	->%p<-\n", current);
+		printf("First=	->%p<-\n", current->first);
+		printf("Prev=	->%p<-\n", current->prev);
+		printf("Next=	->%p<-\n", current->next);
 		current = current->next;
 		i++;
 	}

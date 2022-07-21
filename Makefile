@@ -96,6 +96,14 @@ valgrind:
 
 re:	fclean all 
 	./$(NAME)
+
+rew: 
+	@rm -rf $(NAME)
+	@rm -f *.o
+	@rm -rf $(OBJS_DIR)
+	@$(MAKE) $(NAME)
+	./$(NAME)
+
 help:
 	@echo "Rules: all clean fclean re"
 

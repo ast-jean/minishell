@@ -80,7 +80,7 @@ char	**new_split(char *line)
 	i = 0;
 	x = 0;
 	wc = nbr_of_words(line);
-	tab = malloc(sizeof(char *) * (wc + 1));
+	tab = ft_calloc(wc + 1, sizeof(char *));
 	while (wc--)
 	{
 		while (line[i] && ft_iswhitespace(line[i]))

@@ -22,7 +22,7 @@ int	len_of_this_word(char *line, int i)
 	int	l;
 
 	l = 0;
-	while (!ft_iswhitespace(line[i]))
+	while (!ft_iswhitespace(line[i]) && line[i] != '\0')
 	{
 		i++;
 		l++;
