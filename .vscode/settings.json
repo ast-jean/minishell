@@ -1,0 +1,14 @@
+{
+	"makefile.extensionOutputFolder": "./.vscode",
+	"makefile.launchConfigurations": [
+		{
+			"cwd": "/Users/ast-jean/Cursus/minishell",
+			"binaryPath": "/Users/ast-jean/Cursus/minishell/minishell",
+			"binaryArgs": []
+		}
+	],
+	"files.associations": {
+		"history.h": "c",
+		"readline.h": "c"
+	}
+}

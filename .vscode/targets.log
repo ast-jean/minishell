@@ -1,0 +1,1111 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 3.81
+# Copyright (C) 2006  Free Software Foundation, Inc.
+# This is free software; see the source for copying conditions.
+# There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
+
+# This program built for i386-apple-darwin11.3.0
+# GNU Make 3.81
+# Copyright (C) 2006  Free Software Foundation, Inc.
+# This is free software; see the source for copying conditions.
+# There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
+
+# This program built for i386-apple-darwin11.3.0
+
+# Make data base, printed on Fri Jul 22 12:19:57 2022
+
+# Variables
+
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# automatic
+?F = $(notdir $?)
+# makefile (from `Makefile', line 1)
+SRC = ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_memchr.c ft_memcmp.c ft_strlen.c ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_toupper.c ft_tolower.c ft_strncmp.c ft_strchr.c ft_strrchr.c ft_strnstr.c ft_strlcpy.c ft_strlcat.c ft_atoi.c ft_strdup.c ft_calloc.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_substr.c ft_strjoin.c ft_strmapi.c ft_striteri.c ft_itoa.c ft_strtrim.c ft_split.c ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstclear.c ft_lstdelone.c ft_lstiter.c ft_lstmap.c ft_swap.c ft_pt_swap.c ft_atol.c get_next_line.c get_next_line_utils.c ft_isquote.c ft_iswhitespace.c ft_iseven.c ft_isuneven.c ft_strcmp.c
+# environment
+VSCODE_LOG_NATIVE = false
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# automatic
+@F = $(notdir $@)
+# makefile
+CURDIR := /Users/ast-jean/Cursus/minishell/include/libft
+# makefile (from `Makefile', line 74)
+BLINK = \033[5m
+# makefile
+SHELL = /bin/sh
+# environment
+VSCODE_NLS_CONFIG = {"locale":"fr","availableLanguages":{},"_languagePackSupport":true}
+# environment
+_ = /usr/bin/make
+# makefile (from `Makefile', line 57)
+CFLAGS = -Wall -Wextra -Werror
+# makefile (from `Makefile', line 82)
+BLUE = \033[34m
+# makefile (from `Makefile', line 1)
+MAKEFILE_LIST :=  Makefile
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# makefile (from `Makefile', line 87)
+OBJS = $(SRC:.c=.o)
+# environment
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cb340032rs/T/vscode-ipc-14717ae1-e9b1-4458-9314-3b408f30dcd0.sock
+# environment
+VSCODE_CWD = /
+# makefile (from `Makefile', line 90)
+OBJS_IN_DIR = $(addprefix $(OBJS_DIR), $(OBJS))
+# environment
+PATH = /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Apple/usr/bin:/Users/ast-jean/.cargo/bin:~/Desktop/Cursus/custom-git-commandas
+# makefile (from `Makefile', line 71)
+BOLD = \033[1m
+# environment
+LSCOLORS = Gxfxcxdxbxegedabagacad
+# makefile (from `Makefile', line 70)
+END = \033[0m
+# makefile (from `Makefile', line 63)
+INCLUDE_DIR = include/
+# makefile (from `Makefile', line 89)
+SRC_IN_DIR = $(addprefix $(SRCS_DIR), $(SRC))
+# makefile (from `Makefile', line 76)
+SELECTED = \033[7m
+# makefile (from `Makefile', line 61)
+SRCS_DIR = srcs/
+# environment
+VSCODE_LOG_STACK = false
+# makefile (from `Makefile', line 75)
+BLINK2 = \033[6m
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# default
+.FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
+# environment
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.aGUNqhMax0/Listeners
+# automatic
+%F = $(notdir $%)
+# makefile (from `Makefile', line 73)
+URL = \033[4m
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+PWD = /Users/ast-jean/Cursus/minishell
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+# makefile (from `Makefile', line 80)
+GREEN = \033[32m
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+HOME = /Users/ast-jean
+# default
+MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
+# environment
+VSCODE_CODE_CACHE_PATH = /Users/ast-jean/Library/Application Support/Code/CachedData/4af164ea3a06f701fe3e89a2bcbb421d2026b68f
+# environment
+LOGNAME = ast-jean
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+# environment
+ZSH = /Users/ast-jean/.oh-my-zsh
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+XPC_FLAGS = 0x0
+# default
+MAKE = $(MAKE_COMMAND)
+# environment
+SHLVL = 1
+# makefile (from `Makefile', line 85)
+WHITE = \033[37m
+# makefile (from `Makefile', line 56)
+CC = gcc
+# makefile (from `Makefile', line 83)
+VIOLET = \033[35m
+# default
+MAKE_VERSION := 3.81
+# environment
+USER = ast-jean
+# makefile
+.DEFAULT_GOAL := all
+# makefile (from `Makefile', line 55)
+NAME = libft.a
+# makefile (from `Makefile', line 67)
+CURSOR_UP = \033[2A
+# environment
+LESS = -R
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# makefile (from `Makefile', line 66)
+CURSOR_UP_1 = \033[1A
+# default
+MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
+# default
+.VARIABLES := 
+# environment
+TMPDIR = /var/folders/zz/zyxvpxvq6csfxvn_n000cb340032rs/T/
+# automatic
+*F = $(notdir $*)
+# environment
+VSCODE_IPC_HOOK = /Users/ast-jean/Library/Application Support/Code/1.68.0-main.sock
+# makefile (from `Makefile', line 79)
+RED = \033[31m
+# makefile
+MAKEFLAGS = Rrqp
+# environment
+MFLAGS = -Rrqp
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# makefile (from `Makefile', line 78)
+BLACK = \033[30m
+# environment
+XPC_SERVICE_NAME = com.microsoft.VSCode.2084
+# makefile (from `Makefile', line 62)
+OBJS_DIR = objs/
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# makefile (from `Makefile', line 81)
+YELLOW = \033[33m
+# makefile (from `Makefile', line 84)
+CYAN = \033[36m
+# automatic
++F = $(notdir $+)
+# environment
+__CF_USER_TEXT_ENCODING = 0x18B19:0x0:0x0
+# default
+MAKEFILES := 
+# makefile (from `Makefile', line 68)
+CURSOR_DOWN = \033[1B
+# automatic
+<F = $(notdir $<)
+# environment
+PAGER = less
+# environment
+LC_ALL = C
+# makefile (from `Makefile', line 58)
+HEADER = -I  libft.h
+# automatic
+^F = $(notdir $^)
+# default
+SUFFIXES := 
+# default
+.INCLUDE_DIRS = /usr/local/include
+# makefile (from `Makefile', line 72)
+ITALIC = \033[3m
+# environment
+MAKELEVEL := 1
+# environment
+LANG = C
+# environment
+VSCODE_PID = 16759
+# variable set hash-table stats:
+# Load=92/1024=9%, Rehash=0, Collisions=6/129=5%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# . (device 16777225, inode 1682049): 8 files, no impossibilities.
+# srcs (device 16777225, inode 1901649): No files, no impossibilities so far.
+
+# 8 files, no impossibilities in 2 directories.
+
+# Implicit Rules
+
+objs/%.o: srcs/%.c
+#  commands to execute (from `Makefile', line 103):
+	@mkdir -p $(OBJS_DIR)
+	@echo "$(CURSOR_UP)Compiling $@         $(CURSOR_DOWN)"
+	@$(CC) $(CFLAGS) $(HEADER) -c $< -o $@
+	
+
+# 1 implicit rules, 0 (0.0%) terminal.
+
+# Files
+
+# Not a target:
+objs/ft_strnstr.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_putstr_fd.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/get_next_line.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_putchar_fd.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_isascii.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+all: start
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/3=0%
+
+# Not a target:
+objs/ft_strtrim.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_lstadd_back.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_pt_swap.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_putendl_fd.o:
+ 
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_strmapi.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_lstiter.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_isuneven.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_memcpy.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_itoa.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_memcmp.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_strlen.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-19 15:01:16
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+objs/ft_isdigit.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+start:
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `'
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := start
+# automatic
+# % := 
+# automatic
+# * := 
+# automatic
+# + := 
+# automatic
+# | := 
+# automatic
+# < := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/11=9%
+#  commands to execute (from `Makefile', line 116):
+	@echo "$(NAME) already exist. try:'make re'"
+	
+
+# Not a target:
+objs/ft_lstlast.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+libft.a: objs/ft_memset.o objs/ft_bzero.o objs/ft_memcpy.o objs/ft_memmove.o objs/ft_memchr.o objs/ft_memcmp.o objs/ft_strlen.o objs/ft_isalpha.o objs/ft_isdigit.o objs/ft_isalnum.o objs/ft_isascii.o objs/ft_isprint.o objs/ft_toupper.o objs/ft_tolower.o objs/ft_strncmp.o objs/ft_strchr.o objs/ft_strrchr.o objs/ft_strnstr.o objs/ft_strlcpy.o objs/ft_strlcat.o objs/ft_atoi.o objs/ft_strdup.o objs/ft_calloc.o objs/ft_putchar_fd.o objs/ft_putstr_fd.o objs/ft_putendl_fd.o objs/ft_putnbr_fd.o objs/ft_substr.o objs/ft_strjoin.o objs/ft_strmapi.o objs/ft_striteri.o objs/ft_itoa.o objs/ft_strtrim.o objs/ft_split.o objs/ft_lstnew.o objs/ft_lstadd_front.o objs/ft_lstsize.o objs/ft_lstlast.o objs/ft_lstadd_back.o objs/ft_lstclear.o objs/ft_lstdelone.o objs/ft_lstiter.o objs/ft_lstmap.o objs/ft_swap.o objs/ft_pt_swap.o objs/ft_atol.o objs/get_next_line.o objs/get_next_line_utils.o objs/ft_isquote.o objs/ft_iswhitespace.o objs/ft_iseven.o objs/ft_isuneven.o objs/ft_strcmp.o
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 96):
+	@echo "$(CURSOR_UP)$(GREEN)Compiling DONE! ✅                   $(END)$(CURSOR_DOWN)"
+	@echo "$(BLUE)$(CURSOR_UP_1)Creating archive $(NAME)     $(END)"
+	@ar -rc $(NAME) $^
+	@echo "----------------------------"
+	@echo "\n"
+	
+
+# Not a target:
+objs/ft_memchr.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_memset.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_isquote.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_swap.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_tolower.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_strrchr.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_strjoin.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_split.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_lstclear.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_strlcat.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+fclean: clean
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 127):
+	@rm -f $(NAME)
+	@echo "$(CURSOR_UP_1)LIBFT		| STATUS: $(BLUE)LIBRARY CLEANED$(END)"
+	
+
+# Not a target:
+objs/ft_bzero.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_isprint.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_striteri.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_iswhitespace.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_atol.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_lstnew.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+re: fclean fclean all
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 120):
+	@$(MAKE) $(NAME)
+	
+
+# Not a target:
+objs/ft_putnbr_fd.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+clean:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 123):
+	@rm -rf $(OBJS_DIR)
+	@echo "LIBFT		| STATUS: $(CYAN)OBJECTS CLEANED$(END)"
+	
+
+# Not a target:
+objs/get_next_line_utils.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_calloc.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_substr.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_isalpha.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_lstsize.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_iseven.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_strlcpy.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_lstmap.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_strncmp.o:
+ 
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_isalnum.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_strcmp.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_lstadd_front.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_strdup.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_lstdelone.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_memmove.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_strchr.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_toupper.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/ft_atoi.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# files hash-table stats:
+# Load=62/1024=6%, Rehash=0, Collisions=2/134=1%
+# VPATH Search Paths
+
+# No `vpath' search paths.
+
+# No general (`VPATH' variable) search path.
+
+# # of strings in strcache: 1
+# # of strcache buffers: 1
+# strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
+# strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
+
+# Finished Make data base on Fri Jul 22 12:19:57 2022
+
+
+# Make data base, printed on Fri Jul 22 12:19:57 2022
+
+# Variables
+
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# automatic
+?F = $(notdir $?)
+# environment
+VSCODE_LOG_NATIVE = false
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# makefile (from `Makefile', line 34)
+CURSOR_BACK = \033[1D
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# automatic
+@F = $(notdir $@)
+# makefile
+CURDIR := /Users/ast-jean/Cursus/minishell
+# makefile (from `Makefile', line 40)
+BLINK = \033[5m
+# makefile
+SHELL = /bin/sh
+# environment
+VSCODE_NLS_CONFIG = {"locale":"fr","availableLanguages":{},"_languagePackSupport":true}
+# environment
+_ = /usr/bin/make
+# makefile (from `Makefile', line 55)
+CFLAGS = -g -Wall -Wextra -Werror 
+# makefile (from `Makefile', line 48)
+BLUE = \033[34m
+# makefile (from `Makefile', line 1)
+MAKEFILE_LIST :=  Makefile
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# makefile (from `Makefile', line 24)
+OBJS = $(SRCS_FILES:.c=.o)
+# environment
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cb340032rs/T/vscode-ipc-14717ae1-e9b1-4458-9314-3b408f30dcd0.sock
+# environment
+VSCODE_CWD = /
+# makefile (from `Makefile', line 25)
+OBJS_IN_DIR = $(addprefix $(OBJS_DIR), $(OBJS))
+# environment
+PATH = /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Apple/usr/bin:/Users/ast-jean/.cargo/bin:~/Desktop/Cursus/custom-git-commandas
+# makefile (from `Makefile', line 37)
+BOLD = \033[1m
+# environment
+LSCOLORS = Gxfxcxdxbxegedabagacad
+# makefile (from `Makefile', line 36)
+END = \033[0m
+# makefile (from `Makefile', line 21)
+INCLUDE_DIR = include/
+# makefile (from `Makefile', line 42)
+SELECTED = \033[7m
+# makefile (from `Makefile', line 57)
+NORMINETTE = norminette
+# makefile (from `Makefile', line 19)
+SRCS_DIR = srcs/
+# environment
+VSCODE_LOG_STACK = false
+# makefile (from `Makefile', line 41)
+BLINK2 = \033[6m
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# default
+.FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
+# makefile (from `Makefile', line 14)
+INCLUDE_FILES = minishell.h
+# environment
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.aGUNqhMax0/Listeners
+# automatic
+%F = $(notdir $%)
+# makefile (from `Makefile', line 39)
+URL = \033[4m
+# environment
+VSCODE_PIPE_LOGGING = true
+# makefile (from `Makefile', line 5)
+SRCS_FILES = execution/minishell.c execution/execution.c parsing/parsing.c parsing/new_split.c parsing/new_split_utils.c parsing/new_split_utils2.c parsing/init_token.c parsing/token_op.c			
+# environment
+PWD = /Users/ast-jean/Cursus/minishell
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+# makefile (from `Makefile', line 46)
+GREEN = \033[32m
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+HOME = /Users/ast-jean
+# default
+MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
+# environment
+VSCODE_CODE_CACHE_PATH = /Users/ast-jean/Library/Application Support/Code/CachedData/4af164ea3a06f701fe3e89a2bcbb421d2026b68f
+# environment
+LOGNAME = ast-jean
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+# environment
+ZSH = /Users/ast-jean/.oh-my-zsh
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+XPC_FLAGS = 0x0
+# default
+MAKE = $(MAKE_COMMAND)
+# default
+MAKECMDGOALS := all
+# makefile (from `Makefile', line 26)
+SRCS = $(addprefix $(SRCS_DIR), $(SRCS_FILES))
+# environment
+SHLVL = 1
+# makefile (from `Makefile', line 51)
+WHITE = \033[37m
+# makefile (from `Makefile', line 54)
+CC = gcc
+# makefile (from `Makefile', line 49)
+VIOLET = \033[35m
+# default
+MAKE_VERSION := 3.81
+# environment
+USER = ast-jean
+# makefile
+.DEFAULT_GOAL := all
+# makefile (from `Makefile', line 27)
+INCLUDE = $(addprefix $(INCLUDE_DIR), $(INCLUDE_FILES))
+# makefile (from `Makefile', line 3)
+NAME = minishell
+# makefile (from `Makefile', line 31)
+CURSOR_UP = \033[2A
+# makefile (from `Makefile', line 33)
+CURSOR_FORWARD = \033[1C
+# environment
+LESS = -R
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# makefile (from `Makefile', line 30)
+CURSOR_UP_1 = \033[1A
+# default
+MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
+# makefile (from `Makefile', line 59)
+LEAK = leaks -q --atExit -- ./minishell
+# default
+.VARIABLES := 
+# environment
+TMPDIR = /var/folders/zz/zyxvpxvq6csfxvn_n000cb340032rs/T/
+# automatic
+*F = $(notdir $*)
+# environment
+VSCODE_IPC_HOOK = /Users/ast-jean/Library/Application Support/Code/1.68.0-main.sock
+# makefile (from `Makefile', line 45)
+RED = \033[31m
+# makefile
+MAKEFLAGS = Rrqp
+# environment
+MFLAGS = -Rrqp
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# makefile (from `Makefile', line 44)
+BLACK = \033[30m
+# environment
+XPC_SERVICE_NAME = com.microsoft.VSCode.2084
+# makefile (from `Makefile', line 20)
+OBJS_DIR = objs/
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# makefile (from `Makefile', line 47)
+YELLOW = \033[33m
+# makefile (from `Makefile', line 50)
+CYAN = \033[36m
+# automatic
++F = $(notdir $+)
+# makefile (from `Makefile', line 60)
+VALGRING = valgrind --track-fds=yes --track-origins=yes  --leak-check=full ./minishell
+# environment
+__CF_USER_TEXT_ENCODING = 0x18B19:0x0:0x0
+# default
+MAKEFILES := 
+# makefile (from `Makefile', line 32)
+CURSOR_DOWN = \033[1B
+# automatic
+<F = $(notdir $<)
+# environment
+PAGER = less
+# environment
+LC_ALL = C
+# makefile (from `Makefile', line 16)
+LIBS = include/libft/libft.a
+# automatic
+^F = $(notdir $^)
+# default
+SUFFIXES := 
+# default
+.INCLUDE_DIRS = /usr/local/include
+# makefile (from `Makefile', line 38)
+ITALIC = \033[3m
+# environment
+MAKELEVEL := 0
+# environment
+LANG = C
+# environment
+VSCODE_PID = 16759
+# variable set hash-table stats:
+# Load=100/1024=10%, Rehash=0, Collisions=10/143=7%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# . (device 16777225, inode 1769740): 11 files, no impossibilities.
+# srcs/execution (device 16777225, inode 1891015): 4 files, no impossibilities so far.
+# srcs (device 16777225, inode 1772411): No files, no impossibilities so far.
+
+# 15 files, no impossibilities in 3 directories.
+
+# Implicit Rules
+
+objs/%.o: srcs/%.c
+#  commands to execute (from `Makefile', line 72):
+	@$(MAKE) -C include/libft
+	@mkdir -p $(OBJS_DIR)
+	@mkdir -p $(OBJS_DIR)/parsing
+	@mkdir -p $(OBJS_DIR)/execution
+	@mkdir -p $(OBJS_DIR)/built_ins
+ 
+make: *** [objs/execution/minishell.o] Error 1
+
+	@echo "$(CURSOR_UP)Compiling $< ..           "
+	@$(CC) $(CFLAGS) -c $< -o $@
+	
+
+# 1 implicit rules, 0 (0.0%) terminal.
+
+# Files
+
+# Not a target:
+srcs/execution/minishell.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-22 12:19:40
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+all: minishell
+#  Command-line target.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/11=0%
+
+# Not a target:
+objs/parsing/init_token.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-22 12:19:08
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+rew:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 101):
+	@echo " "
+	@rm -rf $(NAME)
+	@rm -f *.o
+	@rm -rf $(OBJS_DIR)
+	@$(MAKE) $(NAME)
+	./$(NAME)
+	
+
+# Not a target:
+objs/parsing/token_op.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/parsing/new_split_utils.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+minishell: objs/execution/minishell.o objs/execution/execution.o objs/parsing/parsing.o objs/parsing/new_split.o objs/parsing/new_split_utils.o objs/parsing/new_split_utils2.o objs/parsing/init_token.o objs/parsing/token_op.o
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/11=0%
+#  commands to execute (from `Makefile', line 65):
+	@echo "$(CURSOR_UP_1)$(SELECTED)MINISHELL$(END)                                     "
+	@echo "$(GREEN)Compiling DONE! ✅                                 $(END)"
+	@$(CC) $(CFLAGS) $(OBJS_IN_DIR) -lreadline -L -I $(LIBS) -o $(NAME)
+	@echo "$(BLUE)Executable $(NAME) created                 $(END)"
+	@echo "----------------------------"
+	
+
+help:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 109):
+	@echo "Rules: all clean fclean re"
+	
+
+fclean: clean
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 87):
+	@$(MAKE) -C include/libft fclean
+	@rm -rf $(NAME)
+	@echo "MINISHELL	| STATUS: $(BLUE)EXECUTABLE CLEANED$(END)"
+	
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+re: fclean all
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 98):
+	./$(NAME)
+	
+
+leak:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 92):
+	$(LEAK)
+	
+
+clean:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 81):
+	@$(MAKE) -C include/libft clean
+	@rm -f *.o
+	@rm -rf $(OBJS_DIR)
+	@echo "MINISHELL	| STATUS: $(CYAN)OBJECTS CLEANED$(END)"
+	
+
+# Not a target:
+objs/parsing/new_split.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/execution/execution.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/parsing/new_split_utils2.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+objs/execution/minishell.o: srcs/execution/minishell.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `execution/minishell'
+#  Last modified 1969-12-31 18:59:56
+#  File has been updated.
+#  Failed to be updated.
+# automatic
+# @ := objs/execution/minishell.o
+# automatic
+# % := 
+# automatic
+# * := execution/minishell
+# automatic
+# + := srcs/execution/minishell.c
+# automatic
+# | := 
+# automatic
+# < := srcs/execution/minishell.c
+# automatic
+# ^ := srcs/execution/minishell.c
+# automatic
+# ? := srcs/execution/minishell.c
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=4/22=18%
+#  commands to execute (from `Makefile', line 72):
+	@$(MAKE) -C include/libft
+	@mkdir -p $(OBJS_DIR)
+	@mkdir -p $(OBJS_DIR)/parsing
+	@mkdir -p $(OBJS_DIR)/execution
+	@mkdir -p $(OBJS_DIR)/built_ins
+	@echo "$(CURSOR_UP)Compiling $< ..           "
+	@$(CC) $(CFLAGS) -c $< -o $@
+	
+
+# Not a target:
+objs/parsing/parsing.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+valgrind:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 95):
+	$(VALGRIND)
+	
+
+# files hash-table stats:
+# Load=21/1024=2%, Rehash=0, Collisions=0/50=0%
+# VPATH Search Paths
+
+# No `vpath' search paths.
+
+# No general (`VPATH' variable) search path.
+
+# # of strings in strcache: 1
+# # of strcache buffers: 1
+# strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
+# strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
+
+# Finished Make data base on Fri Jul 22 12:19:57 2022
+
+ 

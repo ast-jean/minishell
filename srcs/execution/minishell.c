@@ -13,7 +13,7 @@ void free_tokens(t_vars *vars)
 	temp = vars->token->first;
 	while (temp->next)
 	{
-		printf("token->%s\n", temp->cont);
+		// printf("token->%s\n", temp->cont);
 		temp = temp->next;
 		free((temp->prev));
 	}
@@ -35,7 +35,7 @@ void	executing_command(char *line, t_vars *vars, char **env)
 	//Built-in nothing-------------
 	if (ft_strlen(line) == 0)
 	{
-		printf("nothing\n");
+		// printf("nothing\n");
 		return ;
 	}
 	creating_tokens(line, vars);
@@ -45,15 +45,15 @@ void	executing_command(char *line, t_vars *vars, char **env)
 	//Built-in exit-------------
 	if(!ft_strcmp(current->cont, "exit"))
 		quit_shell(vars);
-	//Built-in exit-------------
+	//-------------
 	//Built-in pwd-------------
 	if(!ft_strcmp(current->cont, "pwd"))
 		ft_pwd(env);
-	//Built-in pwd-------------
+	//-------------
 		//Built-in pwd-------------
 	if(!ft_strcmp(current->cont, "env"))
 		ft_env(env);
-	//Built-in pwd-------------
+	//-------------
 
 	if(current)
 		free_tokens(vars);
@@ -81,7 +81,6 @@ int main(int argc, char **argv, char **env)
 	//---------
 	(void)argc;
 	(void)argv;
-	(void)env;
 	//---------
 	init_shell(&vars);
 	signal(SIGINT, handler);
@@ -94,10 +93,10 @@ int main(int argc, char **argv, char **env)
 		else
      		add_history(line);
 
-		//if not 
-		executing_command(line, &vars, env);		
+		executing_command(line, &vars, env); //maybe resplit between "|" "<, <<, >, >>"
+
 		// debug_print_tokens(&vars); //causes segfault if no tokens
-		printf("The End\n");
+		// printf("The End\n");
 	}
 	quit_shell(&vars);
 	return 0;

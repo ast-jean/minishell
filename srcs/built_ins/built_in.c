@@ -50,6 +50,7 @@ void	ft_env(char **env)
 	i = -1;
 	pwd = "";
 	while(env[++i])
+	if (!ft_strncmp(env[i], "PWD", 3))
 	{
 		printf("%s\n", env[i]);
 	}
