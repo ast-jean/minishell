@@ -49,12 +49,16 @@ int	nbr_of_letters(char *s, int i, int code);
 //INIT_TOKEN.C
 void	creating_tokens(char *line, t_vars *vars);
 void	push_tk(char *cont, t_token *token, t_token *first, t_token *prev, int i, int count);
-void	executing_command(char *line, t_vars *vars);
+void	executing_command(char *line, t_vars *vars, char **env);
 char	*defining_token_type(t_token *token);
 
 //TOKEN_OP.C
 void	debug_print_tokens(t_vars *vars);
 void	*access_ptr(t_vars *vars, int i);
 
+
+//buit_ins
+void	ft_pwd(char **env);
+void	ft_env(char **env);
 // ------------------------------------------------
 #endif

@@ -28,7 +28,7 @@ void	quit_shell(t_vars *vars)
 }
 
 
-void	executing_command(char *line, t_vars *vars)
+void	executing_command(char *line, t_vars *vars, char **env)
 {
 	t_token *current;
 
@@ -46,7 +46,14 @@ void	executing_command(char *line, t_vars *vars)
 	if(!ft_strcmp(current->cont, "exit"))
 		quit_shell(vars);
 	//Built-in exit-------------
-
+	//Built-in pwd-------------
+	if(!ft_strcmp(current->cont, "pwd"))
+		ft_pwd(env);
+	//Built-in pwd-------------
+		//Built-in pwd-------------
+	if(!ft_strcmp(current->cont, "env"))
+		ft_env(env);
+	//Built-in pwd-------------
 
 	if(current)
 		free_tokens(vars);
@@ -61,8 +68,6 @@ void	handler(int sig)
         rl_replace_line("", 0);
         rl_redisplay();
 	}
-	if (sig == SIGQUIT)//ctrl-/ not necessary
-	{}
 }
 
 int main(int argc, char **argv, char **env)
@@ -88,7 +93,9 @@ int main(int argc, char **argv, char **env)
 			quit_shell(&vars);
 		else
      		add_history(line);
-		executing_command(line, &vars);
+
+		//if not 
+		executing_command(line, &vars, env);		
 		// debug_print_tokens(&vars); //causes segfault if no tokens
 		printf("The End\n");
 	}
