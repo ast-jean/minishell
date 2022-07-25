@@ -23,6 +23,7 @@ void	quit_shell(t_vars *vars)
 {
 	(void)vars;
 	// free_tokens(vars);
+	//delete history
 	exit(0);
 }
 
@@ -51,41 +52,46 @@ void	executing_command(char *line, t_vars *vars)
 		free_tokens(vars);
 }
 
+void	handler(int sig) 
+{
+	if (sig == SIGINT) //ctrl-C
+	{
+		printf("\n");
+        rl_on_new_line();
+        rl_replace_line("", 0);
+        rl_redisplay();
+	}
+	if (sig == SIGQUIT)//ctrl-/ not necessary
+	{}
+}
+
 int main(int argc, char **argv, char **env)
 {
 	char *line;
-	t_vars	vars;
+	t_vars	vars;	
+	char *prompt;
 
+	prompt= "$>";
 	line = NULL;
+	//---------
 	(void)argc;
 	(void)argv;
 	(void)env;
+	//---------
 	init_shell(&vars);
+	signal(SIGINT, handler);
+	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
-		line = readline("$>");
+		line = readline(prompt);
+		if (!line) //ctrl-D
+			quit_shell(&vars);
+		else
+     		add_history(line);
 		executing_command(line, &vars);
 		// debug_print_tokens(&vars); //causes segfault if no tokens
 		printf("The End\n");
 	}
-
+	quit_shell(&vars);
 	return 0;
 }
-
-
-// int main(int argc, char **argv, char **env)
-// {
-// 	char *line;
-// 	t_vars	vars;
-
-// 	(void)argc;
-// 	(void)argv;
-// 	(void)env;
-// 	line = "test";
-// 		// init_shell(&vars);
-// 		printf("line = >%s<\n", line);
-// 		executing_command(line, &vars);
-// 		debug_print_tokens(&vars);
-// 		printf("The End\n");
-// 	return 0;
-// }

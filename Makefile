@@ -14,6 +14,7 @@ SRCS_FILES 		=	execution/minishell.c		\
 INCLUDE_FILES	= 	minishell.h
 
 LIBS = include/libft/libft.a
+READLINE = -lreadline -I /usr/local/opt/readline/include -L ~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include
 
 ### Repertoires ###
 SRCS_DIR 	= srcs/
@@ -64,7 +65,7 @@ all: $(NAME)
 $(NAME) : $(OBJS_IN_DIR)
 	@echo "$(CURSOR_UP_1)$(SELECTED)MINISHELL$(END)                                     "
 	@echo "$(GREEN)Compiling DONE! ✅                                 $(END)"
-	@$(CC) $(CFLAGS) $(OBJS_IN_DIR) -lreadline $(LIBS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS_IN_DIR) $(LIBS) $(READLINE) -o $@ 
 	@echo "$(BLUE)Executable $(NAME) created                 $(END)"
 	@echo "----------------------------"
 
@@ -75,7 +76,7 @@ $(OBJS_DIR)%.o : $(SRCS_DIR)%.c
 	@mkdir -p $(OBJS_DIR)/execution
 	@mkdir -p $(OBJS_DIR)/built_ins
 	@echo "$(CURSOR_UP)Compiling $< ..           "
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) -I ~/.brew/opt/readline/include -I /usr/local/opt/readline/include  $(CFLAGS) -c $< -o $@
 
 clean:
 	@$(MAKE) -C include/libft clean
@@ -98,6 +99,7 @@ re:	fclean all
 	./$(NAME)
 
 rew: 
+	@echo " "
 	@rm -rf $(NAME)
 	@rm -f *.o
 	@rm -rf $(OBJS_DIR)
