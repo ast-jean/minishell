@@ -25,3 +25,12 @@ TOKNOW:
 	- Ne pas gérer les fuites avec readline 
 
 FIXME: 
+
+
+TODO:
+//-Not yet done-
+//	print list
+//	search list -> pointer du mot
+//	cpyarray
+//	lenarray
+//	strcpy

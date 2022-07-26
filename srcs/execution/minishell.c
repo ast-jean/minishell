@@ -1,11 +1,15 @@
 #include "../../include/minishell.h"
 
-void init_shell(t_vars *vars)
+void init_shell(t_vars *vars, char **env)
 {
-	(void)vars;
-	//save env
-	printf("*******************************\n*          MINISHELL          *\n*******************************\n");
+	vars->env = ft_cpyarray(env);
+	vars->pwd = ft_strcpy(ft_scharray(env, "PWD=") + 4);
+	vars->oldpwd = ft_strcpy(ft_scharray(env, "OLDPWD=") + 7);
+	printf("*******************************\n");
+	printf("*          MINISHELL          *\n");
+	printf("*******************************\n");
 }
+
 
 void free_tokens(t_vars *vars)
 {
@@ -34,12 +38,8 @@ void	executing_command(char *line, t_vars *vars, char **env)
 {
 	t_token *current;
 
-	//Built-in nothing-------------
 	if (ft_strlen(line) == 0)
-	{
-		// printf("nothing\n");
 		return ;
-	}
 	creating_tokens(line, vars);
 	current = vars->token->first;
 	//Built-in nothing-------------
@@ -56,7 +56,6 @@ void	executing_command(char *line, t_vars *vars, char **env)
 	if(!ft_strcmp(current->cont, "env"))
 		ft_env(env);
 	//-------------
-
 	if(current)
 		free_tokens(vars);
 }

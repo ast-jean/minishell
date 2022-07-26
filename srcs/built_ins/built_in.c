@@ -15,17 +15,10 @@ void	ft_cd(void)
 //change pwd and oldpwd in env, maybe?
 // save pwd in struct and env
 }
-void	ft_pwd(char **env)
+void	ft_pwd(t_vars *vars)
 {
 // pwd (no flag)
-	int		i;
-
-	i = -1;
-	while(env[++i])
-	{
-		if (!ft_strncmp(env[i], "PWD", 3))
-			printf("%s\n", env[i] + 4);
-	}
+	printf("%s\n", vars->pwd);
 }
 void	ft_export(void)
 {
@@ -37,14 +30,8 @@ void ft_unset(void)
 // unset (no flag)
 }
 
-void	ft_env(char **env)
+void	ft_env(t_vars *vars)
 {
 // env (no flag)
-	char	*pwd;
-	int		i;
-
-	i = -1;
-	pwd = "";
-	while(env[++i])
-		printf("%s\n", env[i]);
+	ft_printarray(vars->env);
 }

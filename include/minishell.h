@@ -22,13 +22,15 @@ typedef struct s_vars
 	int		ac; //use?
 	char	**av; //use?
 	char 	**env;
+	char	*pwd;
+	char	*oldpwd;
 	t_token	*token;
 }	t_vars;
 
 // FUNCTIONS (SELON FILENAME)----------------------
 
 // MINISHELL.C
-	init_shell(t_vars vars, char **env);
+void	init_shell(t_vars vars, char **env);
 // PARSING.C
 
 // NEW_SPLIT.C
@@ -57,9 +59,9 @@ void	*access_ptr(t_vars *vars, int i);
 
 
 //buit_ins
-void	ft_pwd(char **env);
-void	ft_env(char **env);
-// void	ft_cd(char **env);
-// void	ft_(char **env);
+void	ft_pwd(t_vars *vars);
+void	ft_env(t_vars *vars);
+// void	ft_cd(char **env, t_vars vars);
+// void	ft_echo(char **env);
 // ------------------------------------------------
 #endif
