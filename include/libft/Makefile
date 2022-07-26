@@ -50,7 +50,12 @@ SRC =	ft_memset.c				\
 		ft_iswhitespace.c		\
 		ft_iseven.c				\
 		ft_isuneven.c			\
-		ft_strcmp.c
+		ft_strcmp.c				\
+		ft_arrayprint.c			\
+		# ft_arraysrch.c			\
+		# ft_arraycpy.c			\
+		# ft_arraylen.c			\
+		# ft_arrayadd.c			\
 
 NAME = libft.a
 CC = gcc
