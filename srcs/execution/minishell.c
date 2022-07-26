@@ -10,7 +10,6 @@ void init_shell(t_vars *vars, char **env)
 	printf("*******************************\n");
 }
 
-
 void free_tokens(t_vars *vars)
 {
 	t_token *temp;
