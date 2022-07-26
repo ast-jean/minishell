@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_arrayprint.c                                    :+:      :+:    :+:   */
+/*   ft_arrayadd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/26 12:32:11 by xchouina          #+#    #+#             */
-/*   Updated: 2022/07/26 12:54:46 by xchouina         ###   ########.fr       */
+/*   Created: 2022/07/26 12:34:26 by xchouina          #+#    #+#             */
+/*   Updated: 2022/07/26 13:03:16 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-void	ft_printarray(char **tab)
+int	ft_arrayadd(char **tab, char *str_2_add)
+{
+	char	**new;
+	int		i;
+	
+}
+
+int	ft_arraylen(char **tab)
 {
 	int	i;
+	int	len;
 
-	i = 0;
-	while (tab[i] != NULL)
-	{
-		printf("%s", tab[i++]);
-	}
+	i = -1;
+	len = 0;
+	while (tab[++i] != NULL)
+		len++;
+	return (len);
 }
