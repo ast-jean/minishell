@@ -30,7 +30,7 @@ typedef struct s_vars
 // FUNCTIONS (SELON FILENAME)----------------------
 
 // MINISHELL.C
-void	init_shell(t_vars vars, char **env);
+void	init_shell(t_vars *vars, char **env);
 // PARSING.C
 
 // NEW_SPLIT.C

@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:46:17 by xchouina          #+#    #+#             */
-/*   Updated: 2022/07/19 14:47:29 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/07/26 13:16:42 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,9 @@ int		ft_isquote(const int c);
 bool	ft_iswhitespace(const int c);
 bool	ft_iseven(const int c);
 bool	ft_isuneven(const int c);
+
+void	ft_arrayadd(char **tab, char *str_2_add);
+void	ft_arrayprint(char **tab);
+void	ft_arrayrm(char *element_to_remove);
 
 #endif

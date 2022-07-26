@@ -2,9 +2,9 @@
 
 void init_shell(t_vars *vars, char **env)
 {
-	vars->env = ft_cpyarray(env);
-	vars->pwd = ft_strcpy(ft_scharray(env, "PWD=") + 4);
-	vars->oldpwd = ft_strcpy(ft_scharray(env, "OLDPWD=") + 7);
+	vars->env = ft_arraycpy(env);
+	vars->pwd = ft_strcpy(ft_arraysrch(env, "PWD=") + 4);
+	vars->oldpwd = ft_strcpy(ft_arraysrch(env, "OLDPWD=") + 7);
 	printf("*******************************\n");
 	printf("*          MINISHELL          *\n");
 	printf("*******************************\n");
