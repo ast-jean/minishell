@@ -3,6 +3,7 @@
 void init_shell(t_vars *vars)
 {
 	(void)vars;
+	//save env
 	printf("*******************************\n*          MINISHELL          *\n*******************************\n");
 }
 
@@ -24,6 +25,7 @@ void	quit_shell(t_vars *vars)
 	(void)vars;
 	// free_tokens(vars);
 	//delete history
+
 	exit(0);
 }
 
@@ -77,12 +79,12 @@ int main(int argc, char **argv, char **env)
 	char *prompt;
 
 	prompt= "$>";
-	line = NULL;
+	line = "";
 	//---------
 	(void)argc;
 	(void)argv;
 	//---------
-	init_shell(&vars);
+	init_shell(&vars, env);
 	signal(SIGINT, handler);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)

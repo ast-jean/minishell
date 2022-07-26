@@ -12,23 +12,19 @@ void	ft_echo(char **args, char **env)
 void	ft_cd(void)
 {
 // cd (only relative path or absolute)
-
+//change pwd and oldpwd in env, maybe?
+// save pwd in struct and env
 }
 void	ft_pwd(char **env)
 {
 // pwd (no flag)
-	char	*pwd;
 	int		i;
 
 	i = -1;
-	pwd = "";
 	while(env[++i])
 	{
 		if (!ft_strncmp(env[i], "PWD", 3))
-		{
-			env[i] = env[i] + 4;
-			printf("%s\n", env[i]);
-		}
+			printf("%s\n", env[i] + 4);
 	}
 }
 void	ft_export(void)
@@ -50,8 +46,5 @@ void	ft_env(char **env)
 	i = -1;
 	pwd = "";
 	while(env[++i])
-	if (!ft_strncmp(env[i], "PWD", 3))
-	{
 		printf("%s\n", env[i]);
-	}
 }

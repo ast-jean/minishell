@@ -19,17 +19,16 @@ typedef struct s_token
 
 typedef struct s_vars
 {
-	int		ac;
-	char	**av;
+	int		ac; //use?
+	char	**av; //use?
 	char 	**env;
 	t_token	*token;
 }	t_vars;
 
-
 // FUNCTIONS (SELON FILENAME)----------------------
 
 // MINISHELL.C
-
+	init_shell(t_vars vars, char **env);
 // PARSING.C
 
 // NEW_SPLIT.C
@@ -60,5 +59,7 @@ void	*access_ptr(t_vars *vars, int i);
 //buit_ins
 void	ft_pwd(char **env);
 void	ft_env(char **env);
+// void	ft_cd(char **env);
+// void	ft_(char **env);
 // ------------------------------------------------
 #endif
