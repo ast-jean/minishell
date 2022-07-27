@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:46:17 by xchouina          #+#    #+#             */
-/*   Updated: 2022/07/19 14:47:29 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/07/27 13:10:26 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,10 @@ int		ft_isquote(const int c);
 bool	ft_iswhitespace(const int c);
 bool	ft_iseven(const int c);
 bool	ft_isuneven(const int c);
+
+void	ft_arrayprint(char **tab);
+int		ft_arraylen(char **tab);
+char 	**ft_arraycpy(char **tab);
+char	**ft_arrayadd(char **tab, char *str_2_add);
 
 #endif

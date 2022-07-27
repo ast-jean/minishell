@@ -29,8 +29,9 @@ FIXME:
 
 TODO:
 //-Not yet done-
-//	print list
-//	search list -> pointer du mot
-//	cpyarray
-//	lenarray
-//	strcpy
+[X]arrayprint
+[X]arraylen
+[ ]arrayadd (needs further testing)
+[ ]arraycpy (needs further testing)
+[ ]arraysrch
+[ ]strcpy

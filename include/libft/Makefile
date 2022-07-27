@@ -52,10 +52,10 @@ SRC =	ft_memset.c				\
 		ft_isuneven.c			\
 		ft_strcmp.c				\
 		ft_arrayprint.c			\
+		ft_arraylen.c			\
+		ft_arrayadd.c			\
 		# ft_arraysrch.c		\
 		# ft_arraycpy.c			\
-		# ft_arraylen.c			\
-		# ft_arrayadd.c			\
 
 NAME = libft.a
 CC = gcc
