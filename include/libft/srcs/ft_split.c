@@ -6,7 +6,7 @@
 /*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 17:55:01 by xchouina          #+#    #+#             */
-/*   Updated: 2022/07/18 11:06:09 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/07/27 08:10:14 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	while (wc--)
 	{
-		while (*s && *s == c) //skipping whitespaces
+		while (*s && *s == c)
 			s++;
 		str_array[i] = mallocating_wrd_array(s, c);
 		i++;
