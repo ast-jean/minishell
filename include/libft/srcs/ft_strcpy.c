@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isuneven.c                                      :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/12 12:03:04 by xchouina          #+#    #+#             */
-/*   Updated: 2022/07/28 10:44:06 by xchouina         ###   ########.fr       */
+/*   Created: 2022/07/28 10:38:57 by xchouina          #+#    #+#             */
+/*   Updated: 2022/07/28 10:40:01 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-bool	ft_isuneven(const int c)
+char	*ft_strcpy(char *dest, char *src)
 {
-	if ((c % 2) != 0)
-		return (true);
-	return (false);
+	int	i;
+
+	i = 0;
+	while (src[i] != '\0')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }
