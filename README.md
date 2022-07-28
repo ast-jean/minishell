@@ -33,4 +33,4 @@ TODO:
 [X]arrayadd (needs further testing)
 [X]arraycpy (needs further testing)
 [ ]arraysrch
-[ ]strcpy
+[X]strcpy
