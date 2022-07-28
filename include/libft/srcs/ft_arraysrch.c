@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_arrayadd.c                                      :+:      :+:    :+:   */
+/*   ft_arraysrch.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/26 12:34:26 by xchouina          #+#    #+#             */
-/*   Updated: 2022/07/28 13:13:28 by xchouina         ###   ########.fr       */
+/*   Created: 2022/07/28 13:12:02 by xchouina          #+#    #+#             */
+/*   Updated: 2022/07/28 13:12:51 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "../include/libft.h"
 
-char	**ft_arrayadd(char **tab, char *str_to_add)
+char	ft_arraysrch(char **tab, char str_to_find)
 {
-	char	**new;
-	int		i;
+	int	i;
 
-	new = malloc(sizeof(char *) * (ft_arraylen(tab) + 1));
 	i = -1;
-	while (tab[++i] != NULL)
-		new[i] = tab[i];
-	new[i] = str_to_add;
-	new[++i] = NULL;
-	return (new);
+	while (tab[++i])
+	{
+		if (!ft_strncmp(tab[i], str_to_find, ft_strlen(str_to_find)))
+			return (tab[i]);
+	}
+	return (0);
 }
