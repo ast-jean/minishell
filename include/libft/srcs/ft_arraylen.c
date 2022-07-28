@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isuneven.c                                      :+:      :+:    :+:   */
+/*   ft_arraylen.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/12 12:03:04 by xchouina          #+#    #+#             */
-/*   Updated: 2022/07/28 10:44:06 by xchouina         ###   ########.fr       */
+/*   Created: 2022/07/26 13:07:50 by xchouina          #+#    #+#             */
+/*   Updated: 2022/07/26 13:23:03 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-bool	ft_isuneven(const int c)
+int	ft_arraylen(char **tab)
 {
-	if ((c % 2) != 0)
-		return (true);
-	return (false);
+	int	i;
+	int	len;
+
+	i = -1;
+	len = 0;
+	while (tab[++i] != NULL)
+		len++;
+	return (len);
 }

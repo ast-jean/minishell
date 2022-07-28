@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isuneven.c                                      :+:      :+:    :+:   */
+/*   ft_arraycpy.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/12 12:03:04 by xchouina          #+#    #+#             */
-/*   Updated: 2022/07/28 10:44:06 by xchouina         ###   ########.fr       */
+/*   Created: 2022/07/27 13:09:42 by xchouina          #+#    #+#             */
+/*   Updated: 2022/07/28 10:51:01 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-bool	ft_isuneven(const int c)
+char	**ft_arraycpy(char **tab)
 {
-	if ((c % 2) != 0)
-		return (true);
-	return (false);
+	char	**new;
+	int		i;
+
+	new = malloc(sizeof(char *) * (ft_arraylen(tab) + 1));
+	i = -1;
+	while (tab[++i] != NULL)
+		new[i] = tab[i];
+	new[i] = NULL;
+	return (new);
 }

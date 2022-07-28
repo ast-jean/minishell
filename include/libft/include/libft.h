@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:46:17 by xchouina          #+#    #+#             */
-/*   Updated: 2022/07/26 13:16:42 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/07/28 12:55:55 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 // AJOUTS
+char	*ft_strcpy(char *dest, char *src);
 void	ft_swap(int a, int b);
 void	ft_pt_swap(int *a, int *b);
 long	ft_atol(const char *str);
@@ -92,8 +93,9 @@ bool	ft_iswhitespace(const int c);
 bool	ft_iseven(const int c);
 bool	ft_isuneven(const int c);
 
-void	ft_arrayadd(char **tab, char *str_2_add);
 void	ft_arrayprint(char **tab);
-void	ft_arrayrm(char *element_to_remove);
+int		ft_arraylen(char **tab);
+char 	**ft_arraycpy(char **tab);
+char	**ft_arrayadd(char **tab, char *str_2_add);
 
 #endif

@@ -6,27 +6,22 @@
 /*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 12:34:26 by xchouina          #+#    #+#             */
-/*   Updated: 2022/07/26 13:03:16 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/07/28 10:50:53 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-int	ft_arrayadd(char **tab, char *str_2_add)
+char	**ft_arrayadd(char **tab, char *str_2_add)
 {
 	char	**new;
 	int		i;
-	
-}
 
-int	ft_arraylen(char **tab)
-{
-	int	i;
-	int	len;
-
+	new = malloc(sizeof(char *) * (ft_arraylen(tab) + 1));
 	i = -1;
-	len = 0;
 	while (tab[++i] != NULL)
-		len++;
-	return (len);
+		new[i] = tab[i];
+	new[i] = str_2_add;
+	new[++i] = NULL;
+	return (new);
 }

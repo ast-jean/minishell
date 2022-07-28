@@ -14,7 +14,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 
 # This program built for i386-apple-darwin11.3.0
 
-# Make data base, printed on Tue Jul 26 13:33:21 2022
+# Make data base, printed on Tue Jul 26 15:10:00 2022
 
 # Variables
 
@@ -53,7 +53,7 @@ VSCODE_VERBOSE_LOGGING = true
 # makefile (from `Makefile', line 92)
 OBJS = $(SRC:.c=.o)
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cb340032rs/T/vscode-ipc-c1035d4d-b1a2-46e2-be94-9e49448c9f31.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cb340032rs/T/vscode-ipc-2f1ae25e-4f98-4b1a-b1e6-61951d0228dc.sock
 # environment
 VSCODE_CWD = /
 # makefile (from `Makefile', line 95)
@@ -73,7 +73,7 @@ SRC_IN_DIR = $(addprefix $(SRCS_DIR), $(SRC))
 # makefile (from `Makefile', line 81)
 SELECTED = \033[7m
 # environment
-LaunchInstanceID = 7FFC55BA-9AE7-491C-A062-EDE2AA7B370D
+LaunchInstanceID = 4FF8CE0F-6FF6-4374-93C3-5331EC3812B3
 # makefile (from `Makefile', line 66)
 SRCS_DIR = srcs/
 # environment
@@ -85,7 +85,7 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.Lg5tQwa9cT/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.OZdDdNYg93/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -169,7 +169,7 @@ MFLAGS = -Rrqp
 # makefile (from `Makefile', line 83)
 BLACK = \033[30m
 # environment
-XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000009.Electron
+XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000002.Electron
 # makefile (from `Makefile', line 67)
 OBJS_DIR = objs/
 # automatic
@@ -197,7 +197,7 @@ LC_ALL = C
 # makefile (from `Makefile', line 63)
 HEADER = -I  libft.h
 # environment
-SECURITYSESSIONID = 18871
+SECURITYSESSIONID = 186a7
 # automatic
 ^F = $(notdir $^)
 # default
@@ -211,7 +211,7 @@ MAKELEVEL := 1
 # environment
 LANG = C
 # environment
-VSCODE_PID = 35296
+VSCODE_PID = 4513
 # variable set hash-table stats:
 # Load=97/1024=9%, Rehash=0, Collisions=6/134=4%
 
@@ -353,7 +353,7 @@ objs/ft_strlen.o:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-26 13:32:46
+#  Last modified 2022-07-26 13:49:31
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -685,10 +685,10 @@ objs/ft_atoi.o:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Tue Jul 26 13:33:21 2022
+# Finished Make data base on Tue Jul 26 15:10:00 2022
 
 
-# Make data base, printed on Tue Jul 26 13:33:21 2022
+# Make data base, printed on Tue Jul 26 15:10:00 2022
 
 # Variables
 
@@ -729,7 +729,7 @@ VSCODE_VERBOSE_LOGGING = true
 # makefile (from `Makefile', line 26)
 OBJS = $(SRCS_FILES:.c=.o)
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cb340032rs/T/vscode-ipc-c1035d4d-b1a2-46e2-be94-9e49448c9f31.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cb340032rs/T/vscode-ipc-2f1ae25e-4f98-4b1a-b1e6-61951d0228dc.sock
 # makefile (from `Makefile', line 18)
 READLINE = -lreadline -I /usr/local/opt/readline/include -L ~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include
 # environment
@@ -751,7 +751,7 @@ SELECTED = \033[7m
 # makefile (from `Makefile', line 59)
 NORMINETTE = norminette
 # environment
-LaunchInstanceID = 7FFC55BA-9AE7-491C-A062-EDE2AA7B370D
+LaunchInstanceID = 4FF8CE0F-6FF6-4374-93C3-5331EC3812B3
 # makefile (from `Makefile', line 21)
 SRCS_DIR = srcs/
 # environment
@@ -765,7 +765,7 @@ ELECTRON_RUN_AS_NODE = 1
 # makefile (from `Makefile', line 15)
 INCLUDE_FILES = minishell.h
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.Lg5tQwa9cT/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.OZdDdNYg93/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -859,7 +859,7 @@ MFLAGS = -Rrqp
 # makefile (from `Makefile', line 46)
 BLACK = \033[30m
 # environment
-XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000009.Electron
+XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000002.Electron
 # makefile (from `Makefile', line 22)
 OBJS_DIR = objs/
 # automatic
@@ -892,7 +892,7 @@ LC_ALL = C
 # makefile (from `Makefile', line 17)
 LIBS = include/libft/libft.a
 # environment
-SECURITYSESSIONID = 18871
+SECURITYSESSIONID = 186a7
 # automatic
 ^F = $(notdir $^)
 # default
@@ -906,7 +906,7 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 35296
+VSCODE_PID = 4513
 # variable set hash-table stats:
 # Load=106/1024=10%, Rehash=0, Collisions=11/149=7%
 
@@ -942,7 +942,7 @@ objs/%.o: srcs/%.c
 # Not a target:
 srcs/execution/minishell.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-26 13:33:20
+#  Last modified 2022-07-26 13:49:31
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -1152,6 +1152,6 @@ valgrind:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Tue Jul 26 13:33:21 2022
+# Finished Make data base on Tue Jul 26 15:10:02 2022
 
  

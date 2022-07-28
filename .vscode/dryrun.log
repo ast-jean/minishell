@@ -1,10 +1,8 @@
-make --dry-run --keep-going --print-directory
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/ast-jean/Cursus/minishell'
 /Applications/Xcode.app/Contents/Developer/usr/bin/make -C include/libft
- 
 make[1]: Entering directory `/Users/ast-jean/Cursus/minishell/include/libft'
 echo "libft.a already exist. try:'make re'"
- 
 make[1]: Leaving directory `/Users/ast-jean/Cursus/minishell/include/libft'
 mkdir -p objs/
 mkdir -p objs//parsing
@@ -13,7 +11,6 @@ mkdir -p objs//built_ins
 echo "\033[2ACompiling srcs/execution/minishell.c ..           "
 gcc -I ~/.brew/opt/readline/include -I /usr/local/opt/readline/include  -g -Wall -Wextra -Werror  -c srcs/execution/minishell.c -o objs/execution/minishell.o
 /Applications/Xcode.app/Contents/Developer/usr/bin/make -C include/libft
- 
 make[1]: Entering directory `/Users/ast-jean/Cursus/minishell/include/libft'
 echo "libft.a already exist. try:'make re'"
 make[1]: Leaving directory `/Users/ast-jean/Cursus/minishell/include/libft'
@@ -24,7 +21,6 @@ mkdir -p objs//built_ins
 echo "\033[2ACompiling srcs/execution/execution.c ..           "
 gcc -I ~/.brew/opt/readline/include -I /usr/local/opt/readline/include  -g -Wall -Wextra -Werror  -c srcs/execution/execution.c -o objs/execution/execution.o
 /Applications/Xcode.app/Contents/Developer/usr/bin/make -C include/libft
- 
 make[1]: Entering directory `/Users/ast-jean/Cursus/minishell/include/libft'
 echo "libft.a already exist. try:'make re'"
 make[1]: Leaving directory `/Users/ast-jean/Cursus/minishell/include/libft'
@@ -35,7 +31,6 @@ mkdir -p objs//built_ins
 echo "\033[2ACompiling srcs/parsing/parsing.c ..           "
 gcc -I ~/.brew/opt/readline/include -I /usr/local/opt/readline/include  -g -Wall -Wextra -Werror  -c srcs/parsing/parsing.c -o objs/parsing/parsing.o
 /Applications/Xcode.app/Contents/Developer/usr/bin/make -C include/libft
- 
 make[1]: Entering directory `/Users/ast-jean/Cursus/minishell/include/libft'
 echo "libft.a already exist. try:'make re'"
 make[1]: Leaving directory `/Users/ast-jean/Cursus/minishell/include/libft'
@@ -46,7 +41,6 @@ mkdir -p objs//built_ins
 echo "\033[2ACompiling srcs/parsing/new_split.c ..           "
 gcc -I ~/.brew/opt/readline/include -I /usr/local/opt/readline/include  -g -Wall -Wextra -Werror  -c srcs/parsing/new_split.c -o objs/parsing/new_split.o
 /Applications/Xcode.app/Contents/Developer/usr/bin/make -C include/libft
- 
 make[1]: Entering directory `/Users/ast-jean/Cursus/minishell/include/libft'
 echo "libft.a already exist. try:'make re'"
 make[1]: Leaving directory `/Users/ast-jean/Cursus/minishell/include/libft'
@@ -67,7 +61,6 @@ mkdir -p objs//built_ins
 echo "\033[2ACompiling srcs/parsing/new_split_utils2.c ..           "
 gcc -I ~/.brew/opt/readline/include -I /usr/local/opt/readline/include  -g -Wall -Wextra -Werror  -c srcs/parsing/new_split_utils2.c -o objs/parsing/new_split_utils2.o
 /Applications/Xcode.app/Contents/Developer/usr/bin/make -C include/libft
- 
 make[1]: Entering directory `/Users/ast-jean/Cursus/minishell/include/libft'
 echo "libft.a already exist. try:'make re'"
 make[1]: Leaving directory `/Users/ast-jean/Cursus/minishell/include/libft'
@@ -78,7 +71,6 @@ mkdir -p objs//built_ins
 echo "\033[2ACompiling srcs/parsing/init_token.c ..           "
 gcc -I ~/.brew/opt/readline/include -I /usr/local/opt/readline/include  -g -Wall -Wextra -Werror  -c srcs/parsing/init_token.c -o objs/parsing/init_token.o
 /Applications/Xcode.app/Contents/Developer/usr/bin/make -C include/libft
- 
 make[1]: Entering directory `/Users/ast-jean/Cursus/minishell/include/libft'
 echo "libft.a already exist. try:'make re'"
 make[1]: Leaving directory `/Users/ast-jean/Cursus/minishell/include/libft'
@@ -89,7 +81,6 @@ mkdir -p objs//built_ins
 echo "\033[2ACompiling srcs/parsing/token_op.c ..           "
 gcc -I ~/.brew/opt/readline/include -I /usr/local/opt/readline/include  -g -Wall -Wextra -Werror  -c srcs/parsing/token_op.c -o objs/parsing/token_op.o
 /Applications/Xcode.app/Contents/Developer/usr/bin/make -C include/libft
- 
 make[1]: Entering directory `/Users/ast-jean/Cursus/minishell/include/libft'
 echo "libft.a already exist. try:'make re'"
 make[1]: Leaving directory `/Users/ast-jean/Cursus/minishell/include/libft'
