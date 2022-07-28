@@ -6,7 +6,7 @@
 /*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:46:17 by xchouina          #+#    #+#             */
-/*   Updated: 2022/07/27 13:10:26 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/07/28 10:43:04 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 // AJOUTS
+char	*ft_strcpy(char *dest, char *src);
 void	ft_swap(int a, int b);
 void	ft_pt_swap(int *a, int *b);
 long	ft_atol(const char *str);
