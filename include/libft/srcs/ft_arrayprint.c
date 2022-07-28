@@ -6,7 +6,7 @@
 /*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 12:32:11 by xchouina          #+#    #+#             */
-/*   Updated: 2022/07/27 13:09:17 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/07/28 10:14:48 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,5 @@ void	ft_arrayprint(char **tab)
 
 	i = 0;
 	while (tab[i] != NULL)
-	{
 		printf("%s\n", tab[i++]);
-	}
 }

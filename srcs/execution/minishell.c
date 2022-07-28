@@ -111,14 +111,17 @@ int	main(void)
 	// int	i = 0;
 	char	*str = "Hello how are you";
 	char **tab;
+	char **cpy_tab;
 
 	tab = ft_split(str, ' ');
 	printf("--------------------\n");
 	printf("[len = %d]\n", ft_arraylen(tab));
 	ft_arrayprint(tab);
 	printf("--------------------\n");
-	ft_arrayadd(tab, "today");
-	printf("[len = %d]\n", ft_arraylen(tab));
+	tab = ft_arrayadd(tab, "today");
+	// printf("[len = %d]\n", ft_arraylen(tab));
 	ft_arrayprint(tab);
 	printf("--------------------\n");
+	cpy_tab = ft_arraycpy(tab);
+	ft_arrayprint(cpy_tab);
 }

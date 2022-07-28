@@ -31,7 +31,7 @@ TODO:
 //-Not yet done-
 [X]arrayprint
 [X]arraylen
-[ ]arrayadd (needs further testing)
-[ ]arraycpy (needs further testing)
+[X]arrayadd (needs further testing)
+[X]arraycpy (needs further testing)
 [ ]arraysrch
 [ ]strcpy
