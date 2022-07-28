@@ -56,7 +56,7 @@ SRC =	ft_memset.c				\
 		ft_arraylen.c			\
 		ft_arrayadd.c			\
 		ft_arraycpy.c			\
-		# ft_arraysrch.c		\
+		ft_arraysrch.c			\
 
 NAME = libft.a
 CC = gcc
