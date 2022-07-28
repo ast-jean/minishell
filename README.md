@@ -27,10 +27,10 @@ FIXME:
 
 
 TODO:
--Not yet done-
-[X]print list
-[ ]search list -> pointer du mot
-[ ]cpyarray
-[ ]lenarray
-[ ]arrayrm
-[X]strcpy
+//-Not yet done-
+[X]arrayprint
+[X]arraylen
+[X]arrayadd (needs further testing)
+[X]arraycpy (needs further testing)
+[ ]arraysrch
+[ ]strcpy

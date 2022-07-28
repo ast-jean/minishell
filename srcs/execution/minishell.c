@@ -23,6 +23,15 @@ void free_tokens(t_vars *vars)
 	}
 }
 
+	temp = vars->token->first;
+	while (temp->next)
+	{
+		// printf("token->%s\n", temp->cont);
+		temp = temp->next;
+		free((temp->prev));
+	}
+}
+
 void	quit_shell(t_vars *vars)
 {
 	(void)vars;
@@ -101,3 +110,26 @@ int main(int argc, char **argv, char **env)
 	quit_shell(&vars);
 	return 0;
 }
+
+
+
+// // TESTS
+// int	main(void)
+// {
+// 	// int	i = 0;
+// 	char	*str = "Hello how are you";
+// 	char **tab;
+// 	char **cpy_tab;
+
+// 	tab = ft_split(str, ' ');
+// 	printf("--------------------\n");
+// 	printf("[len = %d]\n", ft_arraylen(tab));
+// 	ft_arrayprint(tab);
+// 	printf("--------------------\n");
+// 	tab = ft_arrayadd(tab, "today");
+// 	// printf("[len = %d]\n", ft_arraylen(tab));
+// 	ft_arrayprint(tab);
+// 	printf("--------------------\n");
+// 	cpy_tab = ft_arraycpy(tab);
+// 	ft_arrayprint(cpy_tab);
+// }
