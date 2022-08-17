@@ -6,6 +6,8 @@ char	*defining_token_type(t_token *token)
 		return ("flag");
 	// else if cmd
 	// 	return ("cmd");
+		// else if builtins
+	// 	return ("builtins");
 	else
 		return ("file");
 
@@ -13,8 +15,8 @@ char	*defining_token_type(t_token *token)
 
 void	init_token_null(t_token *token, t_token *fi)
 {
-	token->cont = NULL;
-	token->type = NULL;
+	token->cont = "";
+	token->type = "";
 	token->next = NULL;
 	token->first = fi;
 	token->prev = NULL;
@@ -56,5 +58,3 @@ void	creating_tokens(char *line, t_vars *vars)
 	}
 	vars->token = vars->token->first;
 }
-
-

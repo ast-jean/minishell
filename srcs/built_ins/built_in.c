@@ -20,10 +20,6 @@ void	ft_pwd(t_vars *vars)
 // pwd (no flag)
 	printf("%s\n", vars->pwd);
 }
-void	ft_export(void)
-{
-// export (no flag)
-}
 
 void ft_unset(void)
 {
@@ -33,5 +29,5 @@ void ft_unset(void)
 void	ft_env(t_vars *vars)
 {
 // env (no flag)
-	ft_printarray(vars->env);
+	ft_arrayprint(vars->env);
 }

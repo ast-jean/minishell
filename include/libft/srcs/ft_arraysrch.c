@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_arraysrch.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 13:12:02 by xchouina          #+#    #+#             */
-/*   Updated: 2022/07/28 13:12:51 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/07/28 15:33:20 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../include/libft.h"
 
-char	ft_arraysrch(char **tab, char str_to_find)
+char	*ft_arraysrch(char **tab, char *str_to_find)
 {
 	int	i;
 
@@ -23,5 +23,5 @@ char	ft_arraysrch(char **tab, char str_to_find)
 		if (!ft_strncmp(tab[i], str_to_find, ft_strlen(str_to_find)))
 			return (tab[i]);
 	}
-	return (0);
+	return ("");
 }

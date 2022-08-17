@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_arraycpy.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 13:09:42 by xchouina          #+#    #+#             */
-/*   Updated: 2022/07/28 10:51:01 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/07/28 14:57:12 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

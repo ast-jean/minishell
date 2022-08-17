@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_arrayrm.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/15 19:11:36 by xchouina          #+#    #+#             */
-/*   Updated: 2022/07/28 14:46:48 by ast-jean         ###   ########.fr       */
+/*   Created: 2022/02/01 12:13:13 by xchouina          #+#    #+#             */
+/*   Updated: 2022/07/28 15:22:05 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-int	ft_toupper(int c)
+void	ft_arrayrm(char *element_to_remove)
 {
-	if (c >= 'a' && c <= 'z')
-		c -= 32;
-	return (c);
+	element_to_remove = element_to_remove + 1;
+	//dupliquer??
 }
