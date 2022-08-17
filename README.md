@@ -2,9 +2,9 @@
 Custom shell in C
 TODO:
 [X]	Historique
-[ ] Lancer le bon exec ex: cat lance la commande
-[ ] Redirection ex: < , > , << , >>
-[ ] Pipes
+[ ] Lancer le bon exec ve, ex: cat lance la commande
+[ ] Redirection ex: < , > , << delim, >>
+[ ] Pipes ( et ajouter dans le parsing)
 [ ] Gérer les Variables d'env $ (attention a just "=")
 [ ] Gérer $?  
 [X] Gérer les signaux ctrl-C, ctrl-D, ctrl-\
@@ -13,7 +13,7 @@ TODO:
 	[X] ctrl-\ ne fait rien.
 [ ] Créé les buitins
 	[ ] echo (with -n)
-	[ ] cd (only relative path or absolute)
+	[ ] cd (only relative path or absolute)(changer PATH et OLDPATH)
 	[X] pwd (no flag)
 	[ ] export (no flag)
 	[ ] unset (no flag) 
@@ -24,13 +24,5 @@ TOKNOW:
 	- Ne pas gérer les fuites avec readline 
 
 FIXME: 
+	- ft_arrayrm
 
-
-TODO:
-//-Not yet done-
-[X]arrayprint
-[X]arraylen
-[X]arrayadd (needs further testing)
-[X]arraycpy (needs further testing)
-[ ]arraysrch
-[ ]strcpy

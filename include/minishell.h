@@ -61,7 +61,9 @@ void	*access_ptr(t_vars *vars, int i);
 //buit_ins
 void	ft_pwd(t_vars *vars);
 void	ft_env(t_vars *vars);
+void	ft_export(char *var_name, char *var_content, char **env, t_vars *vars);
 // void	ft_cd(char **env, t_vars vars);
 // void	ft_echo(char **env);
+
 // ------------------------------------------------
 #endif

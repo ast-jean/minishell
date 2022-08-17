@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_arraysrch.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/15 19:11:36 by xchouina          #+#    #+#             */
-/*   Updated: 2022/07/28 14:46:48 by ast-jean         ###   ########.fr       */
+/*   Created: 2022/07/28 13:12:02 by xchouina          #+#    #+#             */
+/*   Updated: 2022/07/28 15:33:20 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "../include/libft.h"
 
-int	ft_toupper(int c)
+char	*ft_arraysrch(char **tab, char *str_to_find)
 {
-	if (c >= 'a' && c <= 'z')
-		c -= 32;
-	return (c);
+	int	i;
+
+	i = -1;
+	while (tab[++i])
+	{
+		if (!ft_strncmp(tab[i], str_to_find, ft_strlen(str_to_find)))
+			return (tab[i]);
+	}
+	return ("");
 }

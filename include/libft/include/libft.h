@@ -1,18 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/19 14:46:17 by xchouina          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/07/28 12:55:55 by ast-jean         ###   ########.fr       */
-=======
-/*   Updated: 2022/07/28 10:35:46 by xchouina         ###   ########.fr       */
->>>>>>> f0b2cef1a037bb90da49479b0ffc48f82cf13b76
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
@@ -22,7 +7,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
-#include <stdbool.h>
+# include <stdbool.h>
 
 typedef struct s_list
 {
@@ -49,7 +34,7 @@ int		ft_atoi(const char *str);
 int		ft_strncmp(char *s1, char *s2, unsigned int n);
 int		ft_strcmp(char *s1, char *s2);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
-char	*ft_strdup(const char *s1);
+char	*ft_strdup(char *s1);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strchr(const char *s, int t);
 
@@ -100,6 +85,8 @@ bool	ft_isuneven(const int c);
 void	ft_arrayprint(char **tab);
 int		ft_arraylen(char **tab);
 char 	**ft_arraycpy(char **tab);
-char	**ft_arrayadd(char **tab, char *str_2_add);
+char	**ft_arrayadd(char **tab, char *str_to_add);
+char	*ft_arraysrch(char **tab, char *str_to_find);
+char 	*ft_strtoupper(char *str);
 
 #endif

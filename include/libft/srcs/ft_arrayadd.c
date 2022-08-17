@@ -6,13 +6,13 @@
 /*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 12:34:26 by xchouina          #+#    #+#             */
-/*   Updated: 2022/07/28 10:50:53 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/07/28 13:13:28 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-char	**ft_arrayadd(char **tab, char *str_2_add)
+char	**ft_arrayadd(char **tab, char *str_to_add)
 {
 	char	**new;
 	int		i;
@@ -21,7 +21,7 @@ char	**ft_arrayadd(char **tab, char *str_2_add)
 	i = -1;
 	while (tab[++i] != NULL)
 		new[i] = tab[i];
-	new[i] = str_2_add;
+	new[i] = str_to_add;
 	new[++i] = NULL;
 	return (new);
 }
