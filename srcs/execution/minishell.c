@@ -12,29 +12,6 @@ void init_shell(t_vars *vars, char **env)
 	printf("*******************************\n");
 }
 
-void free_tokens(t_vars *vars)
-{
-	t_token *temp;
-
-	temp = vars->token->first;
-	while (temp->next)
-	{
-		// printf("token->%s\n", temp->cont);
-		temp = temp->next;
-		free((temp->prev));
-	}
-}
-
-void	quit_shell(t_vars *vars)
-{
-	(void)vars;
-	// free_tokens(vars);
-	//delete history
-
-	exit(0);
-}
-
-
 void	executing_command(char *line, t_vars *vars, char **env)
 {
 	t_token *current;

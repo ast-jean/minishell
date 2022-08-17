@@ -6,6 +6,8 @@ char	*defining_token_type(t_token *token)
 		return ("flag");
 	// else if cmd
 	// 	return ("cmd");
+		// else if builtins
+	// 	return ("builtins");
 	else
 		return ("file");
 

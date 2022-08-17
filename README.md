@@ -15,7 +15,7 @@ TODO:
 	[ ] echo (with -n)
 	[ ] cd (only relative path or absolute)(changer PATH et OLDPATH)
 	[X] pwd (no flag)
-	[ ] export (no flag)
+	[ ] export (no flag) -ungoing-
 	[ ] unset (no flag) 
 	[X] env (no flag)
 	[X] exit (no flag)
@@ -23,6 +23,7 @@ TOKNOW:
 	- Ne pas interpréter de quotes (guillemets) non fermés ou de caractères spéciaux non demandés dans le sujet, tels que \ (le backslash) ou ; (le point-virgule).
 	- Ne pas gérer les fuites avec readline 
 
-FIXME: 
+ TOFIX  
 	- ft_arrayrm
+	- signals get displayed
 
