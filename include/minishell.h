@@ -4,10 +4,9 @@
 # include "libft/include/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
-#include <signal.h>
+# include <signal.h>
 
 // STRUCTS
-
 typedef struct s_token
 {
 	char			*cont;
@@ -56,7 +55,6 @@ char	*defining_token_type(t_token *token);
 //TOKEN_OP.C
 void	debug_print_tokens(t_vars *vars);
 void	*access_ptr(t_vars *vars, int i);
-
 
 //buit_ins
 void	ft_pwd(t_vars *vars);

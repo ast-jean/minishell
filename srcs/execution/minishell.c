@@ -49,7 +49,7 @@ void	executing_command(char *line, t_vars *vars, char **env)
 	//-------------
 	//Built-in export-------------
 	if(!ft_strcmp(current->cont, "export")) //create struct of saved variables
-		ft_export(current->cont);			//ft_export will fetch variables names and put it in env
+		// ft_export(current->cont);			//ft_export will fetch variables names and put it in env
 	//Built-in exit-------------
 	if(!ft_strcmp(current->cont, "exit"))
 		quit_shell(vars);

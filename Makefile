@@ -30,28 +30,28 @@ SRCS 		= $(addprefix $(SRCS_DIR), $(SRCS_FILES))
 INCLUDE 	= $(addprefix $(INCLUDE_DIR), $(INCLUDE_FILES))
 
 ### Colour var ###
-CURSOR_UP_1	= \033[1A
-CURSOR_UP	= \033[2A
-CURSOR_DOWN	= \033[1B
-CURSOR_FORWARD = \033[1C
-CURSOR_BACK  = \033[1D
+CURSOR_UP_1		= \033[1A
+CURSOR_UP		= \033[2A
+CURSOR_DOWN		= \033[1B
+CURSOR_FORWARD	= \033[1C
+CURSOR_BACK  	= \033[1D
 
-END			= \033[0m
-BOLD		= \033[1m
-ITALIC		= \033[3m
-URL			= \033[4m
-BLINK		= \033[5m
-BLINK2		= \033[6m
-SELECTED	= \033[7m
+END				= \033[0m
+BOLD			= \033[1m
+ITALIC			= \033[3m
+URL				= \033[4m
+BLINK			= \033[5m
+BLINK2			= \033[6m
+SELECTED		= \033[7m
 
-BLACK		= \033[30m
-RED			= \033[31m
-GREEN		= \033[32m
-YELLOW		= \033[33m
-BLUE		= \033[34m
-VIOLET		= \033[35m
-CYAN		= \033[36m
-WHITE		= \033[37m
+BLACK			= \033[30m
+RED				= \033[31m
+GREEN			= \033[32m
+YELLOW			= \033[33m
+BLUE			= \033[34m
+VIOLET			= \033[35m
+CYAN			= \033[36m
+WHITE			= \033[37m
 
 ### Compilations et archivage ###
 CC 			= gcc
