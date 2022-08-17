@@ -44,13 +44,11 @@ int	accessing(t_vars *vars, int n)
 	return (0);
 }
 
-
-
-
 void	executing_simple_cmds(t_vars *vars)
 {
 	
 	finding_paths(vars, env);
-	accessing(vars)
+	accessing(vars);
+
 	execve(vars->path, vars->cmd_line, NULL);
 }

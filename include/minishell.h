@@ -21,6 +21,8 @@ typedef struct s_vars
 	int		ac; //use?
 	char	**av; //use?
 	char 	**env;
+	char	*cmd_line;
+	char	*path;
 	char	*pwd;
 	char	*oldpwd;
 	t_token	*token;
