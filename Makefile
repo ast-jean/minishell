@@ -11,7 +11,8 @@ SRCS_FILES 		=	execution/minishell.c		\
 					parsing/init_token.c		\
 					parsing/token_op.c			\
 					built_ins/export.c			\
-					built_ins/built_in.c		
+					built_ins/built_in.c		\
+					built_ins/echo_cd.c			\
 
 INCLUDE_FILES	= 	minishell.h
 
