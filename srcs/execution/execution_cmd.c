@@ -1,4 +1,4 @@
-
+(xchouina)
 #include "../../include/minishell.h"
 
 void	finding_paths(t_vars *vars, char **env)
