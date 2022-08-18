@@ -21,3 +21,4 @@ void	quit_shell(t_vars *vars)
 
 	exit(0);
 }
+
