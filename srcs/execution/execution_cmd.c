@@ -18,13 +18,13 @@ void	finding_paths(t_vars *vars, char **env)
 	vars->env = ft_split(vars->path + 5, ':');
 }
 
-int	accessing(t_vars *vars)
+int	accessing(t_vars *vars, t_token token)
 {
 	int		yes_or_no;
 	char	*cmd;
 	int		i;
 
-	vars->cmd_line = ft_split(vars->current->cont, ' ');
+	vars->cmd_line = ft_split(vars->token->cont, ' ');
 	cmd = ft_strjoin("/", vars->cmd_line[0]);
 	i = 0;
 	while (vars->env[i])
@@ -44,11 +44,9 @@ int	accessing(t_vars *vars)
 	return (0);
 }
 
-void	executing_simple_cmds(t_vars *vars, char **env)
+void	executing_simple_cmds(t_vars *vars, t_token token, char **env)
 {
-	
 	finding_paths(vars, env);
-	accessing(vars); // 0 is av[0]
-
+	accessing(vars, token);
 	execve(vars->path, vars->cmd_line, NULL);
 }

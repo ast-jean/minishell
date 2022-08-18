@@ -67,8 +67,8 @@ void	ft_export(char *var_name, char *var_content, char **env, t_vars *vars);
 
 // EXECUTION_CMD.C
 void	finding_paths(t_vars *vars, char **env);
-int	accessing(t_vars *vars);
-void	executing_simple_cmds(t_vars *vars, char **env);
+int	accessing(t_vars *vars, t_token token);
+void	executing_simple_cmds(t_vars *vars, t_token token, char **env);
 //QUIT.C
 void	quit_shell(t_vars *vars);
 void	free_tokens(t_vars *vars);
