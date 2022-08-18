@@ -21,7 +21,7 @@ typedef struct s_vars
 	int		ac; //use?
 	char	**av; //use?
 	char 	**env;
-	char	*cmd_line;
+	char	**cmd_line;
 	char	*path;
 	char	*pwd;
 	char	*oldpwd;
@@ -67,7 +67,7 @@ void	ft_export(char *var_name, char *var_content, char **env, t_vars *vars);
 
 // EXECUTION_CMD.C
 void	finding_paths(t_vars *vars, char **env);
-int	accessing(t_vars *vars, int n);
+int	accessing(t_vars *vars);
 void	executing_simple_cmds(t_vars *vars, char **env);
 //QUIT.C
 void	quit_shell(t_vars *vars);

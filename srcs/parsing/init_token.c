@@ -9,7 +9,7 @@ char	*defining_token_type(t_token *token)
 		// else if builtins
 	// 	return ("builtins");
 	else
-		return ("file");
+		return ("cmd");
 
 }
 
