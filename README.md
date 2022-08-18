@@ -2,10 +2,10 @@
 Custom shell in C
 TODO:
 [X]	Historique
-[ ] Lancer le bon exec ve, ex: cat lance la commande (xchouina)
+[X] Lancer le bon exec ve, ex: cat lance la commande (xchouina)
 [ ] Redirection ex: < , > , << delim, >> (ast-jean) ++mjarry
 [ ] Pipes: Pimper les pipes ( et ajouter dans le parsing) (xchouina) ++mjarry
-[ ] Gérer les Variables d'env $ (attention a just "=")
+[ ] Gérer les Variables d'env $ (attention a juste "=")
 [ ] Gérer $?
 [X] Gérer les signaux ctrl-C, ctrl-D, ctrl-\
 	[X] ctrl-C
