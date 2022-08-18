@@ -65,5 +65,9 @@ void	ft_export(char *var_name, char *var_content, char **env, t_vars *vars);
 // void	ft_cd(char **env, t_vars vars);
 // void	ft_echo(char **env);
 
+//QUIT.C
+void	quit_shell(t_vars *vars);
+void	free_tokens(t_vars *vars);
+
 // ------------------------------------------------
 #endif
