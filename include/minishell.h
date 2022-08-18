@@ -32,8 +32,8 @@ typedef struct s_vars
 
 // MINISHELL.C
 void	init_shell(t_vars *vars, char **env);
-// PARSING.C
 
+// PARSING.C
 // NEW_SPLIT.C
 char	*unquoted_wrd_array(char *s, int *n);
 char	*single_quoted_wrd_array(char *line, int *n);
@@ -65,5 +65,9 @@ void	ft_export(char *var_name, char *var_content, char **env, t_vars *vars);
 // void	ft_cd(char **env, t_vars vars);
 // void	ft_echo(char **env);
 
+// EXECUTION_CMD.C
+void	finding_paths(t_vars *vars, char **env);
+int	accessing(t_vars *vars, int n);
+void	executing_simple_cmds(t_vars *vars, char **env);
 // ------------------------------------------------
 #endif

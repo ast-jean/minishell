@@ -1,4 +1,3 @@
-// (xchouina)
 #include "../../include/minishell.h"
 
 void init_shell(t_vars *vars, char **env)
