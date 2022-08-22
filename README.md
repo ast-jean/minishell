@@ -4,7 +4,7 @@ TODO:
 [X]	Historique
 [X] Lancer le bon exec ve, ex: cat lance la commande (xchouina)
 [ ] Redirection ex: < , > , << delim, >> (ast-jean) ++mjarry
-[ ] Pipes: Pimper les pipes ( et ajouter dans le parsing) (xchouina) ++mjarry
+[ ] Pipes: Pimper les pipes (et ajouter dans le parsing) (xchouina) ++mjarry
 [ ] Gérer les Variables d'env $ (attention a juste "=")
 [ ] Gérer $?
 [X] Gérer les signaux ctrl-C, ctrl-D, ctrl-\
@@ -24,7 +24,7 @@ TOKNOW:
 	- Ne pas gérer les fuites avec readline 
 
  TOFIX  
-	- ft_arrayrm
+	- ft_arrayrm (xchouina)
 	- signals get displayed
  
 
