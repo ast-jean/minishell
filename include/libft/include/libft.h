@@ -83,10 +83,13 @@ bool	ft_iseven(const int c);
 bool	ft_isuneven(const int c);
 
 void	ft_arrayprint(char **tab);
+void	ft_arrayfree(char **tab);
 int		ft_arraylen(char **tab);
 char 	**ft_arraycpy(char **tab);
-char	**ft_arrayadd(char **tab, char *str_to_add);
 char	*ft_arraysrch(char **tab, char *str_to_find);
+char	**ft_arrayadd(char **tab, char *str_to_add);
+char	**ft_arrayrm(char **tab, char *str_to_rm);
+
 char 	*ft_strtoupper(char *str);
 
 #endif
