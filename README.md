@@ -45,7 +45,8 @@ LOG:
 			des nouvelles fonctions dans la libft.
 
 23/08:
-	9:40 - 
+	11:27 - J'ai fait le tour des petits raccourcis pratique pour git, à voir ci-dessous ;).
+
 
 
 À Ajouter:
@@ -69,3 +70,13 @@ LOG:
             "borderStyle": "solid",
             "borderColor": "white",
         },
+
+Raccourcis git:
+
+gaa	—> git add .
+gst	—> git status
+gc		—> git commit
+gp	—> git push
+gl		—> git pull
+gco	—> git checkout
+gm	—> git merge
