@@ -38,7 +38,7 @@ void	executing_command(char *line, t_vars *vars, char **env)
 		//Built-in pwd-------------
 	if(!ft_strcmp(current->cont, "env"))
 		ft_env(vars);
-	if (!ft_strcmp(current->type, "cmd"))
+	else if (!ft_strcmp(current->type, "cmd"))
 		executing_simple_cmds(vars, current, env);
 	//-------------
 	if(current)

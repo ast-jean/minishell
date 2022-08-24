@@ -6,12 +6,13 @@
 /*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 13:09:42 by xchouina          #+#    #+#             */
-/*   Updated: 2022/08/22 13:41:44 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/08/24 10:49:21 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 // NOTE: "ft_arraycpy" creates a copy of a double array.
+
 char	**ft_arraycpy(char **tab)
 {
 	char	**new;
@@ -22,6 +23,6 @@ char	**ft_arraycpy(char **tab)
 	while (tab[++i] != NULL)
 		new[i] = tab[i];
 	new[i] = NULL;
-	// ft_arrayfree(tab);
+	free(tab);
 	return (new);
 }

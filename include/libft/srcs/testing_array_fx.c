@@ -12,8 +12,8 @@ int	main(void)
 	tab[4] = "fifth";
 	ft_arrayprint(tab);
 	printf("----\n");
-	newt = ft_arrayrm(tab, "third");
-	ft_arrayfree(tab);
-	ft_arrayprint(tab);
-		ft_arrayprint(tab);
+	newt = ft_arrayadd(tab, "sixth");
+	// ft_arrayfree(tab);
+	ft_arrayprint(newt);
+		// ft_arrayprint(tab);
 }

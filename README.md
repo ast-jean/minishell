@@ -27,11 +27,11 @@ TOKNOW:
  TOFIX  
 [X]	- ft_arrayrm (xchouina)
 	- signals get displayed
- 
+
 
 GOALS:
 
-- Terminer le parsing avant tout
+- Gérer les pipes ensemble
 
 
 

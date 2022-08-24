@@ -6,7 +6,7 @@
 /*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 12:34:26 by xchouina          #+#    #+#             */
-/*   Updated: 2022/08/22 13:41:45 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/08/24 10:39:05 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ char	**ft_arrayadd(char **tab, char *str_to_add)
 		new[i] = tab[i];
 	new[i] = str_to_add;
 	new[++i] = NULL;
-	// ft_arrayfree(tab);
+	free(tab);
 	return (new);
 }
