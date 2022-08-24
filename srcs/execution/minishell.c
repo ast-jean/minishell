@@ -3,9 +3,9 @@
 void init_shell(t_vars *vars, char **env)
 {
 	vars->env = ft_arraycpy(env);
-	vars->pwd = ft_calloc(ft_strlen(ft_arraysrch(env, "PWD")), sizeof(char));
+	// vars->pwd = ft_calloc(ft_strlen(ft_arraysrch(env, "PWD")), sizeof(char));
 	vars->pwd = ft_arraysrch(env, "PWD=") + 4;
-	vars->oldpwd = ft_calloc(ft_strlen(ft_arraysrch(env, "OLDPWD")), sizeof(char));
+	// vars->oldpwd = ft_calloc(ft_strlen(ft_arraysrch(env, "OLDPWD")), sizeof(char));
 	vars->oldpwd = ft_arraysrch(env, "OLDPWD=") + 7;
 	printf("*******************************\n");
 	printf("*          MINISHELL          *\n");
@@ -31,14 +31,14 @@ void	executing_command(char *line, t_vars *vars, char **env)
 	if(!ft_strcmp(current->cont, "exit"))
 		quit_shell(vars);
 	//-------------
-	//Built-in pwd-------------
-	if(!ft_strcmp(current->cont, "pwd"))
-		ft_pwd(vars);
-	//-------------
 		//Built-in pwd-------------
 	if(!ft_strcmp(current->cont, "env"))
 		ft_env(vars);
-	if (!ft_strcmp(current->type, "cmd"))
+	//-------------
+	//Built-in pwd-------------
+	if(!ft_strcmp(current->cont, "pwd"))
+		ft_pwd(vars);
+	else if (!ft_strcmp(current->type, "cmd"))
 		executing_simple_cmds(vars, current, env);
 	//-------------
 	if(current)

@@ -11,6 +11,7 @@ int	is_n(char *str)
 			return (0);
 		i++;
 	}
+	return (1);
 }
 
 void	ft_echo(char **args, char **env)
