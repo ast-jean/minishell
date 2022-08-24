@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_arraycpy.c                                      :+:      :+:    :+:   */
+/*   ft_arrayfree.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/27 13:09:42 by xchouina          #+#    #+#             */
-/*   Updated: 2022/08/22 13:41:44 by xchouina         ###   ########.fr       */
+/*   Created: 2022/08/22 11:42:46 by xchouina          #+#    #+#             */
+/*   Updated: 2022/08/22 13:05:21 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
-// NOTE: "ft_arraycpy" creates a copy of a double array.
-char	**ft_arraycpy(char **tab)
-{
-	char	**new;
-	int		i;
+// NOTE: "ft_arrayfree" frees a double array.
 
-	new = malloc(sizeof(char *) * (ft_arraylen(tab) + 1));
+void	ft_arrayfree(char **tab)
+{
+	int	i;
+
 	i = -1;
 	while (tab[++i] != NULL)
-		new[i] = tab[i];
-	new[i] = NULL;
-	// ft_arrayfree(tab);
-	return (new);
+		free(tab[i]);
+	free(tab);
 }

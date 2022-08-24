@@ -4,6 +4,7 @@ NAME = minishell
 
 SRCS_FILES 		=	execution/minishell.c		\
 					execution/execution.c		\
+					execution/execution_cmd.c	\
 					parsing/parsing.c			\
 					parsing/new_split.c			\
 					parsing/new_split_utils.c	\
@@ -13,6 +14,7 @@ SRCS_FILES 		=	execution/minishell.c		\
 					built_ins/export.c			\
 					built_ins/built_in.c		\
 					built_ins/echo_cd.c			\
+					execution/quit.c
 
 INCLUDE_FILES	= 	minishell.h
 

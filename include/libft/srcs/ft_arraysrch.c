@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_arraysrch.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 13:12:02 by xchouina          #+#    #+#             */
-/*   Updated: 2022/07/28 15:33:20 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/08/22 13:14:37 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../include/libft.h"
+// NOTE:	"ft_arraysrch" searchs for a str (2nd param.) 
+// NOTE:	 in a double array (1st param.) and returns its position.
 
 char	*ft_arraysrch(char **tab, char *str_to_find)
 {

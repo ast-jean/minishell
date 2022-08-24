@@ -1,4 +1,3 @@
-// (xchouina)
 #include "../../include/minishell.h"
 
 void init_shell(t_vars *vars, char **env)
@@ -15,7 +14,7 @@ void init_shell(t_vars *vars, char **env)
 
 void	executing_command(char *line, t_vars *vars, char **env)
 {
-	t_token *current;
+	t_token	*current;
 	(void)env;
 	if (ft_strlen(line) == 0)
 		return ;
@@ -39,6 +38,8 @@ void	executing_command(char *line, t_vars *vars, char **env)
 		//Built-in pwd-------------
 	if(!ft_strcmp(current->cont, "env"))
 		ft_env(vars);
+	if (!ft_strcmp(current->type, "cmd"))
+		executing_simple_cmds(vars, current, env);
 	//-------------
 	if(current)
 		free_tokens(vars);
@@ -87,24 +88,4 @@ int main(int argc, char **argv, char **env)
 }
 
 
-
-// // TESTS
-// int	main(void)
-// {
-// 	// int	i = 0;
-// 	char	*str = "Hello how are you";
-// 	char **tab;
-// 	char **cpy_tab;
-
-// 	tab = ft_split(str, ' ');
-// 	printf("--------------------\n");
-// 	printf("[len = %d]\n", ft_arraylen(tab));
-// 	ft_arrayprint(tab);
-// 	printf("--------------------\n");
-// 	tab = ft_arrayadd(tab, "today");
-// 	// printf("[len = %d]\n", ft_arraylen(tab));
-// 	ft_arrayprint(tab);
-// 	printf("--------------------\n");
-// 	cpy_tab = ft_arraycpy(tab);
-// 	ft_arrayprint(cpy_tab);
-// }
+// TESTS
