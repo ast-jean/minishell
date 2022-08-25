@@ -61,7 +61,6 @@ void	*access_ptr(t_vars *vars, int i);
 //buit_ins
 void	ft_pwd(t_vars *vars);
 void	ft_env(t_vars *vars);
-void	ft_export(char *var_name, char *var_content, char **env, t_vars *vars);
 // void	ft_cd(char **env, t_vars vars);
 // void	ft_echo(char **env);
 
@@ -72,6 +71,10 @@ void	executing_simple_cmds(t_vars *vars, t_token *token, char **env);
 //QUIT.C
 void	quit_shell(t_vars *vars);
 void	free_tokens(t_vars *vars);
+
+//export.c
+void	ft_unset(t_vars *vars, char *var_name);
+void	ft_export(t_token *token, char **env, t_vars *vars);
 
 // ------------------------------------------------
 #endif
