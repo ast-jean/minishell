@@ -51,7 +51,7 @@ int	nbr_of_letters(char *s, int i, int code);
 //INIT_TOKEN.C
 void	creating_tokens(char *line, t_vars *vars);
 void	push_tk(char *cont, t_token *token, t_token *first, t_token *prev, int i, int count);
-void	executing_command(char *line, t_vars *vars, char **env);
+void	executing_command(char *line, t_vars *vars);
 char	*defining_token_type(t_token *token);
 
 //TOKEN_OP.C
@@ -67,7 +67,7 @@ void	ft_env(t_vars *vars);
 // EXECUTION_CMD.C
 void	finding_paths(t_vars *vars, char **env);
 int		accessing(t_vars *vars, t_token *token);
-void	executing_simple_cmds(t_vars *vars, t_token *token, char **env);
+void	executing_simple_cmds(t_vars *vars, t_token *token);
 //QUIT.C
 void	quit_shell(t_vars *vars);
 void	free_tokens(t_vars *vars);

@@ -47,9 +47,9 @@ int	accessing(t_vars *vars, t_token *token)
 	return (0);
 }
 
-void	executing_simple_cmds(t_vars *vars, t_token *token, char **env)
+void	executing_simple_cmds(t_vars *vars, t_token *token)
 {
-	finding_paths(vars, env);
+	finding_paths(vars, vars->env);
 	accessing(vars, token);
 	execve(vars->path, vars->cmd_line, NULL);
 }

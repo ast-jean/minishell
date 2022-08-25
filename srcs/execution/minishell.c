@@ -12,7 +12,7 @@ void init_shell(t_vars *vars, char **env)
 	printf("*******************************\n");
 }
 
-void	executing_command(char *line, t_vars *vars, char **env)
+void	executing_command(char *line, t_vars *vars)
 {
 	t_token	*current;
 	if (ft_strlen(line) == 0)
@@ -26,7 +26,7 @@ void	executing_command(char *line, t_vars *vars, char **env)
 	//Built-in export-------------
 	if(!ft_strcmp(current->cont, "export"))
 		ft_export(current, vars->env, vars);
-	if(!ft_strcmp(current->cont, "unset"))
+	else if(!ft_strcmp(current->cont, "unset"))
 		ft_unset(vars, current->next->cont);
 	else if(!ft_strcmp(current->cont, "exit"))
 		quit_shell(vars);
@@ -34,13 +34,19 @@ void	executing_command(char *line, t_vars *vars, char **env)
 		ft_pwd(vars);
 	else if(!ft_strcmp(current->cont, "env"))
 		ft_env(vars);
-	else if (!ft_strcmp(current->type, "cmd"))
-		executing_simple_cmds(vars, current, env);
+	else if (!accessing(vars, current)) //si command est dans le path
+	{
+/*debug*/printf("\033[43mcommand is '%s'\033[0m\n", current->cont);
+		executing_simple_cmds(vars, current);
+	}
 	else
+	{
 		printf("command not found '%s'\n", current->cont);
-	if(current)
-		free_tokens(vars);
-	printf("command is '%s'\n", current->cont);
+		return ;
+	}
+	// if(current)
+	// 	free_tokens(vars);
+/*debug*/printf("\033[43mcommand is '%s'\033[0m\n", current->cont);
 }
 
 void	handler(int sig) 
@@ -77,7 +83,7 @@ int main(int argc, char **argv, char **env)
 		else
      		add_history(line);
 			
-		executing_command(line, &vars, env); //maybe resplit between "|" "<, <<, >, >>"
+		executing_command(line, &vars); //maybe resplit between "|" "<, <<, >, >>"
 
 		// debug_print_tokens(&vars); //causes segfault if no tokens
 
