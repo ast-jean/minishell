@@ -30,18 +30,47 @@ char	**split_del(char *line, char *d_found, int len, int count)
 	char	**split;
 	int		i;
 	int		j;
+	char	c;
 
 	i = 0;
 	j = 0;
 	split = NULL;
-	while (i < len && j < count)
+	split = malloc(sizeof(char *) * 100000000);
+	while (i < len)
 	{
+		// printf("line: %c\n", line[i]);
+		// printf("d_found: %c\n", d_found[j]);
 		if (line[i] == 34 || line[i] == 39)
-			split = ft_arrayadd(split, newtoken_q(line, &i, line[i]));
+		{
+			split = ft_arrayadd(split, newtoken_q(line, i, line[i]));
+			c = line[i++];
+			while (line[i] && line[i] != c)
+				i++;
+			i++;
+		}
 		else if (line[i])
-			split = ft_arrayadd(split, newtoken_s(line, &i));
-		// else if (d_found[j] && d_found[j] != ' ')
-		// 	split = ft_arrayadd(split, newtoken_d())
+		{
+			split = ft_arrayadd(split, newtoken_s(line, i));
+			while (line[i])
+				i++;
+		}
+		else if (!line[i] && d_found[j] && d_found[j] != ' ')
+		{
+			split = ft_arrayadd(split, newtoken_d(line, d_found, i, j));
+			c = d_found[j];
+			while (d_found[j] && !line[i] && d_found[j] == c)
+			{
+				i++;
+				j++;
+			}
+		}
+		else if (!line[i] && d_found[j] == ' ')
+		{
+			i++;
+			j++;
+		}
+		// printf("len : %d	i : %d\n", len, i);
+		// printf("count : %d	j : %d\n", count, j);
 	}
 	return (split);
 }
@@ -88,8 +117,14 @@ char	**tokenize(char *line)
 
 int main(void)
 {
-	char str[] = "test is< \"what this is\"";
-	tokenize(str);
+	char str[] = "'this'\"is\" a test";
+	char **split;
+	split = tokenize(str);
+
+	while (*split)
+	{
+		printf("res: %s\n", *(split++));
+	}
 }
 
 //type 0-line 1-delims
