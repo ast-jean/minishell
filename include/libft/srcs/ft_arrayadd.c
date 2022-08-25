@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_arrayadd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 12:34:26 by xchouina          #+#    #+#             */
-/*   Updated: 2022/08/22 13:41:45 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/08/25 15:40:13 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,11 @@ char	**ft_arrayadd(char **tab, char *str_to_add)
 
 	new = malloc(sizeof(char *) * (ft_arraylen(tab) + 1));
 	i = -1;
-	while (tab[++i] != NULL)
+	while (tab && tab[++i] != NULL)
 		new[i] = tab[i];
 	new[i] = str_to_add;
 	new[++i] = NULL;
-	// ft_arrayfree(tab);
+	if (tab)
+		free(tab);
 	return (new);
 }

@@ -58,6 +58,10 @@ char	*defining_token_type(t_token *token);
 void	debug_print_tokens(t_vars *vars);
 void	*access_ptr(t_vars *vars, int i);
 
+//NEWTOKEN.C
+char	*newtoken_q(char *line, int *i, char c);
+char	*newtoken_s(char *line, int *i);
+
 //buit_ins
 void	ft_pwd(t_vars *vars);
 void	ft_env(t_vars *vars);
@@ -72,6 +76,7 @@ void	executing_simple_cmds(t_vars *vars, t_token *token, char **env);
 //QUIT.C
 void	quit_shell(t_vars *vars);
 void	free_tokens(t_vars *vars);
+
 
 // ------------------------------------------------
 #endif

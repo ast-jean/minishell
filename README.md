@@ -22,7 +22,8 @@ TODO:
 [X] Fonction pour free un double array (xchouina)
 TOKNOW: 
 	- Ne pas interpréter de quotes (guillemets) non fermés ou de caractères spéciaux non demandés dans le sujet, tels que \ (le backslash) ou ; (le point-virgule).
-	- Ne pas gérer les fuites avec readline 
+	- Ne pas gérer les fuites avec readline
+	- simple quotes = litéral
 
  TOFIX  
 [X]	- ft_arrayrm (xchouina)
