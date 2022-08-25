@@ -78,6 +78,7 @@ int main(int argc, char **argv, char **env)
 			quit_shell(&vars);
 		else
      		add_history(line);
+			
 		executing_command(line, &vars, env); //maybe resplit between "|" "<, <<, >, >>"
 
 		// debug_print_tokens(&vars); //causes segfault if no tokens
