@@ -14,10 +14,6 @@ TODO:
 [ ] Pipes: looper les pipes (et ajouter dans le parsing)
 [ ] Gérer les Variables d'env $ (attention a juste "=")
 [ ] Gérer $?
-[X] Gérer les signaux ctrl-C, ctrl-D, ctrl-\
-	[X] ctrl-C
-	[X] ctrl-D quitte le shell. (done)
-	[X] ctrl-\ ne fait rien.
 [ ] Créer les buitins
 	[ ] echo (with -n)
 	[ ] cd (only relative path or absolute)(changer PATH et OLDPATH)
@@ -37,6 +33,8 @@ TOKNOW:
 		"$VAR"
 		"<<"
 		"<<hello"
+- execution_cmd.c
+-init-token_type.c
 
 LOG:
 
