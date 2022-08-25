@@ -38,13 +38,6 @@ TOKNOW:
 		"<<"
 		"<<hello"
 
-
-
-GOALS:
-- Gérer les pipes ensemble
-
-
-
 LOG:
 
 Raccourcis git:
