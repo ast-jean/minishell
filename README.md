@@ -75,8 +75,8 @@ Raccourcis git:
 
 gaa	—> git add .
 gst	—> git status
-gc		—> git commit
+gc	—> git commit
 gp	—> git push
-gl		—> git pull
+gl	—> git pull
 gco	—> git checkout
 gm	—> git merge

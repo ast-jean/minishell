@@ -21,11 +21,6 @@ void	ft_pwd(t_vars *vars)
 	printf("%s\n", vars->pwd);
 }
 
-void ft_unset(void)
-{
-// unset (no flag)
-}
-
 void	ft_env(t_vars *vars)
 {
 // env (no flag)
