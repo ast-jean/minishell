@@ -26,6 +26,8 @@ void	executing_command(char *line, t_vars *vars, char **env)
 	//Built-in export-------------
 	if(!ft_strcmp(current->cont, "export"))
 		ft_export(current->cont,current->next->cont, vars->env, vars);
+	if(!ft_strcmp(current->cont, "unset"))
+		ft_unset(vars, current->next->cont);
 	else if(!ft_strcmp(current->cont, "exit"))
 		quit_shell(vars);
 	else if(!ft_strcmp(current->cont, "pwd"))
