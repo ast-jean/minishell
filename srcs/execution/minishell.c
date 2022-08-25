@@ -34,6 +34,8 @@ void	executing_command(char *line, t_vars *vars)
 		ft_pwd(vars);
 	else if(!ft_strcmp(current->cont, "env"))
 		ft_env(vars);
+/*debug*/	// else if(!ft_strcmp(current->cont, "ls"))
+	// 	executing_simple_cmds(vars, current);
 	else if (!accessing(vars, current)) //si command est dans le path
 	{
 /*debug*/printf("\033[43mcommand is '%s'\033[0m\n", current->cont);
@@ -48,7 +50,7 @@ void	executing_command(char *line, t_vars *vars)
 	// 	free_tokens(vars);
 /*debug*/printf("\033[43mcommand is '%s'\033[0m\n", current->cont);
 }
-
+                                                                                              
 void	handler(int sig) 
 {
 	if (sig == SIGINT) //ctrl-C
