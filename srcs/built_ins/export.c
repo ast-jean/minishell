@@ -1,14 +1,17 @@
 #include "../../include/minishell.h"
 
-void	ft_export(char *var_name, char *var_content, char **env, t_vars *vars)
+void	ft_export(t_token *token, char **env, t_vars *vars)
 {
-// export (no flag)
-	char *line;
+printf("in export\n");
+// export (no flag) var_name=var_content
+	
+// char *line;
+(void)env;
+(void)vars;
 
-	var_name = ft_strtoupper(var_name);
-	line = ft_strjoin(var_name, "=");
-	line = ft_strjoin(line, var_content);
-	ft_arrayadd(vars->env, line);
-	ft_arrayadd(env, line);
+printf("var_name= %s\n", token->cont);
+// printf("line= %s\n", line);
+// 	ft_arrayadd(vars->env, line);
+// 	ft_arrayadd(env, line);
 }
 

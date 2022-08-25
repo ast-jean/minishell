@@ -74,7 +74,7 @@ void	free_tokens(t_vars *vars);
 
 //export.c
 void	ft_unset(t_vars *vars, char *var_name);
-void	ft_export(char *var_name, char *var_content, char **env, t_vars *vars);
+void	ft_export(t_token *token, char **env, t_vars *vars);
 
 // ------------------------------------------------
 #endif

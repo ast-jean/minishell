@@ -3,7 +3,11 @@ Custom shell in C
 TODO:
 [X]	Historique
 [X] Lancer le bon exec ve, ex: cat lance la commande (xchouina)
-[ ] Redirection ex: < , > , << delim, >> (ast-jean) ++mjarry
+[ ] Redirections
+	[ ] <	rediriger l’entrée
+	[ ] >	rediriger la sortie
+	[ ] <<	heredoc (document temp.) ? ouvrir fd sans fichier? mmmmh?
+	[ ] >>	rediriger la sortie en mode append
 [ ] Pipes: Pimper les pipes (et ajouter dans le parsing) (xchouina) ++mjarry
 [ ] Gérer les Variables d'env $ (attention a juste "=")
 [ ] Gérer $?
@@ -11,7 +15,7 @@ TODO:
 	[X] ctrl-C
 	[X] ctrl-D quitte le shell. (done)
 	[X] ctrl-\ ne fait rien.
-[ ] Créé les buitins
+[ ] Créer les buitins
 	[ ] echo (with -n) (mjarry)
 	[ ] cd (only relative path or absolute)(changer PATH et OLDPATH) (mjarry)
 	[ ] export (no flag) -ungoing- (ast-jean)
@@ -27,6 +31,10 @@ TOKNOW:
  TOFIX  
 [X]	- ft_arrayrm (xchouina)
 	- signals get displayed
+	- new_split cases:
+		"'ec''ho'" + "'ec'ho"
+		"$VAR"
+
 
 
 GOALS:
@@ -36,40 +44,6 @@ GOALS:
 
 
 LOG:
-22/08:	
-	12:50 -	J'ai ajouté "ft_arrayfree" à la libft, puis ajouté cette fonction à 
-			"ft_arrayrm", "ft_arrayadd", "ft_arraycpy". Cela semble causer des problèmes, à discuter.
-	
-	13:00 -	Ajouts des surlignements (NOTE) et (LOG), vous pourrez les ajouter vous aussi
-			en regardant ci-dessous. J'ai utilisé le NOTE pour ajouter une description
-			des nouvelles fonctions dans la libft.
-
-23/08:
-	11:27 - J'ai fait le tour des petits raccourcis pratique pour git, à voir ci-dessous ;).
-
-
-
-À Ajouter:
-
-		{
-            "text": "NOTE:",
-            "color": "black",
-            "backgroundColor": "#778899",
-            "border": "1px",
-            "borderRadius": "1px",
-            "textDecoration": "none",
-            "borderStyle": "solid",
-            "isWholeLine": true,
-        },
-        {
-            "text": "LOG:",
-            "color": "white",
-            "backgroundColor": "#191970",
-            "border": "1px",
-            "borderRadius": "1px",
-            "borderStyle": "solid",
-            "borderColor": "white",
-        },
 
 Raccourcis git:
 

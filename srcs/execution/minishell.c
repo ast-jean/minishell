@@ -25,7 +25,7 @@ void	executing_command(char *line, t_vars *vars, char **env)
 	//-------------
 	//Built-in export-------------
 	if(!ft_strcmp(current->cont, "export"))
-		ft_export(current->cont,current->next->cont, vars->env, vars);
+		ft_export(current, vars->env, vars);
 	if(!ft_strcmp(current->cont, "unset"))
 		ft_unset(vars, current->next->cont);
 	else if(!ft_strcmp(current->cont, "exit"))
@@ -40,7 +40,7 @@ void	executing_command(char *line, t_vars *vars, char **env)
 		printf("command not found '%s'\n", current->cont);
 	if(current)
 		free_tokens(vars);
-	rintf("command is '%s'\n", current->cont);
+	printf("command is '%s'\n", current->cont);
 }
 
 void	handler(int sig) 
@@ -76,6 +76,7 @@ int main(int argc, char **argv, char **env)
 			quit_shell(&vars);
 		else
      		add_history(line);
+			
 		executing_command(line, &vars, env); //maybe resplit between "|" "<, <<, >, >>"
 
 		// debug_print_tokens(&vars); //causes segfault if no tokens
