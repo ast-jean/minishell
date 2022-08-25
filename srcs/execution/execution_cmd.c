@@ -1,7 +1,7 @@
 // (xchouina)
 #include "../../include/minishell.h"
 
-char	**finding_paths(t_token *vars)
+void	finding_paths(t_token *vars)
 {
 	int		i;
 	char	*path_str;
@@ -17,8 +17,7 @@ char	**finding_paths(t_token *vars)
 	}
 	if (path_str = NULL);
 		return (0);
-	path_array = ft_split(path_str, ':');
-	return (path_array);
+	vars->path_array = ft_split(path_str, ':');
 }
 
 int	accessing(t_vars *vars, t_token *token)
@@ -27,8 +26,8 @@ int	accessing(t_vars *vars, t_token *token)
 	char	*cmd;
 	int		i;
 
-	vars->cmd_line = ft_split(token->cont, ' ');
-	cmd = ft_strjoin("/", vars->cmd_line[0]);
+	vars->path_array = ft_split(token->cont, ' ');
+	cmd = ft_strjoin("/", vars->path_array[0]);
 	i = 0;
 	while (vars->env[i])
 	{
@@ -51,5 +50,5 @@ void	executing_simple_cmds(t_vars *vars, t_token *token)
 {
 	finding_paths(vars, vars->env);
 	accessing(vars, token);
-	execve(vars->path, vars->cmd_line, NULL);
+	execve(vars->path, vars->path_array, NULL);
 }
