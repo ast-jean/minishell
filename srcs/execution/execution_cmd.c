@@ -24,7 +24,7 @@ int	accessing(t_vars *vars, t_token *token)
 	int		yes_or_no;
 	char	*cmd;
 	int		i;
-
+ // "cat -e" "file.txt"
 	vars->path_array = ft_split(token->cont, ' ');
 	cmd = ft_strjoin("/", vars->path_array[0]);
 	i = 0;

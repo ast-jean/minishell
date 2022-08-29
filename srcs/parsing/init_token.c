@@ -3,7 +3,6 @@
 void	init_token_null(t_token *token, t_token *fi)
 {
 	token->cont = "";
-	token->type = "";
 	token->next = NULL;
 	token->first = fi;
 	token->prev = NULL;
@@ -18,6 +17,8 @@ int	count_list(char **list)
 		i++;
 	return(i);
 }
+
+
 
 void	creating_tokens(char *line, t_vars *vars)
 {

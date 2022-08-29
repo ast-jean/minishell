@@ -10,7 +10,6 @@
 typedef struct s_token
 {
 	char			*cont;
-	char 			*type;
 	struct s_token	*next;
 	struct s_token	*prev;
 	struct s_token	*first;
@@ -33,6 +32,7 @@ typedef struct s_vars
 
 // MINISHELL.C
 void	init_shell(t_vars *vars, char **env);
+void	handler(int sig);
 
 // PARSING.C
 // NEW_SPLIT.C
@@ -53,7 +53,6 @@ int	nbr_of_letters(char *s, int i, int code);
 void	creating_tokens(char *line, t_vars *vars);
 void	push_tk(char *cont, t_token *token, t_token *first, t_token *prev, int i, int count);
 void	executing_command(char *line, t_vars *vars);
-char	*defining_token_type(t_token *token);
 
 //TOKEN_OP.C
 void	debug_print_tokens(t_vars *vars);
@@ -75,7 +74,11 @@ void	free_tokens(t_vars *vars);
 
 //export.c
 void	ft_unset(t_vars *vars, char *var_name);
-void	ft_export(t_token *token, char **env, t_vars *vars);
+void	ft_export(t_token *token, t_vars *vars);
 
+//heredocs.c
+void	check_heredocs(t_vars *vars);
+t_token	*new_token_after(t_token *after_this_one, char* file_name);
+t_token	*remove_token(t_token *remove);
 // ------------------------------------------------
 #endif

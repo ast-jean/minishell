@@ -3,7 +3,7 @@ Custom shell in C
 TODO:
 [ ] Splitamary
 [ ] check <<
-	[ ] Remplacer << par filename
+	[ ] Remplacer << par filename (ast-jean)
 	[ ] Creer le file et ajouter chaque ligne if(ligne != delim)
 	[ ] effacer le delim token
 	[ ] loop to next <<
@@ -17,8 +17,8 @@ TODO:
 [ ] Créer les buitins
 	[ ] echo (with -n)
 	[ ] cd (only relative path or absolute)(changer PATH et OLDPATH)
-	[ ] export (no flag)	-ungoing-
-	[ ] unset (no flag)		-ungoing-
+	[ ] export (no flag)	-started-
+	[ ] unset (no flag)		-started-
 	[X] pwd (no flag)
 	[X] env (no flag)
 	[X] exit (no flag)

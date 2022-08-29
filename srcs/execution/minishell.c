@@ -19,13 +19,15 @@ void	executing_command(char *line, t_vars *vars)
 		return ;
 	creating_tokens(line, vars);
 	current = vars->token->first;
+	
+	check_heredocs(vars); //(ast-jean) <<
 
 	//MANAGE $VARS-------------
 	//create struct of saved variables and add them if $VAR
 	//-------------
 	//Built-in export-------------
 	if(!ft_strcmp(current->cont, "export"))
-		ft_export(current, vars->env, vars);
+		ft_export(current, vars);
 	else if(!ft_strcmp(current->cont, "unset"))
 		ft_unset(vars, current->next->cont);
 	else if(!ft_strcmp(current->cont, "exit"))
@@ -38,7 +40,6 @@ void	executing_command(char *line, t_vars *vars)
 	// 	executing_simple_cmds(vars, current);
 	else if (!accessing(vars, current)) //si command est dans le path
 	{
-/*debug*/printf("\033[43mcommand is '%s'\033[0m\n", current->cont);
 		executing_simple_cmds(vars, current);
 	}
 	else
@@ -50,7 +51,7 @@ void	executing_command(char *line, t_vars *vars)
 	// 	free_tokens(vars);
 /*debug*/printf("\033[43mcommand is '%s'\033[0m\n", current->cont);
 }
-                                                                                              
+
 void	handler(int sig) 
 {
 	if (sig == SIGINT) //ctrl-C
@@ -84,13 +85,10 @@ int main(int argc, char **argv, char **env)
 			quit_shell(&vars);
 		else
      		add_history(line);
-			
-		executing_command(line, &vars); //maybe resplit between "|" "<, <<, >, >>"
-
-		// debug_print_tokens(&vars); //causes segfault if no tokens
-
+		executing_command(line, &vars);
 	}
 	quit_shell(&vars);
+	// unlink(".temp_heredoc0"); tried to delete temp file
 	return 0;
 }
 
