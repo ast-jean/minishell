@@ -17,7 +17,7 @@ void	push_tk(char *cont, t_token *token, t_token *first, t_token *prev, int i, i
 {
 	token->cont = cont;
 	token->prev = prev;
-	token->type = defining_token_type(token);
+	// token->type = defining_token_type(token);
 	token->first = first;
 	if (i < count)
 		token->next = malloc(sizeof(t_token));

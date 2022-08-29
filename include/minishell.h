@@ -66,7 +66,7 @@ void	ft_env(t_vars *vars);
 // void	ft_echo(char **env);
 
 // EXECUTION_CMD.C
-void	finding_paths(t_vars *vars, char **env);
+void	finding_paths(t_vars *vars);
 int		accessing(t_vars *vars, t_token *token);
 void	executing_simple_cmds(t_vars *vars, t_token *token);
 //QUIT.C
