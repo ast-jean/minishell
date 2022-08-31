@@ -76,7 +76,6 @@ void	increm(int *i, int *j);
 //TOKENIZE.C
 char	**tokenize(char *line);
 char	**nullify_str(char *line, char *delims, int len, int count);
-char	**split_del(char *line, char *d_found, int len, int count);
 int		cnt_delims(char *line, char *delims);
 
 //NOTE: BUILT INS
