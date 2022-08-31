@@ -73,6 +73,12 @@ char	*newtoken_s(char *line, int *i);
 char	*newtoken_d(char *line, char *delims, int i, int j);
 void	increm(int *i, int *j);
 
+//TOKENIZE.C
+char	**tokenize(char *line);
+char	**nullify_str(char *line, char *delims, int len, int count);
+char	**split_del(char *line, char *d_found, int len, int count);
+int		cnt_delims(char *line, char *delims);
+
 //NOTE: BUILT INS
 // PWD_ENV.C
 void	builtin_pwd(t_vars *vars);
