@@ -18,8 +18,6 @@ int	count_list(char **list)
 	return(i);
 }
 
-
-
 void	creating_tokens(char *line, t_vars *vars)
 {
 	char **line_content;
