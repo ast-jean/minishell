@@ -1,7 +1,7 @@
 # minishell
 Custom shell in C
 TODO:
-[ ] Splitamary
+[X] Splitamary (mjarry)
 [ ] check <<
 	[ ] Remplacer << par filename (ast-jean)
 	[ ] Creer le file et ajouter chaque ligne if(ligne != delim)

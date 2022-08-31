@@ -11,6 +11,8 @@ SRCS_FILES 		=	execution/minishell.c		\
 					parsing/new_split_utils2.c	\
 					parsing/init_token.c		\
 					parsing/token_op.c			\
+					parsing/tokenize.c			\
+					parsing/newtoken.c			\
 					built_ins/export.c			\
 					built_ins/unset.c			\
 					built_ins/built_in.c		\
