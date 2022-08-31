@@ -41,7 +41,7 @@ int		accessing(t_vars *vars, t_token *token);
 void	executing_simple_cmds(t_vars *vars, t_token *token);
 
 // HEREDOCS.c
-void	check_heredocs(t_vars *vars);
+int	check_heredocs(t_vars *vars);
 t_token	*new_token_after(t_token *after_this_one, char* file_name);
 t_token	*remove_token(t_token *remove);
 

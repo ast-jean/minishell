@@ -20,8 +20,8 @@ void	executing_command(char *line, t_vars *vars)
 	creating_tokens(line, vars);
 	current = vars->token->first;
 	
-	check_heredocs(vars); //(ast-jean) <<
-
+	if(!check_heredocs(vars)) //(ast-jean) <<
+		return ;
 	//MANAGE $VARS-------------
 	//create struct of saved variables and add them if $VAR
 	//-------------
