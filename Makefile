@@ -12,9 +12,11 @@ SRCS_FILES 		=	execution/minishell.c		\
 					parsing/init_token.c		\
 					parsing/token_op.c			\
 					built_ins/export.c			\
+					built_ins/unset.c			\
 					built_ins/built_in.c		\
 					built_ins/echo_cd.c			\
-					execution/quit.c
+					execution/quit.c			\
+					execution/heredocs.c 		\
 
 INCLUDE_FILES	= 	minishell.h
 
@@ -87,12 +89,12 @@ clean:
 	@$(MAKE) -C include/libft clean
 	@rm -f *.o
 	@rm -rf $(OBJS_DIR)
-	@echo "MINISHELL	| STATUS: $(CYAN)OBJECTS CLEANED$(END)"
+	@echo "MINISHELL	| STATUS: $(CYAN)OBJECTS	CLEANED$(END)"
 
 fclean:	clean
 	@$(MAKE) -C include/libft fclean
 	@rm -rf $(NAME)
-	@echo "MINISHELL	| STATUS: $(BLUE)EXECUTABLE CLEANED$(END)"
+	@echo "MINISHELL	| STATUS: $(BLUE)EXECUTABLE	CLEANED$(END)"
 
 leak:
 	$(LEAK)

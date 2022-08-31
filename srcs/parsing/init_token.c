@@ -1,22 +1,8 @@
 #include "../../include/minishell.h"
 
-char	*defining_token_type(t_token *token)
-{
-	if (token->cont[0] == '-')
-		return ("flag");
-	// else if cmd
-	// 	return ("cmd");
-		// else if builtins
-	// 	return ("builtins");
-	else
-		return ("cmd");
-
-}
-
 void	init_token_null(t_token *token, t_token *fi)
 {
 	token->cont = "";
-	token->type = "";
 	token->next = NULL;
 	token->first = fi;
 	token->prev = NULL;
@@ -31,6 +17,8 @@ int	count_list(char **list)
 		i++;
 	return(i);
 }
+
+
 
 void	creating_tokens(char *line, t_vars *vars)
 {

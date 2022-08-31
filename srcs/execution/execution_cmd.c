@@ -1,21 +1,22 @@
 // (xchouina)
 #include "../../include/minishell.h"
 
-void	finding_paths(t_vars *vars, char **env)
+void	finding_paths(t_vars *vars)
 {
-	int	i;
+	int		i;
+	char	*path_str;
 
 	i = 0;
-	vars->path = NULL;
-	while (env[i] != NULL)
+	path_str = 0;
+	while (vars->env[i] != NULL)
 	{
-		if (ft_strnstr(env[i], "PATH=", 5) != NULL)
-			vars->path = ft_strnstr(env[i], "PATH=", 5);
+		if (ft_strnstr(vars->env[i], "PATH=", 5) != NULL)
+			path_str = ft_strnstr(vars->env[i], "PATH=", 5);
 		i++;
 	}
-	// if (vars->path == NULL)
-		// print_error(vars, 2);
-	vars->env = ft_split(vars->path + 5, ':');
+	if (path_str == NULL)
+		return ;
+	vars->path_array = ft_split(path_str, ':');
 }
 
 int	accessing(t_vars *vars, t_token *token)
@@ -23,9 +24,9 @@ int	accessing(t_vars *vars, t_token *token)
 	int		yes_or_no;
 	char	*cmd;
 	int		i;
-
-	vars->cmd_line = ft_split(token->cont, ' ');
-	cmd = ft_strjoin("/", vars->cmd_line[0]);
+ // "cat -e" "file.txt"
+	vars->path_array = ft_split(token->cont, ' ');
+	cmd = ft_strjoin("/", vars->path_array[0]);
 	i = 0;
 	while (vars->env[i])
 	{
@@ -44,9 +45,9 @@ int	accessing(t_vars *vars, t_token *token)
 	return (0);
 }
 
-void	executing_simple_cmds(t_vars *vars, t_token *token, char **env)
+void	executing_simple_cmds(t_vars *vars, t_token *token)
 {
-	finding_paths(vars, env);
+	finding_paths(vars);
 	accessing(vars, token);
-	execve(vars->path, vars->cmd_line, NULL);
+	execve(vars->path, vars->path_array, NULL);
 }

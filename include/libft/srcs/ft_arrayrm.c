@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_arrayrm.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:13:13 by xchouina          #+#    #+#             */
-/*   Updated: 2022/08/22 13:41:39 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/08/24 11:45:03 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ char	**ft_arrayrm(char **tab, char *str_to_rm)
 		else
 			i++;
 	}
-	// ft_arrayfree(tab);
+	free(tab);
 	return (new);
 }

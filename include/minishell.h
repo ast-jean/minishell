@@ -10,7 +10,6 @@
 typedef struct s_token
 {
 	char			*cont;
-	char 			*type;
 	struct s_token	*next;
 	struct s_token	*prev;
 	struct s_token	*first;
@@ -21,8 +20,9 @@ typedef struct s_vars
 	int		ac; //use?
 	char	**av; //use?
 	char 	**env;
-	char	**cmd_line;
+	// char	**cmd_line;
 	char	*path;
+	char	**path_array;
 	char	*pwd;
 	char	*oldpwd;
 	t_token	*token;
@@ -32,6 +32,7 @@ typedef struct s_vars
 
 // MINISHELL.C
 void	init_shell(t_vars *vars, char **env);
+void	handler(int sig);
 
 // PARSING.C
 // NEW_SPLIT.C
@@ -51,8 +52,7 @@ int	nbr_of_letters(char *s, int i, int code);
 //INIT_TOKEN.C
 void	creating_tokens(char *line, t_vars *vars);
 void	push_tk(char *cont, t_token *token, t_token *first, t_token *prev, int i, int count);
-void	executing_command(char *line, t_vars *vars, char **env);
-char	*defining_token_type(t_token *token);
+void	executing_command(char *line, t_vars *vars);
 
 //TOKEN_OP.C
 void	debug_print_tokens(t_vars *vars);
@@ -66,18 +66,22 @@ char	*newtoken_d(char *line, char *delims, int i, int j);
 //buit_ins
 void	ft_pwd(t_vars *vars);
 void	ft_env(t_vars *vars);
-void	ft_export(char *var_name, char *var_content, char **env, t_vars *vars);
 // void	ft_cd(char **env, t_vars vars);
 // void	ft_echo(char **env);
 
 // EXECUTION_CMD.C
-void	finding_paths(t_vars *vars, char **env);
+void	finding_paths(t_vars *vars);
 int		accessing(t_vars *vars, t_token *token);
-void	executing_simple_cmds(t_vars *vars, t_token *token, char **env);
+void	executing_simple_cmds(t_vars *vars, t_token *token);
 //QUIT.C
 void	quit_shell(t_vars *vars);
 void	free_tokens(t_vars *vars);
-
-
+// export.c
+void	ft_unset(t_vars *vars, char *var_name);
+void	ft_export(t_token *token, t_vars *vars);
+// heredocs.c
+void	check_heredocs(t_vars *vars);
+t_token	*new_token_after(t_token *after_this_one, char* file_name);
+t_token	*remove_token(t_token *remove);
 // ------------------------------------------------
 #endif

@@ -17,7 +17,7 @@ void	push_tk(char *cont, t_token *token, t_token *first, t_token *prev, int i, i
 {
 	token->cont = cont;
 	token->prev = prev;
-	token->type = defining_token_type(token);
+	// token->type = defining_token_type(token);
 	token->first = first;
 	if (i < count)
 		token->next = malloc(sizeof(t_token));
@@ -31,13 +31,15 @@ void	debug_print_tokens(t_vars *vars)
 	int i;
 
 	i = 0;
+
 	current = vars->token->first;
-	while (current->cont != NULL)
+	if (!current)
+		return ;
+	while (current)
 	{
 		printf("----------------\n");
 		printf("Token %d\n",i);
 		printf("Cont=	->%s<-\n", current->cont);
-		printf("Type=	->%s<-\n", current->type);
 		printf("Ptr=	->%p<-\n", current);
 		printf("First=	->%p<-\n", current->first);
 		printf("Prev=	->%p<-\n", current->prev);
