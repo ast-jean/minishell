@@ -1,5 +1,5 @@
 #include "../../include/minishell.h"
-
+// NOTE: Built-ins 3/3 (Echo + CD)
 int	is_n(char *str)
 {
 	int	i;
@@ -33,3 +33,4 @@ void	ft_echo(char **args, char **env)
 // //change pwd and oldpwd in env, maybe?
 // // save pwd in struct and env
 // }
+

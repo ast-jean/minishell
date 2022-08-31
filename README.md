@@ -34,7 +34,6 @@ TOKNOW:
 		"$VAR"
 		"<<"
 		"<<hello"
-- execution_cmd.c
 -init-token_type.c
 
 LOG:

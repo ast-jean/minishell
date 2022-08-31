@@ -30,17 +30,26 @@ typedef struct s_vars
 
 // FUNCTIONS (SELON FILENAME)----------------------
 
+// NOTE: EXECUTION
 // MINISHELL.C
 void	init_shell(t_vars *vars, char **env);
 void	handler(int sig);
 
-// PARSING.C
-// NEW_SPLIT.C
-char	*unquoted_wrd_array(char *s, int *n);
-char	*single_quoted_wrd_array(char *line, int *n);
-char	*double_quoted_wrd_array(char *line, int *n);
-char	**new_split(char *line);
+// EXECUTION_CMD.C
+void	finding_paths(t_vars *vars);
+int		accessing(t_vars *vars, t_token *token);
+void	executing_simple_cmds(t_vars *vars, t_token *token);
 
+// HEREDOCS.c
+void	check_heredocs(t_vars *vars);
+t_token	*new_token_after(t_token *after_this_one, char* file_name);
+t_token	*remove_token(t_token *remove);
+
+//QUIT.C
+void	quit_shell(t_vars *vars);
+void	free_tokens(t_vars *vars);
+
+//NOTE: PARSING
 // PARSING_UTILS.C
 int	how_many_quotes(char *str);
 int	len_of_this_word(char *line, int i);
@@ -64,25 +73,16 @@ char	*newtoken_s(char *line, int *i);
 char	*newtoken_d(char *line, char *delims, int i, int j);
 void	increm(int *i, int *j);
 
-//buit_ins
-void	ft_pwd(t_vars *vars);
-void	ft_env(t_vars *vars);
-// void	ft_cd(char **env, t_vars vars);
-// void	ft_echo(char **env);
+//NOTE: BUILT INS
+// PWD_ENV.C
+void	builtin_pwd(t_vars *vars);
+void	builtin_env(t_vars *vars);
+// EXPORT_UNSET.C
+void	builtin_unset(t_vars *vars, char *var_name);
+void	builtin_export(t_token *token, t_vars *vars);
+// ECHO_CD.C
+//// void	builtin_cd(char **env, t_vars vars);
+//// void	builtin_echo(char **env);
 
-// EXECUTION_CMD.C
-void	finding_paths(t_vars *vars);
-int		accessing(t_vars *vars, t_token *token);
-void	executing_simple_cmds(t_vars *vars, t_token *token);
-//QUIT.C
-void	quit_shell(t_vars *vars);
-void	free_tokens(t_vars *vars);
-// export.c
-void	ft_unset(t_vars *vars, char *var_name);
-void	ft_export(t_token *token, t_vars *vars);
-// heredocs.c
-void	check_heredocs(t_vars *vars);
-t_token	*new_token_after(t_token *after_this_one, char* file_name);
-t_token	*remove_token(t_token *remove);
-// ------------------------------------------------
+//NOTE: ------------------------------------------------
 #endif

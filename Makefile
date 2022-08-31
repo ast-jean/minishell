@@ -6,17 +6,13 @@ SRCS_FILES 		=	execution/minishell.c		\
 					execution/execution.c		\
 					execution/execution_cmd.c	\
 					parsing/parsing.c			\
-					parsing/new_split.c			\
-					parsing/new_split_utils.c	\
-					parsing/new_split_utils2.c	\
 					parsing/init_token.c		\
 					parsing/token_op.c			\
 					parsing/tokenize.c			\
 					parsing/newtoken.c			\
-					built_ins/export.c			\
-					built_ins/unset.c			\
-					built_ins/built_in.c		\
-					built_ins/echo_cd.c			\
+					built_ins/echo+cd.c			\
+					built_ins/pwd+env.c			\
+					built_ins/unset+export.c	\
 					execution/quit.c			\
 					execution/heredocs.c 		\
 

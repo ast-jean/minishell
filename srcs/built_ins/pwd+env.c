@@ -1,4 +1,5 @@
 #include "../../include/minishell.h"
+// NOTE: Built-ins 1/3 (PWD + ENV)
 
 // void	ft_echo(char **args, char **env)
 // {
@@ -15,13 +16,13 @@
 // //change pwd and oldpwd in env, maybe?
 // // save pwd in struct and env
 // }
-void	ft_pwd(t_vars *vars)
+void	builtin_pwd(t_vars *vars)
 {
 // pwd (no flag)
 	printf("%s\n", vars->pwd);
 }
 
-void	ft_env(t_vars *vars)
+void	builtin_env(t_vars *vars)
 {
 // env (no flag)
 	char **env_copy;

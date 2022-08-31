@@ -27,15 +27,17 @@ void	executing_command(char *line, t_vars *vars)
 	//-------------
 	//Built-in export-------------
 	if(!ft_strcmp(current->cont, "export"))
-		ft_export(current, vars);
-	else if(!ft_strcmp(current->cont, "unset"))
-		ft_unset(vars, current->next->cont);
+		builtin_export(current, vars);
+	// else if(!ft_strcmp(current->cont, "unset"))
+	// 	builtin_unset(vars, current->next->cont);
 	else if(!ft_strcmp(current->cont, "exit"))
 		quit_shell(vars);
 	else if(!ft_strcmp(current->cont, "pwd"))
-		ft_pwd(vars);
+		builtin_pwd(vars);
 	else if(!ft_strcmp(current->cont, "env"))
-		ft_env(vars);
+		builtin_env(vars);
+	// else if(!ft_strcmp(current->cont, "echo"))
+	// 	builtin_echo(vars);
 /*debug*/	// else if(!ft_strcmp(current->cont, "ls"))
 	// 	executing_simple_cmds(vars, current);
 	else if (!accessing(vars, current)) //si command est dans le path
