@@ -6,7 +6,7 @@
 /*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 11:17:56 by mjarry            #+#    #+#             */
-/*   Updated: 2022/08/31 12:10:56 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/08/31 12:16:03 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	cnt_delims(char *line, char *delims)
 	return (count);
 }
 
-char	**split_del(char *line, char *d_found, int len, int count)
+char	**split_del(char *line, char *d_found, int len)
 {
 	char	**split;
 	int		i;
@@ -90,7 +90,7 @@ char	**nullify_str(char *line, char *delims, int len, int count)
 			line[i] = '\0';
 		}
 	}
-	return (split_del(line, d_found, len, count));
+	return (split_del(line, d_found, len));
 }
 
 char	**tokenize(char *line)
