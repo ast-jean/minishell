@@ -64,10 +64,12 @@ char	*newtoken_s(char *line, int i);
 char	*newtoken_d(char *line, char *delims, int i, int j);
 
 //buit_ins
-void	ft_pwd(t_vars *vars);
-void	ft_env(t_vars *vars);
-// void	ft_cd(char **env, t_vars vars);
-// void	ft_echo(char **env);
+void	builtin_pwd(t_vars *vars);
+void	builtin_env(t_vars *vars);
+void	builtin_export(t_token *token, t_vars *vars);
+// void	builtin_cd(char **env, t_vars vars);
+// void	builtin_echo(char **env);
+// void	builtin_unset(t_vars *vars, char *var_name);
 
 // EXECUTION_CMD.C
 void	finding_paths(t_vars *vars);

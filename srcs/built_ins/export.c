@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-void	ft_export(t_token *token, t_vars *vars)
+void	builtin_export(t_token *token, t_vars *vars)
 {
 printf("in export\n");
 // export (no flag) var_name=var_content

@@ -1,7 +1,7 @@
 #include "../../include/minishell.h"
 
 
-void ft_unset(t_vars *vars, char *var_name)
+void	builtin_unset(t_vars *vars, char *var_name)
 {
 // unset (no flag)
 	char *name_to_find;

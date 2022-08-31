@@ -27,8 +27,6 @@ t_token	*new_token_after(t_token *after_this_one, char* file_name)
 	return (new);
 }
 
-
-
 void	check_heredocs(t_vars *vars)
 {
 	t_token *current;
