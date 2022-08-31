@@ -6,7 +6,7 @@
 /*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 12:34:26 by xchouina          #+#    #+#             */
-/*   Updated: 2022/08/31 09:33:49 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/08/31 11:16:22 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ char	**ft_arrayadd(char **tab, char *str_to_add)
 		new[i] = tab[i];
 		i++;
 	}
-	new[i] = str_to_add;
-	new[++i] = NULL;
+	new[i++] = str_to_add;
+	new[i] = NULL;
 	if (tab)
 		free(tab);
 	return (new);

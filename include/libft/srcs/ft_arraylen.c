@@ -6,7 +6,7 @@
 /*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 13:07:50 by xchouina          #+#    #+#             */
-/*   Updated: 2022/08/25 15:37:30 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/08/31 11:15:55 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_arraylen(char **tab)
 	int	len;
 
 	len = 0;
-	while (tab[len])
+	while (tab && tab[len])
 		len++;
 	return (len);
 }
