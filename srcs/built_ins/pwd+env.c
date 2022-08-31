@@ -1,4 +1,5 @@
 #include "../../include/minishell.h"
+// NOTE: Built-ins 1/3 (PWD + ENV)
 
 // void	ft_echo(char **args, char **env)
 // {

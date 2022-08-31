@@ -1,4 +1,13 @@
 #include "../../include/minishell.h"
+// NOTE: Built-ins 2/3 (Unset + Export)
+void	builtin_unset(t_vars *vars, char *var_name)
+{
+// unset (no flag)
+	char *name_to_find;
+
+	name_to_find = ft_strjoin(var_name, "=");
+	ft_arrayrm(vars->env, ft_arraysrch(vars->env, name_to_find));
+}
 
 void	builtin_export(t_token *token, t_vars *vars)
 {
@@ -21,4 +30,3 @@ else
 /*debug*/printf("line= %s\n", content);
 
 }
-
