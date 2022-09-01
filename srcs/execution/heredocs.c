@@ -38,6 +38,11 @@ void	syntax_error(char *token)
 		printf("Syntax error near unexpected token '%s'\n", token);
 }
 
+int	is_exception(t_token *token)
+{
+	(void)token;
+	return (0);
+}
 
 int	check_heredocs(t_vars *vars)
 {
@@ -49,23 +54,22 @@ int	check_heredocs(t_vars *vars)
 	char *delim;
 
 	heredoc_count = 0;
-	line = " ";
 	current = vars->token->first;
-	delim = current->next->next->cont;
 	while(current)
 	{
 		if(!ft_strcmp(current->cont, "<<"))
 		{
-/*debug*/printf("\033[43mdelim = ->|%s|<-\033[0m\n", delim);
-/*debug*/printf("\033[43mIs delim? = ->|%d|<-\033[0m\n", ft_is_str_alnum(delim));
-			if(!ft_strcmp(current->next->cont, ""))
+			line = " ";
+			delim = current->next->cont;
+// /*debug*/printf("\033[43mdelim = ->|%s|<-\033[0m\n", delim);
+			if(!ft_strcmp(delim, ""))
 			{
 				syntax_error("");
 				return (0);
 			}
-			if(!ft_is_str_alnum(current->next->cont))
+			if(is_exception(current))
 			{
-				syntax_error(current->next->cont);
+				syntax_error(delim);
 				return (0);
 			}
 			name = ft_strjoin(".temp_heredoc", ft_itoa(heredoc_count));
@@ -73,18 +77,20 @@ int	check_heredocs(t_vars *vars)
 			new_token_after(current, name);
 			while(ft_strcmp(delim, line))
 			{
+				if(ft_strcmp(" ", line))
+					dprintf(fd, "%s\n", line);
 				rl_on_new_line();
 				line = readline(">");
-				dprintf(fd, "%s\n", line);
 				rl_redisplay();
 			}
 			current = remove_token(current);
+			current->next = remove_token(current->next);
 			heredoc_count++;
 		}
 		else
 			current = current->next;
 	}
-/*debug*/printf("\033[43m'<<'count:%d\033[0m\n", heredoc_count);
-	debug_print_tokens(vars);
+// /*debug*/printf("\033[43m'<<'count:%d\033[0m\n", heredoc_count);
+// /*debug*/debug_print_tokens(vars);
 	return (1);
 }
