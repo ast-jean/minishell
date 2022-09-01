@@ -64,6 +64,8 @@ char	*newtoken_s(char *line, int *i);
 char	*newtoken_d(char *line, char *delims, int i, int j);
 void	increm(int *i, int *j);
 
+char	**tokenize(char *line);
+
 //buit_ins
 void	ft_pwd(t_vars *vars);
 void	ft_env(t_vars *vars);

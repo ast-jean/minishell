@@ -28,7 +28,7 @@ void	creating_tokens(char *line, t_vars *vars)
 	t_token *first_first;
 	t_token *prev_prev;
 
-	line_content = new_split(line);
+	line_content = tokenize(line);
 	count = count_list(line_content);
 	i = 0;
 	vars->token = malloc(sizeof(t_token));
