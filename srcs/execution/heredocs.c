@@ -32,29 +32,47 @@ void	syntax_error(char *token)
 {
 	if(!ft_strcmp(token, ""))
 	{
-		printf("Syntax error near unexpected token 'newline'\n");
+		printf("minishell: syntax error near unexpected token 'newline'\n");
 	}
 	else
-		printf("Syntax error near unexpected token '%s'\n", token);
+		printf("minishell: syntax error near unexpected token '%s'\n", token);
 }
 
 int	is_exception(t_token *token)
 {
-	(void)token;
-	return (0);
+	if(!token->next->next)
+	{
+		syntax_error("newline");
+		return (0);
+	}
+	token = token->next;
+	if((token->cont[0] == '<') || (token->cont[0] == '>') || (token->cont[0] == '|'))
+	{		
+		syntax_error(token->cont);
+		return (0);
+	}
+	return (1);
 }
 
+char *remove_quotes(char *str)
+{
+	return (str[0] != 34) ? (str) : ft_strtrim(str, "\"");
+}
+
+/*
+TODO:
+[ ] Norminette
+*/
 int	check_heredocs(t_vars *vars)
 {
 	t_token *current;
 	char *name;
 	int fd;
 	char *line;
-	int heredoc_count;
 	char *delim;
 
-	heredoc_count = 0;
 	current = vars->token->first;
+	vars->heredoc_count = 0;
 	while(current)
 	{
 		if(!ft_strcmp(current->cont, "<<"))
@@ -62,18 +80,11 @@ int	check_heredocs(t_vars *vars)
 			line = " ";
 			delim = current->next->cont;
 // /*debug*/printf("\033[43mdelim = ->|%s|<-\033[0m\n", delim);
-			if(!ft_strcmp(delim, ""))
-			{
-				syntax_error("");
-				return (0);
-			}
-			if(is_exception(current))
-			{
-				syntax_error(delim);
-				return (0);
-			}
-			name = ft_strjoin(".temp_heredoc", ft_itoa(heredoc_count));
-			fd = open(name, O_WRONLY | O_APPEND | O_CREAT, 0777);
+			if(!is_exception(current))
+				return(0);
+			delim = remove_quotes(current->next->cont);
+			name = ft_strjoin(".tmp/temp_heredoc", ft_itoa(vars->heredoc_count));
+			fd = open(name, O_RDWR | O_CREAT, 0777);
 			new_token_after(current, name);
 			while(ft_strcmp(delim, line))
 			{
@@ -85,7 +96,24 @@ int	check_heredocs(t_vars *vars)
 			}
 			current = remove_token(current);
 			current->next = remove_token(current->next);
-			heredoc_count++;
+			vars->heredoc_count++;
+		}
+		else if(!ft_strcmp(current->cont, "<<<"))
+		{
+			if(!is_exception(current))
+				return(0);
+			line = current->next->cont;
+			name = ft_strjoin(".tmp/temp_heredoc", ft_itoa(vars->heredoc_count));
+			fd = open(name, O_RDWR | O_CREAT, 0777);
+			new_token_after(current, name);
+			dprintf(fd, "%s\n", line);
+			current = remove_token(current);
+			current->next = remove_token(current->next);
+		}
+		else if((current->cont[0] == '<') && ft_strlen(current->cont) > 3)
+		{
+			syntax_error("<");
+			return (0);
 		}
 		else
 			current = current->next;

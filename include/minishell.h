@@ -23,6 +23,7 @@ typedef struct s_vars
 	// char	**cmd_line;
 	char	*path;
 	char	**path_array;
+	int		heredoc_count;
 	char	*pwd;
 	char	*oldpwd;
 	t_token	*token;

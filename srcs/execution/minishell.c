@@ -20,7 +20,7 @@ void	executing_command(char *line, t_vars *vars)
 	creating_tokens(line, vars);
 	current = vars->token->first;
 	
-	if(!check_heredocs(vars)) //(ast-jean) <<
+	if(!check_heredocs(vars))
 		return ;
 	//MANAGE $VARS-------------
 	//create struct of saved variables and add them if $VAR
@@ -65,6 +65,19 @@ void	handler(int sig)
 	}
 }
 
+void	remove_tmp_files(t_vars *vars)
+{
+	int i;
+	char *filename;
+
+	i = -1;
+	while(++i < vars->heredoc_count)
+	{	
+		filename = ft_strjoin(".tmp/temp_heredoc", ft_itoa(i));
+		unlink(filename);
+	}
+}
+
 int main(int argc, char **argv, char **env)
 {
 	char *line;
@@ -88,11 +101,8 @@ int main(int argc, char **argv, char **env)
 		else
      		add_history(line);
 		executing_command(line, &vars);
+		remove_tmp_files(&vars);
 	}
 	quit_shell(&vars);
-	// unlink(".temp_heredoc0"); tried to delete temp file
 	return 0;
 }
-
-
-// TESTS
