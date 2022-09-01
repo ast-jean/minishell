@@ -1,12 +1,13 @@
 # minishell
 Custom shell in C
 TODO:
-[X] Splitamary (mjarry)
+[X] Splitamary
 [ ] check <<
-	[ ] Remplacer << par filename (ast-jean)
-	[ ] Creer le file et ajouter chaque ligne if(ligne != delim)
-	[ ] effacer le delim token
+	[X] Remplacer << par filename
+	[X] Creer le file et ajouter chaque ligne if(ligne != delim)
+	[X] effacer le delim token
 	[ ] loop to next <<
+	[ ] Error if no delim
 [ ] Redirections
 	[ ] <	rediriger l’entrée
 	[ ] >	rediriger la sortie
@@ -35,6 +36,7 @@ TOKNOW:
 		"<<"
 		"<<hello"
 -init-token_type.c
+	- segfault when ctrl-D in heredoc
 
 LOG:
 

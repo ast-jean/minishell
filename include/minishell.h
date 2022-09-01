@@ -41,7 +41,7 @@ int		accessing(t_vars *vars, t_token *token);
 void	executing_simple_cmds(t_vars *vars, t_token *token);
 
 // HEREDOCS.c
-void	check_heredocs(t_vars *vars);
+int	check_heredocs(t_vars *vars);
 t_token	*new_token_after(t_token *after_this_one, char* file_name);
 t_token	*remove_token(t_token *remove);
 
@@ -72,6 +72,11 @@ char	*newtoken_q(char *line, int *i, char c);
 char	*newtoken_s(char *line, int *i);
 char	*newtoken_d(char *line, char *delims, int i, int j);
 void	increm(int *i, int *j);
+
+//TOKENIZE.C
+char	**tokenize(char *line);
+char	**nullify_str(char *line, char *delims, int len, int count);
+int		cnt_delims(char *line, char *delims);
 
 //NOTE: BUILT INS
 // PWD_ENV.C

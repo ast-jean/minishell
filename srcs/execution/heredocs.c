@@ -27,32 +27,56 @@ t_token	*new_token_after(t_token *after_this_one, char* file_name)
 	return (new);
 }
 
-void	check_heredocs(t_vars *vars)
+
+void	syntax_error(char *token)
+{
+	if(!ft_strcmp(token, ""))
+	{
+		printf("Syntax error near unexpected token 'newline'\n");
+	}
+	else
+		printf("Syntax error near unexpected token '%s'\n", token);
+}
+
+
+int	check_heredocs(t_vars *vars)
 {
 	t_token *current;
 	char *name;
 	int fd;
 	char *line;
-/*debug*/int heredoc_count = 0;
+	int heredoc_count;
+	char *delim;
 
-	line = NULL;
+	heredoc_count = 0;
+	line = " ";
 	current = vars->token->first;
+	delim = current->next->next->cont;
 	while(current)
 	{
 		if(!ft_strcmp(current->cont, "<<"))
 		{
-			if(!current->next)
+/*debug*/printf("\033[43mdelim = ->|%s|<-\033[0m\n", delim);
+/*debug*/printf("\033[43mIs delim? = ->|%d|<-\033[0m\n", ft_is_str_alnum(delim));
+			if(!ft_strcmp(current->next->cont, ""))
 			{
-				printf("Error: << needs delimiter\n");
-				break ;
+				syntax_error("");
+				return (0);
+			}
+			if(!ft_is_str_alnum(current->next->cont))
+			{
+				syntax_error(current->next->cont);
+				return (0);
 			}
 			name = ft_strjoin(".temp_heredoc", ft_itoa(heredoc_count));
 			fd = open(name, O_WRONLY | O_APPEND | O_CREAT, 0777);
 			new_token_after(current, name);
-			dprintf(fd, "%s\n", line);
-			while(!ft_strcmp(current->next->cont, line))
+			while(ft_strcmp(delim, line))
 			{
+				rl_on_new_line();
 				line = readline(">");
+				dprintf(fd, "%s\n", line);
+				rl_redisplay();
 			}
 			current = remove_token(current);
 			heredoc_count++;
@@ -60,8 +84,7 @@ void	check_heredocs(t_vars *vars)
 		else
 			current = current->next;
 	}
-
-
-	printf("\033[43m'<<'count:%d\033[0m\n", heredoc_count);
+/*debug*/printf("\033[43m'<<'count:%d\033[0m\n", heredoc_count);
 	debug_print_tokens(vars);
+	return (1);
 }
