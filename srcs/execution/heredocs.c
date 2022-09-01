@@ -54,18 +54,42 @@ int	is_exception(t_token *token)
 	return (1);
 }
 
-char *remove_quotes(char *str)
+char *isquote(str)
 {
 	if (str[0] == 34)
-		return (ft_strtrim(str, "\""));
+	{
+		remove_quotes(str,"\"");
+	}
 	else if(str[0] == 39)
-		return (ft_strtrim(str, "\'"));
+		remove_quotes(str,"\'");
 	else
 		return (str);
 }
 
+char *remove_quotes(char *str, char c)
+{
+//input: "'test'"'lake'
+//output: 'test'lake
+	int i;
+	int count;
+	int quote;
+	char *new;
+
+	count = 0;
+	i = 0;
+	//count char in new string
+	quote = c; 
+	while()
+
+
+	// free(str);
+}
+
 /*
 TODO:
+
+[ ] strjoin "this"'test'"one"
+[ ] fix single quote segfault
 [ ] Norminette
 */
 int	check_heredocs(t_vars *vars)
@@ -86,7 +110,8 @@ int	check_heredocs(t_vars *vars)
 			delim = current->next->cont;
 			if(!is_exception(current))
 				return(0);
-			delim = remove_quotes(current->next->cont);
+			delim = isquote(current->next->cont);
+/*debug*/debug_print_tokens(vars);
 /*debug*/printf("\033[43mdelim = ->|%s|<-\033[0m\n", delim);
 			name = ft_strjoin(".tmp/temp_heredoc", ft_itoa(vars->heredoc_count));
 			fd = open(name, O_RDWR | O_CREAT, 0777);
@@ -124,6 +149,5 @@ int	check_heredocs(t_vars *vars)
 			current = current->next;
 	}
 // /*debug*/printf("\033[43m'<<'count:%d\033[0m\n", heredoc_count);
-// /*debug*/debug_print_tokens(vars);
 	return (1);
 }
