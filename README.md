@@ -37,6 +37,7 @@ TOKNOW:
 		"<<hello"
 -init-token_type.c
 	- segfault when ctrl-D in heredoc
+	- make a special case for <<< (error)
 
 LOG:
 
