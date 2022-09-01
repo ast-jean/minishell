@@ -49,6 +49,8 @@ t_token	*remove_token(t_token *remove);
 void	quit_shell(t_vars *vars);
 void	free_tokens(t_vars *vars);
 
+// PIPES.C
+
 //NOTE: PARSING
 // PARSING_UTILS.C
 int	how_many_quotes(char *str);
