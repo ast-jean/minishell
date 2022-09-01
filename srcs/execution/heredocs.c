@@ -56,7 +56,12 @@ int	is_exception(t_token *token)
 
 char *remove_quotes(char *str)
 {
-	return (str[0] != 34) ? (str) : ft_strtrim(str, "\"");
+	if (str[0] == 34)
+		return (ft_strtrim(str, "\""));
+	else if(str[0] == 39)
+		return (ft_strtrim(str, "\'"));
+	else
+		return (str);
 }
 
 /*
@@ -79,10 +84,10 @@ int	check_heredocs(t_vars *vars)
 		{
 			line = " ";
 			delim = current->next->cont;
-// /*debug*/printf("\033[43mdelim = ->|%s|<-\033[0m\n", delim);
 			if(!is_exception(current))
 				return(0);
 			delim = remove_quotes(current->next->cont);
+/*debug*/printf("\033[43mdelim = ->|%s|<-\033[0m\n", delim);
 			name = ft_strjoin(".tmp/temp_heredoc", ft_itoa(vars->heredoc_count));
 			fd = open(name, O_RDWR | O_CREAT, 0777);
 			new_token_after(current, name);
