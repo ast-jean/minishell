@@ -2,32 +2,6 @@
 
 #include "../../include/minishell.h"
 
-t_token *remove_token(t_token *remove)
-{
-	t_token *nex;
-
-	nex = remove->next;
-	remove->prev->next = remove->next;
-	remove->next->prev = remove->prev;
-	free(remove);
-	return (nex);
-}
-
-t_token	*new_token_after(t_token *after_this_one, char* file_name)
-{
-	t_token *new;
-
-	new = malloc(sizeof(t_token));
-	after_this_one->next->prev = new;
-	new->cont = file_name;
-	new->next = after_this_one->next;
-	new->first = after_this_one->first;
-	new->prev = after_this_one;
-	after_this_one->next = new;
-	return (new);
-}
-
-
 void	syntax_error(char *token)
 {
 	if(!ft_strcmp(token, ""))
@@ -54,43 +28,48 @@ int	is_exception(t_token *token)
 	return (1);
 }
 
-char *isquote(str)
+char *remove_quotes(char *str)
 {
-	if (str[0] == 34)
-	{
-		remove_quotes(str,"\"");
-	}
-	else if(str[0] == 39)
-		remove_quotes(str,"\'");
-	else
-		return (str);
-}
+	//cat << "'test'"'test'
+//input: "<<"'test''lake'
+//output: 'test''lake'
 
-char *remove_quotes(char *str, char c)
-{
-//input: "'test'"'lake'
-//output: 'test'lake
+//input: '"test"''lake'
+//output: "test"lake
 	int i;
-	int count;
-	int quote;
+	int count; //use?
+	char quote;
 	char *new;
 
-	count = 0;
+	new = str;
+	count = 0; //use?
 	i = 0;
-	//count char in new string
-	quote = c; 
-	while()
 
-
-	// free(str);
+	while(new[i])
+	{
+		if(new[i] == '\"' || new[i] == '\'')
+		{
+			quote = new[i];
+			new = ft_rmchar(new, &new[i++]);
+			while(new[i] && new[i] != quote)
+			{
+				if(!new[i++])
+					break ;
+			}
+			if(new[i])
+				new = ft_rmchar(new, &new[i]);
+		}
+	}
+	free(str);
+	return (new);
 }
-
 /*
 TODO:
-
-[ ] strjoin "this"'test'"one"
+[X] strjoin "this"'test'"one"
 [ ] fix single quote segfault
+[ ] add ctrl-D to go finish the heredoc (act like delim)
 [ ] Norminette
+[ ] check for leaks
 */
 int	check_heredocs(t_vars *vars)
 {
@@ -104,14 +83,15 @@ int	check_heredocs(t_vars *vars)
 	vars->heredoc_count = 0;
 	while(current)
 	{
+// /*debug*/printf("token = %s\n", current->cont);
 		if(!ft_strcmp(current->cont, "<<"))
 		{
 			line = " ";
-			delim = current->next->cont;
+			// delim = current->next->cont;
 			if(!is_exception(current))
 				return(0);
-			delim = isquote(current->next->cont);
-/*debug*/debug_print_tokens(vars);
+			delim = remove_quotes(current->next->cont);
+///*debug*/debug_print_tokens(vars);
 /*debug*/printf("\033[43mdelim = ->|%s|<-\033[0m\n", delim);
 			name = ft_strjoin(".tmp/temp_heredoc", ft_itoa(vars->heredoc_count));
 			fd = open(name, O_RDWR | O_CREAT, 0777);

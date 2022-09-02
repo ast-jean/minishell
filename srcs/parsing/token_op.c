@@ -1,5 +1,30 @@
 #include "../../include/minishell.h"
 
+t_token *remove_token(t_token *remove)
+{
+	t_token	*nex;
+
+	nex = remove->next;
+	remove->prev->next = remove->next;
+	remove->next->prev = remove->prev;
+	free(remove);
+	return (nex);
+}
+
+t_token	*new_token_after(t_token *after_this_one, char* file_name)
+{
+	t_token	*new;
+
+	new = malloc(sizeof(t_token));
+	after_this_one->next->prev = new;
+	new->cont = file_name;
+	new->next = after_this_one->next;
+	new->first = after_this_one->first;
+	new->prev = after_this_one;
+	after_this_one->next = new;
+	return (new);
+}
+
 void	*access_ptr(t_vars *vars, int i) //dont know if it works
 {
 	int count;

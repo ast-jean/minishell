@@ -15,6 +15,7 @@ void init_shell(t_vars *vars, char **env)
 void	executing_command(char *line, t_vars *vars)
 {
 	t_token	*current;
+
 	if (ft_strlen(line) == 0)
 		return ;
 	creating_tokens(line, vars);
@@ -87,8 +88,8 @@ int main(int argc, char **argv, char **env)
 	prompt= "$>";
 	line = "";
 	//---------
-	(void)argc;
-	(void)argv;
+	(void)argc; //use?
+	(void)argv; //use?
 	//---------
 	init_shell(&vars, env);
 	signal(SIGINT, handler);
