@@ -23,6 +23,7 @@ void	executing_command(char *line, t_vars *vars)
 	
 	if(!check_heredocs(vars))
 		return ;
+	if (check_redictions)
 	//MANAGE $VARS-------------
 	//create struct of saved variables and add them if $VAR
 	//-------------
