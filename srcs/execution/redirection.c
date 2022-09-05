@@ -2,10 +2,7 @@
 // NOTE: Redirection (sortie en mode append)
 
 
-void	is_extraction_op()
-{
-	
-}
+
 
 int	redirect_append(char *txt_2_add, char *file)
 {
