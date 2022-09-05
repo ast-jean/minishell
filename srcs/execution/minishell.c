@@ -24,10 +24,10 @@ void	executing_command(char *line, t_vars *vars)
 	if (parsing_pipes(vars) == -1)
 		return ;
 	current = vars->token->first;
-	while (vars->pipe_count--)
-	{
-
-	}
+	// while (vars->pipe_count--)
+	// {
+	// 	// TRADUIRE PIPEX
+	// }
 	//MANAGE $VARS-------------
 	//create struct of saved variables and add them if $VAR
 	//-------------
