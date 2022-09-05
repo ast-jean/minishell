@@ -6,8 +6,8 @@ TODO:
 	[X] Remplacer << par filename
 	[X] Creer le file et ajouter chaque ligne if(ligne != delim)
 	[X] effacer le delim token
-	[ ] loop to next <<
-	[ ] Error if no delim
+	[X] loop to next <<
+	[X] Error if no delim
 [ ] Redirections
 	[ ] <	rediriger l’entrée
 	[ ] >	rediriger la sortie

@@ -36,7 +36,6 @@ void	creating_tokens(char *line, t_vars *vars)
 	while (line_content[i])
 	{
 		push_tk(line_content[i], vars->token, first_first, prev_prev, i, count);
-		
 		prev_prev = vars->token;
 		vars->token = vars->token->next;
 		init_token_null(vars->token, first_first);
