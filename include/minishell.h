@@ -89,7 +89,7 @@ void	builtin_unset(t_vars *vars, char *var_name);
 void	builtin_export(t_token *token, t_vars *vars);
 // ECHO_CD.C
 //// void	builtin_cd(char **env, t_vars vars);
-//// void	builtin_echo(char **env);
+void	builtin_echo(char **args, char **env);
 
 //NOTE: ------------------------------------------------
 #endif

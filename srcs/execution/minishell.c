@@ -12,10 +12,10 @@ void init_shell(t_vars *vars, char **env)
 	printf("*******************************\n");
 }
 
-void	executing_command(char *line, t_vars *vars)
-{
-	t_token *current;
-}
+// void	executing_command(char *line, t_vars *vars)
+// {
+// 	t_token *current;
+// }
 
 void	executing_command(char *line, t_vars *vars)
 {
@@ -28,7 +28,7 @@ void	executing_command(char *line, t_vars *vars)
 	//current = first???
 	if(!check_heredocs(vars))
 		return ;
-	if (check_redictions)
+	// !!!!if (check_redictions)
 	//MANAGE $VARS-------------
 	//create struct of saved variables and add them if $VAR
 	//-------------
@@ -43,8 +43,8 @@ void	executing_command(char *line, t_vars *vars)
 		builtin_pwd(vars);
 	else if(!ft_strcmp(current->cont, "env"))
 		builtin_env(vars);
-	// else if(!ft_strcmp(current->cont, "echo"))
-	// 	builtin_echo(vars);
+	else if(!ft_strcmp(current->cont, "echo"))
+		builtin_echo(vars->av, vars->env);
 /*debug*/	// else if(!ft_strcmp(current->cont, "ls"))
 	// 	executing_simple_cmds(vars, current);
 	else if (!accessing(vars, current)) //si command est dans le path
@@ -95,7 +95,7 @@ int main(int argc, char **argv, char **env)
 	line = "";
 	//---------
 	(void)argc; //use?
-	(void)argv; //use?
+	vars.av = argv;
 	//---------
 	init_shell(&vars, env);
 	signal(SIGINT, handler);

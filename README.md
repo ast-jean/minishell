@@ -39,15 +39,16 @@ TOKNOW:
 	- segfault when ctrl-D in heredoc
 	- make a special case for <<< (error)
 
-LOG:
+
+
+
 
 Raccourcis git:
-
-gaa	—> git add .
-gst	—> git status
-gc	—> git commit
-gp	—> git push
-gl	—> git pull
-gco	—> git checkout
-gm	—> git merge
-gcl -> git clone
+	gaa	—> git add .
+	gst	—> git status
+	gc	—> git commit
+	gp	—> git push
+	gl	—> git pull
+	gco	—> git checkout
+	gm	—> git merge
+	gcl -> git clone
