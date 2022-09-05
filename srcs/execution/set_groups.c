@@ -29,3 +29,28 @@ int	init_groups(t_vars *vars)
 		return (-1);
 	return (0);
 }
+
+
+// NOTE:
+
+void	parsing_pipes(t_vars *vars)
+{
+	t_token *cpy;
+
+	cpy = vars->token->first;
+
+	while (cpy->cont)
+	{
+		if (cpy->cont == "|" && cpy->next->cont == "|")
+		{
+			write(2, "Error.\n", 7);
+			return (error_was_made(vars));
+		}
+		else if (cpy->cont[0] == '|' && cpy->cont[1] == '|')
+		{
+			write(2, "Error.\n", 7);
+			return (error_was_made(vars));
+		}
+		return (0);
+	}
+}
