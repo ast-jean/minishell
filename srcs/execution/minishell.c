@@ -12,11 +12,6 @@ void init_shell(t_vars *vars, char **env)
 	printf("*******************************\n");
 }
 
-// void	executing_command(char *line, t_vars *vars)
-// {
-// 	t_token *current;
-// }
-
 void	executing_command(char *line, t_vars *vars)
 {
 	t_token	*current;
@@ -24,11 +19,12 @@ void	executing_command(char *line, t_vars *vars)
 	if (ft_strlen(line) == 0)
 		return ;
 	creating_tokens(line, vars);
-	current = vars->token->first;
-	//current = first???
 	if(!check_heredocs(vars))
 		return ;
-	// !!!!if (check_redictions)
+	if (init_groups(vars) == -1)
+		printf("wrong pipe placement");
+	//current is a copy of official tokens
+	current = vars->token->first;
 	//MANAGE $VARS-------------
 	//create struct of saved variables and add them if $VAR
 	//-------------

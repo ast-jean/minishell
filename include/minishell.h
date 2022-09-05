@@ -9,6 +9,7 @@
 // STRUCTS
 typedef struct s_token
 {
+	int				group_num;
 	char			*cont;
 	struct s_token	*next;
 	struct s_token	*prev;
@@ -27,6 +28,7 @@ typedef struct s_vars
 	char	*pwd;
 	char	*oldpwd;
 	t_token	*token;
+	int		pipe_count;
 }	t_vars;
 
 // FUNCTIONS (SELON FILENAME)----------------------
@@ -50,6 +52,9 @@ void	free_tokens(t_vars *vars);
 
 // PIPES.C
 
+// SET_GORUPS.C
+int	init_groups(t_vars *vars);
+
 //NOTE: PARSING
 // PARSING_UTILS.C
 int	how_many_quotes(char *str);
@@ -65,10 +70,11 @@ void	push_tk(char *cont, t_token *token, t_token *first, t_token *prev, int i, i
 void	executing_command(char *line, t_vars *vars);
 
 //TOKEN_OP.C
-void	debug_print_tokens(t_vars *vars);
+void	debug_print_tokens(t_vars *vars); //temp_function
 void	*access_ptr(t_vars *vars, int i);
 t_token	*new_token_after(t_token *after_this_one, char* file_name);
 t_token	*remove_token(t_token *remove);
+
 //NEWTOKEN.C
 char	*newtoken_q(char *line, int *i, char c);
 char	*newtoken_s(char *line, int *i);
