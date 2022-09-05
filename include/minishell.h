@@ -54,6 +54,7 @@ void	free_tokens(t_vars *vars);
 
 // SET_GORUPS.C
 int	init_groups(t_vars *vars);
+int	parsing_pipes(t_vars *vars)
 
 //NOTE: PARSING
 // PARSING_UTILS.C

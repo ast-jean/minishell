@@ -21,10 +21,13 @@ void	executing_command(char *line, t_vars *vars)
 	creating_tokens(line, vars);
 	if(!check_heredocs(vars))
 		return ;
-	if (init_groups(vars) == -1)
-		printf("wrong pipe placement");
-	//current is a copy of official tokens
+	if (parsing_pipes(vars) == -1)
+		return ;
 	current = vars->token->first;
+	while (vars->pipe_count--)
+	{
+
+	}
 	//MANAGE $VARS-------------
 	//create struct of saved variables and add them if $VAR
 	//-------------

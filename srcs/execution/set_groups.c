@@ -33,13 +33,12 @@ int	init_groups(t_vars *vars)
 
 // NOTE:
 
-void	parsing_pipes(t_vars *vars)
+int	parsing_pipes(t_vars *vars)
 {
 	t_token *cpy;
 
 	cpy = vars->token->first;
-
-	while (cpy->cont)
+	while (cpy->next)
 	{
 		if (cpy->cont == "|" && cpy->next->cont == "|")
 		{
@@ -51,6 +50,12 @@ void	parsing_pipes(t_vars *vars)
 			write(2, "Error.\n", 7);
 			return (error_was_made(vars));
 		}
-		return (0);
+		else if (init_groups(vars) == -1)
+		{
+			write(2, "Error.\n", 7);
+			return (error_was_made(vars));
+		}
+		cpy = cpy->next;
 	}
+		return (0);
 }
