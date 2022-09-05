@@ -14,7 +14,7 @@ int	is_n(char *str)
 	return (1);
 }
 
-void	ft_echo(char **args, char **env)
+void	builtin_echo(char **args, char **env)
 {
 	(void)env;
 	int	i;
