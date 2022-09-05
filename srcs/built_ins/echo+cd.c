@@ -27,18 +27,22 @@ int	is_n(char *str)
 // 	printf ("%s", args[0 + i]);
 // }
 
-// void	builtin_echo(t_vars *vars)
-// {
-// 	if (vars->av[1] == "-n")
-	
-// 		while (token->cont != '|')
-// 		{
-// 			printf("%s", token->cont);
-// 		}
-// // IF	TOKEN 0 = echo
-// // 		TOKEN 1 = -n | words
-// //		TOKEN n = words
-// }
+void	builtin_echo(t_vars *vars)
+{
+	t_token *cpy;
+
+	cpy = vars->token->first;
+	if (ft_strcmp(cpy->cont, "-n") == 0)
+	{
+		while (ft_strcmp(cpy->cont, "|") != 0)
+		{
+			printf("%s", cpy->cont);
+		}
+	}
+// IF	TOKEN 0 = echo
+// 		TOKEN 1 = -n | words
+//		TOKEN n = words
+}
 
 // void	ft_cd(char *arg, char **env)
 // {

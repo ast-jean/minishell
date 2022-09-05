@@ -25,13 +25,14 @@ int	init_groups(t_vars *vars)
 	}
 	debug_print_tokens(vars);
 	printf("pipecount : %d\n\n", vars->pipe_count);
-	if (vars->pipe_count == (i + 1))
+	printf("i : %d\n", i);
+	if (vars->pipe_count >= (i - 1))
 		return (-1);
 	return (0);
 }
 
 
-// NOTE:
+// NOTE: SEGFAULTS IF STARTS WITH PIPE
 
 int	parsing_pipes(t_vars *vars)
 {
@@ -40,22 +41,23 @@ int	parsing_pipes(t_vars *vars)
 	cpy = vars->token->first;
 	while (cpy->next)
 	{
-		if (cpy->cont == "|" && cpy->next->cont == "|")
+		if (cpy->next && (ft_strcmp(cpy->cont, "|") == 0 && ft_strcmp(cpy->next->cont, "|") == 0))
 		{
 			write(2, "Error.\n", 7);
-			return (error_was_made(vars));
+			return (-1);
 		}
 		else if (cpy->cont[0] == '|' && cpy->cont[1] == '|')
 		{
 			write(2, "Error.\n", 7);
-			return (error_was_made(vars));
-		}
-		else if (init_groups(vars) == -1)
-		{
-			write(2, "Error.\n", 7);
-			return (error_was_made(vars));
+			return (-1);
 		}
 		cpy = cpy->next;
 	}
+		if (init_groups(vars) == -1)
+		{
+			write(2, "Error.\n", 7);
+			return (-1);
+		}
 		return (0);
 }
+

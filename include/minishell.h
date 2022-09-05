@@ -54,7 +54,7 @@ void	free_tokens(t_vars *vars);
 
 // SET_GORUPS.C
 int	init_groups(t_vars *vars);
-int	parsing_pipes(t_vars *vars)
+int	parsing_pipes(t_vars *vars);
 
 //NOTE: PARSING
 // PARSING_UTILS.C
@@ -97,6 +97,6 @@ void	builtin_export(t_token *token, t_vars *vars);
 // ECHO_CD.C
 //// void	builtin_cd(char **env, t_vars vars);
 void	builtin_echo(t_vars *vars);
-
+// void	builtin_echo(char **args, char **env);
 //NOTE: ------------------------------------------------
 #endif
