@@ -27,6 +27,21 @@ void	builtin_echo(char **args, char **env)
 	printf ("%s", args[0 + i]);
 }
 
+void	builtin_echo(t_vars *vars)
+{
+	if (vars->av[1] == "-n")
+	
+		while (token->cont != '|')
+		{
+			printf("%s", token->cont);
+		}
+
+	}
+// IF	TOKEN 0 = echo
+// 		TOKEN 1 = -n | words
+//		TOKEN n = words
+}
+
 // void	ft_cd(char *arg, char **env)
 // {
 // // cd (only relative path or absolute)

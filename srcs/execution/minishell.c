@@ -44,7 +44,7 @@ void	executing_command(char *line, t_vars *vars)
 	else if(!ft_strcmp(current->cont, "env"))
 		builtin_env(vars);
 	else if(!ft_strcmp(current->cont, "echo"))
-		builtin_echo(vars->av, vars->env);
+		builtin_echo(vars);
 /*debug*/	// else if(!ft_strcmp(current->cont, "ls"))
 	// 	executing_simple_cmds(vars, current);
 	else if (!accessing(vars, current)) //si command est dans le path
