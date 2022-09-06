@@ -4,7 +4,7 @@ NAME = minishell
 
 SRCS_FILES 		=	execution/minishell.c		\
 					execution/execution.c		\
-					execution/execution_cmd.c	\
+					execution/executing_simple_cmd.c	\
 					parsing/parsing.c			\
 					parsing/init_token.c		\
 					parsing/token_op.c			\
@@ -16,6 +16,7 @@ SRCS_FILES 		=	execution/minishell.c		\
 					execution/quit.c			\
 					execution/heredocs.c 		\
 					execution/set_groups.c 		\
+					# execution/execution_cmd.c	\
 
 INCLUDE_FILES	= 	minishell.h
 

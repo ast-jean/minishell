@@ -28,7 +28,8 @@ TOKNOW:
 	- Ne pas gérer les fuites avec readline
 	- simple quotes = litéral
 
-	- heardocs must be child
+	- heardocs must be child NEW
+
  TOFIX  
 	- signals get displayed
 	- test splitamary cases:
@@ -40,8 +41,22 @@ TOKNOW:
 	- segfault when ctrl-D in heredoc
 	- make a special case for <<< (error)
 
+LOG:
+
+	- ADDED HIGHLIGHT (NEW) to use along with [x][a][m] to indicate new stuff to read in the README
 
 
+
+        {
+            "text": "NEW",
+            "color": "black",
+            "backgroundColor": "#FF7F50",
+            "border": "1px",
+            "borderRadius": "1px",
+            "textDecoration": "none",
+            "borderStyle": "solid",
+            "isWholeLine": true,
+        },
 
 
 Raccourcis git:

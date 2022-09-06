@@ -89,14 +89,14 @@ int		cnt_delims(char *line, char *delims);
 
 //NOTE: BUILT INS
 // PWD_ENV.C
-void	builtin_pwd(t_vars *vars);
-void	builtin_env(t_vars *vars);
+int	builtin_pwd(t_vars *vars);
+int	builtin_env(t_vars *vars);
 // EXPORT_UNSET.C
-void	builtin_unset(t_vars *vars, char *var_name);
-void	builtin_export(t_token *token, t_vars *vars);
+int	builtin_unset(t_vars *vars, char *var_name);
+int	builtin_export(t_token *token, t_vars *vars);
 // ECHO_CD.C
 //// void	builtin_cd(char **env, t_vars vars);
-void	builtin_echo(t_vars *vars);
+int	builtin_echo(t_vars *vars);
 // void	builtin_echo(char **args, char **env);
 //NOTE: ------------------------------------------------
 #endif

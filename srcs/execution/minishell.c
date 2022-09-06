@@ -32,14 +32,15 @@ int	is_builtin(t_token *current, t_vars *vars)
 
 void	cmd_not_found(char *s)
 {
-	ft_putstr_fd("command not found", 2);
 	ft_putstr_fd(s, 2);
-	ft_putstr_fd("\n", 2);
+	ft_putstr_fd(": command not found\n", 2);
 }
 
+// TOFIX : rename for check_token_type
 void	executing_command(char *line, t_vars *vars)
 {
 	t_token	*current;
+	int		i;
 
 	if (ft_strlen(line) == 0)
 		return ;
@@ -49,14 +50,20 @@ void	executing_command(char *line, t_vars *vars)
 	if (parsing_pipes(vars) == -1)
 		return ;
 	current = vars->token->first;
-	while (vars->pipe_count--)
+	i = 0;
+	while (++i <= current->group_num)
 	{
 		if (is_builtin(current, vars) == -1)
 		{
-		if (!accessing(vars, current)) //si command est dans le path
-			executing_simple_cmds(vars, current);
-		else
+			if (!accessing(vars, current)) //si command est dans le path
+				format_execve(vars, current); //will format so execve receives right content
+			else
 			return (cmd_not_found(current->cont));
+		}
+		else 
+		{
+			while (i == current->group_num)
+				current = current->next;
 		}
 	}
 	//MANAGE $VARS-------------
@@ -66,7 +73,7 @@ void	executing_command(char *line, t_vars *vars)
 	// 	executing_simple_cmds(vars, current);
 	// if(current)
 	// 	free_tokens(vars);
-/*debug*/printf("\033[43mcommand is '%s'\033[0m\n", current->cont);
+// /*debug*/printf("\033[43mcommand is '%s'\033[0m\n", current->cont);
 }
 
 void	handler(int sig) 

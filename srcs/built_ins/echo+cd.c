@@ -45,10 +45,11 @@ int	builtin_echo(t_vars *vars)
 	return (1);
 }
 
-// void	ft_cd(char *arg, char **env)
+// int	ft_cd(char *arg, char **env)
 // {
 // // cd (only relative path or absolute)
 // //change pwd and oldpwd in env, maybe?
 // // save pwd in struct and env
+	// return (1);
 // }
 
