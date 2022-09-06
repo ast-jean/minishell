@@ -27,7 +27,7 @@ int	is_n(char *str)
 // 	printf ("%s", args[0 + i]);
 // }
 
-void	builtin_echo(t_vars *vars)
+int	builtin_echo(t_vars *vars)
 {
 	t_token *cpy;
 
@@ -42,6 +42,7 @@ void	builtin_echo(t_vars *vars)
 // IF	TOKEN 0 = echo
 // 		TOKEN 1 = -n | words
 //		TOKEN n = words
+	return (1);
 }
 
 // void	ft_cd(char *arg, char **env)

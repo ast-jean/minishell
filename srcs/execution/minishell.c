@@ -12,6 +12,24 @@ void init_shell(t_vars *vars, char **env)
 	printf("*******************************\n");
 }
 
+int	is_builtin(t_token *current, t_vars *vars)
+{
+	//Built-in export-------------
+	if(!ft_strcmp(current->cont, "export"))
+		return (builtin_export(current, vars));
+	// else if(!ft_strcmp(current->cont, "unset"))
+	// 	builtin_unset(vars, current->next->cont);
+	else if(!ft_strcmp(current->cont, "exit"))
+		quit_shell(vars);
+	else if(!ft_strcmp(current->cont, "pwd"))
+		return (builtin_pwd(vars));
+	else if(!ft_strcmp(current->cont, "env"))
+		return (builtin_env(vars));
+	else if(!ft_strcmp(current->cont, "echo"))
+		return (builtin_echo(vars));
+	return (-1);
+}
+
 void	executing_command(char *line, t_vars *vars)
 {
 	t_token	*current;
@@ -24,10 +42,11 @@ void	executing_command(char *line, t_vars *vars)
 	if (parsing_pipes(vars) == -1)
 		return ;
 	current = vars->token->first;
-	// while (vars->pipe_count--)
-	// {
-	// 	// TRADUIRE PIPEX
-	// }
+	while (vars->pipe_count--)
+	{
+		if (is_builtin(current, vars) == -1)
+
+	}
 	//MANAGE $VARS-------------
 	//create struct of saved variables and add them if $VAR
 	//-------------

@@ -31,17 +31,19 @@ int	init_groups(t_vars *vars)
 	return (0);
 }
 
-
-// NOTE: SEGFAULTS IF STARTS WITH PIPE
-
 int	parsing_pipes(t_vars *vars)
 {
 	t_token *cpy;
 
 	cpy = vars->token->first;
+	if (cpy->cont[0] == '|')
+	{
+		write(2, "Error.\n", 7);
+		return (-1);
+	}
 	while (cpy->next)
 	{
-		if (cpy->next && (ft_strcmp(cpy->cont, "|") == 0 && ft_strcmp(cpy->next->cont, "|") == 0))
+		if ((ft_strcmp(cpy->cont, "|") == 0 && ft_strcmp(cpy->next->cont, "|") == 0))
 		{
 			write(2, "Error.\n", 7);
 			return (-1);
