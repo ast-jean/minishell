@@ -29,6 +29,9 @@ typedef struct s_vars
 	char	*oldpwd;
 	t_token	*token;
 	int		pipe_count;
+	int		fdi;
+	int		fdo;
+	int		pipefd[2];
 }	t_vars;
 
 // FUNCTIONS (SELON FILENAME)----------------------
@@ -55,6 +58,10 @@ void	free_tokens(t_vars *vars);
 // SET_GORUPS.C
 int	init_groups(t_vars *vars);
 int	parsing_pipes(t_vars *vars);
+
+//	REDIRECTION"C
+int	redirect_input(t_token *token, int fd);
+int	redirect_output(t_token *token);
 
 //NOTE: PARSING
 // PARSING_UTILS.C

@@ -1,19 +1,22 @@
 #include "../../include/minishell.h"
 // NOTE: Redirections ( > , < , >>)
+// TOFIX  when there is pipe, 0 would overwrite.
 
-int	redirect_input(t_token *token)
+int	redirect_input(t_token *token, int fd)
 {
-	int	fd;
+	t_token *cpy;
 
-	fd = 0;
-	while (ft_strcmp(token->cont, "|") != 0 && token->next)
+	cpy = token;
+	while (ft_strcmp(cpy->cont, "|") != 0 && cpy->next)
 	{
-		if (ft_strcmp(token->cont, "<") == 0)
+		if (ft_strcmp(cpy->cont, "<") == 0)
 		{
-			fd = open(token->next->cont, O_RDONLY);
-			//tokenrem x 2 ?
+			fd = open(cpy->next->cont, O_RDONLY);
+			// cpy = remove_token(cpy);
+			// cpy->next = remove_token(cpy->next);
 		}
-		token = token->next;
+		// else
+			cpy = cpy->next;
 	}
 	printf("FINAL INPUT = %d\n", fd);
 	return (fd);
@@ -22,21 +25,23 @@ int	redirect_input(t_token *token)
 int	redirect_output(t_token *token)
 {
 	int	fd;
+	t_token *cpy;
 
 	fd = 1;
-	while (ft_strcmp(token->cont, "|") != 0 && token->next)
+	cpy = token;
+	while (ft_strcmp(cpy->cont, "|") != 0 && cpy->next)
 	{
-		if (ft_strcmp(token->cont, ">") == 0)
+		if (ft_strcmp(cpy->cont, ">") == 0)
 		{
-			fd = open(token->next->cont, O_TRUNC | O_CREAT | O_RDWR, 0777);
-			//tokenrem x 2 ?
+			fd = open(cpy->next->cont, O_TRUNC | O_CREAT | O_RDWR, 0777);
+			//cpyrem x 2 ?
 		}
-		else if (ft_strcmp(token->cont, ">>") == 0)
+		else if (ft_strcmp(cpy->cont, ">>") == 0)
 		{
-			fd = open(token->next->cont, O_APPEND | O_CREAT | O_RDWR, 0777);
-			//tokenrem x 2 ?
+			fd = open(cpy->next->cont, O_APPEND | O_CREAT | O_RDWR, 0777);
+			//cpyrem x 2 ?
 		}
-		token = token->next;
+		cpy = cpy->next;
 	}
 	printf("FINAL OUTPUT = %d\n", fd);
 	return (fd);
