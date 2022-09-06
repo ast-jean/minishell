@@ -30,6 +30,13 @@ int	is_builtin(t_token *current, t_vars *vars)
 	return (-1);
 }
 
+void	cmd_not_found(char *s)
+{
+	ft_putstr_fd("command not found", 2);
+	ft_putstr_fd(s, 2);
+	ft_putstr_fd("\n", 2);
+}
+
 void	executing_command(char *line, t_vars *vars)
 {
 	t_token	*current;
@@ -45,35 +52,18 @@ void	executing_command(char *line, t_vars *vars)
 	while (vars->pipe_count--)
 	{
 		if (is_builtin(current, vars) == -1)
-
+		{
+		if (!accessing(vars, current)) //si command est dans le path
+			executing_simple_cmds(vars, current);
+		else
+			return (cmd_not_found(current->cont));
+		}
 	}
 	//MANAGE $VARS-------------
 	//create struct of saved variables and add them if $VAR
 	//-------------
-	//Built-in export-------------
-	if(!ft_strcmp(current->cont, "export"))
-		builtin_export(current, vars);
-	// else if(!ft_strcmp(current->cont, "unset"))
-	// 	builtin_unset(vars, current->next->cont);
-	else if(!ft_strcmp(current->cont, "exit"))
-		quit_shell(vars);
-	else if(!ft_strcmp(current->cont, "pwd"))
-		builtin_pwd(vars);
-	else if(!ft_strcmp(current->cont, "env"))
-		builtin_env(vars);
-	else if(!ft_strcmp(current->cont, "echo"))
-		builtin_echo(vars);
 /*debug*/	// else if(!ft_strcmp(current->cont, "ls"))
 	// 	executing_simple_cmds(vars, current);
-	else if (!accessing(vars, current)) //si command est dans le path
-	{
-		executing_simple_cmds(vars, current);
-	}
-	else
-	{
-		printf("command not found '%s'\n", current->cont);
-		return ;
-	}
 	// if(current)
 	// 	free_tokens(vars);
 /*debug*/printf("\033[43mcommand is '%s'\033[0m\n", current->cont);
