@@ -28,6 +28,7 @@ TOKNOW:
 	- Ne pas gérer les fuites avec readline
 	- simple quotes = litéral
 
+	- heardocs must be child
  TOFIX  
 	- signals get displayed
 	- test splitamary cases:
