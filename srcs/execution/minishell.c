@@ -45,7 +45,6 @@ void	executing_command(char *line, t_vars *vars)
 	while (vars->pipe_count--)
 	{
 		if (is_builtin(current, vars) == -1)
-
 	}
 	//MANAGE $VARS-------------
 	//create struct of saved variables and add them if $VAR
