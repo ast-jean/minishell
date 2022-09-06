@@ -32,7 +32,7 @@ int	init_groups(t_vars *vars)
 }
 
 
-// NOTE: SEGFAULTS IF STARTS WITH PIPE
+// TOFIX  SEGFAULTS IF STARTS WITH PIPE
 
 int	parsing_pipes(t_vars *vars)
 {
@@ -61,3 +61,4 @@ int	parsing_pipes(t_vars *vars)
 		return (0);
 }
 
+// 
