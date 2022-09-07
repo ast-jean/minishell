@@ -29,10 +29,8 @@ typedef struct s_vars
 	char	*oldpwd;
 	t_token	*token;
 	int		pipe_count;
-	int		fdi;
-	int		fdo;
-	int		pipefd1[2];
-	int		pipefd2[2];
+	int		pid[32768];
+	int		pid_count;
 }	t_vars;
 
 // FUNCTIONS (SELON FILENAME)----------------------
@@ -49,6 +47,8 @@ void	executing_simple_cmds(t_vars *vars, t_token *token);
 
 // HEREDOCS.c
 int	check_heredocs(t_vars *vars);
+char *remove_quotes(char *str);
+
 // HEREDOCS2.c
 char *check_var(char *line, t_vars *vars);
 
@@ -65,8 +65,8 @@ int	init_groups(t_vars *vars);
 int	parsing_pipes(t_vars *vars);
 
 //	REDIRECTION"C
-int	redirect_input(t_token *token, int fd);
-int	redirect_output(t_token *token, int fd);
+int	redirect_input(t_token *token, int fd_init);
+int	redirect_output(t_token *token, int fd_init);
 
 //NOTE: PARSING
 // PARSING_UTILS.C

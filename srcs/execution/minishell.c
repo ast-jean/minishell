@@ -90,6 +90,7 @@ void	executing_command(char *line, t_vars *vars)
 		return ;
 	current = vars->token->first;
 	fd_catch(vars, current);
+	debug_print_tokens(vars);
 	// i = 0;
 	// fd_default = 0;
 	// while (++i <= current->group_num)
