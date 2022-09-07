@@ -6,24 +6,31 @@ char *add_varcontent(char *line,int newlen, char *var_name, char **env, int coun
 {
 	char	*newline;
 	int		pos;
+	char	*var_value;
+	int i;
 
+i = 0;
 	pos = 0;
-	newline = "";
-	while(line[pos] && line[pos]!= ' ')
+	newline = NULL;
+	while (line[pos] && line[pos]!= ' ')
 		pos++;
-
-	printf("pos =%d\n", pos);
-
-	(void)var_name;
-	(void)env;
 // add content of var at pos
-	if(ft_arraysrch(env, ft_strjoin(var_name, "="))) // TOFIX  arraysrch should check only the strlen(var_name) of the first strings and until it hits a '='
+		var_value = ft_arraysrch(env, ft_strjoin(var_name, "=")) + (ft_strlen(var_name) + 1);
+/*debug*/printf("\033[43mvar_value=%s\033[0m\n", var_value);
+
+	if (var_value) // TOFIX  arraysrch should check only the strlen(var_name) of the first strings and until it hits a '='
 	{
 		newline = calloc(count + newlen, sizeof(char));
-		
+		while(pos < ((int)ft_strlen(var_value) + (int)ft_strlen(var_name) + 1))
+		{
+/*debug*/printf("\033[43m pos=%d < %d\033[0m\n", pos,((int)ft_strlen(var_value) + (int)ft_strlen(var_name) + 1));
+/*debug*/printf("\033[43mvar_value[i]=%c, pos=%d \033[0m\n", var_value[i], i);
+			newline[pos++] = var_value[i++];
+/*debug*/printf("\033[43mnewline[pos]=%c, pos=%d \033[0m\n", newline[pos], pos);
+		}
 	}
 /*debug*/printf("\033[43mnewline=%s\033[0m\n", newline);
-
+	// free(line);
 	return newline ? (newline) : (line);
 }
 
@@ -44,7 +51,7 @@ char *change_to_var(char *line, char *var_name, char **env)
 		varremoved = ft_rmchar(varremoved, temp); // TOFIX  MIGHT LEAK
 		temp++;
 	}
-	// ft_rmchar(varremoved, temp);
+	ft_rmchar(varremoved, temp);
 	count = ft_strlen(ft_arraysrch(env, var_name)) - (ft_strlen(var_name)+ 1);
 	if(count > 0)
 	{

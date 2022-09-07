@@ -94,7 +94,6 @@ int	check_heredocs(t_vars *vars)
 ///*debug*/debug_print_tokens(vars);
 			fd = open(name, O_RDWR | O_CREAT, 0777);
 			new_token_after(current, name);
-
 			while(ft_strcmp(delim, line))
 			{
 /*debug*/printf("\033[43mdelim = ->|%s|<-\033[0m\n", delim);
@@ -107,8 +106,8 @@ int	check_heredocs(t_vars *vars)
 				line = readline(">");
 				rl_redisplay();
 			}
-			current = remove_token(current);
-			current->next = remove_token(current->next);
+			current = remove_token(current, vars);
+			current->next = remove_token(current->next, vars);
 			vars->heredoc_count++;
 		}
 		else if(!ft_strcmp(current->cont, "<<<"))
@@ -121,8 +120,8 @@ int	check_heredocs(t_vars *vars)
 			new_token_after(current, name);
 			line = check_var(line, vars);
 			ft_putstr_fd(line, fd);
-			current = remove_token(current);
-			current->next = remove_token(current->next);
+			current = remove_token(current, vars);
+			current->next = remove_token(current->next, vars);
 		}
 		else if((current->cont[0] == '<') && ft_strlen(current->cont) > 3)
 		{
@@ -132,6 +131,6 @@ int	check_heredocs(t_vars *vars)
 		else
 			current = current->next;
 	}
-// /*debug*/printf("\033[43m'<<'count:%d\033[0m\n", heredoc_count);
+/*debug*/debug_print_tokens(vars);
 	return (1);
 }

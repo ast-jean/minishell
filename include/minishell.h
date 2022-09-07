@@ -68,7 +68,7 @@ void	executing_command(char *line, t_vars *vars);
 void	debug_print_tokens(t_vars *vars);
 void	*access_ptr(t_vars *vars, int i);
 t_token	*new_token_after(t_token *after_this_one, char* file_name);
-t_token	*remove_token(t_token *remove);
+t_token *remove_token(t_token *remove, t_vars *vars);
 //NEWTOKEN.C
 char	*newtoken_q(char *line, int *i, char c);
 char	*newtoken_s(char *line, int *i);

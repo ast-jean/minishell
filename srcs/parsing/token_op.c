@@ -1,32 +1,31 @@
 #include "../../include/minishell.h"
 
-t_token *remove_token(t_token *remove)
+t_token *remove_token(t_token *remove, t_vars *vars)
 {
 	t_token	*nex;
 
-	if(remove->next)
+	if (remove->next && remove->prev)
 	{
-		nex = remove->next;
 		remove->prev->next = remove->next;
-	}
-	else
-	{
-		nex = remove->prev;
-		remove->prev->next = NULL;
-	}
-	if(remove->prev)
 		remove->next->prev = remove->prev;
+		nex = remove->next;
+	}
+	else if(!remove->next)
+	{
+		remove->prev->next = NULL;
+		nex = remove->prev;
+	}
 	else
 	{
 		remove->next->prev = NULL;
-		remove->next->first = remove->next;
 		nex = remove->next;
-		while(nex->next)
+		while (nex)
 		{
-			nex->next->first = remove->next;
+			nex->first = remove->next;
 			nex = nex->next;
 		}
-		nex = nex->first;
+		vars->token = remove->next;
+		nex = remove->next;
 	}
 	free(remove);
 	return (nex);
@@ -92,5 +91,5 @@ void	debug_print_tokens(t_vars *vars)
 		current = current->next;
 		i++;
 	}
-	printf("----------------\n");
+	printf("-------END-------\n");
 }
