@@ -17,6 +17,7 @@ SRCS_FILES 		=	execution/minishell.c		\
 					execution/heredocs.c 		\
 					execution/set_groups.c 		\
 					execution/redirection.c		\
+					execution/pipes.c			\
 
 INCLUDE_FILES	= 	minishell.h
 
