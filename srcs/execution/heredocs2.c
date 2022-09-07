@@ -8,16 +8,23 @@ char *add_varcontent(char *line,int newlen, char *var_name, char **env, int coun
 	int		pos;
 
 	pos = 0;
+	newline = "";
 	while(line[pos] && line[pos]!= ' ')
 		pos++;
 
 	printf("pos =%d\n", pos);
-	newline = calloc(count + newlen, sizeof(char));
 
 	(void)var_name;
 	(void)env;
 // add content of var at pos
-	return (newline);
+	if(ft_arraysrch(env, ft_strjoin(var_name, "="))) // TOFIX  arraysrch should check only the strlen(var_name) of the first strings and until it hits a '='
+	{
+		newline = calloc(count + newlen, sizeof(char));
+		
+	}
+/*debug*/printf("\033[43mnewline=%s\033[0m\n", newline);
+
+	return newline ? (newline) : (line);
 }
 
 
@@ -37,8 +44,7 @@ char *change_to_var(char *line, char *var_name, char **env)
 		varremoved = ft_rmchar(varremoved, temp); // TOFIX  MIGHT LEAK
 		temp++;
 	}
-	ft_rmchar(varremoved, temp);
-	printf("varremoved =%s\n", varremoved);
+	// ft_rmchar(varremoved, temp);
 	count = ft_strlen(ft_arraysrch(env, var_name)) - (ft_strlen(var_name)+ 1);
 	if(count > 0)
 	{
@@ -77,20 +83,26 @@ char *check_var(char *line, t_vars *vars)
 	char *var_name;
 	char *newline;
 
-	newline = "";
 	i = 0;	
-		var_name = save_varname(ft_strchr(line, '$')); 
-/*debug*/printf("%s\n", ft_arraysrch(vars->env, var_name));
-	while (ft_strchr(line, '$'))
+	if(ft_strchr(line, '$'))
 	{
-		var_name = save_varname(ft_strchr(line, '$')); 
-		var_name = &var_name[1]; //LEAKKKKKK TOFIX 
+		newline = line;
+		var_name = save_varname(ft_strchr(line, '$'));
+/*debug*/printf("%s\n", ft_arraysrch(vars->env, var_name));
+/*debug*/printf("\033[43msrcchr=%s\033[0m\n", ft_strchr(line, '$'));
+		while (ft_strchr(newline, '$'))
+		{
+			/*debug*/printf("\033[43msrchr=%s\033[0m\n", ft_strchr(line, '$'));
+			var_name = save_varname(ft_strchr(line, '$')); 
+			var_name = &var_name[1]; //LEAKKKKKK TOFIX 
 /*debug*/printf("var_name = %s\n", var_name); 
-		newline = change_to_var(line, var_name, vars->env);
+			newline = change_to_var(line, var_name, vars->env);
 /*debug*/printf("line = %s\n", newline); 
-		exit(0);
-	} 
-	// free(line);
-	// free(var_name)
+		} 
+		// free(line);
+		// free(var_name)
 	return (newline);
+	}
+	else
+		return (line);
 }
