@@ -13,7 +13,7 @@ t_token *remove_token(t_token *remove, t_vars *vars)
 	else if(!remove->next)
 	{
 		remove->prev->next = NULL;
-		nex = remove->prev;
+		nex = NULL;
 	}
 	else
 	{
