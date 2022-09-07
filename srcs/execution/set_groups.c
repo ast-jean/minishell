@@ -23,9 +23,7 @@ int	init_groups(t_vars *vars)
 		}
 		i++;
 	}
-	debug_print_tokens(vars);
 	printf("pipecount : %d\n\n", vars->pipe_count);
-	printf("i : %d\n", i);
 	if (vars->pipe_count >= (i - 1))
 		return (-1);
 	return (0);
