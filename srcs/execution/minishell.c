@@ -19,13 +19,15 @@ void	executing_command(char *line, t_vars *vars)
 	if (ft_strlen(line) == 0)
 		return ;
 	creating_tokens(line, vars);
-	current = vars->token->first;
 	
 	if(!check_heredocs(vars))
 		return ;
 	//MANAGE $VARS-------------
 	//create struct of saved variables and add them if $VAR
 	//-------------
+// /*debug*/debug_print_tokens(vars);
+
+	current = vars->token->first;
 	//Built-in export-------------
 	if(!ft_strcmp(current->cont, "export"))
 		builtin_export(current, vars);
@@ -43,6 +45,7 @@ void	executing_command(char *line, t_vars *vars)
 	// 	executing_simple_cmds(vars, current);
 	else if (!accessing(vars, current)) //si command est dans le path
 	{
+
 		executing_simple_cmds(vars, current);
 	}
 	else

@@ -81,7 +81,7 @@ int	check_heredocs(t_vars *vars)
 	while(current)
 	{
 // /*debug*/printf("token = %s\n", current->cont);
-		if(!ft_strcmp(current->cont, "<<"))
+		if(current && !ft_strcmp(current->cont, "<<"))
 		{
 			line = " ";
 			if(!is_exception(current))
@@ -110,7 +110,7 @@ int	check_heredocs(t_vars *vars)
 			current->next = remove_token(current->next, vars);
 			vars->heredoc_count++;
 		}
-		else if(!ft_strcmp(current->cont, "<<<"))
+		else if(current && !ft_strcmp(current->cont, "<<<"))
 		{
 			if(!is_exception(current))
 				return(0);
@@ -131,6 +131,5 @@ int	check_heredocs(t_vars *vars)
 		else
 			current = current->next;
 	}
-/*debug*/debug_print_tokens(vars);
 	return (1);
 }
