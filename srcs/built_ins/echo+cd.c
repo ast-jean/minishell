@@ -29,19 +29,29 @@ int	is_n(char *str)
 
 int	builtin_echo(t_vars *vars)
 {
-	t_token *cpy;
+	t_token *token;
 
-	cpy = vars->token->first;
-	if (ft_strcmp(cpy->cont, "-n") == 0)
+	token = vars->token->next;
+	if (ft_strcmp(token->cont, "-n") == 0)
 	{
-		while (ft_strcmp(cpy->cont, "|") != 0)
+		while (ft_strcmp(token->cont, "|") != 0)
 		{
-			printf("%s", cpy->cont);
+			token = token->next;
+			printf("%s", token->cont);
 		}
 	}
-// IF	TOKEN 0 = echo
-// 		TOKEN 1 = -n | words
-//		TOKEN n = words
+	if (ft_strcmp(token->cont, "-n") != 0)
+	{
+		while (ft_strcmp(token->cont, "|") != 0)
+		{
+			printf("%s", token->cont);
+			token = token->next;
+		}
+	}
+
+// IF	TOKEN n+0 = echo
+// 		TOKEN n+1 = -n | words
+//		TOKEN n+l = words
 	return (1);
 }
 
