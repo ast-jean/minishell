@@ -6,8 +6,8 @@ TODO:
 	[X] Remplacer << par filename
 	[X] Creer le file et ajouter chaque ligne if(ligne != delim)
 	[X] effacer le delim token
-	[ ] loop to next <<
-	[ ] Error if no delim
+	[X] loop to next <<
+	[X] Error if no delim
 [ ] Redirections
 	[ ] <	rediriger l’entrée
 	[ ] >	rediriger la sortie
@@ -28,6 +28,8 @@ TOKNOW:
 	- Ne pas gérer les fuites avec readline
 	- simple quotes = litéral
 
+	- heardocs must be child NEW
+
  TOFIX  
 	- signals get displayed
 	- test splitamary cases:
@@ -37,16 +39,32 @@ TOKNOW:
 		"<<hello"
 -init-token_type.c
 	- segfault when ctrl-D in heredoc
+	- make a special case for <<< (error)
 
 LOG:
 
-Raccourcis git:
+	- ADDED HIGHLIGHT (NEW) to use along with [x][a][m] to indicate new stuff to read in the README
 
-gaa	—> git add .
-gst	—> git status
-gc	—> git commit
-gp	—> git push
-gl	—> git pull
-gco	—> git checkout
-gm	—> git merge
-gcl -> git clone
+
+
+        {
+            "text": "NEW",
+            "color": "black",
+            "backgroundColor": "#FF7F50",
+            "border": "1px",
+            "borderRadius": "1px",
+            "textDecoration": "none",
+            "borderStyle": "solid",
+            "isWholeLine": true,
+        },
+
+
+Raccourcis git:
+	gaa	—> git add .
+	gst	—> git status
+	gc	—> git commit
+	gp	—> git push
+	gl	—> git pull
+	gco	—> git checkout
+	gm	—> git merge
+	gcl -> git clone
