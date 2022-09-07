@@ -36,52 +36,51 @@ void	cmd_not_found(char *s)
 	ft_putstr_fd(": command not found\n", 2);
 }
 
-void	forking(t_vars *vars, t_token *current)
-{
-	int	pid1;
-	int	pid2;
-	int	temp;
+// void	forking(t_vars *vars, t_token *current)
+// {
+// 	int	pid1;
+// 	int	pid2;
+// 	int	temp;
 
-	finding_paths(vars);
-	if ((vars->fdi != -1) && (accessing(vars, current) == 1)) // For 1st cmd
-	{
-		pid1 = fork();
-		if (pid1 == 0)
-		{ //could be a fx
-			close; //	(pipefd[0]);
-			dup2; //	(pipefd[1], 1);
-			close; //	(pipefd[1]);
-			dup2; //	(fdi, 0);
-			close; //	(fdi);
-			execve;
-		}
-		waitpid(pid1, &temp, 0);
-		// TODO: fx to free	
-	}
-	if (accessing(vars, ???) == 1)
-	{
-		pid2 = fork();
-		if (pid2 == 0)
-		{ //could be a fx
-			close; //	(pipefd[1]);
-			dup2; //	(pipefd[0], 0);
-			close; //	(pipefd[0]);
-			dup2; //	(fdo, 1);
-			close; //	(fdo);
-			execve;
-		}
-		// TODO: fx to free	 
-	}
-}
+// 	finding_paths(vars);
+// 	if ((vars->fdi != -1) && (accessing(vars, current) == 1)) // For 1st cmd
+// 	{
+// 		pid1 = fork();
+// 		if (pid1 == 0)
+// 		{ //could be a fx
+// 			close; //	(pipefd[0]);
+// 			dup2; //	(pipefd[1], 1);
+// 			close; //	(pipefd[1]);
+// 			dup2; //	(fdi, 0);
+// 			close; //	(fdi);
+// 			execve;
+// 		}
+// 		waitpid(pid1, &temp, 0);
+// 		// TODO: fx to free	
+// 	}
+// 	if (accessing(vars, ???) == 1)
+// 	{
+// 		pid2 = fork();
+// 		if (pid2 == 0)
+// 		{ //could be a fx
+// 			close; //	(pipefd[1]);
+// 			dup2; //	(pipefd[0], 0);
+// 			close; //	(pipefd[0]);
+// 			dup2; //	(fdo, 1);
+// 			close; //	(fdo);
+// 			execve;
+// 		}
+// 		// TODO: fx to free	 
+// 	}
+// }
 
 // TOFIX : rename for check_token_type
 void	executing_command(char *line, t_vars *vars)
 {
 	t_token	*current;
-	int		i;
-	int		fd_default;
+	// int		i;
+	// int		fd_default;
 
-	pipe(vars->pipefd);
 	if (ft_strlen(line) == 0)
 		return ;
 	creating_tokens(line, vars);
@@ -90,32 +89,33 @@ void	executing_command(char *line, t_vars *vars)
 	if (parsing_pipes(vars) == -1)
 		return ;
 	current = vars->token->first;
-	i = 0;
-	fd_default = 0;
-	while (++i <= current->group_num)
-	{
-		if (i != 1)
-			fd_default= vars->pipefd[1];
-		if (vars->fdi != fd_default)
-			close(vars->fdi);
-		vars->fdi = redirect_input(current, fd_default);
-		printf("fdi : %d\n", vars->fdi);
-		// current = remove_token(current);
-		// current->next = remove_token(current->next); <- makes me segfault
-		if (is_builtin(current, vars) == -1)
-		{
-			forking(vars, current);
-			// if (!accessing(vars, current)) //si command est dans le path
-			// 	format_execve(vars, current); //will format so execve receives right content
-			// else
-			return (cmd_not_found(current->cont));
-		}
-		else 
-		{
-			while (i == current->group_num)
-				current = current->next;
-		}
-	}
+	fd_catch(vars, current);
+	// i = 0;
+	// fd_default = 0;
+	// while (++i <= current->group_num)
+	// {
+	// 	if (i != 1)
+	// 		fd_default= vars->pipefd[1];
+	// 	if (vars->fdi != fd_default)
+	// 		close(vars->fdi);
+	// 	vars->fdi = redirect_input(current, fd_default);
+	// 	printf("fdi : %d\n", vars->fdi);
+	// 	// current = remove_token(current);
+	// 	// current->next = remove_token(current->next); <- makes me segfault
+	// 	if (is_builtin(current, vars) == -1)
+	// 	{
+	// 		forking(vars, current);
+	// 		// if (!accessing(vars, current)) //si command est dans le path
+	// 		// 	format_execve(vars, current); //will format so execve receives right content
+	// 		// else
+	// 		return (cmd_not_found(current->cont));
+	// 	}
+	// 	else 
+	// 	{
+	// 		while (i == current->group_num)
+	// 			current = current->next;
+	// 	}
+	// }
 	//MANAGE $VARS-------------
 	//create struct of saved variables and add them if $VAR
 	//-------------

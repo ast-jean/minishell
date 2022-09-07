@@ -12,37 +12,38 @@ int	redirect_input(t_token *token, int fd)
 		if (ft_strcmp(cpy->cont, "<") == 0)
 		{
 			fd = open(cpy->next->cont, O_RDONLY);
-			// cpy = remove_token(cpy);
-			// cpy->next = remove_token(cpy->next);
+			cpy = remove_token(cpy);
+			cpy->next = remove_token(cpy->next);
 		}
-		// else
+		else
 			cpy = cpy->next;
 	}
-	printf("FINAL INPUT = %d\n", fd);
+	printf("FINAL FDIN = %d\n", fd);
 	return (fd);
 }
 
-int	redirect_output(t_token *token)
+int	redirect_output(t_token *token, int fd)
 {
-	int	fd;
 	t_token *cpy;
 
-	fd = 1;
 	cpy = token;
 	while (ft_strcmp(cpy->cont, "|") != 0 && cpy->next)
 	{
 		if (ft_strcmp(cpy->cont, ">") == 0)
 		{
 			fd = open(cpy->next->cont, O_TRUNC | O_CREAT | O_RDWR, 0777);
-			//cpyrem x 2 ?
+			cpy = remove_token(cpy);
+			cpy->next = remove_token(cpy->next);
 		}
 		else if (ft_strcmp(cpy->cont, ">>") == 0)
 		{
 			fd = open(cpy->next->cont, O_APPEND | O_CREAT | O_RDWR, 0777);
-			//cpyrem x 2 ?
+			cpy = remove_token(cpy);
+			cpy->next = remove_token(cpy->next);
 		}
-		cpy = cpy->next;
+		else
+			cpy = cpy->next;
 	}
-	printf("FINAL OUTPUT = %d\n", fd);
+	printf("FINAL FDOUT = %d\n", fd);
 	return (fd);
 }

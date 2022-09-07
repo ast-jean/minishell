@@ -31,7 +31,8 @@ typedef struct s_vars
 	int		pipe_count;
 	int		fdi;
 	int		fdo;
-	int		pipefd[2];
+	int		pipefd1[2];
+	int		pipefd2[2];
 }	t_vars;
 
 // FUNCTIONS (SELON FILENAME)----------------------
@@ -54,6 +55,8 @@ void	quit_shell(t_vars *vars);
 void	free_tokens(t_vars *vars);
 
 // PIPES.C
+void	fd_catch(t_vars *vars, t_token *current);
+t_token	*group_skip(t_token *current_token);
 
 // SET_GORUPS.C
 int	init_groups(t_vars *vars);
@@ -61,7 +64,7 @@ int	parsing_pipes(t_vars *vars);
 
 //	REDIRECTION"C
 int	redirect_input(t_token *token, int fd);
-int	redirect_output(t_token *token);
+int	redirect_output(t_token *token, int fd);
 
 //NOTE: PARSING
 // PARSING_UTILS.C
