@@ -49,6 +49,8 @@ void	executing_simple_cmds(t_vars *vars, t_token *token);
 
 // HEREDOCS.c
 int	check_heredocs(t_vars *vars);
+// HEREDOCS2.c
+char *check_var(char *line, t_vars *vars);
 
 //QUIT.C
 void	quit_shell(t_vars *vars);
