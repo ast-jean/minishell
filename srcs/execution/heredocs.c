@@ -101,7 +101,7 @@ int	check_heredocs(t_vars *vars)
 				if(ft_strcmp(" ", line))
 				{
 					line = check_var(line, vars); 
-					dprintf(fd, "%s\n", line);
+					ft_putstr_fd(line, fd);
 				}
 				rl_on_new_line();
 				line = readline(">");
@@ -119,8 +119,8 @@ int	check_heredocs(t_vars *vars)
 			name = ft_strjoin(".tmp/temp_heredoc", ft_itoa(vars->heredoc_count));
 			fd = open(name, O_RDWR | O_CREAT, 0777);
 			new_token_after(current, name);
-			line = check_var(line, vars); 
-			dprintf(fd, "%s\n", line);
+			line = check_var(line, vars);
+			ft_putstr_fd(line, fd);
 			current = remove_token(current);
 			current->next = remove_token(current->next);
 		}

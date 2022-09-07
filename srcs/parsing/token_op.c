@@ -4,9 +4,30 @@ t_token *remove_token(t_token *remove)
 {
 	t_token	*nex;
 
-	nex = remove->next;
-	remove->prev->next = remove->next;
-	remove->next->prev = remove->prev;
+	if(remove->next)
+	{
+		nex = remove->next;
+		remove->prev->next = remove->next;
+	}
+	else
+	{
+		nex = remove->prev;
+		remove->prev->next = NULL;
+	}
+	if(remove->prev)
+		remove->next->prev = remove->prev;
+	else
+	{
+		remove->next->prev = NULL;
+		remove->next->first = remove->next;
+		nex = remove->next;
+		while(nex->next)
+		{
+			nex->next->first = remove->next;
+			nex = nex->next;
+		}
+		nex = nex->first;
+	}
 	free(remove);
 	return (nex);
 }
@@ -42,7 +63,6 @@ void	push_tk(char *cont, t_token *token, t_token *first, t_token *prev, int i, i
 {
 	token->cont = cont;
 	token->prev = prev;
-	// token->type = defining_token_type(token);
 	token->first = first;
 	if (i < count)
 		token->next = malloc(sizeof(t_token));
