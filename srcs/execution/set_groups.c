@@ -17,12 +17,13 @@ int	init_groups(t_vars *vars)
 		}
 		if (ft_strcmp(copy->cont, "|") == 0)
 		{
-			vars->pipe_count++;
+			(vars->pipe_count)++;
 			// copy = copy->next;
 			copy = remove_token(copy);
 		}
 		i++;
 	}
+			dprintf(2, "hello\n");
 	printf("pipecount : %d\n\n", vars->pipe_count);
 	if (vars->pipe_count >= (i - 1))
 		return (-1);
@@ -53,12 +54,12 @@ int	parsing_pipes(t_vars *vars)
 		}
 		cpy = cpy->next;
 	}
-		if (init_groups(vars) == -1)
-		{
-			write(2, "Error.\n", 7);
-			return (-1);
-		}
-		return (0);
+	if (init_groups(vars) == -1)
+	{
+		write(2, "Error.\n", 7);
+		return (-1);
+	}
+	return (0);
 }
 
 // 

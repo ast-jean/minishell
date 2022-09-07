@@ -53,10 +53,12 @@ void	fd_catch(t_vars *vars, t_token *current)
 
 	fd = execute(current, redirect_input(current, 0), vars);
 	current = skip_group(current);
-	while (--(vars->pipe_count) > 0 && ++(vars->pid_count) < 32766) // max pid 32768
+	dprintf(2, "here\n");
+	while ((--(vars->pipe_count) > 0) && (++(vars->pid_count) < 32766)) // max pid 32768
 	{
 		fd = execute(current, redirect_input(current, fd), vars);
 		current = skip_group(current);
 	}
-	execute(current, redirect_input(current, fd), vars);
+	// execute(current, redirect_input(current, fd), vars);
+
 }
