@@ -49,6 +49,12 @@ int	forking(t_token *current, int fdi, t_vars *vars)
 	int	pipefd[2];
 	int	fdo;
 
+	if(current && !ft_strcmp(current->cont, "exit"))
+	{
+		if (fdi != 0)
+			close(fdi);
+		quit_shell(vars);
+	}
 	if (current->group_num < (vars->pipe_count + 1))
 	{
 		pipe(pipefd);

@@ -19,8 +19,8 @@ int	is_builtin(t_token *current, t_vars *vars)
 		return (builtin_export(current, vars));
 	// else if(!ft_strcmp(current->cont, "unset"))
 	// 	builtin_unset(vars, current->next->cont);
-	else if(current && !ft_strcmp(current->cont, "exit"))
-		quit_shell(vars);
+	// else if(current && !ft_strcmp(current->cont, "exit"))
+	// 	quit_shell(vars);
 	else if(current && !ft_strcmp(current->cont, "pwd"))
 		return (builtin_pwd(vars));
 	else if(current && !ft_strcmp(current->cont, "env"))
