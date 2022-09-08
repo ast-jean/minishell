@@ -23,6 +23,7 @@ typedef struct s_vars
 	// char	**cmd_line;
 	char	*path;
 	char	**path_array;
+	int		heredoc_count;
 	char	*pwd;
 	char	*oldpwd;
 	t_token	*token;
@@ -42,8 +43,8 @@ void	executing_simple_cmds(t_vars *vars, t_token *token);
 
 // HEREDOCS.c
 int	check_heredocs(t_vars *vars);
-t_token	*new_token_after(t_token *after_this_one, char* file_name);
-t_token	*remove_token(t_token *remove);
+// HEREDOCS2.c
+char *check_var(char *line, t_vars *vars);
 
 //QUIT.C
 void	quit_shell(t_vars *vars);
@@ -66,7 +67,8 @@ void	executing_command(char *line, t_vars *vars);
 //TOKEN_OP.C
 void	debug_print_tokens(t_vars *vars);
 void	*access_ptr(t_vars *vars, int i);
-
+t_token	*new_token_after(t_token *after_this_one, char* file_name);
+t_token *remove_token(t_token *remove, t_vars *vars);
 //NEWTOKEN.C
 char	*newtoken_q(char *line, int *i, char c);
 char	*newtoken_s(char *line, int *i);

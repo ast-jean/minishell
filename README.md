@@ -3,11 +3,8 @@ Custom shell in C
 TODO:
 [X] Splitamary
 [ ] check <<
-	[X] Remplacer << par filename
-	[X] Creer le file et ajouter chaque ligne if(ligne != delim)
-	[X] effacer le delim token
-	[ ] loop to next <<
-	[ ] Error if no delim
+	[ ] $Var within <<
+	[ ] Signal ctrl-D close heredoc
 [ ] Redirections
 	[ ] <	rediriger l’entrée
 	[ ] >	rediriger la sortie
@@ -37,6 +34,7 @@ TOKNOW:
 		"<<hello"
 -init-token_type.c
 	- segfault when ctrl-D in heredoc
+	- make a special case for <<< (error)
 
 LOG:
 

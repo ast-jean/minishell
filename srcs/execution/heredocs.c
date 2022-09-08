@@ -2,89 +2,135 @@
 
 #include "../../include/minishell.h"
 
-t_token *remove_token(t_token *remove)
-{
-	t_token *nex;
-
-	nex = remove->next;
-	remove->prev->next = remove->next;
-	remove->next->prev = remove->prev;
-	free(remove);
-	return (nex);
-}
-
-t_token	*new_token_after(t_token *after_this_one, char* file_name)
-{
-	t_token *new;
-
-	new = malloc(sizeof(t_token));
-	after_this_one->next->prev = new;
-	new->cont = file_name;
-	new->next = after_this_one->next;
-	new->first = after_this_one->first;
-	new->prev = after_this_one;
-	after_this_one->next = new;
-	return (new);
-}
-
-
 void	syntax_error(char *token)
 {
 	if(!ft_strcmp(token, ""))
 	{
-		printf("Syntax error near unexpected token 'newline'\n");
+		printf("minishell: syntax error near unexpected token 'newline'\n");
 	}
 	else
-		printf("Syntax error near unexpected token '%s'\n", token);
+		printf("minishell: syntax error near unexpected token '%s'\n", token);
 }
 
+int	is_exception(t_token *token)
+{
+	if(!token->next->next)
+	{
+		syntax_error("newline");
+		return (0);
+	}
+	token = token->next;
+	if((token->cont[0] == '<') || (token->cont[0] == '>') || (token->cont[0] == '|'))
+	{		
+		syntax_error(token->cont);
+		return (0);
+	}
+	return (1);
+}
 
+char *remove_quotes(char *str)
+{
+	int i;
+	char quote;
+	char *new;
+
+	new = str;
+	i = 0;
+
+	while(new[i])
+	{
+		if(new[i] == '\"' || new[i] == '\'')
+		{
+			quote = new[i];
+			new = ft_rmchar(new, &new[i++]);
+			while(new[i] && new[i] != quote)
+			{
+				if(!new[i++])
+					break ;
+			}
+			if(new[i])
+				new = ft_rmchar(new, &new[i]);
+		}
+		i++;
+	}
+	new[i] = '\0';
+	free(str);
+	return (new);
+}
+/*
+TODO:
+[X] strjoin "this"'test'"one"
+[ ] rm_quotes gives test'test' instead of test"test" for "test"'"test"'
+[ ] Add $VAR
+[ ] add ctrl-D to finish the heredoc (act like delim)
+[ ] fix single quote in delim segfault
+[ ] check for leaks
+[ ] Norminette
+*/
 int	check_heredocs(t_vars *vars)
 {
 	t_token *current;
+	char *delim;
 	char *name;
 	int fd;
 	char *line;
-	int heredoc_count;
-	char *delim;
 
-	heredoc_count = 0;
-	line = " ";
+	name = calloc(100, sizeof(char));
 	current = vars->token->first;
-	delim = current->next->next->cont;
+	vars->heredoc_count = 0;
 	while(current)
 	{
+// /*debug*/printf("token = %s\n", current->cont);
 		if(!ft_strcmp(current->cont, "<<"))
 		{
-/*debug*/printf("\033[43mdelim = ->|%s|<-\033[0m\n", delim);
-/*debug*/printf("\033[43mIs delim? = ->|%d|<-\033[0m\n", ft_is_str_alnum(delim));
-			if(!ft_strcmp(current->next->cont, ""))
-			{
-				syntax_error("");
-				return (0);
-			}
-			if(!ft_is_str_alnum(current->next->cont))
-			{
-				syntax_error(current->next->cont);
-				return (0);
-			}
-			name = ft_strjoin(".temp_heredoc", ft_itoa(heredoc_count));
-			fd = open(name, O_WRONLY | O_APPEND | O_CREAT, 0777);
+			line = " ";
+			if(!is_exception(current))
+				return(0);
+			name = ft_strjoin(".tmp/temp_heredoc", ft_itoa(vars->heredoc_count));
+			if(ft_strchr(current->next->cont, '\"') || ft_strchr(current->next->cont, '\''))
+				delim = remove_quotes(current->next->cont);
+			else
+				delim = current->next->cont;
+///*debug*/debug_print_tokens(vars);
+			fd = open(name, O_RDWR | O_CREAT, 0777);
 			new_token_after(current, name);
 			while(ft_strcmp(delim, line))
 			{
+/*debug*/printf("\033[43mdelim = ->|%s|<-\033[0m\n", delim);
+				if(ft_strcmp(" ", line))
+				{
+					line = check_var(line, vars); 
+					ft_putstr_fd(line, fd);
+				}
 				rl_on_new_line();
 				line = readline(">");
-				dprintf(fd, "%s\n", line);
 				rl_redisplay();
 			}
-			current = remove_token(current);
-			heredoc_count++;
+			current = remove_token(current, vars);
+			current->next = remove_token(current->next, vars);
+			vars->heredoc_count++;
+		}
+		else if(!ft_strcmp(current->cont, "<<<"))
+		{
+			if(!is_exception(current))
+				return(0);
+			line = current->next->cont;
+			name = ft_strjoin(".tmp/temp_heredoc", ft_itoa(vars->heredoc_count));
+			fd = open(name, O_RDWR | O_CREAT, 0777);
+			new_token_after(current, name);
+			line = check_var(line, vars);
+			ft_putstr_fd(line, fd);
+			current = remove_token(current, vars);
+			current->next = remove_token(current->next, vars);
+		}
+		else if((current->cont[0] == '<') && ft_strlen(current->cont) > 3)
+		{
+			syntax_error("<");
+			return (0);
 		}
 		else
 			current = current->next;
 	}
-/*debug*/printf("\033[43m'<<'count:%d\033[0m\n", heredoc_count);
-	debug_print_tokens(vars);
+/*debug*/debug_print_tokens(vars);
 	return (1);
 }
