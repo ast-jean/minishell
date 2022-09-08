@@ -81,7 +81,7 @@ int	check_heredocs(t_vars *vars)
 	while(current)
 	{
 // /*debug*/printf("token = %s\n", current->cont);
-		if(!ft_strcmp(current->cont, "<<"))
+		if(current && !ft_strcmp(current->cont, "<<"))
 		{
 			line = " ";
 			if(!is_exception(current))
@@ -99,8 +99,8 @@ int	check_heredocs(t_vars *vars)
 /*debug*/printf("\033[43mdelim = ->|%s|<-\033[0m\n", delim);
 				if(ft_strcmp(" ", line))
 				{
-					line = check_var(line, vars); 
-					ft_putstr_fd(ft_strjoin(line, "\n"), fd); //FREEEEEEEE TOFIX 
+					line = ft_strjoin(check_var_heredoc(line, vars), "\n");
+					ft_putstr_fd(line, fd);
 				}
 				rl_on_new_line();
 				line = readline(">");
@@ -110,7 +110,7 @@ int	check_heredocs(t_vars *vars)
 			current->next = remove_token(current->next, vars);
 			vars->heredoc_count++;
 		}
-		else if(!ft_strcmp(current->cont, "<<<"))
+		else if(current && !ft_strcmp(current->cont, "<<<"))
 		{
 			if(!is_exception(current))
 				return(0);
@@ -118,9 +118,8 @@ int	check_heredocs(t_vars *vars)
 			name = ft_strjoin(".tmp/temp_heredoc", ft_itoa(vars->heredoc_count));
 			fd = open(name, O_RDWR | O_CREAT | O_TRUNC, 0777);
 			new_token_after(current, name);
-			line = check_var(line, vars);
-			// ft_strjoin(line, "\n");
-			ft_putstr_fd(ft_strjoin(line, "\n"), fd); //FREEEEEEEE join TOFIX 
+			line = ft_strjoin(check_var_heredoc(line, vars), "\n");
+			ft_putstr_fd(line, fd);
 			current = remove_token(current, vars);
 			current->next = remove_token(current->next, vars);
 		}
@@ -132,6 +131,7 @@ int	check_heredocs(t_vars *vars)
 		else
 			current = current->next;
 	}
-/*debug*/debug_print_tokens(vars);
+	if (line)
+		free(line);
 	return (1);
 }
