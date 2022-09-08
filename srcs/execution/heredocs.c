@@ -99,7 +99,7 @@ int	check_heredocs(t_vars *vars)
 /*debug*/printf("\033[43mdelim = ->|%s|<-\033[0m\n", delim);
 				if(ft_strcmp(" ", line))
 				{
-					line = check_var(line, vars); 
+					line = check_var_heredoc(line, vars); 
 					ft_putstr_fd(line, fd);
 				}
 				rl_on_new_line();
@@ -118,7 +118,7 @@ int	check_heredocs(t_vars *vars)
 			name = ft_strjoin(".tmp/temp_heredoc", ft_itoa(vars->heredoc_count));
 			fd = open(name, O_RDWR | O_CREAT, 0777);
 			new_token_after(current, name);
-			line = check_var(line, vars);
+			line = check_var_heredoc(line, vars);
 			ft_putstr_fd(line, fd);
 			current = remove_token(current, vars);
 			current->next = remove_token(current->next, vars);

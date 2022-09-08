@@ -45,7 +45,6 @@ void	executing_command(char *line, t_vars *vars)
 	// 	executing_simple_cmds(vars, current);
 	else if (!accessing(vars, current)) //si command est dans le path
 	{
-
 		executing_simple_cmds(vars, current);
 	}
 	else
