@@ -15,17 +15,17 @@ void init_shell(t_vars *vars, char **env)
 int	is_builtin(t_token *current, t_vars *vars)
 {
 	//Built-in export-------------
-	if(!ft_strcmp(current->cont, "export"))
+	if(current && !ft_strcmp(current->cont, "export"))
 		return (builtin_export(current, vars));
 	// else if(!ft_strcmp(current->cont, "unset"))
 	// 	builtin_unset(vars, current->next->cont);
-	else if(!ft_strcmp(current->cont, "exit"))
+	else if(current && !ft_strcmp(current->cont, "exit"))
 		quit_shell(vars);
-	else if(!ft_strcmp(current->cont, "pwd"))
+	else if(current && !ft_strcmp(current->cont, "pwd"))
 		return (builtin_pwd(vars));
-	else if(!ft_strcmp(current->cont, "env"))
+	else if(current && !ft_strcmp(current->cont, "env"))
 		return (builtin_env(vars));
-	else if(!ft_strcmp(current->cont, "echo"))
+	else if(current && !ft_strcmp(current->cont, "echo"))
 		return (builtin_echo(vars));
 	return (-1);
 }
@@ -90,7 +90,7 @@ void	executing_command(char *line, t_vars *vars)
 		return ;
 	current = vars->token->first;
 	fd_catch(vars, current);
-	debug_print_tokens(vars);
+	// debug_print_tokens(vars);
 	// i = 0;
 	// fd_default = 0;
 	// while (++i <= current->group_num)

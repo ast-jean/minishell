@@ -19,7 +19,7 @@ typedef struct s_token
 typedef struct s_vars
 {
 	int		ac; //use?
-	char	**av; //use?
+	char	**av; //params for execve
 	char 	**env;
 	// char	**cmd_line;
 	char	*path;
@@ -31,14 +31,17 @@ typedef struct s_vars
 	int		pipe_count;
 	int		pid[32768];
 	int		pid_count;
+	int		status;
 }	t_vars;
 
 // FUNCTIONS (SELON FILENAME)----------------------
 
 // NOTE: EXECUTION
+
 // MINISHELL.C
 void	init_shell(t_vars *vars, char **env);
 void	handler(int sig);
+int		is_builtin(t_token *current, t_vars *vars);
 
 // EXECUTION_CMD.C
 void	finding_paths(t_vars *vars);
@@ -64,7 +67,7 @@ t_token	*group_skip(t_token *current_token);
 int	init_groups(t_vars *vars);
 int	parsing_pipes(t_vars *vars);
 
-//	REDIRECTION"C
+//	REDIRECTION.C
 int	redirect_input(t_token *token, int fd_init);
 int	redirect_output(t_token *token, int fd_init);
 
