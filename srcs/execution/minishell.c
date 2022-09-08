@@ -174,7 +174,7 @@ int main(int argc, char **argv, char **env)
 		else
      		add_history(line);
 		executing_command(line, &vars);
-		// remove_tmp_files(&vars);
+		remove_tmp_files(&vars);
 	}
 	quit_shell(&vars);
 	return 0;
