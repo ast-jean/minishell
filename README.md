@@ -25,6 +25,8 @@ TOKNOW:
 	- Ne pas gérer les fuites avec readline
 	- simple quotes = litéral
 
+	- heardocs must be child NEW
+
  TOFIX  
 	- signals get displayed
 	- test splitamary cases:
@@ -38,13 +40,28 @@ TOKNOW:
 
 LOG:
 
-Raccourcis git:
+	- ADDED HIGHLIGHT (NEW) to use along with [x][a][m] to indicate new stuff to read in the README
 
-gaa	—> git add .
-gst	—> git status
-gc	—> git commit
-gp	—> git push
-gl	—> git pull
-gco	—> git checkout
-gm	—> git merge
-gcl -> git clone
+
+
+        {
+            "text": "NEW",
+            "color": "black",
+            "backgroundColor": "#FF7F50",
+            "border": "1px",
+            "borderRadius": "1px",
+            "textDecoration": "none",
+            "borderStyle": "solid",
+            "isWholeLine": true,
+        },
+
+
+Raccourcis git:
+	gaa	—> git add .
+	gst	—> git status
+	gc	—> git commit
+	gp	—> git push
+	gl	—> git pull
+	gco	—> git checkout
+	gm	—> git merge
+	gcl -> git clone

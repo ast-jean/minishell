@@ -25,29 +25,35 @@ int	accessing(t_vars *vars, t_token *token)
 	char	*cmd;
 	int		i;
  // "cat -e" "file.txt"
-	vars->path_array = ft_split(token->cont, ' ');
-	cmd = ft_strjoin("/", vars->path_array[0]);
-	i = 0;
-	while (vars->env[i])
+	if (!token)
+		return (-1);
+	if (access(token->cont, F_OK | X_OK) == 0)
 	{
-		vars->path = ft_strjoin(vars->env[i], cmd);
+		vars->path = token->cont;
+		return (0);
+	}
+	cmd = ft_strjoin("/", token->cont);
+	i = 0;
+	while (vars->path_array[i] != NULL)
+	{
+		vars->path = ft_strjoin(vars->path_array[i], cmd);
 		yes_or_no = access(vars->path, F_OK | X_OK);
-		if (yes_or_no != -1)
+		if (yes_or_no == 0)
 		{
 			free(cmd);
-			return (1);
+			return (0);
 		}
 		free(vars->path);
 		i++;
 	}
 	free(cmd);
 	// print_error(vars, 1);
-	return (0);
+	return (-1);
 }
 
 void	executing_simple_cmds(t_vars *vars, t_token *token)
 {
 	finding_paths(vars);
 	accessing(vars, token);
-	execve(vars->path, vars->path_array, NULL);
+	// execve(vars->path, CMD+FLAGS, NULL); // send env instead of NULL
 }

@@ -20,5 +20,6 @@ void	quit_shell(t_vars *vars)
 	//delete history
 
 	exit(0);
+	// kill(SIGABRT, 0);
 }
 

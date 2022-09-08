@@ -9,6 +9,7 @@
 // STRUCTS
 typedef struct s_token
 {
+	int				group_num;
 	char			*cont;
 	struct s_token	*next;
 	struct s_token	*prev;
@@ -18,7 +19,7 @@ typedef struct s_token
 typedef struct s_vars
 {
 	int		ac; //use?
-	char	**av; //use?
+	char	**av; //params for execve
 	char 	**env;
 	// char	**cmd_line;
 	char	*path;
@@ -27,14 +28,20 @@ typedef struct s_vars
 	char	*pwd;
 	char	*oldpwd;
 	t_token	*token;
+	int		pipe_count;
+	int		pid[32768];
+	int		pid_count;
+	int		status;
 }	t_vars;
 
 // FUNCTIONS (SELON FILENAME)----------------------
 
 // NOTE: EXECUTION
+
 // MINISHELL.C
 void	init_shell(t_vars *vars, char **env);
 void	handler(int sig);
+int		is_builtin(t_token *current, t_vars *vars);
 
 // EXECUTION_CMD.C
 void	finding_paths(t_vars *vars);
@@ -43,12 +50,26 @@ void	executing_simple_cmds(t_vars *vars, t_token *token);
 
 // HEREDOCS.c
 int	check_heredocs(t_vars *vars);
+char *remove_quotes(char *str);
+
 // HEREDOCS2.c
 char *check_var(char *line, t_vars *vars);
 
 //QUIT.C
 void	quit_shell(t_vars *vars);
 void	free_tokens(t_vars *vars);
+
+// PIPES.C
+void	fd_catch(t_vars *vars, t_token *current);
+t_token	*group_skip(t_token *current_token);
+
+// SET_GORUPS.C
+int	init_groups(t_vars *vars);
+int	parsing_pipes(t_vars *vars);
+
+//	REDIRECTION.C
+int	redirect_input(t_token *token, int fd_init);
+int	redirect_output(t_token *token, int fd_init);
 
 //NOTE: PARSING
 // PARSING_UTILS.C
@@ -65,7 +86,7 @@ void	push_tk(char *cont, t_token *token, t_token *first, t_token *prev, int i, i
 void	executing_command(char *line, t_vars *vars);
 
 //TOKEN_OP.C
-void	debug_print_tokens(t_vars *vars);
+void	debug_print_tokens(t_vars *vars); //temp_function
 void	*access_ptr(t_vars *vars, int i);
 t_token	*new_token_after(t_token *after_this_one, char* file_name);
 t_token *remove_token(t_token *remove, t_vars *vars);
@@ -82,14 +103,14 @@ int		cnt_delims(char *line, char *delims);
 
 //NOTE: BUILT INS
 // PWD_ENV.C
-void	builtin_pwd(t_vars *vars);
-void	builtin_env(t_vars *vars);
+int	builtin_pwd(t_vars *vars);
+int	builtin_env(t_vars *vars);
 // EXPORT_UNSET.C
-void	builtin_unset(t_vars *vars, char *var_name);
-void	builtin_export(t_token *token, t_vars *vars);
+int	builtin_unset(t_vars *vars, char *var_name);
+int	builtin_export(t_token *token, t_vars *vars);
 // ECHO_CD.C
 //// void	builtin_cd(char **env, t_vars vars);
-//// void	builtin_echo(char **env);
-
+int	builtin_echo(t_vars *vars);
+// void	builtin_echo(char **args, char **env);
 //NOTE: ------------------------------------------------
 #endif

@@ -1,3 +1,3 @@
 #include "../../include/minishell.h"
 
-// NOTE: pimped pipex here
+// NOTE: MAIN POUR TESTER PIPES
