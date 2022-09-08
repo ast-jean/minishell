@@ -26,34 +26,60 @@ int	is_n(char *str)
 // //look for $var in env and replace 
 // 	printf ("%s", args[0 + i]);
 // }
-
+// NEW : WORK IN PROGRESS
 int	builtin_echo(t_vars *vars)
 {
 	t_token *token;
+	bool	n;
 
 	token = vars->token->next;
-	if (ft_strcmp(token->cont, "-n") == 0)
+	
+	while (token && ft_strcmp(token->cont, "|") != 0)
 	{
-		while (ft_strcmp(token->cont, "|") != 0)
+		if (is_n(token->cont))
 		{
 			token = token->next;
-			printf("%s", token->cont);
+			n = true;
 		}
+		else
+			ft_putstr_fd(token->cont, 1);
 	}
-	if (ft_strcmp(token->cont, "-n") != 0)
-	{
-		while (ft_strcmp(token->cont, "|") != 0)
-		{
-			printf("%s", token->cont);
-			token = token->next;
-		}
-	}
+	if (n == true)
+		return (0);
+	else
+		ft_putstr_fd("\n", 1);
+	return (0);
+}
 
+// 	if (token && ft_strcmp(token->cont, "-n") == 0)
+// 	{
+// 		token = token->next;
+// 		while (token && ft_strcmp(token->cont, "|") != 0)
+// 		{
+// 			ft_putstr_fd(token->cont, 1);
+// 			token = token->next;
+// 		}
+// 	}
+// 	else if (token && ft_strcmp(token->cont, "-n") != 0)
+// 	{
+// 		while (token && ft_strcmp(token->cont, "|") != 0)
+// 		{
+// 			ft_putstr_fd(token->cont, 1);
+// 			token = token->next;
+// 		}
+// 	}
+// 	else if (!token)
+// 		write(1, "\n", 1);
+// 	return (1);
+// }
+// NEW WORK IN PROGRESS
+
+
+//  -nnnnnnnnnnnnnnnnnnnnnnnnnnn
+//  -n -n- n- n-n--n-n-n n--n--n-n-n-
 // IF	TOKEN n+0 = echo
 // 		TOKEN n+1 = -n | words
 //		TOKEN n+l = words
-	return (1);
-}
 
 // int	ft_cd(char *arg, char **env)
 // {
