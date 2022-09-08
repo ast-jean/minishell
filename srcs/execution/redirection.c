@@ -32,7 +32,7 @@ int	redirect_output(t_token *token, int fd_init)
 
 	group = token->group_num;
 	fd = fd_init;
-	while (ft_strcmp(token->cont, "|") != 0 && token->next)
+	while (token->group_num == group && token->next)
 	{
 		if (ft_strcmp(token->cont, ">") == 0)
 		{

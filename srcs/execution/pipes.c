@@ -33,17 +33,6 @@ void	format_execve(t_vars *vars, t_token *token)
 	exit(0);
 }
 
-// int	access_cmd(t_token *current, t_vars *vars)
-// {
-// 	// printf("test\n");
-// 	if (is_builtin(current, vars) == -1) // exec built in outside child
-// 	{
-// 		if (accessing(vars, current) == 1)
-// 			format_execve(vars, current);
-// 	}
-// 	return (0);
-// }
-
 t_token	*skip_group(t_token *current_token)
 {
 	int	t;
@@ -60,7 +49,6 @@ int	forking(t_token *current, int fdi, t_vars *vars)
 	int	pipefd[2];
 	int	fdo;
 
-	// ft_putnbr_fd(vars->pipe_count, 2);
 	if (current->group_num < (vars->pipe_count + 1))
 	{
 		pipe(pipefd);
@@ -68,9 +56,12 @@ int	forking(t_token *current, int fdi, t_vars *vars)
 	}
 	else
 		fdo = redirect_output(current, 1);
-	if (fdi != -1 && !accessing(vars, current) && is_builtin(current, vars) == -1)
-	{
+	if (fdi == -1)
+		ft_putstr_fd("no such file or directory\n", 2);
+	/*else if (fdi != -1 && !accessing(vars, current))
+	{*/
 		// printf("fdi: %d\nfdo: %d\n", fdi, fdo);
+		// debug_print_tokens(vars);
 		vars->pid[vars->pid_count] = fork();
 		if (vars->pid[vars->pid_count] == 0)
 		{
@@ -80,12 +71,23 @@ int	forking(t_token *current, int fdi, t_vars *vars)
 			dup2(fdo, 1);
 			if (fdo != 1)
 				close(fdo);
+			if (accessing(vars, current) == -1)
+			{
+				if (is_builtin(current, vars) == -1)
+				{
+					ft_putstr_fd(current->cont, 2);
+					ft_putstr_fd(": cmd not found\n", 2);
+					exit(0);
+				}
+			}
 			format_execve(vars, current);
+			exit(0);
 		}
-		// close(fdi);
-		// close(fdo);
-	}
-	wait(NULL);
+		if (fdi != 0)
+			close(fdi);
+		if (fdo != 1)
+			close(fdo);
+	// }
 	return (pipefd[0]);
 }
 
@@ -99,15 +101,12 @@ void	fd_catch(t_vars *vars, t_token *current)
 	fd = forking(current, redirect_input(current, 0), vars);
 	current = skip_group(current);
 	i = 0;
-	// dprintf(1, "here\n");
-	while ((i++ < vars->pipe_count) && (++(vars->pid_count) < 32766)) // max pid 32768 -> loop de waitpid
+	while ((i++ < (vars->pipe_count)) && (++(vars->pid_count) < 32766))
 	{
-		// printf("WE'REIN\n");
 		fd = forking(current, redirect_input(current, fd), vars);
 		current = skip_group(current);
 	}
-	while (vars->pid_count >= 0)
-		waitpid(vars->pid[vars->pid_count--], &vars->status, 0);
-	// forking(current, redirect_input(current, fd), vars);
-
+	i = 0;
+	while (i <= vars->pid_count)
+		waitpid(vars->pid[i++], &vars->status, 0);
 }
