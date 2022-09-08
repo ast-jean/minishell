@@ -23,8 +23,8 @@ int	init_groups(t_vars *vars)
 		}
 		i++;
 	}
-			dprintf(2, "hello\n");
-	printf("pipecount : %d\n\n", vars->pipe_count);
+			// dprintf(2, "hello\n");
+	// printf("pipecount : %d\n\n", vars->pipe_count);
 	if (vars->pipe_count >= (i - 1))
 		return (-1);
 	return (0);
