@@ -19,7 +19,7 @@ int	init_groups(t_vars *vars)
 		{
 			(vars->pipe_count)++;
 			// copy = copy->next;
-			copy = remove_token(copy);
+			copy = remove_token(copy, vars);
 		}
 		i++;
 	}

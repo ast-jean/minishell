@@ -68,8 +68,8 @@ int	init_groups(t_vars *vars);
 int	parsing_pipes(t_vars *vars);
 
 //	REDIRECTION.C
-int	redirect_input(t_token *token, int fd_init);
-int	redirect_output(t_token *token, int fd_init);
+int	redirect_input(t_token *token, int fd_init, t_vars *vars);
+int	redirect_output(t_token *token, int fd_init, t_vars *vars);
 
 //NOTE: PARSING
 // PARSING_UTILS.C
