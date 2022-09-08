@@ -21,7 +21,7 @@ int	redirect_input(t_token *token, int fd_init)
 		else
 			token = token->next;
 	}
-	printf("FINAL FDIN = %d\n", fd);
+	// printf("FINAL FDIN = %d\n", fd);
 	return (fd);
 }
 
@@ -53,6 +53,6 @@ int	redirect_output(t_token *token, int fd_init)
 		else
 			token = token->next;
 	}
-	printf("FINAL FDOUT = %d\n", fd);
+	// printf("FINAL FDOUT = %d\n", fd);
 	return (fd);
 }
