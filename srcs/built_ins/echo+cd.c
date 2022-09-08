@@ -14,26 +14,12 @@ int	is_n(char *str)
 	return (1);
 }
 
-// void	builtin_echo(char **args, char **env)
-// {
-// 	(void)env;
-// 	int	i;
-
-// 	i = 1;
-// 	while (ft_strnstr(args[i], "-n", 2) && is_n(args[i]))
-// 		i++;
-// //start at token "echo" then printf token->next (if not flag) until " | or End of line"
-// //look for $var in env and replace 
-// 	printf ("%s", args[0 + i]);
-// }
-// NEW : WORK IN PROGRESS
 int	builtin_echo(t_vars *vars)
 {
 	t_token *token;
 	bool	n;
 
 	token = vars->token->next;
-	
 	while (token && ft_strcmp(token->cont, "|") != 0)
 	{
 		if (is_n(token->cont))
@@ -50,6 +36,7 @@ int	builtin_echo(t_vars *vars)
 		ft_putstr_fd("\n", 1);
 	return (0);
 }
+
 
 // 	if (token && ft_strcmp(token->cont, "-n") == 0)
 // 	{
@@ -72,15 +59,31 @@ int	builtin_echo(t_vars *vars)
 // 		write(1, "\n", 1);
 // 	return (1);
 // }
-// NEW WORK IN PROGRESS
 
 
-//  -nnnnnnnnnnnnnnnnnnnnnnnnnnn
-//  -n -n- n- n-n--n-n-n n--n--n-n-n-
-// IF	TOKEN n+0 = echo
-// 		TOKEN n+1 = -n | words
-//		TOKEN n+l = words
+int	finding_pwd(t_vars *vars)
+{
+	int	i;
+	int	p;
 
+	i = -1;
+	while (vars->env[++i] != NULL)
+	{
+		if (ft_strnstr(vars->env[i], "PWD=", 4) != NULL)
+		
+		
+	}
+}
+
+int	builtin_cd(t_vars *vars)
+{
+	t_token *token;
+
+	if (token->next->cont == "..")
+	{
+		
+	}
+}
 // int	ft_cd(char *arg, char **env)
 // {
 // // cd (only relative path or absolute)
