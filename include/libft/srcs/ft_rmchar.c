@@ -6,11 +6,12 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 14:51:16 by ast-jean          #+#    #+#             */
-/*   Updated: 2022/09/02 15:50:04 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/09/08 15:34:33 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//NOTE: removes a char (2nd arg) from the str (1st arg) according to its position in the str
+//NOTE: removes a char (2nd arg) from the str (1st arg) 
+//NOTE: according to its position in the str
 //NOTE: Ex: char *str = "AABAA"
 //NOTE:		str = ft_rmchar(str , &str[2]);
 //NOTE:		printf("%s\n", str);
@@ -27,7 +28,7 @@ char	*ft_rmchar(char *str, char *s)
 	i = -1;
 	j = 0;
 	char_pos = 0;
-	new = ft_calloc((ft_strlen(str) - 1), sizeof(char));
+	new = ft_calloc((ft_strlen(str)), sizeof(char));
 	while (s[++i])
 		char_pos++;
 	i = -1;
@@ -35,9 +36,10 @@ char	*ft_rmchar(char *str, char *s)
 	while (str[++i])
 	{
 		if (i == char_pos)
-			continue;
+			continue ;
 		new[j] = str[i];
 		j++;
 	}
+	new[j] = '\0';
 	return (new);
 }

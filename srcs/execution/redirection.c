@@ -1,49 +1,58 @@
 #include "../../include/minishell.h"
 // NOTE: Redirections ( > , < , >>)
-// TOFIX  when there is pipe, 0 would overwrite.
 
-int	redirect_input(t_token *token, int fd)
+int	redirect_input(t_token *token, int fd_init, t_vars *vars)
 {
-	t_token *cpy;
+	int	group;
+	int fd;
 
-	cpy = token;
-	while (ft_strcmp(cpy->cont, "|") != 0 && cpy->next)
+	group = token->group_num;
+	fd = fd_init;
+	while (token->group_num == group && token->next)
 	{
-		if (ft_strcmp(cpy->cont, "<") == 0)
+		if (ft_strcmp(token->cont, "<") == 0)
 		{
-			fd = open(cpy->next->cont, O_RDONLY);
-			cpy = remove_token(cpy);
-			cpy->next = remove_token(cpy->next);
+			if (fd != 0)
+				close(fd);
+			fd = open(remove_quotes(token->next->cont), O_RDONLY);
+			token->next = remove_token(token->next, vars);
+			token = remove_token(token, vars);
 		}
 		else
-			cpy = cpy->next;
+			token = token->next;
 	}
-	printf("FINAL FDIN = %d\n", fd);
+	// printf("FINAL FDIN = %d\n", fd);
 	return (fd);
 }
 
-int	redirect_output(t_token *token, int fd)
+int	redirect_output(t_token *token, int fd_init, t_vars *vars)
 {
-	t_token *cpy;
+	int		group;
+	int		fd;
 
-	cpy = token;
-	while (ft_strcmp(cpy->cont, "|") != 0 && cpy->next)
+	group = token->group_num;
+	fd = fd_init;
+	while (token->group_num == group && token->next)
 	{
-		if (ft_strcmp(cpy->cont, ">") == 0)
+		if (ft_strcmp(token->cont, ">") == 0)
 		{
-			fd = open(cpy->next->cont, O_TRUNC | O_CREAT | O_RDWR, 0777);
-			cpy = remove_token(cpy);
-			cpy->next = remove_token(cpy->next);
+			if (fd != 1)
+				close(fd);
+			fd = open(remove_quotes(token->next->cont), O_TRUNC | O_CREAT | O_RDWR, 0777);
+			token->next = remove_token(token->next, vars);
+			token = remove_token(token, vars);
 		}
-		else if (ft_strcmp(cpy->cont, ">>") == 0)
+		else if (ft_strcmp(token->cont, ">>") == 0)
 		{
-			fd = open(cpy->next->cont, O_APPEND | O_CREAT | O_RDWR, 0777);
-			cpy = remove_token(cpy);
-			cpy->next = remove_token(cpy->next);
+			if (fd != 1)
+				close(fd);
+			fd = open(remove_quotes(token->next->cont), O_APPEND | O_CREAT | O_RDWR, 0777);
+			token->next = remove_token(token->next, vars);
+			token = remove_token(token, vars);
 		}
 		else
-			cpy = cpy->next;
+			token = token->next;
 	}
-	printf("FINAL FDOUT = %d\n", fd);
+	// printf("FINAL FDOUT = %d\n", fd);
 	return (fd);
 }

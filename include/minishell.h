@@ -19,7 +19,7 @@ typedef struct s_token
 typedef struct s_vars
 {
 	int		ac; //use?
-	char	**av; //use?
+	char	**av; //params for execve
 	char 	**env;
 	// char	**cmd_line;
 	char	*path;
@@ -29,18 +29,19 @@ typedef struct s_vars
 	char	*oldpwd;
 	t_token	*token;
 	int		pipe_count;
-	int		fdi;
-	int		fdo;
-	int		pipefd1[2];
-	int		pipefd2[2];
+	int		pid[32768];
+	int		pid_count;
+	int		status;
 }	t_vars;
 
 // FUNCTIONS (SELON FILENAME)----------------------
 
 // NOTE: EXECUTION
+
 // MINISHELL.C
 void	init_shell(t_vars *vars, char **env);
 void	handler(int sig);
+int		is_builtin(t_token *current, t_vars *vars);
 
 // EXECUTION_CMD.C
 void	finding_paths(t_vars *vars);
@@ -49,6 +50,11 @@ void	executing_simple_cmds(t_vars *vars, t_token *token);
 
 // HEREDOCS.c
 int	check_heredocs(t_vars *vars);
+char *remove_quotes(char *str);
+
+// VARIABLES.c
+char *check_var(char *line, t_vars *vars);
+char *check_var_heredoc(char *line, t_vars *vars);
 
 //QUIT.C
 void	quit_shell(t_vars *vars);
@@ -62,9 +68,9 @@ t_token	*group_skip(t_token *current_token);
 int	init_groups(t_vars *vars);
 int	parsing_pipes(t_vars *vars);
 
-//	REDIRECTION"C
-int	redirect_input(t_token *token, int fd);
-int	redirect_output(t_token *token, int fd);
+//	REDIRECTION.C
+int	redirect_input(t_token *token, int fd_init, t_vars *vars);
+int	redirect_output(t_token *token, int fd_init, t_vars *vars);
 
 //NOTE: PARSING
 // PARSING_UTILS.C
@@ -84,8 +90,7 @@ void	executing_command(char *line, t_vars *vars);
 void	debug_print_tokens(t_vars *vars); //temp_function
 void	*access_ptr(t_vars *vars, int i);
 t_token	*new_token_after(t_token *after_this_one, char* file_name);
-t_token	*remove_token(t_token *remove);
-
+t_token *remove_token(t_token *remove, t_vars *vars);
 //NEWTOKEN.C
 char	*newtoken_q(char *line, int *i, char c);
 char	*newtoken_s(char *line, int *i);

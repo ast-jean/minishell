@@ -25,6 +25,13 @@ int	accessing(t_vars *vars, t_token *token)
 	char	*cmd;
 	int		i;
  // "cat -e" "file.txt"
+	if (!token)
+		return (-1);
+	if (access(token->cont, F_OK | X_OK) == 0)
+	{
+		vars->path = token->cont;
+		return (0);
+	}
 	cmd = ft_strjoin("/", token->cont);
 	i = 0;
 	while (vars->path_array[i] != NULL)
@@ -34,14 +41,14 @@ int	accessing(t_vars *vars, t_token *token)
 		if (yes_or_no == 0)
 		{
 			free(cmd);
-			return (1);
+			return (0);
 		}
 		free(vars->path);
 		i++;
 	}
 	free(cmd);
 	// print_error(vars, 1);
-	return (0);
+	return (-1);
 }
 
 void	executing_simple_cmds(t_vars *vars, t_token *token)

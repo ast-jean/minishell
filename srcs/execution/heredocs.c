@@ -30,19 +30,11 @@ int	is_exception(t_token *token)
 
 char *remove_quotes(char *str)
 {
-	//cat << "'test'"'test'
-//input: "<<"'test''lake'
-//output: 'test''lake'
-
-//input: '"test"''lake'
-//output: "test"lake
 	int i;
-	int count; //use?
 	char quote;
 	char *new;
 
 	new = str;
-	count = 0; //use?
 	i = 0;
 
 	while(new[i])
@@ -59,66 +51,77 @@ char *remove_quotes(char *str)
 			if(new[i])
 				new = ft_rmchar(new, &new[i]);
 		}
+		i++;
 	}
+	new[i] = '\0';
 	free(str);
 	return (new);
 }
 /*
 TODO:
 [X] strjoin "this"'test'"one"
-[ ] fix single quote segfault
-[ ] add ctrl-D to go finish the heredoc (act like delim)
-[ ] Norminette
+[ ] rm_quotes gives test'test' instead of test"test" for "test"'"test"'
+[ ] Add $VAR
+[ ] add ctrl-D to finish the heredoc (act like delim)
+[ ] fix single quote in delim segfault
 [ ] check for leaks
+[ ] Norminette
 */
 int	check_heredocs(t_vars *vars)
 {
 	t_token *current;
+	char *delim;
 	char *name;
 	int fd;
 	char *line;
-	char *delim;
 
+	name = calloc(100, sizeof(char));
 	current = vars->token->first;
 	vars->heredoc_count = 0;
 	while(current)
 	{
 // /*debug*/printf("token = %s\n", current->cont);
-		if(!ft_strcmp(current->cont, "<<"))
+		if(current && !ft_strcmp(current->cont, "<<"))
 		{
 			line = " ";
-			// delim = current->next->cont;
 			if(!is_exception(current))
 				return(0);
-			delim = remove_quotes(current->next->cont);
-///*debug*/debug_print_tokens(vars);
-/*debug*/printf("\033[43mdelim = ->|%s|<-\033[0m\n", delim);
 			name = ft_strjoin(".tmp/temp_heredoc", ft_itoa(vars->heredoc_count));
-			fd = open(name, O_RDWR | O_CREAT, 0777);
+			if(ft_strchr(current->next->cont, '\"') || ft_strchr(current->next->cont, '\''))
+				delim = remove_quotes(current->next->cont);
+			else
+				delim = current->next->cont;
+///*debug*/debug_print_tokens(vars);
+			fd = open(name, O_RDWR | O_CREAT | O_TRUNC, 0777);
 			new_token_after(current, name);
 			while(ft_strcmp(delim, line))
 			{
+/*debug*/printf("\033[43mdelim = ->|%s|<-\033[0m\n", delim);
 				if(ft_strcmp(" ", line))
-					dprintf(fd, "%s\n", line);
+				{
+					line = ft_strjoin(check_var_heredoc(line, vars), "\n");
+					ft_putstr_fd(line, fd);
+				}
 				rl_on_new_line();
 				line = readline(">");
 				rl_redisplay();
 			}
-			current = remove_token(current);
-			current->next = remove_token(current->next);
+			current = remove_token(current, vars);
+			current->next = remove_token(current->next, vars);
 			vars->heredoc_count++;
 		}
-		else if(!ft_strcmp(current->cont, "<<<"))
+		else if(current && !ft_strcmp(current->cont, "<<<"))
 		{
 			if(!is_exception(current))
 				return(0);
 			line = current->next->cont;
 			name = ft_strjoin(".tmp/temp_heredoc", ft_itoa(vars->heredoc_count));
-			fd = open(name, O_RDWR | O_CREAT, 0777);
+			fd = open(name, O_RDWR | O_CREAT | O_TRUNC, 0777);
 			new_token_after(current, name);
-			dprintf(fd, "%s\n", line);
-			current = remove_token(current);
-			current->next = remove_token(current->next);
+			line = ft_strjoin(check_var_heredoc(line, vars), "\n");
+			ft_putstr_fd(line, fd);
+			current = remove_token(current, vars);
+			current->next = remove_token(current->next, vars);
 		}
 		else if((current->cont[0] == '<') && ft_strlen(current->cont) > 3)
 		{
@@ -128,6 +131,7 @@ int	check_heredocs(t_vars *vars)
 		else
 			current = current->next;
 	}
-// /*debug*/printf("\033[43m'<<'count:%d\033[0m\n", heredoc_count);
+	if (line)
+		free(line);
 	return (1);
 }
