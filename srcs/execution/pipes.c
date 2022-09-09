@@ -6,6 +6,21 @@
 //forking has to call redirect_output and pipe anyways
 //redirect output becomes stdout and overrides pipefd[1]);
 
+int	is_builtin(t_token *current, t_vars *vars)
+{
+	if (current && !ft_strcmp(current->cont, "export"))
+		return (builtin_export(current, vars));
+	else if (current && !ft_strcmp(current->cont, "pwd"))
+		return (builtin_pwd(vars));
+	else if (current && !ft_strcmp(current->cont, "env"))
+		return (builtin_env(vars));
+	else if (current && !ft_strcmp(current->cont, "echo"))
+		return (builtin_echo(vars));
+	// else if(!ft_strcmp(current->cont, "unset"))
+	// 	builtin_unset(vars, current->next->cont);
+	return (-1);
+}
+
 void	format_execve(t_vars *vars, t_token *token)
 {
 	t_token *current;
@@ -68,6 +83,12 @@ int	forking(t_token *current, int fdi, t_vars *vars)
 	if (fdi == -1)
 	{
 		ft_putstr_fd("no such file or directory\n", 2);
+		write(pipefd[1], "", 0);
+		if (fdi != 0)
+			close(fdi);
+		if (fdo != 1)
+			close(fdo);
+		// close(pipefd[0]);
 		return (pipefd[0]);
 	}
 	/*else if (fdi != -1 && !accessing(vars, current))
