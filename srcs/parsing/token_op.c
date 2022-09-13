@@ -27,6 +27,7 @@ t_token *remove_token(t_token *remove, t_vars *vars)
 		vars->token = remove->next;
 		nex = remove->next;
 	}
+	free(remove->cont);
 	free(remove);
 	return (nex);
 }

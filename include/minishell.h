@@ -49,8 +49,13 @@ int		accessing(t_vars *vars, t_token *token);
 void	executing_simple_cmds(t_vars *vars, t_token *token);
 
 // HEREDOCS.c
-int	check_heredocs(t_vars *vars);
+int	check_here(t_vars *vars);
 char *remove_quotes(char *str);
+
+//SYNTAX_ERROR.c
+int	syntax_error(char *token);
+int	is_exception(t_token *token);
+int	check_quotes(char *str);
 
 // VARIABLES.c
 char *check_var(char *line, t_vars *vars);

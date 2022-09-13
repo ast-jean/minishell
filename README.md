@@ -14,6 +14,7 @@ TODO:
 [ ] Gérer $?
 [ ] Créer les buitins
 	[ ] echo (with -n)
+		[ ] Add $Vars and remove_quotes()
 	[ ] cd (only relative path or absolute)(changer PATH et OLDPATH)
 	[ ] export (no flag)	-started-
 	[ ] unset (no flag)		-started-
@@ -25,18 +26,10 @@ TOKNOW:
 	- Ne pas gérer les fuites avec readline
 	- simple quotes = litéral
 
-	- heardocs must be child NEW
-
  TOFIX  
-	- signals get displayed
-	- test splitamary cases:
-		"'ec''ho'" + "'ec'ho"
-		"$VAR"
-		"<<"
-		"<<hello"
--init-token_type.c
-	- segfault when ctrl-D in heredoc
-	- make a special case for <<< (error)
+	- signals get displayed //dont care
+	- when quotes are not closed it creates SEGFAULT. should be fixed in tokenize
+		- also check check_quotes() in syntax_error.c
 
 LOG:
 

@@ -2,23 +2,24 @@
 ###-------------------------# VARIABLES ##-------------------------###
 NAME = minishell
 
-SRCS_FILES 		=	execution/minishell.c		\
-					execution/execution.c		\
+SRCS_FILES 		=	execution/minishell.c				\
+					execution/execution.c				\
 					execution/executing_simple_cmd.c	\
-					parsing/parsing.c			\
-					parsing/init_token.c		\
-					parsing/token_op.c			\
-					parsing/tokenize.c			\
-					parsing/newtoken.c			\
-					built_ins/echo+cd.c			\
-					built_ins/pwd+env.c			\
-					built_ins/unset+export.c	\
-					execution/quit.c			\
-					execution/heredocs.c 		\
-					execution/set_groups.c 		\
-					execution/redirection.c		\
-					execution/pipes.c			\
-					execution/variables.c 		\
+					parsing/parsing.c					\
+					parsing/init_token.c				\
+					parsing/token_op.c					\
+					parsing/tokenize.c					\
+					parsing/newtoken.c					\
+					built_ins/echo+cd.c					\
+					built_ins/pwd+env.c					\
+					built_ins/unset+export.c			\
+					execution/quit.c					\
+					execution/heredocs.c 				\
+					execution/set_groups.c 				\
+					execution/redirection.c				\
+					execution/pipes.c					\
+					execution/variables.c 				\
+					execution/syntax_error.c			\
 
 
 INCLUDE_FILES	= 	minishell.h
