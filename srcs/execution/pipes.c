@@ -58,10 +58,10 @@ int	forking(t_token *current, int fdi, t_vars *vars)
 	if (current->group_num < (vars->pipe_count + 1))
 	{
 		pipe(pipefd);
-		fdo = redirect_output(current, pipefd[1]);
+		fdo = redirect_output(current, pipefd[1], vars);
 	}
 	else
-		fdo = redirect_output(current, 1);
+		fdo = redirect_output(current, 1, vars);
 	if (fdi == -1)
 		ft_putstr_fd("no such file or directory\n", 2);
 	/*else if (fdi != -1 && !accessing(vars, current))
@@ -104,12 +104,12 @@ void	fd_catch(t_vars *vars, t_token *current)
 	vars->pid_count = 0;
 
 	finding_paths(vars);
-	fd = forking(current, redirect_input(current, 0), vars);
+	fd = forking(current, redirect_input(current, 0, vars), vars);
 	current = skip_group(current);
 	i = 0;
 	while ((i++ < (vars->pipe_count)) && (++(vars->pid_count) < 32766))
 	{
-		fd = forking(current, redirect_input(current, fd), vars);
+		fd = forking(current, redirect_input(current, fd, vars), vars);
 		current = skip_group(current);
 	}
 	i = 0;

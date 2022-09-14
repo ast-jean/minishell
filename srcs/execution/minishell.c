@@ -84,12 +84,18 @@ void	executing_command(char *line, t_vars *vars)
 	if (ft_strlen(line) == 0)
 		return ;
 	creating_tokens(line, vars);
-	if(!check_heredocs(vars))
-		return ;
-	if (parsing_pipes(vars) == -1)
-		return ;
-	current = vars->token->first;
-	fd_catch(vars, current);
+	
+	if (vars->token != NULL)
+	{
+		if(!check_here(vars))
+			return ;
+// printf("---after checks---\n");
+// /*debug*/debug_print_tokens(vars);
+		if (parsing_pipes(vars) == -1)
+			return ;
+		current = vars->token->first;
+		fd_catch(vars, current);
+	}
 	// debug_print_tokens(vars);
 	// i = 0;
 	// fd_default = 0;
@@ -144,7 +150,7 @@ void	remove_tmp_files(t_vars *vars)
 	char *filename;
 
 	i = -1;
-	while(++i < vars->heredoc_count)
+	while(++i <= vars->heredoc_count)
 	{	
 		filename = ft_strjoin(".tmp/temp_heredoc", ft_itoa(i));
 		unlink(filename);
@@ -169,7 +175,7 @@ int main(int argc, char **argv, char **env)
 	while (1)
 	{
 		line = readline(prompt);
-		if (!line) //ctrl-D
+		if (!line)
 			quit_shell(&vars);
 		else
      		add_history(line);

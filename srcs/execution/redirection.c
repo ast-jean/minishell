@@ -1,7 +1,7 @@
 #include "../../include/minishell.h"
 // NOTE: Redirections ( > , < , >>)
 
-int	redirect_input(t_token *token, int fd_init)
+int	redirect_input(t_token *token, int fd_init, t_vars *vars)
 {
 	int	group;
 	int fd;
@@ -15,8 +15,8 @@ int	redirect_input(t_token *token, int fd_init)
 			if (fd != 0)
 				close(fd);
 			fd = open(remove_quotes(token->next->cont), O_RDONLY);
-			token->next = remove_token(token->next);
-			token = remove_token(token);
+			token->next = remove_token(token->next, vars);
+			token = remove_token(token, vars);
 		}
 		else
 			token = token->next;
@@ -25,7 +25,7 @@ int	redirect_input(t_token *token, int fd_init)
 	return (fd);
 }
 
-int	redirect_output(t_token *token, int fd_init)
+int	redirect_output(t_token *token, int fd_init, t_vars *vars)
 {
 	int		group;
 	int		fd;
@@ -39,16 +39,16 @@ int	redirect_output(t_token *token, int fd_init)
 			if (fd != 1)
 				close(fd);
 			fd = open(remove_quotes(token->next->cont), O_TRUNC | O_CREAT | O_RDWR, 0777);
-			token->next = remove_token(token->next);
-			token = remove_token(token);
+			token->next = remove_token(token->next, vars);
+			token = remove_token(token, vars);
 		}
 		else if (ft_strcmp(token->cont, ">>") == 0)
 		{
 			if (fd != 1)
 				close(fd);
 			fd = open(remove_quotes(token->next->cont), O_APPEND | O_CREAT | O_RDWR, 0777);
-			token->next = remove_token(token->next);
-			token = remove_token(token);
+			token->next = remove_token(token->next, vars);
+			token = remove_token(token, vars);
 		}
 		else
 			token = token->next;

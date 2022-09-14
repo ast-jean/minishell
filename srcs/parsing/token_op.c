@@ -1,38 +1,38 @@
 #include "../../include/minishell.h"
 
-t_token *remove_token(t_token *remove)
+t_token	*remove_token(t_token *remove, t_vars *vars)
 {
 	t_token	*nex;
 
-	if(remove->next)
+	if (remove->next && remove->prev)
 	{
-		nex = remove->next;
 		remove->prev->next = remove->next;
-	}
-	else
-	{
-		nex = remove->prev;
-		remove->prev->next = NULL;
-	}
-	if(remove->prev)
 		remove->next->prev = remove->prev;
+		nex = remove->next;
+	}
+	else if (!remove->next)
+	{
+		remove->prev->next = NULL;
+		nex = NULL;
+	}
 	else
 	{
 		remove->next->prev = NULL;
-		remove->next->first = remove->next;
 		nex = remove->next;
-		while(nex->next)
+		while (nex)
 		{
-			nex->next->first = remove->next;
+			nex->first = remove->next;
 			nex = nex->next;
 		}
-		nex = nex->first;
+		vars->token = remove->next;
+		nex = remove->next;
 	}
+	free(remove->cont);
 	free(remove);
 	return (nex);
-}
+} // TOFIX TOO LONG
 
-t_token	*new_token_after(t_token *after_this_one, char* file_name)
+t_token	*new_token_after(t_token *after_this_one, char *file_name)
 {
 	t_token	*new;
 
@@ -48,7 +48,7 @@ t_token	*new_token_after(t_token *after_this_one, char* file_name)
 
 void	*access_ptr(t_vars *vars, int i) //dont know if it works
 {
-	int count;
+	int	count;
 
 	count = 0;
 	vars->token = vars->token->first;
@@ -59,7 +59,7 @@ void	*access_ptr(t_vars *vars, int i) //dont know if it works
 	return (vars->token);
 }
 
-void	push_tk(char *cont, t_token *token, t_token *first, t_token *prev, int i, int count)
+void	push_tk(char *cont, t_token *token, t_token *first, t_token *prev, int i, int count) // TOFIX TOO MANY ARGUMENTS
 {
 	token->cont = cont;
 	token->prev = prev;
@@ -72,18 +72,17 @@ void	push_tk(char *cont, t_token *token, t_token *first, t_token *prev, int i, i
 
 void	debug_print_tokens(t_vars *vars)
 {
-	t_token *current;
-	int i;
+	t_token	*current;
+	int		i;
 
 	i = 0;
-
 	current = vars->token->first;
 	if (!current)
 		return ;
 	while (current)
 	{
 		printf("----------------\n");
-		printf("Token %d\n",i);
+		printf("Token %d\n", i);
 		printf("Cont=	->%s<-\n", current->cont);
 		printf("Ptr=	->%p<-\n", current);
 		printf("First=	->%p<-\n", current->first);
@@ -92,5 +91,5 @@ void	debug_print_tokens(t_vars *vars)
 		current = current->next;
 		i++;
 	}
-	printf("----------------\n");
+	printf("-------END-------\n");
 }

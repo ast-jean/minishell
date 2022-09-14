@@ -46,6 +46,7 @@ int	builtin_echo(t_vars *vars)
 		n = true;
 		token = token->next;
 	}
+	// TOFIX add remove_quotes() somewhere
 	while (token && ft_strcmp(token->cont, "|") != 0)
 	{
 		ft_putstr_fd(rm_quotes_echo(token->cont), 1);

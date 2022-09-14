@@ -49,11 +49,17 @@ int		accessing(t_vars *vars, t_token *token);
 void	executing_simple_cmds(t_vars *vars, t_token *token);
 
 // HEREDOCS.c
-int	check_heredocs(t_vars *vars);
+int	check_here(t_vars *vars);
 char *remove_quotes(char *str);
 
-// HEREDOCS2.c
+//SYNTAX_ERROR.c
+int	syntax_error(char *token);
+int	is_exception(t_token *token);
+int	check_quotes(char *str);
+
+// VARIABLES.c
 char *check_var(char *line, t_vars *vars);
+char *check_var_heredoc(char *line, t_vars *vars);
 
 //QUIT.C
 void	quit_shell(t_vars *vars);
@@ -68,8 +74,8 @@ int	init_groups(t_vars *vars);
 int	parsing_pipes(t_vars *vars);
 
 //	REDIRECTION.C
-int	redirect_input(t_token *token, int fd_init);
-int	redirect_output(t_token *token, int fd_init);
+int	redirect_input(t_token *token, int fd_init, t_vars *vars);
+int	redirect_output(t_token *token, int fd_init, t_vars *vars);
 
 //NOTE: PARSING
 // PARSING_UTILS.C
@@ -89,8 +95,7 @@ void	executing_command(char *line, t_vars *vars);
 void	debug_print_tokens(t_vars *vars); //temp_function
 void	*access_ptr(t_vars *vars, int i);
 t_token	*new_token_after(t_token *after_this_one, char* file_name);
-t_token	*remove_token(t_token *remove);
-
+t_token *remove_token(t_token *remove, t_vars *vars);
 //NEWTOKEN.C
 char	*newtoken_q(char *line, int *i, char c);
 char	*newtoken_s(char *line, int *i);
