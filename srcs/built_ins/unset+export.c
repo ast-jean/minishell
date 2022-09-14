@@ -8,7 +8,7 @@ int	builtin_unset(t_vars *vars, char *var_name)
 
 	name_to_find = ft_strjoin(var_name, "=");
 	ft_arrayrm(vars->env, ft_arraysrch(vars->env, name_to_find));
-	return (1);
+		return (1);
 }
 
 int	builtin_export(t_token *token, t_vars *vars)

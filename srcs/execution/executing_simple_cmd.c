@@ -27,12 +27,12 @@ int	accessing(t_vars *vars, t_token *token)
  // "cat -e" "file.txt"
 	if (!token)
 		return (-1);
-	if (access(token->cont, F_OK | X_OK) == 0)
+	if (access(remove_quotes(token->cont), F_OK | X_OK) == 0)
 	{
-		vars->path = token->cont;
+		vars->path = remove_quotes(token->cont);
 		return (0);
 	}
-	cmd = ft_strjoin("/", token->cont);
+	cmd = ft_strjoin("/", remove_quotes(token->cont));
 	i = 0;
 	while (vars->path_array[i] != NULL)
 	{
