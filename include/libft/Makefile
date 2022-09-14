@@ -62,6 +62,7 @@ SRC =	ft_memset.c				\
 		ft_strtoupper.c 		\
 		ft_is_str_alnum.c		\
 		ft_rmchar.c				\
+		ft_addchar.c			\
 
 NAME = libft.a
 CC = gcc

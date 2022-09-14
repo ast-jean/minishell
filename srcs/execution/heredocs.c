@@ -2,8 +2,6 @@
 
 #include "../../include/minishell.h"
 
-
-
 char *remove_quotes(char *str)
 {
 	int i;
@@ -40,10 +38,10 @@ TODO:
 [ ] Add $VAR
 [X] add ctrl-D to finish the heredoc (act like delim)
 [X] fix herestring cat: /usr/bin: Is a directory: FIXED by unfreeing line and name
-[ ] Fix remove_quotes
+[X] Fix remove_quotes
 	[X] remove quote bug in: "hello"'hello' out: hello'hello
-	[ ] Add error if missing a quote
 [ ] fix single quote in delim segfault
+	[ ] Add error if missing a quote -> should be done in tokenize()
 [ ] check for leaks
 [ ] Norminette
 */

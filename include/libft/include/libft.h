@@ -93,5 +93,6 @@ char	**ft_arrayrm(char **tab, char *str_to_rm);
 char 	*ft_strtoupper(char *str);
 int		ft_is_str_alnum(char *str);
 char	*ft_rmchar(char *str, char *s);
+char	*ft_addchar(char *str, char c, char *s);
 
 #endif

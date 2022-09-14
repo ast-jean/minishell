@@ -20,6 +20,7 @@ int	builtin_echo(t_vars *vars)
 	bool	n;
 
 	token = vars->token->next;
+	// TOFIX add remove_quotes() somewhere
 	while (token && ft_strcmp(token->cont, "|") != 0)
 	{
 		if (is_n(token->cont))

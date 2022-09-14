@@ -5,7 +5,6 @@ NAME = minishell
 SRCS_FILES 		=	execution/minishell.c				\
 					execution/execution.c				\
 					execution/executing_simple_cmd.c	\
-					parsing/parsing.c					\
 					parsing/init_token.c				\
 					parsing/token_op.c					\
 					parsing/tokenize.c					\
