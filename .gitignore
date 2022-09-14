@@ -53,3 +53,4 @@ Mkfile.old
 dkms.conf
 
 .temp*
+.DS_Store
