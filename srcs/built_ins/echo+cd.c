@@ -41,15 +41,14 @@ int	builtin_echo(t_vars *vars)
 
 		// if (is_n(token->cont))
 	token = vars->token->next;
-	while (is_n(token->cont))
+	while (is_n(remove_quotes(token->cont)))
 	{
 		n = true;
 		token = token->next;
 	}
-	// TOFIX add remove_quotes() somewhere
 	while (token && ft_strcmp(token->cont, "|") != 0)
 	{
-		ft_putstr_fd(rm_quotes_echo(token->cont), 1);
+		ft_putstr_fd(remove_quotes(token->cont), 1);
 		// if (token->next != NULL)
 			// write(1, " ", 1);
 		token = token->next;
