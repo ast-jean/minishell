@@ -122,5 +122,7 @@ int	check_here(t_vars *vars)
 		else
 			current = current->next;
 	}
+	// if (line)
+	// 	free(line);
 	return (1);
 }
