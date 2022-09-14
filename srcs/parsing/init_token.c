@@ -27,6 +27,11 @@ void	creating_tokens(char *line, t_vars *vars)
 	t_token *prev_prev;
 
 	line_content = tokenize(line);
+	if (!line_content)
+	{
+		ft_putstr_fd("missing quote\n", 2);
+		return ;
+	}
 	count = count_list(line_content);
 	i = 0;
 	vars->token = malloc(sizeof(t_token));

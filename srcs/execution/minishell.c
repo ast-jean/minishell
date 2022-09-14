@@ -84,14 +84,18 @@ void	executing_command(char *line, t_vars *vars)
 	if (ft_strlen(line) == 0)
 		return ;
 	creating_tokens(line, vars);
-	if(!check_here(vars))
-		return ;
-	// printf("---after checks---\n");
+	
+	if (vars->token != NULL)
+	{
+		if(!check_here(vars))
+			return ;
+// printf("---after checks---\n");
 // /*debug*/debug_print_tokens(vars);
-	if (parsing_pipes(vars) == -1)
-		return ;
-	current = vars->token->first;
-	fd_catch(vars, current);
+		if (parsing_pipes(vars) == -1)
+			return ;
+		current = vars->token->first;
+		fd_catch(vars, current);
+	}
 	// debug_print_tokens(vars);
 	// i = 0;
 	// fd_default = 0;

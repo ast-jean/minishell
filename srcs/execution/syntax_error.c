@@ -40,12 +40,12 @@ int	check_quotes(char *str)
 	}
 	if (j % 2 != 0)
 	{
-		ft_putstr_fd("minishell: syntax error with unexpected token \\\'\n", 2);
+		ft_putstr_fd("minishell: syntax error with unexpected token \'\n", 2);
 		return (0);
 	}
 	else if (k % 2 != 0)
 	{
-		ft_putstr_fd("minishell: syntax error with unexpected token \\\"\n", 2);
+		ft_putstr_fd("minishell: syntax error with unexpected token \"\n", 2);
 		return (0);
 	}
 	else
