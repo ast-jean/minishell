@@ -6,6 +6,21 @@
 //forking has to call redirect_output and pipe anyways
 //redirect output becomes stdout and overrides pipefd[1]);
 
+int	is_builtin(t_token *current, t_vars *vars)
+{
+	if (current && !ft_strcmp(current->cont, "export"))
+		return (builtin_export(current, vars));
+	else if (current && !ft_strcmp(current->cont, "pwd"))
+		return (builtin_pwd(vars));
+	else if (current && !ft_strcmp(current->cont, "env"))
+		return (builtin_env(vars));
+	else if (current && !ft_strcmp(current->cont, "echo"))
+		return (builtin_echo(vars));
+	// else if(!ft_strcmp(current->cont, "unset"))
+	// 	builtin_unset(vars, current->next->cont);
+	return (-1);
+}
+
 void	format_execve(t_vars *vars, t_token *token)
 {
 	t_token *current;
@@ -49,6 +64,7 @@ int	forking(t_token *current, int fdi, t_vars *vars)
 	int	pipefd[2];
 	int	fdo;
 
+	// printf("current : %s\n", current->cont);
 	if(current && !ft_strcmp(current->cont, "exit"))
 	{
 		if (fdi != 0)
@@ -58,19 +74,30 @@ int	forking(t_token *current, int fdi, t_vars *vars)
 	if (current->group_num < (vars->pipe_count + 1))
 	{
 		pipe(pipefd);
-		fdo = redirect_output(current, pipefd[1], vars);
+		fdo = redirect_output(current, pipefd[1]);
 	}
 	else
-		fdo = redirect_output(current, 1, vars);
+		fdo = redirect_output(current, 1);
+	current = rm_redir(current, vars);
+	// printf("current : %s\n", current->cont);
 	if (fdi == -1)
+	{
 		ft_putstr_fd("no such file or directory\n", 2);
+		write(pipefd[1], "", 0);
+		if (fdi != 0)
+			close(fdi);
+		if (fdo != 1)
+			close(fdo);
+		// close(pipefd[0]);
+		return (pipefd[0]);
+	}
 	/*else if (fdi != -1 && !accessing(vars, current))
 	{*/
 		// printf("fdi: %d\nfdo: %d\n", fdi, fdo);
-		// debug_print_tokens(vars);
 		vars->pid[vars->pid_count] = fork();
-		if (vars->pid[vars->pid_count] == 0)
+		if (vars->pid[vars->pid_count++] == 0)
 		{
+		// debug_print_tokens(vars);
 			dup2(fdi, 0);
 			if (fdi != 0)
 				close(fdi);
@@ -81,6 +108,7 @@ int	forking(t_token *current, int fdi, t_vars *vars)
 			{
 				if (is_builtin(current, vars) == -1)
 				{
+					// printf("current : %s\n", current->cont);
 					ft_putstr_fd(current->cont, 2);
 					ft_putstr_fd(": cmd not found\n", 2);
 					exit(0);
@@ -104,12 +132,12 @@ void	fd_catch(t_vars *vars, t_token *current)
 	vars->pid_count = 0;
 
 	finding_paths(vars);
-	fd = forking(current, redirect_input(current, 0, vars), vars);
+	fd = forking(current, redirect_input(current, 0), vars);
 	current = skip_group(current);
 	i = 0;
-	while ((i++ < (vars->pipe_count)) && (++(vars->pid_count) < 32766))
+	while ((i++ < (vars->pipe_count)) && ((vars->pid_count) < 32766))
 	{
-		fd = forking(current, redirect_input(current, fd, vars), vars);
+		fd = forking(current, redirect_input(current, fd), vars);
 		current = skip_group(current);
 	}
 	i = 0;
