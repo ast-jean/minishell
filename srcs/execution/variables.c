@@ -13,10 +13,12 @@ char *find_variable(char **env, char *varname)
 	while (env[++i])
 	{
 		j = 0;
-		while (env[i][j] == varname[j])
+		while (env[i][j] && env[i][j] == varname[j])
 		{
+		printf("%c = %c ?\n", env[i][j], varname[j]);
+			// printf("yes\n");
 			if (env[i][j+1] != '=')
-				ft_strcpy(var_value, env[i]+ j + 2);
+				// ft_strcpy(var_value, env[i]+ j + 2);
 			j++;
 		}
 	}
@@ -29,10 +31,10 @@ char	*add_varcontent(char *line, char *var_name, char **env)
 	char	*var_value;
 	int		pos;
 	int		i;
-	int		j;
+	// int		j;
 
 	newline = NULL;
-	j = -1; //not used
+	// j = -1; //not used
 	i = -1;
 	pos = 0;
 	var_value = find_variable(env, var_name);
@@ -77,7 +79,6 @@ char *change_to_var(char *line, char *var_name, char **env)
 	varremoved = line;
 
 	printf("find_variables = >%s<\n", find_variable(env, var_name));
-	printf("seg2\n");
 	if(ft_strlen(find_variable(env, var_name)) > 0) //fonction arraysrch until =
 	{
 		newline = add_varcontent(varremoved, var_name, env);

@@ -28,7 +28,6 @@ char *remove_quotes(char *str)
 		i++;
 	}
 	new[i] = '\0';
-	free(str);
 	return (new);
 }
 /*
