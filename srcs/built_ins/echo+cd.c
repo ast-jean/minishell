@@ -48,6 +48,8 @@ int	builtin_echo(t_vars *vars)
 	}
 	while (token && ft_strcmp(token->cont, "|") != 0)
 	{
+		dprintf(2, "1: %s\n", token->cont);
+		dprintf(2, "2: %s\n", remove_quotes(token->cont));
 		ft_putstr_fd(remove_quotes(token->cont), 1);
 		// if (token->next != NULL)
 			// write(1, " ", 1);
@@ -64,45 +66,45 @@ int	builtin_echo(t_vars *vars)
 
 
 
-int	finding_pwd(t_vars *vars)
-{
-	int	i;
-	int	p;
+// int	finding_pwd(t_vars *vars)
+// {
+// 	int	i;
+// 	int	p;
 
-	i = -1;
-	j = -1;
-	while (vars->env[++i] != NULL)
-	{
-		if (ft_strnstr(vars->env[i], "PWD=", 4) != NULL)
-		{
-			return (i);
-		}
-		else
-			return (-1);		
-	}
-}
+// 	i = -1;
+// 	j = -1;
+// 	while (vars->env[++i] != NULL)
+// 	{
+// 		if (ft_strnstr(vars->env[i], "PWD=", 4) != NULL)
+// 		{
+// 			return (i);
+// 		}
+// 		else
+// 			return (-1);		
+// 	}
+// }
 
-int	builtin_cd(t_vars *vars)
-{
-	t_token *token;
-	int		i;
-	int		j;
+// int	builtin_cd(t_vars *vars)
+// {
+// 	t_token *token;
+// 	int		i;
+// 	int		j;
 
-	if (finding_pwd(vars) != -1)
-		i = finding_pwd(vars);
-	else
-		return (0);
-	j = -1;
-	while (vars->env[i][++j] != NULL);
-	if (token->next->cont == "..")
-	{
-		while (vars->env[i][j] != '/')
-		{
-			vars->env[i][j--] == NULL;
-		}
-	}
-	if (token->next->cont != "..") //?
-	{
-		ft_strjoin(token->cont, token->next->cont);
-	}
-}
+// 	if (finding_pwd(vars) != -1)
+// 		i = finding_pwd(vars);
+// 	else
+// 		return (0);
+// 	j = -1;
+// 	while (vars->env[i][++j] != NULL);
+// 	if (token->next->cont == "..")
+// 	{
+// 		while (vars->env[i][j] != '/')
+// 		{
+// 			vars->env[i][j--] == NULL;
+// 		}
+// 	}
+// 	if (token->next->cont != "..") //?
+// 	{
+// 		ft_strjoin(token->cont, token->next->cont);
+// 	}
+// }
