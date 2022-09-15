@@ -8,16 +8,16 @@
 
 int	is_builtin(t_token *current, t_vars *vars)
 {
-	if (current && !ft_strcmp(current->cont, "export"))
+	if (current && !ft_strcmp(remove_quotes(current->cont), "export"))
 		return (builtin_export(current, vars));
-	else if (current && !ft_strcmp(current->cont, "pwd"))
+	else if (current && !ft_strcmp(remove_quotes(current->cont), "pwd"))
 		return (builtin_pwd(vars));
-	else if (current && !ft_strcmp(current->cont, "env"))
+	else if (current && !ft_strcmp(remove_quotes(current->cont), "env"))
 		return (builtin_env(vars));
-	else if (current && !ft_strcmp(current->cont, "echo"))
+	else if (current && !ft_strcmp(remove_quotes(current->cont), "echo"))
 		return (builtin_echo(vars));
-	// else if(!ft_strcmp(current->cont, "unset"))
-	// 	builtin_unset(vars, current->next->cont);
+	else if(current && !ft_strcmp(remove_quotes(current->cont), "unset"))
+		return (builtin_unset(vars, remove_quotes(current->next->cont)));
 	return (-1);
 }
 
@@ -36,10 +36,10 @@ void	format_execve(t_vars *vars, t_token *token)
 		current = current->next;
 	}
 	vars->av = malloc(sizeof(char*) * (vars->ac + 1));
-	vars->av[i] = token->cont;
+	vars->av[i] = remove_quotes(token->cont);
 	while (++i < vars->ac)
 	{
-		vars->av[i] = token->next->cont;
+		vars->av[i] = remove_quotes(token->next->cont);
 		token = token->next;
 	}
 	vars->av[i] = NULL;
@@ -65,7 +65,7 @@ int	forking(t_token *current, int fdi, t_vars *vars)
 	int	fdo;
 
 	// printf("current : %s\n", current->cont);
-	if(current && !ft_strcmp(current->cont, "exit"))
+	if(current && !ft_strcmp(remove_quotes(current->cont), "exit"))
 	{
 		if (fdi != 0)
 			close(fdi);
@@ -109,12 +109,13 @@ int	forking(t_token *current, int fdi, t_vars *vars)
 				if (is_builtin(current, vars) == -1)
 				{
 					// printf("current : %s\n", current->cont);
-					ft_putstr_fd(current->cont, 2);
+					ft_putstr_fd(remove_quotes(current->cont), 2);
 					ft_putstr_fd(": cmd not found\n", 2);
 					exit(0);
 				}
 			}
 			format_execve(vars, current);
+			free(vars->av);
 			exit(0);
 		}
 		if (fdi != 0)
@@ -137,6 +138,7 @@ void	fd_catch(t_vars *vars, t_token *current)
 	i = 0;
 	while ((i++ < (vars->pipe_count)) && ((vars->pid_count) < 32766))
 	{
+		finding_paths(vars);
 		fd = forking(current, redirect_input(current, fd), vars);
 		current = skip_group(current);
 	}
