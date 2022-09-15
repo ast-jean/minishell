@@ -69,13 +69,14 @@ void	free_tokens(t_vars *vars);
 void	fd_catch(t_vars *vars, t_token *current);
 t_token	*group_skip(t_token *current_token);
 
-// SET_GORUPS.C
+// SET_GROUPS.C
 int	init_groups(t_vars *vars);
 int	parsing_pipes(t_vars *vars);
 
 //	REDIRECTION.C
-int	redirect_input(t_token *token, int fd_init, t_vars *vars);
-int	redirect_output(t_token *token, int fd_init, t_vars *vars);
+int	redirect_input(t_token *token, int fd_init);
+int	redirect_output(t_token *token, int fd_init);
+t_token *rm_redir(t_token *token, t_vars *vars);
 
 //NOTE: PARSING
 // PARSING_UTILS.C
@@ -96,6 +97,7 @@ void	debug_print_tokens(t_vars *vars); //temp_function
 void	*access_ptr(t_vars *vars, int i);
 t_token	*new_token_after(t_token *after_this_one, char* file_name);
 t_token *remove_token(t_token *remove, t_vars *vars);
+
 //NEWTOKEN.C
 char	*newtoken_q(char *line, int *i, char c);
 char	*newtoken_s(char *line, int *i);
@@ -115,8 +117,7 @@ int	builtin_env(t_vars *vars);
 int	builtin_unset(t_vars *vars, char *var_name);
 int	builtin_export(t_token *token, t_vars *vars);
 // ECHO_CD.C
-//// void	builtin_cd(char **env, t_vars vars);
 int	builtin_echo(t_vars *vars);
-// void	builtin_echo(char **args, char **env);
+//// void	builtin_cd(char **env, t_vars vars);
 //NOTE: ------------------------------------------------
 #endif

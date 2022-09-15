@@ -67,6 +67,7 @@ void*	check_herestrings(t_token *current, t_vars *vars)
 	// free(line);
 	return (current);
 }
+
 void*	check_heredocs(t_token *current, t_vars *vars)
 {
 	char	*line;
@@ -122,5 +123,7 @@ int	check_here(t_vars *vars)
 		else
 			current = current->next;
 	}
+	// if (line)
+	// 	free(line);
 	return (1);
 }

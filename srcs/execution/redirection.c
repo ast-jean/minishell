@@ -1,7 +1,7 @@
 #include "../../include/minishell.h"
 // NOTE: Redirections ( > , < , >>)
 
-int	redirect_input(t_token *token, int fd_init, t_vars *vars)
+int	redirect_input(t_token *token, int fd_init)
 {
 	int	group;
 	int fd;
@@ -15,44 +15,62 @@ int	redirect_input(t_token *token, int fd_init, t_vars *vars)
 			if (fd != 0)
 				close(fd);
 			fd = open(remove_quotes(token->next->cont), O_RDONLY);
-			token->next = remove_token(token->next, vars);
-			token = remove_token(token, vars);
 		}
-		else
 			token = token->next;
 	}
-	// printf("FINAL FDIN = %d\n", fd);
 	return (fd);
 }
 
-int	redirect_output(t_token *token, int fd_init, t_vars *vars)
+int	redirect_output(t_token *token, int fd_init)
 {
 	int		group;
 	int		fd;
 
 	group = token->group_num;
 	fd = fd_init;
-	while (token->group_num == group && token->next)
+	while (token->next && token->group_num == group)
 	{
 		if (ft_strcmp(token->cont, ">") == 0)
 		{
 			if (fd != 1)
 				close(fd);
 			fd = open(remove_quotes(token->next->cont), O_TRUNC | O_CREAT | O_RDWR, 0777);
-			token->next = remove_token(token->next, vars);
-			token = remove_token(token, vars);
 		}
 		else if (ft_strcmp(token->cont, ">>") == 0)
 		{
 			if (fd != 1)
 				close(fd);
 			fd = open(remove_quotes(token->next->cont), O_APPEND | O_CREAT | O_RDWR, 0777);
-			token->next = remove_token(token->next, vars);
-			token = remove_token(token, vars);
 		}
+			token = token->next;
+	}
+	return (fd);
+}
+
+t_token	*rm2tokens(t_token* token, t_vars *vars)
+{
+	token->next = remove_token(token->next, vars);
+	token = remove_token(token, vars);
+	return (token);
+}
+
+t_token *rm_redir(t_token *token, t_vars *vars)
+{
+	int	group;
+
+	group = token->group_num;
+	while (token->next && token->next->group_num == group)
+	{
+		if (ft_strcmp(token->cont, "<") == 0)
+			token = rm2tokens(token, vars);
+		else if (ft_strcmp(remove_quotes(token->cont), ">") == 0)
+			token = rm2tokens(token, vars);
+		else if (ft_strcmp(remove_quotes(token->cont), ">>") == 0)
+			token = rm2tokens(token, vars);
 		else
 			token = token->next;
 	}
-	// printf("FINAL FDOUT = %d\n", fd);
-	return (fd);
+	while (token->prev != NULL && token->prev->group_num == group)
+		token = token->prev;
+	return (token);
 }
