@@ -40,6 +40,7 @@ int	builtin_echo(t_vars *vars)
 	bool	n;
 
 		// if (is_n(token->cont))
+	n = false;
 	token = vars->token->next;
 	while (is_n(remove_quotes(token->cont)))
 	{
@@ -48,11 +49,12 @@ int	builtin_echo(t_vars *vars)
 	}
 	while (token && ft_strcmp(token->cont, "|") != 0)
 	{
-		dprintf(2, "1: %s\n", token->cont);
-		dprintf(2, "2: %s\n", remove_quotes(token->cont));
+		// dprintf(2, "1: %s\n", token->cont);
+		// dprintf(2, "2: %s\n", remove_quotes(token->cont));
 		ft_putstr_fd(remove_quotes(token->cont), 1);
-		// if (token->next != NULL)
-			// write(1, " ", 1);
+		// dprintf(2, "[p = %p, s = %s]\n", token->next, token->next->cont);
+		if (token->next != NULL)
+			write(1, " ", 1);
 		token = token->next;
 	}
 	if (n == true)
@@ -61,10 +63,6 @@ int	builtin_echo(t_vars *vars)
 		ft_putstr_fd("\n", 1);
 	return (0);
 }
-
-
-
-
 
 // int	finding_pwd(t_vars *vars)
 // {
