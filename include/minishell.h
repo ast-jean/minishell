@@ -121,6 +121,6 @@ int	builtin_unset(t_vars *vars, char *var_name);
 int	builtin_export(t_token *token, t_vars *vars);
 // ECHO_CD.C
 int	builtin_echo(t_vars *vars);
-// int	builtin_cd(char **env, t_vars vars);
+int	builtin_cd(t_vars *vars);
 //NOTE: ------------------------------------------------
 #endif
