@@ -27,6 +27,7 @@ typedef struct s_vars
 	int		heredoc_count;
 	char	*pwd;
 	char	*oldpwd;
+	char	*line;
 	t_token	*token;
 	int		pipe_count;
 	int		pid[32768];

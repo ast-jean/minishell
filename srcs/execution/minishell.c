@@ -48,18 +48,21 @@ void	remove_tmp_files(t_vars *vars)
 {
 	int		i;
 	char	*filename;
+	char	*num;
 
 	i = -1;
 	while(++i <= vars->heredoc_count)
 	{	
-		filename = ft_strjoin(".tmp/temp_heredoc", ft_itoa(i));
+		num = ft_itoa(i);
+		filename = ft_strjoin(".tmp/temp_heredoc", num);
 		unlink(filename);
+		free(num);
+		free(filename);
 	}
 }
 
 int	main(int argc, char **argv, char **env)
 {
-	char	*line;
 	t_vars	vars;	
 	char	*prompt;
 
@@ -67,18 +70,18 @@ int	main(int argc, char **argv, char **env)
 		return (-1);
 	(void)argv;
 	prompt = "$>";
-	line = "";
+	vars.line = "";
 	init_shell(&vars, env);
 	signal(SIGINT, handler);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
-		line = readline(prompt);
-		if (!line)
+		vars.line = readline(prompt);
+		if (!vars.line)
 			quit_shell(&vars);
 		else
-			add_history(line);
-		executing_command(line, &vars);
+			add_history(vars.line);
+		executing_command(vars.line, &vars);
 		remove_tmp_files(&vars);
 	}
 	quit_shell(&vars);

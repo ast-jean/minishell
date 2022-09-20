@@ -15,7 +15,12 @@ void free_tokens(t_vars *vars)
 
 void	quit_shell(t_vars *vars)
 {
-	(void)vars;
+	// (void)vars;
+	// while (vars->env[i])
+	// 	free(vars->env[i++]);
+	// free (vars->env);
+	free(vars->line);
+
 	// free_tokens(vars);
 	//delete history
 
