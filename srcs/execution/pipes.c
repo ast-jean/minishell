@@ -104,7 +104,7 @@ int	forking(t_token *current, int fdi, t_vars *vars)
 			dup2(fdo, 1);
 			if (fdo != 1)
 				close(fdo);
-			if (accessing(vars, current) == -1)
+			// if (accessing(vars, current) == -1)
 			{
 				if (is_builtin(current, vars) == -1)
 				{
