@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 14:51:16 by ast-jean          #+#    #+#             */
-/*   Updated: 2022/09/14 14:22:41 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/09/15 14:40:17 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ int	get_pos(char *str, char *s)
 
 	pos = 0;
 	while(s[pos])
-	{
 		pos++;
-	}
-	return(ft_strlen(str) - pos + 1);
+	if(str)
+		return(ft_strlen(str) - pos + 1);
+	else	
+		return (0);
 }
 
 char	*ft_addchar(char *str, char c, char *s)
@@ -40,13 +41,20 @@ char	*ft_addchar(char *str, char c, char *s)
 	old_temp = str;
 	i = 0;
 	j = 0;
-	new = ft_calloc((int)(ft_strlen(str)) + 2, sizeof(char)); //change calloc pour ft_calloc
-	while(old_temp[i] && i < get_pos(str, s))
-		new[j++] = old_temp[i++];
-	new[j++] = c;
-	while(old_temp[i])
-		new[j++] = old_temp[i++];
-	new[j] = '\0';
-	// free(str);
+	if(!str)
+	{
+		new = ft_calloc(2, sizeof(char));
+		new[0] = c;
+	}
+	else
+	{
+		new = ft_calloc((int)(ft_strlen(str)) + 2, sizeof(char));
+		while(old_temp[i] && i < get_pos(str, s))
+			new[j++] = old_temp[i++];
+		new[j++] = c;
+		while(old_temp[i])
+			new[j++] = old_temp[i++];
+		new[j] = '\0';
+	}
 	return (new);
 }

@@ -4,7 +4,7 @@ TODO:
 [X] Splitamary
 [ ] check <<
 	[ ] $Var within <<
-	[ ] Signal ctrl-D close heredoc
+	[X] Signal ctrl-D close heredoc
 [ ] Redirections
 	[ ] <	rediriger l’entrée
 	[ ] >	rediriger la sortie
@@ -27,6 +27,4 @@ TOKNOW:
 	- simple quotes = litéral
 
  TOFIX  
-	- signals get displayed //dont care
-	- when quotes are not closed it creates SEGFAULT. should be fixed in tokenize
-		- also check check_quotes() in syntax_error.c
+	- After error with << <<< it stil tries to run the command

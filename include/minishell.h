@@ -49,17 +49,20 @@ int		accessing(t_vars *vars, t_token *token);
 void	executing_simple_cmds(t_vars *vars, t_token *token);
 
 // HEREDOCS.c
-int	check_here(t_vars *vars);
-char *remove_quotes(char *str);
+int		check_here(t_vars *vars);
+char	*remove_quotes(char *str);
 
 //SYNTAX_ERROR.c
-int	syntax_error(char *token);
-int	is_exception(t_token *token);
-int	check_quotes(char *str);
+int		syntax_error(char *token);
+int		is_exception(t_token *token);
+int		check_quotes(char *str);
 
 // VARIABLES.c
-char *check_var(char *line, t_vars *vars);
-char *check_var_heredoc(char *line, t_vars *vars);
+char 	*check_var(char *line, t_vars *vars);
+char 	*check_var_heredoc(char *line, t_vars *vars);
+char	*add_varcontent(char *line, char *var_name, char *var_value);
+
+
 
 //QUIT.C
 void	quit_shell(t_vars *vars);
@@ -70,22 +73,22 @@ void	fd_catch(t_vars *vars, t_token *current);
 t_token	*group_skip(t_token *current_token);
 
 // SET_GROUPS.C
-int	init_groups(t_vars *vars);
-int	parsing_pipes(t_vars *vars);
+int		init_groups(t_vars *vars);
+int		parsing_pipes(t_vars *vars);
 
 //	REDIRECTION.C
-int	redirect_input(t_token *token, int fd_init);
-int	redirect_output(t_token *token, int fd_init);
+int		redirect_input(t_token *token, int fd_init);
+int		redirect_output(t_token *token, int fd_init);
 t_token *rm_redir(t_token *token, t_vars *vars);
 
 //NOTE: PARSING
 // PARSING_UTILS.C
-int	how_many_quotes(char *str);
-int	len_of_this_word(char *line, int i);
-int	len_single_quoted_word(char *line, int i);
-int	len_double_quoted_word(char *line, int i);
-int	nbr_of_words(char *s);
-int	nbr_of_letters(char *s, int i, int code);
+int		how_many_quotes(char *str);
+int		len_of_this_word(char *line, int i);
+int		len_single_quoted_word(char *line, int i);
+int		len_double_quoted_word(char *line, int i);
+int		nbr_of_words(char *s);
+int		nbr_of_letters(char *s, int i, int code);
 
 //INIT_TOKEN.C
 void	creating_tokens(char *line, t_vars *vars);
