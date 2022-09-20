@@ -5,11 +5,11 @@ TODO:
 [ ] check <<
 	[ ] $Var within <<
 	[X] Signal ctrl-D close heredoc
-[ ] Redirections
-	[ ] <	rediriger l’entrée
-	[ ] >	rediriger la sortie
-	[ ] >>	rediriger la sortie en mode append
-[ ] Pipes: looper les pipes (et ajouter dans le parsing)
+[X] Redirections
+	[X] <	rediriger l’entrée
+	[X] >	rediriger la sortie
+	[X] >>	rediriger la sortie en mode append
+[X] Pipes: looper les pipes (et ajouter dans le parsing)
 [ ] Gérer les Variables d'env $ (attention a juste "=")
 [ ] Gérer $?
 [ ] Add $Vars and remove_quotes()
