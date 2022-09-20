@@ -47,6 +47,7 @@ int	builtin_echo(t_vars *vars)
 	}
 	while (token && ft_strcmp(token->cont, "|") != 0)
 	{
+		// dprintf(2, "Hello from inside");
 		ft_putstr_fd(remove_quotes(check_var_heredoc(token->cont, vars)), 1);
 		if (token->next != NULL && token->next->next != NULL)
 			write(1, " ", 1);
