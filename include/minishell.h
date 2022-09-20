@@ -91,7 +91,7 @@ int		nbr_of_words(char *s);
 int		nbr_of_letters(char *s, int i, int code);
 
 //INIT_TOKEN.C
-void	creating_tokens(char *line, t_vars *vars);
+int		creating_tokens(char *line, t_vars *vars);
 void	push_tk(char *cont, t_token *token, t_token *first, t_token *prev, int i, int count);
 void	executing_command(char *line, t_vars *vars);
 
@@ -121,6 +121,6 @@ int	builtin_unset(t_vars *vars, char *var_name);
 int	builtin_export(t_token *token, t_vars *vars);
 // ECHO_CD.C
 int	builtin_echo(t_vars *vars);
-//// void	builtin_cd(char **env, t_vars vars);
+// int	builtin_cd(char **env, t_vars vars);
 //NOTE: ------------------------------------------------
 #endif

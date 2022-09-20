@@ -5,7 +5,7 @@ void free_tokens(t_vars *vars)
 	t_token *temp;
 
 	temp = vars->token->first;
-	while (temp->next)
+	while (vars && temp)
 	{
 		// printf("token->%s\n", temp->cont);
 		temp = temp->next;

@@ -10,7 +10,7 @@ char *remove_quotes(char *str)
 
 	new = str;
 	i = 0;
-	while(new[i])
+	while( new && new[i])
 	{
 		if(new[i] == '\"' || new[i] == '\'')
 		{
@@ -22,12 +22,13 @@ char *remove_quotes(char *str)
 					break ;
 				i++;
 			}
-			if(new[i])
+			if (new[i])
 				new = ft_rmchar(new, &new[i--]);
 		}
 		i++;
 	}
-	new[i] = '\0';
+	// 	new[i] = '\0'; //caused bus error
+
 	return (new);
 }
 

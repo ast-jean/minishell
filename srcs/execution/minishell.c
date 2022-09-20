@@ -18,8 +18,7 @@ void	executing_command(char *line, t_vars *vars)
 
 	if (ft_strlen(line) == 0)
 		return ;
-	creating_tokens(line, vars);
-	if (vars->token != NULL)
+	if (!creating_tokens(line, vars))
 	{
 		if(!check_here(vars))
 			return ;

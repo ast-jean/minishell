@@ -18,7 +18,7 @@ int	count_list(char **list)
 	return (i);
 }
 
-void	creating_tokens(char *line, t_vars *vars)
+int	creating_tokens(char *line, t_vars *vars)
 {
 	char	**line_content;
 	int		i;
@@ -30,7 +30,7 @@ void	creating_tokens(char *line, t_vars *vars)
 	if (!line_content)
 	{
 		ft_putstr_fd("minishell: syntax error missing quote\n", 2);
-		return ;
+		return (0);
 	}
 	count = count_list(line_content);
 	i = 0;
@@ -46,4 +46,5 @@ void	creating_tokens(char *line, t_vars *vars)
 		i++;
 	}
 	vars->token = vars->token->first;
+	return (0);
 }
