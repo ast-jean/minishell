@@ -114,7 +114,7 @@ char	*add_varcontent(char *line, char *var_name, char *var_value)
 	return (newline);
 }
 
-char *check_var_heredoc(char *line, t_vars *vars)
+char *check_var(char *line, t_vars *vars)
 {
 	int i;
 	char *var_name;
