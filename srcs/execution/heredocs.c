@@ -84,7 +84,7 @@ void*	check_heredocs(t_token *current, t_vars *vars)
 	current = remove_token(current->next, vars);
 	vars->heredoc_count++;
 	// free(name);
-	free(line);
+	// free(line);
 	return (current);
 }
 

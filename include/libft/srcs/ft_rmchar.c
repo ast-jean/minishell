@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 14:51:16 by ast-jean          #+#    #+#             */
-/*   Updated: 2022/09/14 14:46:02 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/09/20 14:52:09 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 char	*ft_rmchar(char *str, char *s)
 {
 	char	*new;
-	int		i;
+	int	 	i;
 	int		j;
 	int		char_pos;
 
