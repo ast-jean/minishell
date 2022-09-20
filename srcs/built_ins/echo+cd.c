@@ -59,49 +59,49 @@ int	builtin_echo(t_vars *vars)
 	return (0);
 }
 
-int	finding_pwd(t_vars *vars)
-{
-	int	i;
-	int	p;
+// int	finding_pwd(t_vars *vars)
+// {
+// 	int	i;
+// 	int	p;
 
-	i = -1;
-	j = -1;
-	while (vars->env[++i] != NULL)
-	{
-		if (ft_strnstr(vars->env[i], "PWD=", 4) != NULL)
-		{
-			return (i);
-		}
-		else
-			return (-1);		
-	}
-}
+// 	i = -1;
+// 	// j = -1;
+// 	while (vars->env[++i] != NULL)
+// 	{
+// 		if (ft_strnstr(vars->env[i], "PWD=", 4) != NULL)
+// 		{
+// 			return (i);
+// 		}
+// 		else
+// 			return (-1);		
+// 	}
+// }
 
-int	builtin_cd(t_vars *vars)
-{
-	t_token *token;
-	int		i;
-	int		j;
+// int	builtin_cd(t_vars *vars)
+// {
+// 	t_token *token;
+// 	int	i;
+// 	int	j;
 
-	if (finding_pwd(vars) != -1)
-		i = finding_pwd(vars);
-	else
-		return (0);
-	j = -1;
-	while (vars->env[i][++j] != '\0');
-	if (token->next->cont == "..")
-	{
-		while (vars->env[i][j] != '/')
-		{
-			vars->env[i][j--] == '\0';
-			// j--;
-		}
-	}
-	else if (token->next->cont != "..") //?
-	{
-		ft_strjoin(token->cont, token->next->cont);
-	}
-}
+// 	if (finding_pwd(vars) != -1)
+// 		i = finding_pwd(vars);
+// 	else
+// 		return (0);
+// 	j = -1;
+// 	while (vars->env[i][++j] != '\0');
+// 	if (token->next->cont == "..")
+// 	{
+// 		while (vars->env[i][j] != '/')
+// 		{
+// 			vars->env[i][j--] == '\0';
+// 			// j--;
+// 		}
+// 	}
+// 	else if (token->next->cont != "..") //?
+// 	{
+// 		ft_strjoin(token->cont, token->next->cont);
+// 	}
+// }
 
 
 /*
