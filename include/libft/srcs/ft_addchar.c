@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 14:51:16 by ast-jean          #+#    #+#             */
-/*   Updated: 2022/09/15 14:40:17 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/09/20 14:50:03 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@
 
 int	get_pos(char *str, char *s)
 {
-	int pos;
+	int	pos;
 
 	pos = 0;
 	while(s[pos])
 		pos++;
 	if(str)
 		return(ft_strlen(str) - pos + 1);
-	else	
+	else
 		return (0);
 }
 

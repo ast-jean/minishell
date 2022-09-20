@@ -69,12 +69,27 @@ char	*find_variable(char **env, char *varname)
 	return (var_value);
 }
 
+char	*delete_var_name(int pos2 ,char *newline)
+{
+	int	i;
+	char *temp;
 
+	i = pos2;
+	while(i >= 0)
+	{
+		if(newline[i] == '$')
+		{
+			newline = ft_rmchar(newline, &newline[i--]);
+			break ;
+		}
+		else
+			newline = ft_rmchar(newline, &newline[i--]);
+	}
+	temp = newline;
+	free(newline);
+	return (temp);
+}
 
-// TOFIX  
-// - This shit's broken with normal cases
-// - If variable doesnt exist if should erase, but it SEGFAULTs
-// - Should loop to multiple $VARs
 char	*add_varcontent(char *line, char *var_name, char *var_value)
 {
 	char	*newline;
@@ -84,34 +99,20 @@ char	*add_varcontent(char *line, char *var_name, char *var_value)
 	int		i;
 
 	posstr = find_var_inline(line);
-	printf("posstr = %s\n", posstr);
 	newline = NULL;
 	i = -1;
 	pos = 0;
-	while(posstr[pos++]);
-	pos += (int)ft_strlen(var_name) - 1;
+	while(posstr[pos])
+		pos++;
+	pos--;
+	pos = ft_strlen(line) - pos - 1 + ft_strlen(var_name);
 	pos2 = pos;
-	if (var_value[++i])
-	{
-		newline = line;
-		while(var_value[i])
-			newline = ft_addchar(newline, var_value[i++], &newline[pos++]);
-		i = pos2;
-		while(i >= 0)
-		{
-			if(newline[i] == '$')
-			{
-				newline = ft_rmchar(newline, &newline[i--]);
-				break ;
-			}
-			else
-				newline = ft_rmchar(newline, &newline[i--]);
-		}
-	}
+	newline = line;
+	while(var_value[++i])
+		newline = ft_addchar(newline, var_value[i], &newline[pos++]);
+	newline = delete_var_name(pos2, newline);
 	return (newline);
 }
-
-
 
 char *check_var_heredoc(char *line, t_vars *vars)
 {
@@ -122,19 +123,14 @@ char *check_var_heredoc(char *line, t_vars *vars)
 
 	i = 0;	
 	newline = line;
-	if(find_var_inline(line))// TOFIX  change ft_strchr to skip single quotes
+	if(find_var_inline(line))
 	{
 		while (find_var_inline(newline))
 		{
-			var_name = save_varname(find_var_inline(line)+ 1); // TOFIX  change ft_strchr to skip single quotes
+			var_name = save_varname(find_var_inline(line)+ 1);
 			var_value = find_variable(vars->env, var_name);
 			newline = add_varcontent(line, var_name, var_value);
-/*debug*/printf("\033[43mvar_name = %s\033[0m\n", var_name); 
-/*debug*/printf("\033[43mnewline= %s\033[0m\n", newline);
-/*debug*/printf("\033[43mAFTER newline= %s\033[0m\n", newline);
 		} 
-		// free(line);
-		// free(var_name)
 	return (newline);
 	}
 	else
