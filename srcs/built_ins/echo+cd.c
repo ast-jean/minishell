@@ -90,7 +90,7 @@ int	builtin_cd(t_vars *vars)
 	dprintf(2, " i = %d\n", i);
 	j = -1;
 	while (vars->env[i][++j] != '\0');
-	if (ft_strcmp(token->next->cont, ".."))
+	if (ft_strcmp(token->next->cont, "..") == 0)
 	{
 		while (vars->env[i][j] != '/')
 		{

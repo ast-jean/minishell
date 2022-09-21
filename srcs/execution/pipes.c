@@ -18,6 +18,8 @@ int	is_builtin(t_token *current, t_vars *vars)
 		return (builtin_echo(vars));
 	else if(current && !ft_strcmp(remove_quotes(current->cont), "unset"))
 		return (builtin_unset(vars, remove_quotes(current->next->cont)));
+	else if (current && !ft_strcmp(remove_quotes(current->cont), "cd"))
+		return (builtin_cd(vars));
 	return (-1);
 }
 
