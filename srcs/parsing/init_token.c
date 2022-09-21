@@ -86,6 +86,6 @@ int	creating_tokens(char *line, t_vars *vars)
 		current->cont = split[i++];
 	}
 	current->next = NULL;
-	// free2d(split);
+	free(split);
 	return (0);
 }
