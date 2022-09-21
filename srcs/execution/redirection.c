@@ -8,13 +8,15 @@ int	redirect_input(t_token *token, int fd_init)
 
 	group = token->group_num;
 	fd = fd_init;
-	while (token->group_num == group && token->next)
+	while (token && token->next && token->group_num == group)
 	{
 		if (ft_strcmp(token->cont, "<") == 0)
 		{
 			if (fd != 0)
 				close(fd);
 			fd = open(remove_quotes(token->next->cont), O_RDONLY);
+			if (fd == -1)
+				ft_putstr_fd(remove_quotes(token->next->cont), 2);
 		}
 			token = token->next;
 	}
@@ -28,7 +30,7 @@ int	redirect_output(t_token *token, int fd_init)
 
 	group = token->group_num;
 	fd = fd_init;
-	while (token->next && token->group_num == group)
+	while (token && token->next && token->group_num == group)
 	{
 		if (ft_strcmp(token->cont, ">") == 0)
 		{
@@ -59,7 +61,7 @@ t_token *rm_redir(t_token *token, t_vars *vars)
 	int	group;
 
 	group = token->group_num;
-	while (token->next && token->next->group_num == group)
+	while (token && token->next && token->next->group_num == group)
 	{
 		if (ft_strcmp(token->cont, "<") == 0)
 			token = rm2tokens(token, vars);

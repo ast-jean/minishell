@@ -50,6 +50,7 @@ char	**split_del(char *line, char *d_found, int len)
 		else
 			increm(&i, &j);
 	}
+	free(d_found);
 	return (split);
 }
 
