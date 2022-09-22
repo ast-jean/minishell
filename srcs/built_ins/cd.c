@@ -98,14 +98,30 @@
 
 
 //  NEW 
+//  UPDATE VARS->ENV WHEN NEEDED
+//  NEW 
 
 int	builtin_cd(t_vars *vars)
 {
-	// char *str;
-	(void)vars;
-	// str = getenv("PATH");
-	ft_putstr_fd(ft_strjoin(getenv("PWD"), "\n"), 1);
-	// ft_putstr_fd("\n", 1);
+	t_token *token;
+	char s[100];
+	// char *oldpwd;
+
+	token = vars->token->first;
+	// if (getenv("OLDPWD") != NULL)
+	// 	oldpwd = ft_strjoin("OLDPWD=", getenv("PWD"));
+	if (ft_strcmp(token->first->cont, "cd") == 0)
+	{
+		// ft_putstr_fd("IM IN!\n", 1);
+		// if (ft_strcmp(chdir(".."), 0) == 0) NOTE: temp value?? ask baby
+		// {
+			// ft_putstr_fd("IM IN TOO!\n", 1);
+			printf("OLDPWD=%s\n", getcwd(s, 100));
+			chdir("..");
+			// ft_putstr_fd(ft_strjoin(getenv("PWD"), "\n"), 1);
+			printf("PWD=%s\n", getcwd(s, 100));
+		// }
+	}
 	return (1);
 }
 

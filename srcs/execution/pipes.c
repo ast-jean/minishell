@@ -11,7 +11,7 @@ int	is_builtin(t_token *current, t_vars *vars)
 	if (current && !ft_strcmp(remove_quotes(current->cont), "export"))
 		return (builtin_export(current, vars));
 	else if (current && !ft_strcmp(remove_quotes(current->cont), "pwd"))
-		return (builtin_pwd(vars));
+		return (builtin_pwd());
 	else if (current && !ft_strcmp(remove_quotes(current->cont), "env"))
 		return (builtin_env(vars));
 	else if (current && !ft_strcmp(remove_quotes(current->cont), "echo"))
