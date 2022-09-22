@@ -4,7 +4,7 @@
 
 int	syntax_error(char *token)
 {
-	if(!ft_strcmp(token, ""))
+	if (!ft_strcmp(token, ""))
 		printf("minishell: syntax error near unexpected token 'newline'\n");
 	else
 		printf("minishell: syntax error near unexpected token '%s'\n", token);
@@ -13,10 +13,10 @@ int	syntax_error(char *token)
 
 int	is_exception(t_token *token)
 {
-	if(!token->next->next)
+	if (!token->next)
 		return (syntax_error("newline"));
 	token = token->next;
-	if((token->cont[0] == '<') || (token->cont[0] == '>') || (token->cont[0] == '|'))
+	if ((token->cont[0] == '<') || (token->cont[0] == '>') || (token->cont[0] == '|'))
 		return (syntax_error(token->cont));
 	return (1);
 }

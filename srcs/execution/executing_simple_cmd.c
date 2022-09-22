@@ -17,7 +17,7 @@ void	finding_paths(t_vars *vars)
 	if (path_str == NULL)
 		return ;
 	if (vars->path_array != NULL)
-		free(vars->path_array);
+		free2d(vars->path_array);
 	vars->path_array = ft_split(path_str, ':');
 }
 
