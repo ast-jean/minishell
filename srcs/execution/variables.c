@@ -44,12 +44,14 @@ char *find_var_inline(char *line)
 
 char	*find_variable(char **env, char *varname)
 {
-	int i;
-	int j;
-	char *var_value;
+	int		i;
+	int		j;
+	int		k;
+	char	*var_value;
 
 	var_value = NULL;
 	i = -1;
+	k = 0;
 	while (env[++i])
 	{
 		j = 0;
@@ -59,10 +61,7 @@ char	*find_variable(char **env, char *varname)
 		{
 			j = (int)ft_strlen(varname) + 1;
 			while(env[i][j])
-			{	
-				var_value = ft_addchar(var_value, env[i][j], &var_value[j]);
-				j++;
-			}
+				var_value = ft_addchar(var_value, env[i][j++], &var_value[k++]);
 			return (var_value);
 		}
 	}
@@ -97,7 +96,7 @@ char	*add_varcontent(char *line, char *var_name, char *var_value)
 	int		pos;
 	int		pos2;
 	int		i;
-
+	printf("\033[43mdebug add_var: \033[0mvar_value =%s\033[43m-\033[0m\n", var_value);
 	posstr = find_var_inline(line);
 	newline = NULL;
 	i = -1;
@@ -108,9 +107,15 @@ char	*add_varcontent(char *line, char *var_name, char *var_value)
 	pos = ft_strlen(line) - pos - 1 + ft_strlen(var_name);
 	pos2 = pos;
 	newline = line;
+	printf("\033[43mdebug add_var1: \033[0mnewline =%s\033[43m-\033[0m\n", newline);
 	while(var_value[++i])
+	{
+		printf("\033[43mdebug add_var2.1: \033[0mnewline =%s\033[43m-\033[0m\n", newline);
 		newline = ft_addchar(newline, var_value[i], &newline[pos++]);
+		printf("\033[43mdebug add_var2.2: \033[0mnewline =%s\033[43m-\033[0m\n", newline);
+	}
 	newline = delete_var_name(pos2, newline);
+	printf("\033[43mdebug add_var3: \033[0mnewline =%s\033[43m-\033[0m\n", newline);
 	return (newline);
 }
 
@@ -123,16 +128,19 @@ char *check_var(char *line, t_vars *vars)
 
 	i = 0;	
 	newline = line;
-	if(find_var_inline(line))
-	{
+
 		while (find_var_inline(newline))
 		{
-			var_name = save_varname(find_var_inline(line)+ 1);
+			printf("\033[43mdebug: \033[0mi =%d\033[43m-\033[0m\n", i++);
+			var_name = save_varname(find_var_inline(newline)+ 1);
+			printf("\033[43mdebug: \033[0mvar_name =%s\033[43m-\033[0m\n", var_name);
 			var_value = find_variable(vars->env, var_name);
-			newline = add_varcontent(line, var_name, var_value);
+			printf("\033[43mdebug: \033[0mvar_value =%s\033[43m-\033[0m\n", var_value);
+			newline = add_varcontent(newline, var_name, var_value);
+			printf("\033[43mdebug: \033[0mnewline =%s\033[43m-\033[0m\n", newline);
+			// if (var_name && !var_value)
+			// 	ft_putstr_fd("\n", 1);
+
 		} 
-	return (newline);
-	}
-	else
-		return (line);
+	return (			printf("\033[43mdebug: \033[0mnewline return=%s\033[43m-\033[0m\n", newline), newline);
 }

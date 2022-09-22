@@ -30,3 +30,4 @@ TOKNOW:
 	- After error with << <<< it stil tries to run the command
 	- exit with exit code
 	- Added Include/readline/ so people dont have to download on brew (we should link it in minishell.h)
+	- $VAR should display if next is $ ex: $HOME$USER$PATH
