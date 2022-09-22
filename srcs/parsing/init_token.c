@@ -70,7 +70,7 @@ int	creating_tokens(char *line, t_vars *vars)
 	if (!split)
 	{
 		ft_putstr_fd("minishell: syntax error missing quote\n", 2);
-		return (0);
+		return (-1);
 	}
 	vars->token = malloc(sizeof(t_token));
 	current = vars->token;
