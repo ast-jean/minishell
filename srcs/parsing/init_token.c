@@ -29,8 +29,8 @@ int	creating_tokens(char *line, t_vars *vars)
 	line_content = tokenize(line);
 	if (!line_content)
 	{
-		ft_putstr_fd("error: missing quote\n", 2);
-		return (-1);
+		ft_putstr_fd("minishell: syntax error missing quote\n", 2);
+		return (0);
 	}
 	count = count_list(line_content);
 	i = 0;

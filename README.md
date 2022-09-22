@@ -4,12 +4,12 @@ TODO:
 [X] Splitamary
 [ ] check <<
 	[ ] $Var within <<
-	[ ] Signal ctrl-D close heredoc
-[ ] Redirections
-	[ ] <	rediriger l’entrée
-	[ ] >	rediriger la sortie
-	[ ] >>	rediriger la sortie en mode append
-[ ] Pipes: looper les pipes (et ajouter dans le parsing)
+	[X] Signal ctrl-D close heredoc
+[X] Redirections
+	[X] <	rediriger l’entrée
+	[X] >	rediriger la sortie
+	[X] >>	rediriger la sortie en mode append
+[X] Pipes: looper les pipes (et ajouter dans le parsing)
 [ ] Gérer les Variables d'env $ (attention a juste "=")
 [ ] Gérer $?
 [ ] Add $Vars and remove_quotes()
@@ -27,6 +27,6 @@ TOKNOW:
 	- simple quotes = litéral
 
  TOFIX  
-	- signals get displayed //dont care
-	- when quotes are not closed it creates SEGFAULT. should be fixed in tokenize
-		- also check check_quotes() in syntax_error.c
+	- After error with << <<< it stil tries to run the command
+	- exit with exit code
+	- Added Include/readline/ so people dont have to download on brew (we should link it in minishell.h)
