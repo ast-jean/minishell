@@ -5,7 +5,9 @@
 int	builtin_pwd(t_vars *vars)
 {
 // pwd (no flag)
-	printf("%s\n", vars->pwd);
+	vars->pwd = ft_arraysrch(vars->env, "PWD=") + 4;
+	ft_putstr_fd(vars->pwd, 1);
+	ft_putstr_fd("\n", 1);
 	return (1);
 }
 

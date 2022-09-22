@@ -106,6 +106,12 @@ int	builtin_cd(t_vars *vars)
 }
 
 
+/* NOTE: 
+- changer vars->pwd pour l'actuel pwd
+- ajouter ft_substr pour le cd ..
+- ajouter ft_strjoin pour le cd "something"
+*/
+
 /*
 
 cd ..					| if (token->next->cont == "..")									--> must erase until '/'
