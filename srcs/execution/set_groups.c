@@ -8,14 +8,14 @@ int	init_groups(t_vars *vars)
 	vars->pipe_count = 0;
 	copy = vars->token->first;
 	i = 1;
-	while (copy->next)
+	while (copy)
 	{
-		while (copy->next && ft_strcmp(copy->cont, "|") != 0)
+		while (copy && ft_strcmp(copy->cont, "|") != 0)
 		{
 			copy->group_num = i;
 			copy = copy->next;
 		}
-		if (ft_strcmp(copy->cont, "|") == 0)
+		if (copy && ft_strcmp(copy->cont, "|") == 0)
 		{
 			(vars->pipe_count)++;
 			// copy = copy->next;
@@ -23,8 +23,6 @@ int	init_groups(t_vars *vars)
 		}
 		i++;
 	}
-			// dprintf(2, "hello\n");
-	// printf("pipecount : %d\n\n", vars->pipe_count);
 	if (vars->pipe_count >= (i - 1))
 		return (-1);
 	return (0);

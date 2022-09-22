@@ -27,6 +27,7 @@ typedef struct s_vars
 	int		heredoc_count;
 	char	*pwd;
 	char	*oldpwd;
+	char	*line;
 	t_token	*token;
 	int		pipe_count;
 	int		pid[32768];
@@ -67,6 +68,7 @@ char	*add_varcontent(char *line, char *var_name, char *var_value);
 //QUIT.C
 void	quit_shell(t_vars *vars);
 void	free_tokens(t_vars *vars);
+void	free2d(char **split);
 
 // PIPES.C
 void	fd_catch(t_vars *vars, t_token *current);

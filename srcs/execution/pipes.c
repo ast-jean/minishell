@@ -82,7 +82,7 @@ int	forking(t_token *current, int fdi, t_vars *vars)
 	// printf("current : %s\n", current->cont);
 	if (fdi == -1)
 	{
-		ft_putstr_fd("no such file or directory\n", 2);
+		ft_putstr_fd(": no such file or directory\n", 2);
 		write(pipefd[1], "", 0);
 		if (fdi != 0)
 			close(fdi);
@@ -143,6 +143,6 @@ void	fd_catch(t_vars *vars, t_token *current)
 		current = skip_group(current);
 	}
 	i = 0;
-	while (i <= vars->pid_count)
+	while (i <= (vars->pid_count - 1))
 		waitpid(vars->pid[i++], &vars->status, 0);
 }
