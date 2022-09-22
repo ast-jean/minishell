@@ -81,7 +81,7 @@ $(NAME) : $(OBJS_IN_DIR)
 
 $(OBJS_DIR)%.o : $(SRCS_DIR)%.c
 	@$(MAKE) -C include/libft
-	@mkdir -f .tmp
+	@mkdir -p .tmp
 	@mkdir -p $(OBJS_DIR)
 	@mkdir -p $(OBJS_DIR)/parsing
 	@mkdir -p $(OBJS_DIR)/execution

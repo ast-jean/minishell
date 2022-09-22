@@ -44,7 +44,7 @@ void*	check_herestrings(t_token *current, t_vars *vars)
 	name = ft_strjoin(".tmp/temp_heredoc", ft_itoa(vars->heredoc_count));
 	fd = open(name, O_RDWR | O_CREAT | O_TRUNC, 0777);
 	new_token_after(current, name);
-	line = ft_strjoin(check_var(line, vars), "\n");
+	line = ft_strjoin(check_var(line), "\n");
 	line = remove_quotes(line);
 	ft_putstr_fd(line, fd);
 	current = remove_token(current, vars);
@@ -72,7 +72,7 @@ void*	check_heredocs(t_token *current, t_vars *vars)
 	{
 		if (ft_strcmp(" ", line))
 		{
-			line = ft_strjoin(check_var(line, vars), "\n");
+			line = ft_strjoin(check_var(line), "\n");
 			ft_putstr_fd(line, fd);
 		}
 		rl_on_new_line();
