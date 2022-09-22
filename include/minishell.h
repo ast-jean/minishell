@@ -115,7 +115,7 @@ int		cnt_delims(char *line, char *delims);
 
 //NOTE: BUILT INS
 // PWD_ENV.C
-int	builtin_pwd(t_vars *vars);
+int	builtin_pwd(void);
 int	builtin_env(t_vars *vars);
 // EXPORT_UNSET.C
 int	builtin_unset(t_vars *vars, char *var_name);
