@@ -49,16 +49,6 @@
 // 	return (0);
 // }
 
-void	free2d(char **split)
-{
-	int	i;
-
-	i = 0;
-	while (split[i])
-		free(split[i++]);
-	free(split);
-}
-
 int	creating_tokens(char *line, t_vars *vars)
 {
 	char	**split;

@@ -79,7 +79,7 @@ int	main(int argc, char **argv, char **env)
 		vars.line = readline(prompt);
 		if (!vars.line)
 			quit_shell(&vars);
-		else
+		else if (ft_strcmp(vars.line, "") != 0)
 			add_history(vars.line);
 		executing_command(vars.line, &vars);
 		remove_tmp_files(&vars);

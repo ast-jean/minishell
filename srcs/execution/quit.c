@@ -13,14 +13,26 @@ void free_tokens(t_vars *vars)
 	}
 }
 
+void	free2d(char **split)
+{
+	int	i;
+
+	i = 0;
+	while (split[i])
+		free(split[i++]);
+	free(split);
+}
+
 void	quit_shell(t_vars *vars)
 {
 	// t_token *temp;
-	int	i = 0;
+	// int	i = 0;
 	// (void)vars;
-	while (vars->env[i])
-		free(vars->env[i++]);
-	free (vars->env);
+	if (vars->env)
+		free2d(vars->env);
+	if (vars->path_array)
+		free2d(vars->path_array);
+	// free(vars->line);
 	// if (vars->token)
 	// 	temp = vars->token->first;
 	// while (temp)

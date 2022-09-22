@@ -65,6 +65,7 @@ char *check_var_heredoc(char *line, t_vars *vars);
 //QUIT.C
 void	quit_shell(t_vars *vars);
 void	free_tokens(t_vars *vars);
+void	free2d(char **split);
 
 // PIPES.C
 void	fd_catch(t_vars *vars, t_token *current);

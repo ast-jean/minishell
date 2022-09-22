@@ -112,12 +112,20 @@ int	check_here(t_vars *vars)
 
 	current = vars->token->first;
 	vars->heredoc_count = 0;
-	while(current)
+	while (current)
 	{
 		if (current && current->cont && !ft_strcmp(current->cont, "<<"))
+		{
 			current = check_heredocs(current, vars);
+			if (!current)
+				return (0);
+		}
 		else if (current && current->cont && !ft_strcmp(current->cont, "<<<"))
+		{
 			current = check_herestrings(current, vars);
+			if (!current)
+				return (0);
+		}
 		else if (current && current->cont && (current->cont[0] == '<') && ft_strlen(current->cont) > 3)
 			return (syntax_error("<"));
 		else
