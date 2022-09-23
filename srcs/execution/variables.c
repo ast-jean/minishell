@@ -125,22 +125,21 @@ char *check_var(char *line)
 	char *var_value;
 	char *newline;
 
-	newline = malloc(ft_strlen(line)*sizeof(char));
-		printf("hello\n");
-		newline = ft_strcpy(newline, line);
-		printf("there\n");
+	newline = malloc(ft_strlen(line) * sizeof(char)); // Trying to find bug
+	newline = ft_strcpy(newline, line);
+	
 		printf("\033[43mdebug: \033[0mfind_var_inline =%s\033[43m-\033[0m\n", find_var_inline(newline));
-		while (find_var_inline(newline))
-		{
-			var_name = save_varname(find_var_inline(newline)+ 1);
-			// printf("\033[43mdebug: \033[0mvar_name =%s\033[43m-\033[0m\n", var_name);
-			// var_value = find_variable(vars->env, var_name);
-			var_value = getenv(var_name);
-			// printf("\033[43mdebug: \033[0mvar_value =%s\033[43m-\033[0m\n", var_value);
-			newline = add_varcontent(newline, var_name, var_value);
-			if (var_name && !var_value)
-				ft_putstr_fd("\n", 1);
-		} 
+	while (find_var_inline(newline))
+	{
+		var_name = save_varname(find_var_inline(newline)+ 1);
+		// printf("\033[43mdebug: \033[0mvar_name =%s\033[43m-\033[0m\n", var_name);
+		// var_value = find_variable(vars->env, var_name);
+		var_value = getenv(var_name);
+		// printf("\033[43mdebug: \033[0mvar_value =%s\033[43m-\033[0m\n", var_value);
+		newline = add_varcontent(newline, var_name, var_value);
+		if (!ft_strcmp(var_value, ""))
+			ft_putstr_fd("\n", 1);
+	} 
 			printf("\033[43mdebug: \033[0mnewline =%s\033[43m-\033[0m\n", newline);
 	return (newline);
 }

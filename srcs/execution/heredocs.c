@@ -8,6 +8,7 @@ char *remove_quotes(char *str)
 	char quote;
 	char *new;
 
+printf("remove quotes in-> %s\n", str);
 	new = str;
 	i = 0;
 	while( new && new[i])
@@ -28,7 +29,7 @@ char *remove_quotes(char *str)
 		i++;
 	}
 	// 	new[i] = '\0'; //caused bus error
-
+printf("remove quotes out-> %s\n", str);
 	return (new);
 }
 
