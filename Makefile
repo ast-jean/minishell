@@ -63,7 +63,7 @@ WHITE			= \033[37m
 
 ### Compilations et archivage ###
 CC 			= gcc
-CFLAGS 		= -g -Wall -Wextra -Werror 
+CFLAGS 		= -g -Wall -Wextra -Werror
 ### Autres Fonctions ###
 NORMINETTE 	= norminette
 ###------------------------## LEAK CHECK ##------------------------###

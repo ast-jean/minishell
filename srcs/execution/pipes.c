@@ -64,7 +64,7 @@ int	forking(t_token *current, int fdi, t_vars *vars)
 	int	pipefd[2];
 	int	fdo;
 
-	// printf("current : %s\n", current->cont);
+	// dprintf(2, "current : %s\n", current->cont);
 	if(current && !ft_strcmp(remove_quotes(current->cont), "exit"))
 	{
 		if (fdi != 0)

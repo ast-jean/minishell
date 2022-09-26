@@ -5,11 +5,12 @@ void free_tokens(t_vars *vars)
 	t_token *temp;
 
 	temp = vars->token->first;
-	while (vars && temp)
+	while (vars->token)
 	{
-		// printf("token->%s\n", temp->cont);
-		temp = temp->next;
-		free((temp->prev));
+		temp = vars->token;
+		free(temp->cont);
+		vars->token = vars->token->next;
+		free(temp);
 	}
 }
 
@@ -32,6 +33,8 @@ void	quit_shell(t_vars *vars)
 		free2d(vars->env);
 	if (vars->path_array)
 		free2d(vars->path_array);
+	if (vars->token)
+		free_tokens(vars);
 	// free(vars->line);
 	// if (vars->token)
 	// 	temp = vars->token->first;
