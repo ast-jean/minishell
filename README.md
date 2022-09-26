@@ -35,3 +35,5 @@ TOKNOW:
 		Ex: in: "hello$" -> out: hello$
 		Ex: in: "hello$v" -> out: hello
 		Ex: in: "hello$@" -> out: hello
+	- Echo: should display a space between arguments ex: $>echo aa aa% out: aa aa% instead of: aaaa
+	- Echo: doesnt work with only one char
