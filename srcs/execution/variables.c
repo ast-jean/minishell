@@ -24,7 +24,7 @@ char	*find_var_inline(char *line)
 {
 	while (*line && *line != '$')
 	{	
-		if (*line++ == '\"')
+		if (*line == '\"')
 		{	
 			while (*line++ && *line != '\"')
 			{
@@ -103,10 +103,13 @@ char	*check_var(char *line)
 
 	newline = malloc(ft_strlen(line) * sizeof(char));
 	newline = ft_strcpy(newline, line);
+/*debug*/printf("find_var_inline = %s\n", find_var_inline(newline));
+	
 	while (find_var_inline(newline))
 	{
 		var_name = save_varname(find_var_inline(newline) + 1);
 		var_value = getenv(var_name);
+/*debug*/printf("varname = %s\n", var_value);
 		newline = add_varcontent(newline, var_name, var_value);
 	}
 	return (newline);
