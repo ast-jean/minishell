@@ -35,3 +35,5 @@ TOKNOW:
 		Ex: in: "hello$" -> out: hello$
 		Ex: in: "hello$v" -> out: hello
 		Ex: in: "hello$@" -> out: hello
+	- $VAR double quotes -> first doesn't work
+	- $VAR single quotes -> second doesn't work
