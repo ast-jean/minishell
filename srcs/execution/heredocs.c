@@ -8,15 +8,17 @@ char *remove_quotes(char *str)
 	char quote;
 	char *new;
 
-printf("remove quotes in-> %s\n", str);
+	new = malloc(ft_strlen(str) * sizeof(char));//debug test: worked
 	new = str;
 	i = 0;
 	while( new && new[i])
 	{
 		if(new[i] == '\"' || new[i] == '\'')
 		{
+
 			quote = new[i];
 			new = ft_rmchar(new, &new[i]);
+
 			while (new[i] && new[i] != quote)
 			{
 				if(!new[i])
@@ -25,11 +27,11 @@ printf("remove quotes in-> %s\n", str);
 			}
 			if (new[i])
 				new = ft_rmchar(new, &new[i--]);
+
 		}
 		i++;
 	}
 	// 	new[i] = '\0'; //caused bus error
-printf("remove quotes out-> %s\n", str);
 	return (new);
 }
 

@@ -40,7 +40,6 @@ int	builtin_echo(t_vars *vars)
 
 	n = false;
 	token = vars->token->next;
-		printf("\033[46m next-> %s\033[0m\n", token->cont);
 	while (is_n(remove_quotes(token->cont)))
 	{
 		n = true;
@@ -48,8 +47,6 @@ int	builtin_echo(t_vars *vars)
 	}
 	while (token && ft_strcmp(token->cont, "|") != 0)
 	{
-		printf("\033[46m check_var-> %s\033[0m\n", token->cont);
-		printf("\033[46m check_var-> %s\033[0m\n", check_var(token->cont));
 		ft_putstr_fd(remove_quotes(check_var(token->cont)), 1);
 		if (token->next != NULL && token->next->next != NULL)
 			write(1, " ", 1);

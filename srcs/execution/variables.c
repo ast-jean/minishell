@@ -3,9 +3,9 @@
 
 char	*save_varname(char *line)
 {
-	int	i;
-	int count;
-	char *var_name;
+	int		i;
+	int		count;
+	char	*var_name;
 
 	i = 0;
 	count = 0;
@@ -20,16 +20,23 @@ char	*save_varname(char *line)
 	return (var_name);
 }
 
-char *find_var_inline(char *line)
+char	*find_var_inline(char *line)
 {
 	while (*line && *line != '$')
-	{
-		if (*line == '\'')
+	{	
+		if (*line++ == '\"')
+		{	
+			while (*line++ && *line != '\"')
+			{
+				if (*line == '$')
+					return ((char *)line);
+			}
+		}
+		if (*line++ == '\'')
 		{
-			line++;
-			while(*line && *line != '\'')	
+			while (*line && *line != '\'')
 				line++;
-			if(!*line)
+			if (!*line)
 				return (NULL);
 			line++;
 		}
@@ -42,41 +49,15 @@ char *find_var_inline(char *line)
 		return (NULL);
 }
 
-// char	*find_variable(char **env, char *varname) //REPLACE BY getenv(var_name)
-// {
-// 	int		i;
-// 	int		j;
-// 	int		k;
-// 	char	*var_value;
-//
-// 	var_value = NULL;
-// 	i = -1;
-// 	k = 0;
-// 	while (env[++i])
-// 	{
-// 		j = 0;
-// 		while (env[i][j] && env[i][j] == varname[j])
-// 			j++;
-// 		if (env[i][j] == '=')
-// 		{
-// 			j = (int)ft_strlen(varname) + 1;
-// 			while(env[i][j])
-// 				var_value = ft_addchar(var_value, env[i][j++], &var_value[k++]);
-// 			return (var_value);
-// 		}
-// 	}
-// 	return (var_value);
-// }
-
-char	*delete_var_name(int pos2 ,char *newline)
+char	*delete_var_name(int pos2, char *newline)
 {
-	int	i;
-	char *temp;
+	int		i;
+	char	*temp;
 
 	i = pos2;
-	while(i >= 0)
+	while (i >= 0)
 	{
-		if(newline[i] == '$')
+		if (newline[i] == '$')
 		{
 			newline = ft_rmchar(newline, &newline[i--]);
 			break ;
@@ -96,50 +77,37 @@ char	*add_varcontent(char *line, char *var_name, char *var_value)
 	int		pos;
 	int		pos2;
 	int		i;
-	// printf("\033[43mdebug add_var: \033[0mvar_value =%s\033[43m-\033[0m\n", var_value);
+
 	posstr = find_var_inline(line);
-	newline = NULL;
+	newline = malloc((ft_strlen(line) + 1) * sizeof(char));
+	newline = line;
 	i = -1;
 	pos = 0;
-	while(posstr[pos])
+	while (posstr[pos])
 		pos++;
 	pos--;
 	pos = ft_strlen(line) - pos - 1 + ft_strlen(var_name);
 	pos2 = pos;
-	newline = line;
-	// printf("\033[43mdebug add_var1: \033[0mnewline =%s\033[43m-\033[0m\n", newline);
-	while(var_value[++i])
-	{
-		// printf("\033[43mdebug add_var2.1: \033[0mnewline =%s\033[43m-\033[0m\n", newline);
-		newline = ft_addchar(newline, var_value[i], &newline[pos++]);
-		// printf("\033[43mdebug add_var2.2: \033[0mnewline =%s\033[43m-\033[0m\n", newline);
-	}
+	if (var_value)
+		while (var_value[++i])
+			newline = ft_addchar(newline, var_value[i], &newline[pos++]);
 	newline = delete_var_name(pos2, newline);
-	// printf("\033[43mdebug add_var3: \033[0mnewline =%s\033[43m-\033[0m\n", newline);
 	return (newline);
 }
 
-char *check_var(char *line)
+char	*check_var(char *line)
 {
-	char *var_name;
-	char *var_value;
-	char *newline;
+	char	*var_name;
+	char	*var_value;
+	char	*newline;
 
-	newline = malloc(ft_strlen(line) * sizeof(char)); // Trying to find bug
+	newline = malloc(ft_strlen(line) * sizeof(char));
 	newline = ft_strcpy(newline, line);
-	
-		printf("\033[43mdebug: \033[0mfind_var_inline =%s\033[43m-\033[0m\n", find_var_inline(newline));
 	while (find_var_inline(newline))
 	{
-		var_name = save_varname(find_var_inline(newline)+ 1);
-		// printf("\033[43mdebug: \033[0mvar_name =%s\033[43m-\033[0m\n", var_name);
-		// var_value = find_variable(vars->env, var_name);
+		var_name = save_varname(find_var_inline(newline) + 1);
 		var_value = getenv(var_name);
-		// printf("\033[43mdebug: \033[0mvar_value =%s\033[43m-\033[0m\n", var_value);
 		newline = add_varcontent(newline, var_name, var_value);
-		if (!ft_strcmp(var_value, ""))
-			ft_putstr_fd("\n", 1);
-	} 
-			printf("\033[43mdebug: \033[0mnewline =%s\033[43m-\033[0m\n", newline);
+	}
 	return (newline);
 }

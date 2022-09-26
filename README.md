@@ -4,7 +4,7 @@ TODO:
 [X] Splitamary
 [ ] check <<
 	[ ] $Var within <<
-	[X] Signal ctrl-D close heredoc
+	[ ] Signal ctrl-C close heredoc
 [X] Redirections
 	[X] <	rediriger l’entrée
 	[X] >	rediriger la sortie
@@ -30,4 +30,8 @@ TOKNOW:
 	- After error with << <<< it stil tries to run the command
 	- exit with exit code
 	- Added Include/readline/ so people dont have to download on brew (we should link it in minishell.h)
-	- $VAR should display if next is $ ex: $HOME$USER$PATH
+	- $VAR should display if next is $ ex: $HOME$USER$PATH [X]
+	- $VAR if it's a $ with an exception(!<>|'"?#+-% ) maybe ft_alnum following
+		Ex: in: "hello$" -> out: hello$
+		Ex: in: "hello$v" -> out: hello
+		Ex: in: "hello$@" -> out: hello
