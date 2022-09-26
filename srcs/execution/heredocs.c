@@ -41,6 +41,7 @@ void*	check_herestrings(t_token *current, t_vars *vars)
 	char *line;
 	int fd;
 
+/*debug*/printf("current->cont = %s\n", current->cont);
 	if (!is_exception(current))
 		return (NULL);
 	line = current->next->cont;
@@ -87,8 +88,6 @@ void*	check_heredocs(t_token *current, t_vars *vars)
 	current = remove_token(current, vars);
 	current = remove_token(current->next, vars);
 	vars->heredoc_count++;
-	// free(name);
-	// free(line);
 	return (current);
 }
 

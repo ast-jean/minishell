@@ -35,5 +35,8 @@ TOKNOW:
 		Ex: in: "hello$" -> out: hello$
 		Ex: in: "hello$v" -> out: hello
 		Ex: in: "hello$@" -> out: hello
-	- $VAR double quotes -> first doesn't work
-	- $VAR single quotes -> second doesn't work
+	- $VAR double quotes -> first doesn't work [X]
+	- $VAR single quotes -> second doesn't work [X]
+	- Echo: should display a space between arguments ex: $>echo aa aa% out: aa aa% instead of: aaaa
+	- Echo: doesnt work with only one char
+	- Herestring broken with token changes
