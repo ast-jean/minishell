@@ -1,113 +1,18 @@
 
 #include "../../include/minishell.h"
 
-char *find_variable(char **env, char *varname)
+char	*save_varname(char *line)
 {
-	// TOFIX  arraysrch should check only strings and until it hits a '='
-	int i;
-	int j;
-	char *var_value;
-
-	var_value = NULL;
-	i = -1;
-	while (env[++i])
-	{
-		j = 0;
-		while (env[i][j] == varname[j])
-		{
-			if (env[i][j+1] != '=')
-				ft_strcpy(var_value, env[i]+ j + 2);
-			j++;
-		}
-	}
-	return (var_value);
-}
-
-char	*add_varcontent(char *line, char *var_name, char **env)
-{
-	char	*newline;
-	char	*var_value;
-	int		pos;
 	int		i;
-	int		j;
-
-	newline = NULL;
-	j = -1; //not used
-	i = -1;
-	pos = 0;
-	var_value = find_variable(env, var_name);
-	while(line[pos++] != '$')
-	{ }
-	pos += (int)ft_strlen(var_name);
-/*debug*/printf("\033[43mvar_value=%s\033[0m\n", var_value);
-	if (var_value[++i])
-	{
-		//hello $USER hello
-		ft_strcpy(newline, line);
-
-		//hello $USER hello
-		//free + calloc strlen(newline)
-		//hello $USERast-jean hello
-		while(var_name[i])
-		{
-			ft_addchar(newline ,var_value[i], &newline[pos]);
-			i++;
-			pos--;
-		}
-		printf("test\n");
-		i = 0;
-		//ft_rmchar() while (strlen(var_name))
-		//hello ast-jean hello
-
-
-	}
-	if(!newline)
-		newline = line;
-	// free(line);
-	return (newline);
-}
-
-char *change_to_var(char *line, char *var_name, char **env)
-{
-	char	*varremoved;
-	char	*newline;
-	char	*temp;
-
-	temp = ft_strchr(line, '$');
-	varremoved = line;
-
-	printf("find_variables = >%s<\n", find_variable(env, var_name));
-	printf("seg2\n");
-	if(ft_strlen(find_variable(env, var_name)) > 0) //fonction arraysrch until =
-	{
-		newline = add_varcontent(varremoved, var_name, env);
-	/*debug*/printf("\033[43mBEF:charremove = %s\033[0m\n", newline);
-		while (*temp && (*temp != ' ' && *temp != '\'' && *temp != '\"') )
-			newline = ft_rmchar(varremoved, temp++);
-	/*debug*/printf("\033[43mAFT:charremove = %s\033[0m\n", newline);
-	}
-	else
-	{
-		// free(line);
-		while (*temp && (*temp != ' ' && *temp != '\'' && *temp != '\"') )
-			varremoved = ft_rmchar(varremoved, temp++);
-		return (varremoved);
-	}
-	return(newline);
-}
-
-char *save_varname(char *line)
-{
-	int	i;
-	int count;
-	char *var_name;
+	int		count;
+	char	*var_name;
 
 	i = 0;
 	count = 0;
-	while (line[count] && (line[i] != ' ' && line[i] != '\'' && line[i] != '\"'))
+	while (line[count] && ft_isalnum(line[count]))
 		count++;
 	var_name = ft_calloc(count, sizeof(char));
-	while (line[i] && (line[i] != ' ' && line[i] != '\'' && line[i] != '\"'))
+	while (line[i] && ft_isalnum(line[i]))
 	{
 		var_name[i] = line[i];
 		i++;
@@ -115,42 +20,94 @@ char *save_varname(char *line)
 	return (var_name);
 }
 
-//heredoc	IN: "$USER" $USER '$USER'
-//			OUT: "ast-jean" ast-jean 'ast-jean'
-
-//prompt	IN: '$USER' OUT: '$USER'
-//			OUT: "ast-jean" ast-jean '$USER' 
-
-char *check_var(char *line, t_vars *vars)
+char	*find_var_inline(char *line)
 {
-	(void)line;
-	(void)vars;
-	return (NULL);
+	while (*line && *line != '$')
+	{	
+		if (*line++ == '\"')
+		{	
+			while (*line++ && *line != '\"')
+			{
+				if (*line == '$')
+					return ((char *)line);
+			}
+		}
+		if (*line++ == '\'')
+		{
+			while (*line && *line != '\'')
+				line++;
+			if (!*line)
+				return (NULL);
+			line++;
+		}
+		else
+			line++;
+	}
+	if (*line == '$')
+		return ((char *)line);
+	else
+		return (NULL);
 }
 
-char *check_var_heredoc(char *line, t_vars *vars)
+char	*delete_var_name(int pos2, char *newline)
 {
-	int i;
-	char *var_name;
-	char *newline;
+	int		i;
+	char	*temp;
 
-	i = 0;	
-	newline = line;
-	if(ft_strchr(line, '$'))
+	i = pos2;
+	while (i >= 0)
 	{
-		var_name = save_varname(ft_strchr(line, '$') + 1); 
-		while (ft_strchr(newline, '$'))
+		if (newline[i] == '$')
 		{
-// /*debug*/printf("\033[43msrchr=%s\033[0m\n", ft_strchr(line, '$'));
-// /*debug*/printf("\033[43mline is env : %s\033[0m\n", ft_arraysrch(vars->env, var_name));
-/*debug*/printf("\033[43mvar_name = %s\033[0m\n", var_name); 
-			newline = change_to_var(line, var_name, vars->env);
-/*debug*/printf("\033[43mnewline=%s\033[0m\n", newline);
-		} 
-		// free(line);
-		// free(var_name)
-	return (newline);
+			newline = ft_rmchar(newline, &newline[i--]);
+			break ;
+		}
+		else
+			newline = ft_rmchar(newline, &newline[i--]);
 	}
-	else
-		return (line);
+	temp = newline;
+	free(newline);
+	return (temp);
+}
+
+char	*add_varcontent(char *line, char *var_name, char *var_value)
+{
+	char	*newline;
+	char	*posstr;
+	int		pos;
+	int		pos2;
+	int		i;
+
+	posstr = find_var_inline(line);
+	newline = malloc((ft_strlen(line) + 1) * sizeof(char));
+	newline = line;
+	i = -1;
+	pos = 0;
+	while (posstr[pos])
+		pos++;
+	pos--;
+	pos = ft_strlen(line) - pos - 1 + ft_strlen(var_name);
+	pos2 = pos;
+	if (var_value)
+		while (var_value[++i])
+			newline = ft_addchar(newline, var_value[i], &newline[pos++]);
+	newline = delete_var_name(pos2, newline);
+	return (newline);
+}
+
+char	*check_var(char *line)
+{
+	char	*var_name;
+	char	*var_value;
+	char	*newline;
+
+	newline = malloc(ft_strlen(line) * sizeof(char));
+	newline = ft_strcpy(newline, line);
+	while (find_var_inline(newline))
+	{
+		var_name = save_varname(find_var_inline(newline) + 1);
+		var_value = getenv(var_name);
+		newline = add_varcontent(newline, var_name, var_value);
+	}
+	return (newline);
 }

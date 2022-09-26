@@ -4,18 +4,18 @@ TODO:
 [X] Splitamary
 [ ] check <<
 	[ ] $Var within <<
-	[ ] Signal ctrl-D close heredoc
-[ ] Redirections
-	[ ] <	rediriger l’entrée
-	[ ] >	rediriger la sortie
-	[ ] >>	rediriger la sortie en mode append
-[ ] Pipes: looper les pipes (et ajouter dans le parsing)
+	[ ] Signal ctrl-C close heredoc
+[X] Redirections
+	[X] <	rediriger l’entrée
+	[X] >	rediriger la sortie
+	[X] >>	rediriger la sortie en mode append
+[X] Pipes: looper les pipes (et ajouter dans le parsing)
 [ ] Gérer les Variables d'env $ (attention a juste "=")
 [ ] Gérer $?
 [ ] Add $Vars and remove_quotes()
 [ ] Créer les buitins
-	[ ] echo (with -n)
-	[ ] cd (only relative path or absolute)(changer PATH et OLDPATH)
+	[ ] echo (with -n) (xchouina)
+	[ ] cd (only relative path or absolute)(changer PATH et OLDPATH) (xchouina)
 	[ ] export (no flag)	-started-
 	[ ] unset (no flag)		-started-
 	[X] pwd (no flag)
@@ -27,6 +27,13 @@ TOKNOW:
 	- simple quotes = litéral
 
  TOFIX  
-	- signals get displayed //dont care
-	- when quotes are not closed it creates SEGFAULT. should be fixed in tokenize
-		- also check check_quotes() in syntax_error.c
+	- After error with << <<< it stil tries to run the command
+	- exit with exit code
+	- Added Include/readline/ so people dont have to download on brew (we should link it in minishell.h)
+	- $VAR should display if next is $ ex: $HOME$USER$PATH [X]
+	- $VAR if it's a $ with an exception(!<>|'"?#+-% ) maybe ft_alnum following
+		Ex: in: "hello$" -> out: hello$
+		Ex: in: "hello$v" -> out: hello
+		Ex: in: "hello$@" -> out: hello
+	- $VAR double quotes -> first doesn't work
+	- $VAR single quotes -> second doesn't work

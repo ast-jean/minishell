@@ -8,14 +8,17 @@ char *remove_quotes(char *str)
 	char quote;
 	char *new;
 
+	new = malloc(ft_strlen(str) * sizeof(char));//debug test: worked
 	new = str;
 	i = 0;
 	while( new && new[i])
 	{
 		if(new[i] == '\"' || new[i] == '\'')
 		{
+
 			quote = new[i];
 			new = ft_rmchar(new, &new[i]);
+
 			while (new[i] && new[i] != quote)
 			{
 				if(!new[i])
@@ -24,27 +27,13 @@ char *remove_quotes(char *str)
 			}
 			if (new[i])
 				new = ft_rmchar(new, &new[i--]);
+
 		}
 		i++;
 	}
 	// 	new[i] = '\0'; //caused bus error
-
 	return (new);
 }
-/*
-TODO:
-[X] strjoin "this"'test'"one"
-[X] rm_quotes gives test'test' instead of test"test" for "test"'"test"'
-[ ] Add $VAR
-[X] add ctrl-D to finish the heredoc (act like delim)
-[X] fix herestring cat: /usr/bin: Is a directory: FIXED by unfreeing line and name
-[X] Fix remove_quotes
-	[X] remove quote bug in: "hello"'hello' out: hello'hello
-[ ] fix single quote in delim segfault
-	[ ] Add error if missing a quote -> should be done in tokenize()
-[ ] check for leaks
-[ ] Norminette
-*/
 
 void*	check_herestrings(t_token *current, t_vars *vars)
 {
@@ -56,11 +45,10 @@ void*	check_herestrings(t_token *current, t_vars *vars)
 		return (NULL);
 	line = current->next->cont;
 	name = ft_strjoin(".tmp/temp_heredoc", ft_itoa(vars->heredoc_count));
-	if (ft_strchr(current->next->cont, '\"') || ft_strchr(current->next->cont, '\''))
-		line = remove_quotes(current->next->cont);
 	fd = open(name, O_RDWR | O_CREAT | O_TRUNC, 0777);
 	new_token_after(current, name);
-	line = ft_strjoin(check_var_heredoc(line, vars), "\n");
+	line = ft_strjoin(check_var(line), "\n");
+	line = remove_quotes(line);
 	ft_putstr_fd(line, fd);
 	current = remove_token(current, vars);
 	current = remove_token(current->next, vars);
@@ -68,6 +56,7 @@ void*	check_herestrings(t_token *current, t_vars *vars)
 	// free(line);
 	return (current);
 }
+
 void*	check_heredocs(t_token *current, t_vars *vars)
 {
 	char	*line;
@@ -79,17 +68,14 @@ void*	check_heredocs(t_token *current, t_vars *vars)
 	if (!is_exception(current))
 		return(NULL);
 	name = ft_strjoin(".tmp/temp_heredoc", ft_itoa(vars->heredoc_count));
-	if (ft_strchr(current->next->cont, '\"') || ft_strchr(current->next->cont, '\''))
-		delim = remove_quotes(current->next->cont);
-	else
-		delim = current->next->cont;
+	delim = remove_quotes(current->next->cont);
 	fd = open(name, O_RDWR | O_CREAT | O_TRUNC, 0777);
 	new_token_after(current, name);
 	while (ft_strcmp(delim, line))
 	{
 		if (ft_strcmp(" ", line))
 		{
-			line = ft_strjoin(check_var_heredoc(line, vars), "\n");
+			line = ft_strjoin(check_var(line), "\n");
 			ft_putstr_fd(line, fd);
 		}
 		rl_on_new_line();
@@ -102,7 +88,7 @@ void*	check_heredocs(t_token *current, t_vars *vars)
 	current = remove_token(current->next, vars);
 	vars->heredoc_count++;
 	// free(name);
-	free(line);
+	// free(line);
 	return (current);
 }
 

@@ -24,7 +24,6 @@ SRCS_FILES 		=	execution/minishell.c				\
 INCLUDE_FILES	= 	minishell.h
 
 LIBS = include/libft/libft.a
-READLINE = -lreadline -I /usr/local/opt/readline/include -L ~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include
 
 ### Repertoires ###
 SRCS_DIR 	= srcs/
@@ -61,6 +60,7 @@ VIOLET			= \033[35m
 CYAN			= \033[36m
 WHITE			= \033[37m
 
+READLINE = -lreadline -I /usr/local/opt/readline/include -L ~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include
 ### Compilations et archivage ###
 CC 			= gcc
 CFLAGS 		= -g -Wall -Wextra -Werror
@@ -81,12 +81,13 @@ $(NAME) : $(OBJS_IN_DIR)
 
 $(OBJS_DIR)%.o : $(SRCS_DIR)%.c
 	@$(MAKE) -C include/libft
+	@mkdir -p .tmp
 	@mkdir -p $(OBJS_DIR)
 	@mkdir -p $(OBJS_DIR)/parsing
 	@mkdir -p $(OBJS_DIR)/execution
 	@mkdir -p $(OBJS_DIR)/built_ins
 	@echo "$(CURSOR_UP)Compiling $< ..           "
-	@$(CC) -I ~/.brew/opt/readline/include -I /usr/local/opt/readline/include  $(CFLAGS) -c $< -o $@
+	@$(CC) -I ~/.brew/opt/readline/include -I /usr/local/opt/readline/include $(CFLAGS) -c $< -o $@
 
 clean:
 	@$(MAKE) -C include/libft clean
