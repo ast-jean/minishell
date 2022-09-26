@@ -6,6 +6,7 @@ void	init_shell(t_vars *vars, char **env)
 	vars->pwd = ft_arraysrch(env, "PWD=") + 4; // TOFIX  use function find_variables(env, "PWD=")
 	// vars->oldpwd = ft_calloc(ft_strlen(ft_arraysrch(env, "OLDPWD")), sizeof(char));
 	vars->path_array = NULL;
+	vars->token = NULL;
 	vars->oldpwd = ft_arraysrch(env, "OLDPWD=") + 7; // TOFIX  use function find_variables(env, "OLDPWD=")
 	printf("*******************************\n");
 	printf("*          MINISHELL          *\n");

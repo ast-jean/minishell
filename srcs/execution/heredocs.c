@@ -8,7 +8,7 @@ char *remove_quotes(char *str)
 	char quote;
 	char *new;
 
-	new = malloc(ft_strlen(str) * sizeof(char));//debug test: worked
+	// new = malloc(ft_strlen(str) * sizeof(char));//debug test: worked
 	new = str;
 	i = 0;
 	while( new && new[i])
