@@ -24,7 +24,7 @@ char	*find_var_inline(char *line)
 {
 	while (*line && *line != '$')
 	{	
-		if (*line++ == '\"')
+		if (*line == '\"')
 		{	
 			while (*line++ && *line != '\"')
 			{
