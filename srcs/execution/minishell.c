@@ -2,6 +2,7 @@
 
 void	init_shell(t_vars *vars, char **env)
 {
+	vars->real_env = env;
 	vars->env = ft_arraycpy(env);
 	vars->pwd = getenv("PWD");
 	vars->oldpwd = getenv("OLDPWD");
