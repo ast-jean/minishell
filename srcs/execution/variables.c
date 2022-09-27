@@ -95,10 +95,7 @@ char	*add_varcontent(char *line, char *var_name, char *var_value)
 	return (newline);
 }
 
-
-
-
-char	*find_variable(char **env, char *varname)
+char	*ft_getenv(char **env, char *varname)
 {
 	int i;
 	int j;
