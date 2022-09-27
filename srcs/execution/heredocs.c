@@ -8,20 +8,18 @@ char *remove_quotes(char *str)
 	char quote;
 	char *new;
 
-	new = malloc(ft_strlen(str) * sizeof(char));//debug test: worked
+	new = malloc(ft_strlen(str) * sizeof(char));
 	new = str;
 	i = 0;
 	while( new && new[i])
 	{
 		if(new[i] == '\"' || new[i] == '\'')
 		{
-
 			quote = new[i];
 			new = ft_rmchar(new, &new[i]);
-
 			while (new[i] && new[i] != quote)
 			{
-				if(!new[i])
+				if (!new[i])
 					break ;
 				i++;
 			}
@@ -31,7 +29,6 @@ char *remove_quotes(char *str)
 		}
 		i++;
 	}
-	// 	new[i] = '\0'; //caused bus error
 	return (new);
 }
 
@@ -41,7 +38,6 @@ void*	check_herestrings(t_token *current, t_vars *vars)
 	char *line;
 	int fd;
 
-/*debug*/printf("current->cont = %s\n", current->cont);
 	if (!is_exception(current))
 		return (NULL);
 	line = current->next->cont;
@@ -53,8 +49,6 @@ void*	check_herestrings(t_token *current, t_vars *vars)
 	ft_putstr_fd(line, fd);
 	current = remove_token(current, vars);
 	current = remove_token(current->next, vars);
-	// free(name);
-	// free(line);
 	return (current);
 }
 
@@ -116,7 +110,5 @@ int	check_here(t_vars *vars)
 		else
 			current = current->next;
 	}
-	// if (line)
-	// 	free(line);
 	return (1);
 }

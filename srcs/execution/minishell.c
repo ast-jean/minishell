@@ -3,9 +3,8 @@
 void	init_shell(t_vars *vars, char **env)
 {
 	vars->env = ft_arraycpy(env);
-	vars->pwd = ft_arraysrch(env, "PWD=") + 4; // TOFIX  use function find_variables(env, "PWD=")
-	// vars->oldpwd = ft_calloc(ft_strlen(ft_arraysrch(env, "OLDPWD")), sizeof(char));
-	vars->oldpwd = ft_arraysrch(env, "OLDPWD=") + 7; // TOFIX  use function find_variables(env, "OLDPWD=")
+	vars->pwd = getenv("PWD");
+	vars->oldpwd = getenv("OLDPWD");
 	printf("*******************************\n");
 	printf("*          MINISHELL          *\n");
 	printf("*******************************\n");
@@ -23,7 +22,7 @@ void	executing_command(char *line, t_vars *vars)
 		if(!check_here(vars))
 			return ;
 // printf("---after checks---\n");
-// /*debug*/debug_print_tokens(vars);
+/*debug*/debug_print_tokens(vars);
 		if (parsing_pipes(vars) == -1)
 			return ;
 		current = vars->token->first;
@@ -31,7 +30,6 @@ void	executing_command(char *line, t_vars *vars)
 	}
 }
 
-//sometimes prompt is printed twice after CTRL-C
 void	handler(int sig)
 {
 	if (sig == SIGINT)

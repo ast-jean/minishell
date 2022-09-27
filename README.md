@@ -30,10 +30,9 @@ TOKNOW:
 	- After error with << <<< it stil tries to run the command
 	- exit with exit code
 	- Added Include/readline/ so people dont have to download on brew (we should link it in minishell.h)
-	- $VAR should display if next is $ ex: $HOME$USER$PATH [X]
 	- $VAR if it's a $ with an exception(!<>|'"?#+-% ) maybe ft_alnum following
 		Ex: in: "hello$" -> out: hello$
 		Ex: in: "hello$v" -> out: hello
 		Ex: in: "hello$@" -> out: hello
 	- Echo: should display a space between arguments ex: $>echo aa aa% out: aa aa% instead of: aaaa
-	- Echo: doesnt work with only one char
+	- Echo: doesnt work with only one char as first argument
