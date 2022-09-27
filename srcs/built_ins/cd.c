@@ -104,26 +104,70 @@
 int	builtin_cd(t_vars *vars)
 {
 	t_token *token;
-	char s[100];
-	// char *oldpwd;
+	char *oldpwd;
 
+	oldpwd = ft_arraysrch(vars->env, "PWD=") + 4;
+/*debug*/	//ft_putstr_fd(oldpwd, 1);
 	token = vars->token->first;
-	// if (getenv("OLDPWD") != NULL)
-	// 	oldpwd = ft_strjoin("OLDPWD=", getenv("PWD"));
-	if (ft_strcmp(token->first->cont, "cd") == 0)
-	{
-		// ft_putstr_fd("IM IN!\n", 1);
-		// if (ft_strcmp(chdir(".."), 0) == 0) NOTE: temp value?? ask baby
-		// {
-			// ft_putstr_fd("IM IN TOO!\n", 1);
-			printf("OLDPWD=%s\n", getcwd(s, 100));
-			chdir("..");
-			// ft_putstr_fd(ft_strjoin(getenv("PWD"), "\n"), 1);
-			printf("PWD=%s\n", getcwd(s, 100));
-		// }
-	}
+
+	if (ft_strcmp(token->next->cont, "..") == 0)
+		chdir("..");
+	
+	free2d(vars->env);
+	vars->env = ft_arraycpy(vars->real_env);
 	return (1);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// {
+// 	t_token *token;
+// 	char s[100];
+// 	// char *oldpwd;
+
+// 	token = vars->token->first;
+// 	// if (getenv("OLDPWD") != NULL)
+// 	// 	oldpwd = ft_strjoin("OLDPWD=", getenv("PWD"));
+// 	if (ft_strcmp(token->first->cont, "cd") == 0)
+// 	{
+// 		// ft_putstr_fd("IM IN!\n", 1);
+// 		// if (ft_strcmp(chdir(".."), 0) == 0) NOTE: temp value?? ask baby
+// 		// {
+// 			// ft_putstr_fd("IM IN TOO!\n", 1);
+// 			printf("OLDPWD=%s\n", getcwd(s, 100));
+// 			chdir("..");
+// 			// ft_putstr_fd(ft_strjoin(getenv("PWD"), "\n"), 1);
+// 			printf("PWD=%s\n", getcwd(s, 100));
+// 		// }
+// 	}
+// 	return (1);
+// }
 
 
 

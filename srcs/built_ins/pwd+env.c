@@ -2,9 +2,10 @@
 // NOTE: Built-ins 1/3 (PWD + ENV)
 
 
-int	builtin_pwd(void)
+int	builtin_pwd(t_vars *vars)
 {
-	ft_putstr_fd(ft_strjoin(getenv("PWD"), "\n"), 1);
+	vars->pwd = ft_arraysrch(vars->env, "PWD=") + 4; 
+	printf("%s\n", vars->pwd);
 	return (1);
 }
 

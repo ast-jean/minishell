@@ -21,6 +21,7 @@ typedef struct s_vars
 	int		ac; //use?
 	char	**av; //params for execve
 	char 	**env;
+	char	**real_env;
 	// char	**cmd_line;
 	char	*path;
 	char	**path_array;
@@ -116,7 +117,7 @@ int		cnt_delims(char *line, char *delims);
 
 //NOTE: BUILT INS
 // PWD_ENV.C
-int	builtin_pwd(void);
+int	builtin_pwd(t_vars *vars);
 int	builtin_env(t_vars *vars);
 // EXPORT_UNSET.C
 int	builtin_unset(t_vars *vars, char *var_name);
