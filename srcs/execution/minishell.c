@@ -5,6 +5,11 @@ void	init_shell(t_vars *vars, char **env)
 	vars->env = ft_arraycpy(env);
 	vars->pwd = getenv("PWD");
 	vars->oldpwd = getenv("OLDPWD");
+	// vars->pwd = ft_arraysrch(env, "PWD=") + 4; // TOFIX  use function find_variables(env, "PWD=")
+	// vars->oldpwd = ft_calloc(ft_strlen(ft_arraysrch(env, "OLDPWD")), sizeof(char));
+	vars->path_array = NULL;
+	vars->token = NULL;
+	// vars->oldpwd = ft_arraysrch(env, "OLDPWD=") + 7; // TOFIX  use function find_variables(env, "OLDPWD=")
 	printf("*******************************\n");
 	printf("*          MINISHELL          *\n");
 	printf("*******************************\n");
@@ -13,8 +18,6 @@ void	init_shell(t_vars *vars, char **env)
 // TOFIX : rename for check_token_type
 void	executing_command(char *line, t_vars *vars)
 {
-	t_token	*current;
-
 	if (ft_strlen(line) == 0)
 		return ;
 	if (!creating_tokens(line, vars))
@@ -25,8 +28,7 @@ void	executing_command(char *line, t_vars *vars)
 /*debug*/debug_print_tokens(vars);
 		if (parsing_pipes(vars) == -1)
 			return ;
-		current = vars->token->first;
-		fd_catch(vars, current);
+		fd_catch(vars, vars->token->first);
 	}
 }
 

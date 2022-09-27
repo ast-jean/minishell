@@ -63,7 +63,7 @@ WHITE			= \033[37m
 READLINE = -lreadline -I /usr/local/opt/readline/include -L ~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include
 ### Compilations et archivage ###
 CC 			= gcc
-CFLAGS 		= -g -Wall -Wextra -Werror 
+CFLAGS 		= -g -Wall -Wextra -Werror
 ### Autres Fonctions ###
 NORMINETTE 	= norminette
 ###------------------------## LEAK CHECK ##------------------------###
