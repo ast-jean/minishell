@@ -1,18 +1,12 @@
 # minishell
 Custom shell in C
 TODO:
-[X] Splitamary
 [ ] check <<
 	[X] $Var within <<
 	[ ] Signal ctrl-C close heredoc
-[X] Redirections
-	[X] <	rediriger l’entrée
-	[X] >	rediriger la sortie
-	[X] >>	rediriger la sortie en mode append
-[X] Pipes: looper les pipes (et ajouter dans le parsing)
 [ ] Gérer les Variables d'env $ (attention a juste "=")
+	[ ] See tofix
 [ ] Gérer $?
-[X] Add $Vars and remove_quotes()
 [ ] Créer les buitins
 	[ ] echo (with -n) (xchouina)
 	[ ] cd (only relative path or absolute)(changer PATH et OLDPATH) (xchouina)
@@ -35,8 +29,5 @@ TOKNOW:
 		Ex: in: "hello$v" -> out: hello
 		Ex: in: "hello$@" -> out: hello
 	- $VAR double quotes -> first doesn't work [X]
-	- $VAR single quotes -> second doesn't work [X]
-	- Echo: should display a space between arguments ex: $>echo aa aa% out: aa aa% instead of: aaaa
-	- Echo: doesnt work with only one char
 	- Herestring broken with token changes
 	- Echo: doesnt work with only one char as first argument
