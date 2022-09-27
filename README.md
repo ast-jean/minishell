@@ -15,7 +15,7 @@ TODO:
 [X] Add $Vars and remove_quotes()
 [ ] Créer les buitins
 	[ ] echo (with -n) (xchouina)
-	[ ] cd (only relative path or absolute)(changer PATH et OLDPATH) (xchouina)
+	[ ] cd (xchouina)
 	[ ] export (no flag)	-started-
 	[ ] unset (no flag)		-started-
 	[X] pwd (no flag)
