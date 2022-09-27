@@ -88,21 +88,21 @@ int	forking(t_token *current, int fdi, t_vars *vars)
 	if (fdi == -1)
 	{
 		ft_putstr_fd(": no such file or directory\n", 2);
-		write(pipefd[1], "", 0);
+		write(fdo, "", 0);
 		if (fdo != 1)
 			close(fdo);
 		// close(pipefd[0]);
 		return (pipefd[0]);
 	}
-	// /*debug*/printf("fdi: %d\nfdo: %d\n", fdi, fdo);
+	/*debug*/printf("fdi: %d\nfdo: %d\n", fdi, fdo);
 	vars->pid[vars->pid_count] = fork();
 	if (vars->pid[vars->pid_count++] == 0)
 	{
 	/*debug*/debug_print_tokens(vars);
-		dup2(fdi, 0);
+		// dup2(fdi, 0);
 		if (fdi != 0)
 			close(fdi);
-		dup2(fdo, 1);
+		// dup2(fdo, 1);
 		if (fdo != 1)
 			close(fdo);
 		if (is_builtin(current, vars) == -1)
@@ -111,6 +111,7 @@ int	forking(t_token *current, int fdi, t_vars *vars)
 			{
 				ft_putstr_fd(remove_quotes(current->cont), 2);
 				ft_putstr_fd(": cmd not found\n", 2);
+				//close fd?
 				exit(0);
 			}
 		}
