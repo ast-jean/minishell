@@ -3,7 +3,7 @@ Custom shell in C
 TODO:
 [X] Splitamary
 [ ] check <<
-	[ ] $Var within <<
+	[X] $Var within <<
 	[ ] Signal ctrl-C close heredoc
 [X] Redirections
 	[X] <	rediriger l’entrée
@@ -12,7 +12,7 @@ TODO:
 [X] Pipes: looper les pipes (et ajouter dans le parsing)
 [ ] Gérer les Variables d'env $ (attention a juste "=")
 [ ] Gérer $?
-[ ] Add $Vars and remove_quotes()
+[X] Add $Vars and remove_quotes()
 [ ] Créer les buitins
 	[ ] echo (with -n) (xchouina)
 	[ ] cd (only relative path or absolute)(changer PATH et OLDPATH) (xchouina)
