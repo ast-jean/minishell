@@ -13,22 +13,20 @@ int	builtin_unset(t_vars *vars, char *var_name)
 
 int	builtin_export(t_token *token, t_vars *vars)
 {
-printf("in export\n");
 // export (no flag) var_name=var_content
 char *content;
 
-content = token->next->cont;
-if(ft_strchr(content, '='))
+content = "";
+//replace existing one
+if (ft_strchr(token->next->cont, '='))
 {
-	ft_arrayadd(vars->env, content);
-	// ft_arrayadd(env, content);
+	content = remove_quotes(token->next->cont);
+	vars->env = ft_arrayadd(vars->env, content);
+/*debug*/ft_arrayprint(vars->env);
 }
 else
 {
 /*debug*/printf("\033[41mError with export command\033[0m\n");
 }
-// cont = ft_single_split(token->next->cont, '=');
-/*debug*/printf("var_name= %s\n", token->cont);
-/*debug*/printf("line= %s\n", content);
 	return (1);
 }

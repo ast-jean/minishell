@@ -22,7 +22,7 @@ void	executing_command(char *line, t_vars *vars)
 		if(!check_here(vars))
 			return ;
 // printf("---after checks---\n");
-/*debug*/debug_print_tokens(vars);
+// /*debug*/debug_print_tokens(vars);
 		if (parsing_pipes(vars) == -1)
 			return ;
 		current = vars->token->first;
