@@ -5,7 +5,7 @@ int	is_n(char *str)
 	int	i;
 	
 	i = 1;
-	while (str[i])
+	while (str[i] != '\n')
 	{
 		if (str[i] != 'n')
 			return (0);
@@ -45,17 +45,21 @@ int	builtin_echo(t_vars *vars)
 		n = true;
 		token = token->next;
 	}
-	while (token && ft_strcmp(token->cont, "|") != 0)
+	// dprintf(2, "TOKEN CONT = %s\n", token->cont)
+	while (token && ft_strcmp(token->cont, "|") != 0 )
 	{
 		// printf("\033[46m check_var-> %s\033[46m\n", check_var(token->cont, vars));
+		// ft_putstr_fd(token->cont, 1);
 		ft_putstr_fd(remove_quotes(check_var(token->cont)), 1);
 		if (token->next != NULL) 
 			write(1, " ", 1);
 		token = token->next;
+	// dprintf(2, "im here\n");
 	}
-	if (n == true)
-		return (0);
-	else
+	if (n == false)
+		dprintf(2, "eeeeeee");
 		ft_putstr_fd("\n", 1);
+	// else
+		// return (0);
 	return (0);
 }
