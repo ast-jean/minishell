@@ -2,16 +2,17 @@
 ###-------------------------# VARIABLES ##-------------------------###
 NAME = minishell
 
-SRCS_FILES 		=	execution/minishell.c				\
-					execution/execution.c				\
-					execution/executing_simple_cmd.c	\
+SRCS_FILES 		=	built_ins/echo.c					\
+					built_ins/cd.c						\
+					built_ins/pwd+env.c					\
+					built_ins/unset+export.c			\
 					parsing/init_token.c				\
 					parsing/token_op.c					\
 					parsing/tokenize.c					\
 					parsing/newtoken.c					\
-					built_ins/echo+cd.c					\
-					built_ins/pwd+env.c					\
-					built_ins/unset+export.c			\
+					execution/execution.c				\
+					execution/executing_simple_cmd.c	\
+					execution/minishell.c				\
 					execution/quit.c					\
 					execution/heredocs.c 				\
 					execution/set_groups.c 				\
@@ -63,7 +64,7 @@ WHITE			= \033[37m
 READLINE = -lreadline -I /usr/local/opt/readline/include -L ~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include
 ### Compilations et archivage ###
 CC 			= gcc
-CFLAGS 		= -g -Wall -Wextra -Werror 
+CFLAGS 		= -g -Wall -Wextra -Werror
 ### Autres Fonctions ###
 NORMINETTE 	= norminette
 ###------------------------## LEAK CHECK ##------------------------###
