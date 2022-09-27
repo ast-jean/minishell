@@ -11,9 +11,10 @@ int	builtin_pwd(t_vars *vars)
 
 int	builtin_env(t_vars *vars)
 {
-	char **env_copy;
+	// char **env_copy;
 
-	env_copy = ft_arraycpy(vars->env);
-	ft_arrayprint(env_copy);
+	// env_copy = ft_arraycpy(vars->env);
+	// ft_arrayprint(env_copy);
+	ft_arrayprint(vars->env);
 	return (1);
 }

@@ -6,7 +6,7 @@
 //forking has to call redirect_output and pipe anyways
 //redirect output becomes stdout and overrides pipefd[1]);
 
-int	is_builtin(t_token *current, t_vars *vars)
+int	is_builtin(t_token *current, t_vars *vars, char **env)
 {
 	if (current && !ft_strcmp(remove_quotes(current->cont), "export"))
 		return (builtin_export(current, vars));
@@ -19,7 +19,7 @@ int	is_builtin(t_token *current, t_vars *vars)
 	else if(current && !ft_strcmp(remove_quotes(current->cont), "unset"))
 		return (builtin_unset(vars, remove_quotes(current->next->cont)));
 	else if (current && !ft_strcmp(remove_quotes(current->cont), "cd"))
-		return (builtin_cd(vars));
+		return (builtin_cd(vars, env));
 	return (-1);
 }
 
@@ -61,7 +61,7 @@ t_token	*skip_group(t_token *current_token)
 }
 
 
-int	forking(t_token *current, int fdi, t_vars *vars)
+int	forking(t_token *current, int fdi, t_vars *vars, char **env)
 {
 	int	pipefd[2];
 	int	fdo;
@@ -106,7 +106,7 @@ int	forking(t_token *current, int fdi, t_vars *vars)
 			dup2(fdo, 1);
 			if (fdo != 1)
 				close(fdo);
-			if (is_builtin(current, vars) == -1)
+			if (is_builtin(current, vars, env) == -1)
 			{
 				if (accessing(vars, current) == -1)
 				{
@@ -128,20 +128,20 @@ int	forking(t_token *current, int fdi, t_vars *vars)
 	return (pipefd[0]);
 }
 
-void	fd_catch(t_vars *vars, t_token *current)
+void	fd_catch(t_vars *vars, t_token *current, char **env)
 {
 	int	fd;
 	int	i;
 	vars->pid_count = 0;
 
 	finding_paths(vars);
-	fd = forking(current, redirect_input(current, 0), vars);
+	fd = forking(current, redirect_input(current, 0), vars, env);
 	current = skip_group(current);
 	i = 0;
 	while ((i++ < (vars->pipe_count)) && ((vars->pid_count) < 32766))
 	{
 		finding_paths(vars);
-		fd = forking(current, redirect_input(current, fd), vars);
+		fd = forking(current, redirect_input(current, fd), vars, env);
 		current = skip_group(current);
 	}
 	i = 0;
