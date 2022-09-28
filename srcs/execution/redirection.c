@@ -72,7 +72,8 @@ t_token *rm_redir(t_token *token, t_vars *vars)
 		else
 			token = token->next;
 	}
-	while (token->prev != NULL && token->prev->group_num == group)
-		token = token->prev;
+	token = vars->token->first;
+	while (token->group_num != group)
+		token = token->next;
 	return (token);
 }
