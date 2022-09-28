@@ -14,8 +14,8 @@ TODO:
 [ ] Gérer $?
 [X] Add $Vars and remove_quotes()
 [ ] Créer les buitins
-	[ ] echo (with -n) (xchouina)
-	[ ] cd (only relative path or absolute)(changer PATH et OLDPATH) (xchouina)
+	[X] echo (with -n) (xchouina)
+	[ ] cd (xchouina)
 	[ ] export (no flag)	-started-
 	[ ] unset (no flag)		-started-
 	[X] pwd (no flag)
@@ -36,3 +36,6 @@ TOKNOW:
 		Ex: in: "hello$@" -> out: hello
 	- Echo: should display a space between arguments ex: $>echo aa aa% out: aa aa% instead of: aaaa
 	- Echo: doesnt work with only one char as first argument
+	- $VAR double quotes -> first doesn't work [X]
+	- Herestring broken with token changes
+	- DANS CD : $>pwd | cd srcs

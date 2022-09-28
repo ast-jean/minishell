@@ -11,7 +11,7 @@ void	init_shell(t_vars *vars, char **env)
 }
 
 // TOFIX : rename for check_token_type
-void	executing_command(char *line, t_vars *vars)
+void	executing_command(char *line, t_vars *vars, char **env)
 {
 	t_token	*current;
 
@@ -25,8 +25,7 @@ void	executing_command(char *line, t_vars *vars)
 // /*debug*/debug_print_tokens(vars);
 		if (parsing_pipes(vars) == -1)
 			return ;
-		current = vars->token->first;
-		fd_catch(vars, current);
+		fd_catch(vars, vars->token->first, env);
 	}
 }
 
@@ -78,7 +77,7 @@ int	main(int argc, char **argv, char **env)
 			quit_shell(&vars);
 		else if (ft_strcmp(vars.line, "") != 0)
 			add_history(vars.line);
-		executing_command(vars.line, &vars);
+		executing_command(vars.line, &vars, env);
 		remove_tmp_files(&vars);
 	}
 	quit_shell(&vars);
