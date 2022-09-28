@@ -18,14 +18,10 @@
 // }
 int	builtin_pwd(t_vars *vars)
 {
-<<<<<<< HEAD
 	vars->pwd = ft_arraysrch(vars->env, "PWD=") + 4; 
 	// printf("%s\n", vars->pwd);
 	ft_putstr_fd(vars->pwd, 1);
 	ft_putstr_fd("\n", 1);
-=======
-	printf("%s\n", vars->pwd);
->>>>>>> ast-jean
 	return (1);
 }
 
