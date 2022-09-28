@@ -39,3 +39,4 @@ TOKNOW:
 	- $VAR double quotes -> first doesn't work [X]
 	- Herestring broken with token changes
 	- DANS CD : $>pwd | cd srcs
+	- Echo: doesnt work with only one char as first argument

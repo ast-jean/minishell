@@ -66,6 +66,7 @@ int	forking(t_token *current, int fdi, t_vars *vars, char **env)
 	int	pipefd[2];
 	int	fdo;
 
+<<<<<<< HEAD
 	// if(current && !ft_strcmp(remove_quotes(current->cont), "exit"))
 	// {
 	// 	if (fdi != 0)
@@ -73,6 +74,10 @@ int	forking(t_token *current, int fdi, t_vars *vars, char **env)
 	// 	quit_shell(vars);
 	// }
 	if (vars->pipe_count == 0)
+=======
+	// printf("current : %s\n", current->cont);
+	if(current && !ft_strcmp(remove_quotes(current->cont), "exit"))
+>>>>>>> ast-jean
 	{
 		if (is_builtin(current, vars, env) == -1)
 			ft_putstr_fd("command not found\n", 2);
