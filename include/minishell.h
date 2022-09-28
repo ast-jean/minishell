@@ -34,6 +34,7 @@ typedef struct s_vars
 	int		pid[32768];
 	int		pid_count;
 	int		status;
+	char 	*cd_oldpwd;
 }	t_vars;
 
 // FUNCTIONS (SELON FILENAME)----------------------

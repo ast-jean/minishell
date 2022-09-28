@@ -99,7 +99,6 @@
 
 //  NEW 
 //  UPDATE VARS->ENV WHEN NEEDED
-//  NEW 
 
 
 
@@ -115,74 +114,153 @@ int	finding_index(t_vars *vars, char *str, int n)
 			return (-1);		
 }
 
+
+// void	dispatching_dir(t_vars *vars)
+// {
+// 	t_token	*token;
+// 	char	s[100];
+// 	token = vars->token->first;
+
+// 	printf("AFTER CD =	%s\n", getcwd(s, 100));
+// 	printf("AFTER CD =	%s\n", getenv("PWD"));
+// 	// 	// dprintf(2, "TOKEN->NEXT->CONT = [%s]\n", token->next->cont);
+// 	// 	// dprintf(2, "---------------------\n");
+// 	// if (ft_strcmp(token->next->cont, "..") == 0)
+// 	// 	chdir("..");
+// 	// if (ft_strcmp(token->next->cont, "~") == 0 || ft_strcmp(token->next->cont, NULL) == 0)
+// 	// 	chdir(getenv("HOME"));
+// 	// if (ft_strcmp(token->next->cont, ".") == 0);
+// 	// else
+// 		// chdir(token->next->cont);
+// 	// dprintf(2, "PWD = %s\n", getenv("PWD"));
+// 	// if (ft_strcmp(token->next->cont, "srcs") == 0)
+// }
+
+// int	builtin_cd(t_vars *vars, char **env)
+// {
+// 	t_token	*token;
+// 	char	*oldpwd;
+
+// 	oldpwd = ft_arraysrch(vars->env, "PWD=") + 4;
+// /*debug*/	//ft_putstr_fd(oldpwd, 1);
+// 	token = vars->token->first;
+// 	dispatching_dir(vars);
+	
+// 	// free2d(vars->env);
+// 	vars->env = ft_arraycpy(env);
+
+// 	changing_oldpwd(vars);
+// 	// dprintf(2, "PWD = %s\n", check_var("PWD="));
+// 	return (1);
+// }
+
+
+
+
+
+
+// NEW 
+
+
+
+
+
 void	changing_oldpwd(t_vars *vars)
 {
-	int	p;
 	int	o;
+	// int	p;
+
+	o = finding_index(vars, "OLDPWD=", 7);
+	// p = finding_index(vars, "PWD=", 4);
+	// printf("%d  %d\n", o, p);
+	if (o != -1)
+		vars->env[o] = ft_strjoin("OLDPWD=", ft_arraysrch(vars->env, "PWD=") + 4);
+	else
+		ft_arrayadd(vars->env, ft_strjoin("OLDPWD=", vars->cd_oldpwd));
+	// printf("%s\n", vars->env[p]);
+	printf("%s\n", vars->env[o]);
+	
 	// char *new_oldpwd;
 
-	p = finding_index(vars, "PWD=", 4);
-	if (finding_index(vars, "OLDPWD=", 7) != -1)
-	{
-		o = finding_index(vars, "OLDPWD=", 7);
-		// free(vars->env[o]);
-		vars->env[o] = ft_strjoin("OLD", vars->env[p]);
-	}
-	else
-		ft_arrayadd(vars->env, ft_strjoin("OLD", vars->env[p]));
-}
-
-void	dispatching_dir(t_vars *vars)
-{
-	t_token	*token;
-	char	s[100];
-	token = vars->token->first;
-
-	printf("BEFORE CD =   %s\n", getcwd(s, 100));
-	chdir(token->next->cont);
-	printf("AFTER CD =   %s\n", getcwd(s, 100));
-	printf("AFTER CD =   %s\n", getenv("PWD"));
-	// 	// dprintf(2, "TOKEN->NEXT->CONT = [%s]\n", token->next->cont);
-	// 	// dprintf(2, "---------------------\n");
-	// if (ft_strcmp(token->next->cont, "..") == 0)
-	// 	chdir("..");
-	// if (ft_strcmp(token->next->cont, "~") == 0 || ft_strcmp(token->next->cont, NULL) == 0)
-	// 	chdir(getenv("HOME"));
-	// if (ft_strcmp(token->next->cont, ".") == 0);
+	// p = finding_index(vars, "PWD=", 4);
+	// if (finding_index(vars, "OLDPWD=", 7) != -1)
+	// {
+	// 	o = finding_index(vars, "OLDPWD=", 7);
+	// 	// free(vars->env[o]);
+	// 	vars->env[o] = ft_strjoin("OLD", vars->env[p]);
+	// }
 	// else
-		// chdir(token->next->cont);
-	// dprintf(2, "PWD = %s\n", getenv("PWD"));
-	// if (ft_strcmp(token->next->cont, "srcs") == 0)
+	// 	ft_arrayadd(vars->env, ft_strjoin("OLD", vars->env[p]));
+
+
+
 }
+
+void	changing_pwd(t_vars *vars)
+{
+	int		p;
+	char	s[1000];
+
+	if (finding_index(vars, "PWD=", 4) != -1)
+	{
+		p = finding_index(vars, "PWD=", 4);
+		vars->env[p] = ft_strjoin("PWD=", getcwd(s, 1000));
+	}
+}
+
 
 int	builtin_cd(t_vars *vars, char **env)
 {
-	t_token	*token;
-	char	*oldpwd;
+	t_token *token;
+	// char *new_oldpwd;
+	// char *ini_pwd;
+	// char *dir;
+	char **tempenv;
+	// char s[100];
+	token = vars->token->first->next;
+	if (token)
+		token->cont = remove_quotes(token->cont);
+	vars->cd_oldpwd = getenv("PWD");
+// /*DEBUG*/	dprintf(1, " OLD PWD = %s\n", ini_pwd);
+	// if (token->cont[0] != '/')
+		// dir = ft_strjoin("/", token->cont);
+	// else
+	// dir = token->cont;
 
-	oldpwd = ft_arraysrch(vars->env, "PWD=") + 4;
-/*debug*/	//ft_putstr_fd(oldpwd, 1);
-	token = vars->token->first;
-	dispatching_dir(vars);
-	
-	free2d(vars->env);
-	vars->env = ft_arraycpy(env);
+	// dprintf(1, "[%s]\n", getenv("HOME"));
+
+
+	if (!token || ft_strcmp(token->cont, "~") == 0/* || ft_strcmp(token->cont, NULL) == 0*/)
+		chdir(getenv("HOME"));
+		// printf("!\n");
+	else if (token && ft_strcmp(token->cont, ".") == 0);
+	else if (token && chdir(token->cont) != 0)
+			return (dprintf(2, "cd: no such file or directory: %s\n", token->cont));
+
+	tempenv = ft_arraycpy(env);
+	// free2d(vars->env);
+	vars->env = tempenv;
 
 	changing_oldpwd(vars);
-	dprintf(2, "PWD = %s\n", check_var("PWD="));
+	changing_pwd(vars);
 	return (1);
 }
 
+// /*DEBUG*/	dprintf(1, "dir = %s\n", dir);
+// /*DEBUG*/	printf("AFTER CD =	%s\n", getcwd(s, 100));
+// /*DEBUG*/	printf("AFTER CD =	%s\n", getenv("PWD"));
 
 
 
 
 
-
-
-
-
-
+/*
+- Save pwd for oldpwd
+- Chdir
+- replace pwd with getcwd
+- replace old with prev_pwd
+- recopy vars->env
+*/
 
 
 
