@@ -1,7 +1,11 @@
 #include "../../include/minishell.h"
 
+int main_pid;
+
 void	init_shell(t_vars *vars, char **env)
 {
+	main_pid = getpid();
+	vars->heredoc_pid = getpid();
 	vars->env = ft_arraycpy(env);
 	vars->pwd = getenv("PWD");
 	vars->oldpwd = getenv("OLDPWD");
@@ -19,6 +23,7 @@ void	executing_command(char *line, t_vars *vars)
 		return ;
 	if (!creating_tokens(line, vars))
 	{
+		
 		if(!check_here(vars))
 			return ;
 // printf("---after checks---\n");
@@ -32,7 +37,20 @@ void	executing_command(char *line, t_vars *vars)
 
 void	handler(int sig)
 {
-	if (sig == SIGINT)
+	int pid;
+
+	pid = getpid();
+	// pid = struct_function().name;
+	printf("pid = %d\n",pid);
+	if (sig == SIGINT && pid == main_pid)
+	{
+		printf("in main process\n");
+		ft_putstr_fd("\n", 2);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+	else if(sig == SIGINT)
 	{
 		ft_putstr_fd("\n", 2);
 		rl_on_new_line();

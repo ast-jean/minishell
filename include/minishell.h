@@ -7,6 +7,8 @@
 # include <signal.h>
 
 // STRUCTS
+
+
 typedef struct s_token
 {
 	int				group_num;
@@ -29,11 +31,41 @@ typedef struct s_vars
 	char	*oldpwd;
 	char	*line;
 	t_token	*token;
+	int		heredoc_pid;
 	int		pipe_count;
 	int		pid[32768];
 	int		pid_count;
 	int		status;
 }	t_vars;
+
+
+struct *hd_function(void)
+{
+	static struct s_hds;
+	if (hds.init == 0)
+	{
+		typedef struct s_hds
+			{
+				int				pid;
+			}	t_hds;
+	}
+	return(&t_hds);
+}
+/*
+					struct *name_struct(void)
+					{
+						static struct name_struct;
+						if (name_struct.init == 0)
+						{
+							init la struct;
+						}
+						return(&name_struct);
+					}
+*/
+// pid = hd_function()->pid;
+
+
+
 
 // FUNCTIONS (SELON FILENAME)----------------------
 

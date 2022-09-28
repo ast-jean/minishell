@@ -61,11 +61,14 @@ void*	check_heredocs(t_token *current, t_vars *vars)
 
 	line = " ";
 	if (!is_exception(current))
-		return(NULL);
+		return (NULL);
 	name = ft_strjoin(".tmp/temp_heredoc", ft_itoa(vars->heredoc_count));
 	delim = remove_quotes(current->next->cont);
 	fd = open(name, O_RDWR | O_CREAT | O_TRUNC, 0777);
 	new_token_after(current, name);
+fork();
+if (getpid() == vars->heredoc_pid)
+{
 	while (ft_strcmp(delim, line))
 	{
 		if (ft_strcmp(" ", line))
@@ -82,6 +85,7 @@ void*	check_heredocs(t_token *current, t_vars *vars)
 	current = remove_token(current, vars);
 	current = remove_token(current->next, vars);
 	vars->heredoc_count++;
+}
 	return (current);
 }
 
