@@ -5,6 +5,8 @@ void	init_shell(t_vars *vars, char **env)
 	vars->env = ft_arraycpy(env);
 	vars->pwd = getenv("PWD");
 	vars->oldpwd = getenv("OLDPWD");
+	vars->path_array = NULL;
+	vars->token = NULL;
 	printf("*******************************\n");
 	printf("*          MINISHELL          *\n");
 	printf("*******************************\n");
@@ -13,8 +15,6 @@ void	init_shell(t_vars *vars, char **env)
 // TOFIX : rename for check_token_type
 void	executing_command(char *line, t_vars *vars, char **env)
 {
-	t_token	*current;
-
 	if (ft_strlen(line) == 0)
 		return ;
 	if (!creating_tokens(line, vars))
