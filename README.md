@@ -14,8 +14,8 @@ TODO:
 [ ] Gérer $?
 [ ] Add $Vars and remove_quotes()
 [ ] Créer les buitins
-	[X] echo (with -n) (xchouina)
-	[ ] cd (xchouina)
+	[X] echo
+	[X] cd
 	[ ] export (no flag)	-started-
 	[ ] unset (no flag)		-started-
 	[X] pwd (no flag)
@@ -34,6 +34,5 @@ TOKNOW:
 		Ex: in: "hello$" -> out: hello$
 		Ex: in: "hello$v" -> out: hello
 		Ex: in: "hello$@" -> out: hello
-	- $VAR double quotes -> first doesn't work [X]
 	- Herestring broken with token changes
 	- DANS CD : $>pwd | cd srcs
