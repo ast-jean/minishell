@@ -77,7 +77,7 @@ int	forking(t_token *current, int fdi, t_vars *vars, char **env)
 	{
 		if (is_builtin(current, vars, env) == -1)
 			ft_putstr_fd("command not found\n", 2);
-		ft_putstr_fd("here!\n", 2);
+		// ft_putstr_fd("here!\n", 2);
 /* TOFIX */		// fork if access = 0 and do redirs here too :)
 	}
 	else
