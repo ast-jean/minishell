@@ -31,40 +31,22 @@ typedef struct s_vars
 	char	*oldpwd;
 	char	*line;
 	t_token	*token;
-	int		heredoc_pid;
 	int		pipe_count;
 	int		pid[32768];
 	int		pid_count;
 	int		status;
 }	t_vars;
 
-
-struct *hd_function(void)
+typedef struct s_hds
 {
-	static struct s_hds;
-	if (hds.init == 0)
-	{
-		typedef struct s_hds
-			{
-				int				pid;
-			}	t_hds;
-	}
-	return(&t_hds);
-}
-/*
-					struct *name_struct(void)
-					{
-						static struct name_struct;
-						if (name_struct.init == 0)
-						{
-							init la struct;
-						}
-						return(&name_struct);
-					}
-*/
+	int		init;
+	int		in_heredoc;
+	int		end;
+} t_hds;
+
+
+
 // pid = hd_function()->pid;
-
-
 
 
 // FUNCTIONS (SELON FILENAME)----------------------
@@ -75,6 +57,7 @@ struct *hd_function(void)
 void	init_shell(t_vars *vars, char **env);
 void	handler(int sig);
 int		is_builtin(t_token *current, t_vars *vars);
+t_hds	*f_hds();
 
 // EXECUTION_CMD.C
 void	finding_paths(t_vars *vars);
