@@ -64,14 +64,16 @@ void	handler(int sig)
 	{
 		f_hds()->in_heredoc = 0;
 		f_hds()->end = 1;
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		write(1,"\n",1);
-		rl_redisplay();
-		// write(1,"\r",1);
 
-		// close(0);
-		// exit(0);
+		// ft_putstr_fd("\n", 2);
+		rl_redisplay();
+		rl_replace_line("", 1);
+		rl_on_new_line();
+		ft_putstr_fd("\n", 0);
+		kill(f_hds()->init, SIGABRT);
+		
+
+		// close(STDIN_FILENO);
 	}
 }
 
@@ -122,7 +124,7 @@ int	main(int argc, char **argv, char **env)
 		else if (ft_strcmp(line, "") != 0)
 			add_history(line);
 		executing_command(line, &vars);
-		// remove_tmp_files(&vars);
+		remove_tmp_files(&vars);
 	}
 	quit_shell(&vars);
 	return (0);
