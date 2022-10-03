@@ -14,8 +14,8 @@ TODO:
 [ ] Gérer $?
 [X] Add $Vars and remove_quotes()
 [ ] Créer les buitins
-	[X] echo (with -n) (xchouina)
-	[ ] cd (xchouina)
+	[X] echo
+	[X] cd
 	[ ] export (no flag)	-started-
 	[ ] unset (no flag)		-started-
 	[X] pwd (no flag)
