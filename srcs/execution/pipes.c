@@ -6,7 +6,7 @@
 //forking has to call redirect_output and pipe anyways
 //redirect output becomes stdout and overrides pipefd[1]);
 
-int	is_builtin(t_token *current, t_vars *vars, char **env)
+int	is_builtin(t_token *current, t_vars *vars, char **env, int fdi)
 {
 	if (current && !ft_strcmp(remove_quotes(current->cont), "export"))
 		return (builtin_export(current, vars));
@@ -20,6 +20,12 @@ int	is_builtin(t_token *current, t_vars *vars, char **env)
 		return (builtin_unset(vars, remove_quotes(current->next->cont)));
 	else if (current && !ft_strcmp(remove_quotes(current->cont), "cd"))
 		return (builtin_cd(vars, env));
+	else if(current && !ft_strcmp(remove_quotes(current->cont), "exit"))
+	{
+		if (fdi != 0)
+			close(fdi);
+		quit_shell(vars);
+	}
 	return (-1);
 }
 
@@ -66,17 +72,17 @@ int	forking(t_token *current, int fdi, t_vars *vars, char **env)
 	int	pipefd[2];
 	int	fdo;
 
-	// if(current && !ft_strcmp(remove_quotes(current->cont), "exit"))
-	// {
-	// 	if (fdi != 0)
-	// 		close(fdi);
-	// 	quit_shell(vars);
-	// }
+	if(current && !ft_strcmp(remove_quotes(current->cont), "exit"))
+	{
+		if (fdi != 0)
+			close(fdi);
+		quit_shell(vars);
+	}
 	if (vars->pipe_count == 0)
 	{
-		if (is_builtin(current, vars, env) == -1)
+		if (is_builtin(current, vars, env, fdi) == -1)
 			ft_putstr_fd("command not found\n", 2);
-		// ft_putstr_fd("here!\n", 2);
+		ft_putstr_fd("here!\n", 2);
 /* TOFIX */		// fork if access = 0 and do redirs here too :)
 	}
 	else
@@ -114,7 +120,7 @@ int	forking(t_token *current, int fdi, t_vars *vars, char **env)
 			dup2(fdo, 1);
 			if (fdo != 1)
 				close(fdo);
-			if (is_builtin(current, vars, env) == -1)
+			if (is_builtin(current, vars, env, fdi) == -1)
 			{
 				if (accessing(vars, current) == -1)
 				{
