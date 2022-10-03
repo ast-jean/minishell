@@ -43,7 +43,6 @@ typedef struct s_vars
 // MINISHELL.C
 void	init_shell(t_vars *vars, char **env);
 void	handler(int sig);
-int		is_builtin(t_token *current, t_vars *vars, char **env);
 
 // EXECUTION_CMD.C
 void	finding_paths(t_vars *vars);
@@ -72,6 +71,7 @@ void	free_tokens(t_vars *vars);
 void	free2d(char **split);
 
 // PIPES.C
+int		is_builtin(t_token *current, t_vars *vars, char **env, int fdi);
 void	fd_catch(t_vars *vars, t_token *current, char **env);
 t_token	*group_skip(t_token *current_token);
 
