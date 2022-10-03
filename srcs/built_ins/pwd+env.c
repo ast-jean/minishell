@@ -1,25 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pwd+env.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/03 10:55:48 by xchouina          #+#    #+#             */
+/*   Updated: 2022/10/03 10:55:49 by xchouina         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 // NOTE: Built-ins 1/3 (PWD + ENV)
 
-// void	ft_echo(char **args, char **env)
-// {
-// //echo (with -n)
-// (void)args;
-// (void)env;
-// //start at token "echo" then printf token->next (if not flag) until " | or End of line"
-// //look for $var in env and replace 
-// 	printf ("");
-// }
-// void	ft_cd(void)
-// {
-// // cd (only relative path or absolute)
-// //change pwd and oldpwd in env, maybe?
-// // save pwd in struct and env
-// }
 int	builtin_pwd(t_vars *vars)
 {
-	vars->pwd = ft_arraysrch(vars->env, "PWD=") + 4; 
-	// printf("%s\n", vars->pwd);
+	vars->pwd = ft_arraysrch(vars->env, "PWD=") + 4;
 	ft_putstr_fd(vars->pwd, 1);
 	ft_putstr_fd("\n", 1);
 	return (1);
@@ -27,10 +23,6 @@ int	builtin_pwd(t_vars *vars)
 
 int	builtin_env(t_vars *vars)
 {
-	// char **env_copy;
-
-	// env_copy = ft_arraycpy(vars->env);
-	// ft_arrayprint(env_copy);
 	ft_arrayprint(vars->env);
 	return (1);
 }
