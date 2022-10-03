@@ -13,7 +13,7 @@ void	init_shell(t_vars *vars, char **env)
 // TOFIX : rename for check_token_type
 void	executing_command(char *line, t_vars *vars, char **env)
 {
-	t_token	*current;
+	// t_token	*current;
 
 	if (ft_strlen(line) == 0)
 		return ;
