@@ -9,7 +9,7 @@
 int	is_builtin(t_token *current, t_vars *vars, char **env)
 {
 	if (current && !ft_strcmp(remove_quotes(current->cont), "export"))
-		return (builtin_export(current, vars));
+		return (builtin_export(vars));
 	else if (current && !ft_strcmp(remove_quotes(current->cont), "pwd"))
 		return (builtin_pwd(vars));
 	else if (current && !ft_strcmp(remove_quotes(current->cont), "env"))
@@ -17,7 +17,7 @@ int	is_builtin(t_token *current, t_vars *vars, char **env)
 	else if (current && !ft_strcmp(remove_quotes(current->cont), "echo"))
 		return (builtin_echo(vars));
 	else if(current && !ft_strcmp(remove_quotes(current->cont), "unset"))
-		return (builtin_unset(vars, remove_quotes(current->next->cont)));
+		return (builtin_unset(vars));
 	else if (current && !ft_strcmp(remove_quotes(current->cont), "cd"))
 		return (builtin_cd(vars, env));
 	return (-1);

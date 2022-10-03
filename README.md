@@ -35,8 +35,9 @@ TOKNOW:
 		Ex: in: "hello$v" -> out: hello
 		Ex: in: "hello$@" -> out: hello
 	- Echo: should display a space between arguments ex: $>echo aa aa% out: aa aa% instead of: aaaa
-	- Echo: doesnt work with only one char as first argument
 	- $VAR double quotes -> first doesn't work [X]
 	- Herestring broken with token changes
 	- DANS CD : $>pwd | cd srcs
-	- Echo: doesnt work with only one char as first argument
+
+
+[ ] export multiple
