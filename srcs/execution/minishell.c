@@ -21,6 +21,8 @@ void	init_shell(t_vars *vars, char **env)
 	vars->env = ft_arraycpy(env);
 	vars->pwd = getenv("PWD");
 	vars->oldpwd = getenv("OLDPWD");
+	vars->path_array = NULL;
+	vars->token = NULL;
 	printf("*******************************\n");
 	printf("*          MINISHELL          *\n");
 	printf("*******************************\n");
@@ -28,10 +30,8 @@ void	init_shell(t_vars *vars, char **env)
 
 
 // TOFIX : rename for check_token_type
-void	executing_command(char *line, t_vars *vars)
+void	executing_command(char *line, t_vars *vars, char **env)
 {
-	t_token	*current;
-
 	if (ft_strlen(line) == 0)
 		return ;
 	if (!creating_tokens(line, vars))
@@ -43,8 +43,7 @@ void	executing_command(char *line, t_vars *vars)
 // /*debug*/debug_print_tokens(vars);
 		if (parsing_pipes(vars) == -1)
 			return ;
-		current = vars->token->first;
-		fd_catch(vars, current);
+		fd_catch(vars, vars->token->first, env);
 	}
 }
 
@@ -64,13 +63,12 @@ void	handler(int sig)
 	{
 		f_hds()->in_heredoc = 0;
 		f_hds()->end = 1;
-
 		// ft_putstr_fd("\n", 2);
 		rl_redisplay();
 		rl_replace_line("", 1);
 		rl_on_new_line();
 		ft_putstr_fd("\n", 0);
-		kill(f_hds()->init, SIGABRT);
+		// kill(f_hds()->init, SIGABRT);
 		
 
 		// close(STDIN_FILENO);
@@ -123,7 +121,7 @@ int	main(int argc, char **argv, char **env)
 		}
 		else if (ft_strcmp(line, "") != 0)
 			add_history(line);
-		executing_command(line, &vars);
+		executing_command(line, &vars, env);
 		remove_tmp_files(&vars);
 	}
 	quit_shell(&vars);

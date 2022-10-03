@@ -14,8 +14,8 @@ TODO:
 [ ] Gérer $?
 [X] Add $Vars and remove_quotes()
 [ ] Créer les buitins
-	[ ] echo (with -n) (xchouina)
-	[ ] cd (only relative path or absolute)(changer PATH et OLDPATH) (xchouina)
+	[X] echo
+	[X] cd
 	[ ] export (no flag)	-started-
 	[ ] unset (no flag)		-started-
 	[X] pwd (no flag)
@@ -34,6 +34,10 @@ TOKNOW:
 		Ex: in: "hello$" -> out: hello$
 		Ex: in: "hello$v" -> out: hello
 		Ex: in: "hello$@" -> out: hello
+	- Echo: doesnt work with only one char as first argument
+	- $VAR double quotes -> first doesn't work [X]
+	- Herestring broken with token changes
+	- DANS CD : $>pwd | cd srcs
 	- Echo: doesnt work with only one char as first argument
 	- in:	$>cat<.s
 	  out:	Segmentation fault: 11

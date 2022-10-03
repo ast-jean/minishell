@@ -9,7 +9,8 @@ SRCS_FILES 		=	execution/minishell.c				\
 					parsing/token_op.c					\
 					parsing/tokenize.c					\
 					parsing/newtoken.c					\
-					built_ins/echo+cd.c					\
+					built_ins/echo.c					\
+					built_ins/cd.c						\
 					built_ins/pwd+env.c					\
 					built_ins/unset+export.c			\
 					execution/quit.c					\

@@ -35,6 +35,7 @@ typedef struct s_vars
 	int		pid[32768];
 	int		pid_count;
 	int		status;
+	char 	*cd_oldpwd;
 }	t_vars;
 
 typedef struct s_hds
@@ -57,7 +58,7 @@ typedef struct s_hds
 // MINISHELL.C
 void	init_shell(t_vars *vars, char **env);
 void	handler(int sig);
-int		is_builtin(t_token *current, t_vars *vars);
+// int		is_builtin(t_token *current, t_vars *vars, char **env);
 t_hds	*f_hds();
 
 // EXECUTION_CMD.C
@@ -87,7 +88,8 @@ void	free_tokens(t_vars *vars);
 void	free2d(char **split);
 
 // PIPES.C
-void	fd_catch(t_vars *vars, t_token *current);
+int		is_builtin(t_token *current, t_vars *vars, char **env, int fdi);
+void	fd_catch(t_vars *vars, t_token *current, char **env);
 t_token	*group_skip(t_token *current_token);
 
 // SET_GROUPS.C
@@ -111,7 +113,7 @@ int		nbr_of_letters(char *s, int i, int code);
 //INIT_TOKEN.C
 int		creating_tokens(char *line, t_vars *vars);
 void	push_tk(char *cont, t_token *token, t_token *first, t_token *prev, int i, int count);
-void	executing_command(char *line, t_vars *vars);
+void	executing_command(char *line, t_vars *vars, char **env);
 
 //TOKEN_OP.C
 void	debug_print_tokens(t_vars *vars); //temp_function
@@ -139,6 +141,7 @@ int	builtin_unset(t_vars *vars, char *var_name);
 int	builtin_export(t_token *token, t_vars *vars);
 // ECHO_CD.C
 int	builtin_echo(t_vars *vars);
-int	builtin_cd(t_vars *vars);
+// CD.c
+int	builtin_cd(t_vars *vars, char **env);
 //NOTE: ------------------------------------------------
 #endif

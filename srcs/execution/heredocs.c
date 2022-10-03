@@ -51,7 +51,7 @@ void*	check_herestrings(t_token *current, t_vars *vars)
 	current = remove_token(current->next, vars);
 	return (current);
 }
-
+//signal handler for only heredoc 
 void*	check_heredocs(t_token *current, t_vars *vars)
 {
 	char	*delim;
@@ -67,13 +67,14 @@ void*	check_heredocs(t_token *current, t_vars *vars)
 	delim = remove_quotes(current->next->cont);
 	fd = open(name, O_RDWR | O_CREAT | O_TRUNC, 0777);
 	new_token_after(current, name);
-
 	f_hds()->in_heredoc = 1;
+	
 	pid = fork();
 	f_hds()->init = pid;
+	signal(2, SIG_IGN);
 	if (pid == 0)
 	{
-	printf("hello\n");
+	printf("fork bomb?\n");
 		while (ft_strcmp(delim, vars->line) && !f_hds()->end)
 		{	
 			if (ft_strcmp(" ", vars->line))
@@ -85,26 +86,18 @@ void*	check_heredocs(t_token *current, t_vars *vars)
 			vars->line = readline(ft_strjoin(delim,"> "));
 			if (!vars->line)
 				vars->line = delim;
-		// if(pid == 0 && f_hds()->end)
-		// {
-		// // close(0);
-		// // exit(0);
-		// vars->line = delim;
-		// // write(1,"\r",1);
-		// // rl_redisplay();
-		// }
-			rl_redisplay();
+	
 		}
-			// exit(0);
+	usleep(10);
 	}
-	waitpid(pid, &stat, 0);
+	else	
+		waitpid(pid, &stat, 0);
+	signal(2, handler);
 	f_hds()->in_heredoc = 0;
 	f_hds()->end = 0;
 		// printf("line = %s\n", vars->line);
-	if(pid != 0)	
-{	current = remove_token(current, vars);
-	current = remove_token(current->next, vars);}
-	// debug_print_tokens(vars);
+	current = remove_token(current, vars);
+	current = remove_token(current->next, vars);
 	return (current);
 }
 
