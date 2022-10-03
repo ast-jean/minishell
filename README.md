@@ -40,3 +40,7 @@ TOKNOW:
 	- Herestring broken with token changes
 	- DANS CD : $>pwd | cd srcs
 	- Echo: doesnt work with only one char as first argument
+	- in:	$>cat<.s
+	  out:	Segmentation fault: 11
+	- TODO: Fix cat with << and <<< doesnt work after token changes
+	

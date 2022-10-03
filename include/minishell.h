@@ -7,6 +7,8 @@
 # include <signal.h>
 
 // STRUCTS
+
+
 typedef struct s_token
 {
 	int				group_num;
@@ -36,6 +38,18 @@ typedef struct s_vars
 	char 	*cd_oldpwd;
 }	t_vars;
 
+typedef struct s_hds
+{
+	int		init;
+	int		in_heredoc;
+	int		end;
+} t_hds;
+
+
+
+// pid = hd_function()->pid;
+
+
 // FUNCTIONS (SELON FILENAME)----------------------
 
 // NOTE: EXECUTION
@@ -43,6 +57,8 @@ typedef struct s_vars
 // MINISHELL.C
 void	init_shell(t_vars *vars, char **env);
 void	handler(int sig);
+// int		is_builtin(t_token *current, t_vars *vars, char **env);
+t_hds	*f_hds();
 
 // EXECUTION_CMD.C
 void	finding_paths(t_vars *vars);

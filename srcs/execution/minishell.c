@@ -1,5 +1,21 @@
 #include "../../include/minishell.h"
 
+t_hds *f_hds()
+{
+	static t_hds *a;
+	static int	b;
+
+	if(!b)
+	{	
+		a = malloc(sizeof(t_hds));
+		b = 1;
+		a->init = 1;
+		a->end = 0;
+		a->in_heredoc = 0;
+	}
+	return (a);
+}
+
 void	init_shell(t_vars *vars, char **env)
 {
 	vars->env = ft_arraycpy(env);
@@ -12,6 +28,7 @@ void	init_shell(t_vars *vars, char **env)
 	printf("*******************************\n");
 }
 
+
 // TOFIX : rename for check_token_type
 void	executing_command(char *line, t_vars *vars, char **env)
 {
@@ -19,6 +36,7 @@ void	executing_command(char *line, t_vars *vars, char **env)
 		return ;
 	if (!creating_tokens(line, vars))
 	{
+		
 		if(!check_here(vars))
 			return ;
 // printf("---after checks---\n");
@@ -31,12 +49,23 @@ void	executing_command(char *line, t_vars *vars, char **env)
 
 void	handler(int sig)
 {
-	if (sig == SIGINT)
+	// printf("special boi= %d\n", f_hds().pid);
+	if (sig == SIGINT && !f_hds()->in_heredoc)
 	{
 		ft_putstr_fd("\n", 2);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+	}
+	else if(sig == SIGINT)
+	{
+		// printf("dsadsa\n");
+		// f_hds()->in_heredoc = 0;
+		f_hds()->end = 1;
+		// rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+// close(0);
 	}
 }
 
@@ -57,10 +86,16 @@ void	remove_tmp_files(t_vars *vars)
 	}
 }
 
+
+
 int	main(int argc, char **argv, char **env)
 {
 	t_vars	vars;	
 	char	*prompt;
+
+	t_hds *a;
+	a = f_hds(); //dont forget to free
+	printf("in_heredoc = %d\n", a->in_heredoc);
 
 	if (argc != 1)
 		return (-1);
@@ -74,7 +109,9 @@ int	main(int argc, char **argv, char **env)
 	{
 		vars.line = readline(prompt);
 		if (!vars.line)
+		{
 			quit_shell(&vars);
+		}
 		else if (ft_strcmp(vars.line, "") != 0)
 			add_history(vars.line);
 		executing_command(vars.line, &vars, env);
