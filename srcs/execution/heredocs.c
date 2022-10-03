@@ -54,12 +54,14 @@ void*	check_herestrings(t_token *current, t_vars *vars)
 
 void*	check_heredocs(t_token *current, t_vars *vars)
 {
-	char	*line;
 	char	*delim;
 	char	*name;
 	int		fd;
+	int		pid;
+	int		stat;
+	int i = 0;
 
-	line = " ";
+	vars->line = " ";
 	if (!is_exception(current))
 		return (NULL);
 	name = ft_strjoin(".tmp/temp_heredoc", ft_itoa(vars->heredoc_count));
@@ -68,27 +70,32 @@ void*	check_heredocs(t_token *current, t_vars *vars)
 	new_token_after(current, name);
 
 	f_hds()->in_heredoc = 1;
-	while (ft_strcmp(delim, line) && f_hds()->end != 1)
-	{	
-		if (ft_strcmp(" ", line))
-		{
-			line = ft_strjoin(check_var(line), "\n");
-			ft_putstr_fd(line, fd);
+	pid = fork();
+	if (pid == 0)
+	{
+		while (ft_strcmp(delim, vars->line) && f_hds()->end != 1)
+		{	
+			if (ft_strcmp(" ", vars->line))
+			{
+				vars->line = ft_strjoin(check_var(vars->line), "\n");
+				ft_putstr_fd(vars->line, fd);
+			}
+			rl_on_new_line();
+			vars->line = readline(ft_strjoin(delim,"> "));
+			if (!vars->line)
+				vars->line = delim;
+			rl_redisplay();
 		}
-		rl_on_new_line();
-		line = readline(ft_strjoin(delim,"> "));
-		 if (!line)
-			line = delim;
-		rl_redisplay();
+			f_hds()->in_heredoc = 0;
+			f_hds()->end = 0;
+			exit(0);
 	}
-	if (f_hds()->end == 1)
-		vars->line = " ";
-	f_hds()->in_heredoc = 0;
-	f_hds()->end = 0;
-	// printf("hello\n");
-	rl_redisplay();
+	waitpid(pid, &stat, 0);
+		printf("line = %s\n", vars->line);
+printf("i = %d\n", i);
 	current = remove_token(current, vars);
 	current = remove_token(current->next, vars);
+	debug_print_tokens(vars);
 	return (current);
 }
 

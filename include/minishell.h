@@ -42,6 +42,7 @@ typedef struct s_hds
 	int		init;
 	int		in_heredoc;
 	int		end;
+	t_vars	*vars;
 } t_hds;
 
 

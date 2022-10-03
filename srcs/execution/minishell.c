@@ -50,7 +50,9 @@ void	executing_command(char *line, t_vars *vars)
 
 void	handler(int sig)
 {
-	// printf("special boi= %d\n", f_hds().pid);
+	int c;
+
+	c = 13;
 	if (sig == SIGINT && !f_hds()->in_heredoc)
 	{
 		ft_putstr_fd("\n", 2);
@@ -60,13 +62,16 @@ void	handler(int sig)
 	}
 	else if(sig == SIGINT)
 	{
-		// printf("dsadsa\n");
-		// f_hds()->in_heredoc = 0;
+		f_hds()->in_heredoc = 0;
 		f_hds()->end = 1;
-		// rl_on_new_line();
+		rl_on_new_line();
 		rl_replace_line("", 0);
+		write(1,"\n",1);
 		rl_redisplay();
-// close(0);
+		// write(1,"\r",1);
+
+		// close(0);
+		// exit(0);
 	}
 }
 
@@ -92,31 +97,32 @@ void	remove_tmp_files(t_vars *vars)
 int	main(int argc, char **argv, char **env)
 {
 	t_vars	vars;	
+	char	*line;
 	char	*prompt;
 
-	t_hds *a;
-	a = f_hds(); //dont forget to free
-	printf("in_heredoc = %d\n", a->in_heredoc);
 
 	if (argc != 1)
 		return (-1);
 	(void)argv;
 	prompt = "$>";
-	vars.line = "";
+	line = NULL;
 	init_shell(&vars, env);
+	t_hds *a;
+	a = f_hds(); //dont forget to free
+	f_hds()->vars = &vars;
 	signal(SIGINT, handler);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
-		vars.line = readline(prompt);
-		if (!vars.line)
+		line = readline(prompt);
+		if (!line)
 		{
 			quit_shell(&vars);
 		}
-		else if (ft_strcmp(vars.line, "") != 0)
-			add_history(vars.line);
-		executing_command(vars.line, &vars);
-		remove_tmp_files(&vars);
+		else if (ft_strcmp(line, "") != 0)
+			add_history(line);
+		executing_command(line, &vars);
+		// remove_tmp_files(&vars);
 	}
 	quit_shell(&vars);
 	return (0);
