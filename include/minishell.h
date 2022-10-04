@@ -55,6 +55,7 @@ void	executing_simple_cmds(t_vars *vars, t_token *token);
 // HEREDOCS.c
 int		check_here(t_vars *vars);
 char	*remove_quotes(char *str);
+t_token	*last_token(t_token *current, t_vars *vars);
 
 //CHECK_HEREDOC.C
 void*	check_heredocs(t_token *current, t_vars *vars);

@@ -81,7 +81,7 @@ int	main(int argc, char **argv, char **env)
 		else if (ft_strcmp(line, "") != 0)
 			add_history(line);
 		executing_command(line, &vars, env);
-		remove_tmp_files(&vars);
+		// remove_tmp_files(&vars);
 	}
 	quit_shell(&vars);
 	return (0);

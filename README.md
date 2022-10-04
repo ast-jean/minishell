@@ -30,15 +30,15 @@ TOKNOW:
  TOFIX  
 	- exit with exit code
 	- Added Include/readline/ so people dont have to download on brew (we should link it in minishell.h)
-	- $VAR if it's a $ with an exception(!<>|'"?#+-% ) maybe ft_alnum following
-		Ex: in: "hello$" -> out: hello$
-		Ex: in: "hello$v" -> out: hello
-		Ex: in: "hello$@" -> out: hello
-	- Echo: doesnt work with only one char as first argument
-	- $VAR double quotes -> first doesn't work [X]
-	- Herestring broken with token changes
+	- $Variables 
+		- $VAR if it's a $ with an exception(!<>|'"?#+-% ) maybe ft_alnum following
+			Ex: in: "hello$" -> out: hello$
+			Ex: in: "hello$v" -> out: hello
+			Ex: in: "hello$@" -> out: hello
+		- $>$USER"$HOME" $USER  ->  out: HOMEjean ast-jean
+	- Echo: doesnt work with only one char as first argument [X]
+	- Herestring broken with token changes [X]
 	- DANS CD : $>pwd | cd srcs
 	- Echo:
-		- $>echo $USER"$HOME" $USER  ->  out: HOMEjean ast-jean
 		- $>echo -> out: Segmentation fault: 11
 	- in:	$>cat<.s -> out:	Segmentation fault: 11

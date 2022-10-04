@@ -59,5 +59,7 @@ void	*check_heredocs(t_token *current, t_vars *vars)
 	signal(2, handler);
 	current = remove_token(current, vars);
 	current = remove_token(current->next, vars);
+	if (current == NULL)
+		current = last_token(current, vars);
 	return (current);
 }

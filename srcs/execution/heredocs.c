@@ -2,6 +2,14 @@
 
 #include "../../include/minishell.h"
 
+t_token	*last_token(t_token *current, t_vars *vars)
+{
+	current = vars->token;
+	while(current->next)
+		current = current->next;
+	return (current);
+}
+
 char *remove_quotes(char *str)
 {
 	int i;
@@ -47,6 +55,8 @@ void*	check_herestrings(t_token *current, t_vars *vars)
 	ft_putstr_fd(line, fd);
 	current = remove_token(current, vars);
 	current = remove_token(current->next, vars);
+	if (current == NULL)
+		current = last_token(current, vars);
 	return (current);
 }
 
