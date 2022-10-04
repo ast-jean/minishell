@@ -38,19 +38,6 @@ typedef struct s_vars
 	char 	*cd_oldpwd;
 }	t_vars;
 
-typedef struct s_hds
-{
-	int		init;
-	int		in_heredoc;
-	int		end;
-	t_vars	*vars;
-} t_hds;
-
-
-
-// pid = hd_function()->pid;
-
-
 // FUNCTIONS (SELON FILENAME)----------------------
 
 // NOTE: EXECUTION
@@ -59,7 +46,6 @@ typedef struct s_hds
 void	init_shell(t_vars *vars, char **env);
 void	handler(int sig);
 // int		is_builtin(t_token *current, t_vars *vars, char **env);
-t_hds	*f_hds();
 
 // EXECUTION_CMD.C
 void	finding_paths(t_vars *vars);
@@ -69,6 +55,9 @@ void	executing_simple_cmds(t_vars *vars, t_token *token);
 // HEREDOCS.c
 int		check_here(t_vars *vars);
 char	*remove_quotes(char *str);
+
+//CHECK_HEREDOC.C
+void*	check_heredocs(t_token *current, t_vars *vars);
 
 //SYNTAX_ERROR.c
 int		syntax_error(char *token);
@@ -131,6 +120,8 @@ void	increm(int *i, int *j);
 char	**tokenize(char *line);
 char	**nullify_str(char *line, char *delims, int len, int count);
 int		cnt_delims(char *line, char *delims);
+
+
 
 //NOTE: BUILT INS
 // PWD_ENV.C

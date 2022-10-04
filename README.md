@@ -2,9 +2,9 @@
 Custom shell in C
 TODO:
 [X] Splitamary
-[ ] check <<
+[X] check <<
 	[X] $Var within <<
-	[ ] Signal ctrl-C close heredoc
+	[X] Signal ctrl-C close heredoc
 [X] Redirections
 	[X] <	rediriger l’entrée
 	[X] >	rediriger la sortie
@@ -41,5 +41,4 @@ TOKNOW:
 	- Echo: doesnt work with only one char as first argument
 	- in:	$>cat<.s
 	  out:	Segmentation fault: 11
-	- TODO: Fix cat with << and <<< doesnt work after token changes
 	

@@ -1,21 +1,5 @@
 #include "../../include/minishell.h"
 
-t_hds *f_hds()
-{
-	static t_hds *a;
-	static int	b;
-
-	if(!b)
-	{	
-		a = malloc(sizeof(t_hds));
-		b = 1;
-		a->init = 1;
-		a->end = 0;
-		a->in_heredoc = 0;
-	}
-	return (a);
-}
-
 void	init_shell(t_vars *vars, char **env)
 {
 	vars->env = ft_arraycpy(env);
@@ -49,29 +33,12 @@ void	executing_command(char *line, t_vars *vars, char **env)
 
 void	handler(int sig)
 {
-	int c;
-
-	c = 13;
-	if (sig == SIGINT && !f_hds()->in_heredoc)
+	if (sig == SIGINT)
 	{
 		ft_putstr_fd("\n", 2);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
-	}
-	else if(sig == SIGINT)
-	{
-		f_hds()->in_heredoc = 0;
-		f_hds()->end = 1;
-		// ft_putstr_fd("\n", 2);
-		rl_redisplay();
-		rl_replace_line("", 1);
-		rl_on_new_line();
-		ft_putstr_fd("\n", 0);
-		// kill(f_hds()->init, SIGABRT);
-		
-
-		// close(STDIN_FILENO);
 	}
 }
 
@@ -92,14 +59,11 @@ void	remove_tmp_files(t_vars *vars)
 	}
 }
 
-
-
 int	main(int argc, char **argv, char **env)
 {
 	t_vars	vars;	
 	char	*line;
 	char	*prompt;
-
 
 	if (argc != 1)
 		return (-1);
@@ -107,18 +71,13 @@ int	main(int argc, char **argv, char **env)
 	prompt = "$>";
 	line = NULL;
 	init_shell(&vars, env);
-	t_hds *a;
-	a = f_hds(); //dont forget to free
-	f_hds()->vars = &vars;
 	signal(SIGINT, handler);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
 		line = readline(prompt);
 		if (!line)
-		{
 			quit_shell(&vars);
-		}
 		else if (ft_strcmp(line, "") != 0)
 			add_history(line);
 		executing_command(line, &vars, env);
