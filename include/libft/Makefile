@@ -105,7 +105,7 @@ OBJS_IN_DIR = $(addprefix $(OBJS_DIR), $(OBJS))
 all: start
 
 $(NAME) : $(OBJS_IN_DIR)
-	@echo "$(CURSOR_UP)$(GREEN)Compiling DONE! ✅                   $(END)$(CURSOR_DOWN)"
+	@echo "$(CURSOR_UP)\033[2K$(GREEN)Compiling DONE! ✅$(END)$(CURSOR_DOWN)"
 	@echo "$(BLUE)$(CURSOR_UP_1)Creating archive $(NAME)     $(END)"
 	@ar -rc $(NAME) $^
 	@echo "----------------------------"
@@ -113,7 +113,7 @@ $(NAME) : $(OBJS_IN_DIR)
 
 $(OBJS_DIR)%.o : $(SRCS_DIR)%.c 
 	@mkdir -p $(OBJS_DIR)
-	@echo "$(CURSOR_UP)Compiling $@         $(CURSOR_DOWN)"
+	@echo "$(CURSOR_UP)\033[2KCompiling $@$(CURSOR_DOWN)"
 	@$(CC) $(CFLAGS) $(HEADER) -c $< -o $@
 
 
@@ -124,8 +124,6 @@ ifeq ($(wildcard $(NAME)),)
 	@echo " "
 	@echo "----------------------------"
 	@$(MAKE) $(NAME)
-else
-	@echo "$(NAME) already exist. try:'make re'"
 endif
 
 re: fclean
