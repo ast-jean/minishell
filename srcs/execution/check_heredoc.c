@@ -37,7 +37,6 @@ void	*check_heredocs(t_token *current, t_vars *vars)
 {
 	char	*delim;
 	char	*name;
-	int		fd;
 	int		pid;
 	int		stat;
 
@@ -46,12 +45,11 @@ void	*check_heredocs(t_token *current, t_vars *vars)
 		return (NULL);
 	name = ft_strjoin(".tmp/temp_heredoc", ft_itoa(vars->heredoc_count));
 	delim = remove_quotes(current->next->cont);
-	fd = open(name, O_RDWR | O_CREAT | O_TRUNC, 0777);
 	new_token_after(current, name);
 	pid = fork();
 	signal(2, SIG_IGN);
 	if (pid == 0)
-		in_child(vars, delim, fd);
+		in_child(vars, delim, open(name, O_RDWR | O_CREAT | O_TRUNC, 0777));
 	else
 		waitpid(pid, &stat, 0);
 	if (pid == 0)
