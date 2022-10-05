@@ -16,8 +16,8 @@ TODO:
 [ ] Créer les buitins
 	[X] echo
 	[X] cd
-	[ ] export (no flag)	-started-
-	[ ] unset (no flag)		-started-
+	[X] export (no flag)	-started-
+	[X] unset (no flag)		-started-
 	[X] pwd (no flag)
 	[X] env (no flag)
 	[X] exit (no flag)
@@ -38,6 +38,3 @@ TOKNOW:
 	- $VAR double quotes -> first doesn't work [X]
 	- Herestring broken with token changes
 	- DANS CD : $>pwd | cd srcs
-
-
-[ ] export multiple

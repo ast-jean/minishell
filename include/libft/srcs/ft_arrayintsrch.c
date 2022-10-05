@@ -6,14 +6,13 @@
 /*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 11:54:41 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/03 13:13:13 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/10/05 12:04:18 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../include/libft.h"
 // NOTE:	"ft_arrayintsrch" searchs for a str (2nd param.) 
-// NOTE:	 in a double array (1st param.) and returns its index position. (int).
+// NOTE:	 in a double array (1st param.) and returns its index.
 
 int	ft_arrayintsrch(char **tab, char *str_to_find)
 {
