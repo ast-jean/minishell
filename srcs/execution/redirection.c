@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirection.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/05 13:17:42 by xchouina          #+#    #+#             */
+/*   Updated: 2022/10/05 13:21:10 by xchouina         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 // NOTE: Redirections ( > , < , >>)
 
 int	redirect_input(t_token *token, int fd_init)
 {
 	int	group;
-	int fd;
+	int	fd;
 
 	group = token->group_num;
 	fd = fd_init;
@@ -36,27 +48,29 @@ int	redirect_output(t_token *token, int fd_init)
 		{
 			if (fd != 1)
 				close(fd);
-			fd = open(remove_quotes(token->next->cont), O_TRUNC | O_CREAT | O_RDWR, 0777);
+			fd = open(remove_quotes(token->next->cont),
+					O_TRUNC | O_CREAT | O_RDWR, 0777);
 		}
 		else if (ft_strcmp(token->cont, ">>") == 0)
 		{
 			if (fd != 1)
 				close(fd);
-			fd = open(remove_quotes(token->next->cont), O_APPEND | O_CREAT | O_RDWR, 0777);
+			fd = open(remove_quotes(token->next->cont),
+					O_APPEND | O_CREAT | O_RDWR, 0777);
 		}
 			token = token->next;
 	}
 	return (fd);
 }
 
-t_token	*rm2tokens(t_token* token, t_vars *vars)
+t_token	*rm2tokens(t_token *token, t_vars *vars)
 {
 	token->next = remove_token(token->next, vars);
 	token = remove_token(token, vars);
 	return (token);
 }
 
-t_token *rm_redir(t_token *token, t_vars *vars)
+t_token	*rm_redir(t_token *token, t_vars *vars)
 {
 	int	group;
 

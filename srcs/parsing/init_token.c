@@ -1,19 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_token.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/05 12:51:20 by xchouina          #+#    #+#             */
+/*   Updated: 2022/10/05 12:51:23 by xchouina         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
-
-// void	to_name(t_vars *vars, char **split, int *i)
-// {
-// 	t_token	*current;
-
-// 	while (split[*i] != NULL)
-// 	{
-// 		current->next = malloc(sizeof(t_token));
-// 		current->next->prev = current;
-// 		current->next->first = current->first;
-// 		current = current->next;
-// 		current->cont = split[(*i)++];
-// 	}
-// }
+t_token	*token_loop(t_token *current, char **split, int *i)
+{
+	while (split[*i] != NULL)
+	{
+		current->next = malloc(sizeof(t_token));
+		current->next->prev = current;
+		current->next->first = current->first;
+		current = current->next;
+		current->cont = split[(*i)++];
+	}
+	return (current);
+}
 
 int	creating_tokens(char *line, t_vars *vars)
 {
@@ -33,15 +43,7 @@ int	creating_tokens(char *line, t_vars *vars)
 	current->cont = split[i++];
 	current->first = current;
 	current->prev = NULL;
-	// to_name(vars, split, &i);
-	while (split[i] != NULL)
-	{
-		current->next = malloc(sizeof(t_token));
-		current->next->prev = current;
-		current->next->first = current->first;
-		current = current->next;
-		current->cont = split[i++];
-	}
+	current = token_loop(current, split, &i);
 	current->next = NULL;
 	free(split);
 	return (0);

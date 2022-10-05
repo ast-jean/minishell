@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   variables.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/05 13:26:10 by xchouina          #+#    #+#             */
+/*   Updated: 2022/10/05 13:26:13 by xchouina         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
@@ -93,33 +104,6 @@ char	*add_varcontent(char *line, char *var_name, char *var_value)
 			newline = ft_addchar(newline, var_value[i], &newline[pos++]);
 	newline = delete_var_name(pos2, newline);
 	return (newline);
-}
-
-char	*ft_getenv(char **env, char *varname)
-{
-	int i;
-	int j;
-	char *var_value;
-
-	var_value = NULL;
-	i = -1;
-	while (env[++i])
-	{
-		j = 0;
-		while (env[i][j] && env[i][j] == varname[j])
-			j++;
-		if (env[i][j] == '=')
-		{
-			j = (int)ft_strlen(varname) + 1;
-			while(env[i][j])
-			{	
-				var_value = ft_addchar(var_value, env[i][j], &var_value[j]);
-				j++;
-			}
-			return (var_value);
-		}
-	}
-	return (var_value);
 }
 
 char	*check_var(char *line)
