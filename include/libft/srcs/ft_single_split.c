@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_single_split.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 17:55:01 by xchouina          #+#    #+#             */
-/*   Updated: 2022/09/27 09:08:09 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/05 12:25:11 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ char	*mallocating_wrd_array(const char *s, char c);
 // 	str[i] = '\0';
 // 	return (str);
 // }
-
 
 char	**ft_single_split(char const *s, char c)
 {
