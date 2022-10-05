@@ -132,9 +132,9 @@ re: fclean
 	
 clean:
 	@rm -rf $(OBJS_DIR)
-	@echo "LIBFT		| STATUS: $(CYAN)OBJECTS 	CLEANED$(END)"
+	@echo "LIBFT		| $(CYAN)OBJECTS CLEANED$(END)"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "$(CURSOR_UP_1)LIBFT		| STATUS: $(BLUE)LIBRARY 	CLEANED$(END)"
+	@echo "$(CURSOR_UP_1)LIBFT		| $(BLUE)LIBRARY CLEANED$(END)"
 re: fclean all

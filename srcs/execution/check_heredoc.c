@@ -22,7 +22,7 @@ void	in_child(t_vars *vars, char *delim, int fd)
 	{	
 		if (ft_strcmp(" ", vars->line))
 		{
-			vars->line = ft_strjoin(check_var(vars->line), "\n");
+			vars->line = ft_strjoin(check_var(vars->line, vars), "\n");
 			ft_putstr_fd(vars->line, fd);
 		}
 		rl_on_new_line();

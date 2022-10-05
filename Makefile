@@ -97,12 +97,12 @@ clean:
 	@$(MAKE) -sC include/libft clean
 	@rm -f *.o
 	@rm -rf $(OBJS_DIR)
-	@echo "MINISHELL	| STATUS: $(CYAN)OBJECTS	CLEANED$(END)"
+	@echo "MINISHELL	| $(CYAN)OBJECTS CLEANED$(END)"
 
 fclean:	clean
 	@$(MAKE) -sC include/libft fclean
 	@rm -rf $(NAME)
-	@echo "MINISHELL	| STATUS: $(BLUE)EXECUTABLE	CLEANED$(END)"
+	@echo "MINISHELL	| $(BLUE)EXECUTABLE CLEANED$(END)"
 
 leak:
 	$(LEAK)

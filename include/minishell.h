@@ -66,7 +66,7 @@ int		check_quotes(char *str);
 char	*ft_getenv(char **env, char *varname);
 
 // VARIABLES.c
-char 	*check_var(char *line);
+char 	*check_var(char *line, t_vars *vars);
 char 	*check_var_heredoc(char *line, t_vars *vars);
 char	*add_varcontent(char *line, char *var_name, char *var_value);
 
