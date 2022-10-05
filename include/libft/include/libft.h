@@ -85,8 +85,9 @@ bool	ft_isuneven(const int c);
 void	ft_arrayprint(char **tab);
 void	ft_arrayfree(char **tab);
 int		ft_arraylen(char **tab);
-char 	**ft_arraycpy(char **tab);
+int		ft_arrayintsrch(char **tab, char *str_to_find);
 char	*ft_arraysrch(char **tab, char *str_to_find);
+char 	**ft_arraycpy(char **tab);
 char	**ft_arrayadd(char **tab, char *str_to_add);
 char	**ft_arrayrm(char **tab, char *str_to_rm);
 
@@ -94,6 +95,5 @@ char 	*ft_strtoupper(char *str);
 int		ft_is_str_alnum(char *str);
 char	*ft_rmchar(char *str, char *s);
 char	*ft_addchar(char *str, char c, char *s);
-char	**ft_single_split(char const *s, char c);
 
 #endif

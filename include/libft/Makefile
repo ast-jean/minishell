@@ -57,12 +57,13 @@ SRC =	ft_memset.c				\
 		ft_arraylen.c			\
 		ft_arraycpy.c			\
 		ft_arraysrch.c			\
+		ft_arrayintsrch.c		\
 		ft_arrayadd.c			\
 		ft_arrayrm.c			\
 		ft_strtoupper.c 		\
 		ft_is_str_alnum.c		\
 		ft_rmchar.c				\
-		ft_addchar.c			\
+		ft_charadd.c			\
 
 NAME = libft.a
 CC = gcc

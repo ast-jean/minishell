@@ -1,20 +1,30 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredocs.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/05 13:12:27 by xchouina          #+#    #+#             */
+/*   Updated: 2022/10/05 13:12:30 by xchouina         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
 t_token	*last_token(t_token *current, t_vars *vars)
 {
 	current = vars->token;
-	while(current->next)
+	while (current->next)
 		current = current->next;
 	return (current);
 }
 
-char *remove_quotes(char *str)
+char	*remove_quotes(char *str)
 {
-	int i;
-	char quote;
-	char *new;
+	int		i;
+	char	quote;
+	char	*new;
 
 	new = malloc(ft_strlen(str) * sizeof(char));
 	new = str;
@@ -38,11 +48,11 @@ char *remove_quotes(char *str)
 	return (new);
 }
 
-void*	check_herestrings(t_token *current, t_vars *vars)
+void	*check_herestrings(t_token *current, t_vars *vars)
 {
-	char *name;
-	char *line;
-	int fd;
+	char	*name;
+	char	*line;
+	int		fd;
 
 	if (!is_exception(current))
 		return (NULL);
@@ -62,7 +72,7 @@ void*	check_herestrings(t_token *current, t_vars *vars)
 
 int	check_here(t_vars *vars)
 {
-	t_token *current;
+	t_token	*current;
 
 	current = vars->token->first;
 	vars->heredoc_count = 0;
@@ -80,7 +90,8 @@ int	check_here(t_vars *vars)
 			if (!current)
 				return (0);
 		}
-		else if (current && current->cont && (current->cont[0] == '<') && ft_strlen(current->cont) > 3)
+		else if (current && current->cont && (current->cont[0] == '<')
+			&& ft_strlen(current->cont) > 3)
 			return (syntax_error("<"));
 		else
 			current = current->next;

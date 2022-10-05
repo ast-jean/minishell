@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd+env.c                                          :+:      :+:    :+:   */
+/*   ft_arrayintsrch.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/03 10:55:48 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/03 12:09:46 by xchouina         ###   ########.fr       */
+/*   Created: 2022/10/03 11:54:41 by xchouina          #+#    #+#             */
+/*   Updated: 2022/10/05 12:04:18 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
-// NOTE: Built-ins 1/3 (PWD + ENV)
+#include "../include/libft.h"
+// NOTE:	"ft_arrayintsrch" searchs for a str (2nd param.) 
+// NOTE:	 in a double array (1st param.) and returns its index.
 
-int	builtin_pwd(t_vars *vars)
+int	ft_arrayintsrch(char **tab, char *str_to_find)
 {
-	vars->pwd = ft_arraysrch(vars->env, "PWD=") + 4;
-	ft_putstr_fd(vars->pwd, 1);
-	ft_putstr_fd("\n", 1);
-	return (1);
-}
+	int	i;
 
-int	builtin_env(t_vars *vars)
-{
-	if (vars->env == NULL)
-		dprintf(2, "QUELQUE CHOSE\n");
-	else
-		ft_arrayprint(vars->env);
-	return (1);
+	i = -1;
+	while (tab[++i])
+	{
+		if (!ft_strncmp(tab[i], str_to_find, ft_strlen(str_to_find)))
+			return (i);
+	}
+	return (0);
 }
