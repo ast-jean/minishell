@@ -80,7 +80,7 @@ void	free2d(char **split);
 // PIPES.C
 int		is_builtin(t_token *current, t_vars *vars, char **env, int fdi);
 void	fd_catch(t_vars *vars, t_token *current, char **env);
-t_token	*group_skip(t_token *current_token);
+t_token	*group_skip(t_token *current_token); 
 
 // SET_GROUPS.C
 int		init_groups(t_vars *vars);
@@ -129,8 +129,8 @@ int		cnt_delims(char *line, char *delims);
 int	builtin_pwd(t_vars *vars);
 int	builtin_env(t_vars *vars);
 // EXPORT_UNSET.C
-int	builtin_unset(t_vars *vars, char *var_name);
-int	builtin_export(t_token *token, t_vars *vars);
+int	builtin_unset(t_vars *vars);
+int	builtin_export(t_vars *vars);
 // ECHO_CD.C
 int	builtin_echo(t_vars *vars);
 // CD.c

@@ -6,7 +6,7 @@
 /*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:59 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/03 10:55:00 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/10/03 13:10:59 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	builtin_echo(t_vars *vars)
 
 	n = false;
 	token = vars->token->next;
-	while (is_n(remove_quotes(token->cont)))
+	while (token && is_n(remove_quotes(token->cont)))
 	{
 		n = true;
 		token = token->next;

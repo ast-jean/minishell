@@ -87,6 +87,7 @@ void	ft_arrayfree(char **tab);
 int		ft_arraylen(char **tab);
 char 	**ft_arraycpy(char **tab);
 char	*ft_arraysrch(char **tab, char *str_to_find);
+int		ft_arrayintsrch(char **tab, char *str_to_find);
 char	**ft_arrayadd(char **tab, char *str_to_add);
 char	**ft_arrayrm(char **tab, char *str_to_rm);
 

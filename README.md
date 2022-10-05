@@ -13,11 +13,11 @@ TODO:
 [ ] Gérer les Variables d'env $ (attention a juste "=")
 [ ] Gérer $?
 [X] Add $Vars and remove_quotes()
-[ ] Créer les buitins
+[X] Créer les buitins
 	[X] echo
 	[X] cd
-	[ ] export (no flag)	-started-
-	[ ] unset (no flag)		-started-
+	[X] export (no flag)	-started-
+	[X] unset (no flag)		-started-
 	[X] pwd (no flag)
 	[X] env (no flag)
 	[X] exit (no flag)
@@ -39,6 +39,12 @@ TOKNOW:
 	- Echo: doesnt work with only one char as first argument [X]
 	- Herestring broken with token changes [X]
 	- DANS CD : $>pwd | cd srcs
-	- Echo:
-		- $>echo -> out: Segmentation fault: 11
 	- in:	$>cat<.s -> out:	Segmentation fault: 11
+	- $VAR if it's a $ with an exception(!<>|'"?#+-% ) maybe ft_alnum following
+		Ex: in: "hello$" -> out: hello$
+		Ex: in: "hello$v" -> out: hello
+		Ex: in: "hello$@" -> out: hello
+	- Echo: should display a space between arguments ex: $>echo aa aa% out: aa aa% instead of: aaaa
+	- $VAR double quotes -> first doesn't work [X]
+	- Herestring broken with token changes
+	- DANS CD : $>pwd | cd srcs

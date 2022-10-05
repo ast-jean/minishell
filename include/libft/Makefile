@@ -57,6 +57,7 @@ SRC =	ft_memset.c				\
 		ft_arraylen.c			\
 		ft_arraycpy.c			\
 		ft_arraysrch.c			\
+		ft_arrayintsrch.c		\
 		ft_arrayadd.c			\
 		ft_arrayrm.c			\
 		ft_strtoupper.c 		\
