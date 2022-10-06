@@ -129,7 +129,7 @@ int	builtin_env(t_vars *vars);
 int	builtin_unset(t_vars *vars);
 int	builtin_export(t_vars *vars);
 // ECHO.C
-int	builtin_echo(t_vars *vars);
+int	builtin_echo(t_token *current);
 // CD.c
 int	builtin_cd(t_vars *vars, char **env);
 //NOTE: ------------------------------------------------

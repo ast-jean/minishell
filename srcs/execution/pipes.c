@@ -15,7 +15,7 @@ int	is_builtin(t_token *current, t_vars *vars, char **env, int fdi)
 	else if (current && !ft_strcmp(remove_quotes(current->cont), "env"))
 		return (builtin_env(vars));
 	else if (current && !ft_strcmp(remove_quotes(current->cont), "echo"))
-		return (builtin_echo(vars));
+		return (builtin_echo(current));
 	else if(current && !ft_strcmp(remove_quotes(current->cont), "unset"))
 		return (builtin_unset(vars));
 	else if (current && !ft_strcmp(remove_quotes(current->cont), "cd"))

@@ -6,7 +6,7 @@
 /*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:59 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/06 11:13:04 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/10/06 11:18:43 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,26 +28,26 @@ int	is_n(char *str)
 	return (1);
 }
 
-int	builtin_echo(t_vars *vars)
+int	builtin_echo(t_token *current)
 {
-	t_token	*token;
+	// t_token	*token;
 	bool	n;
 	int		gn;
 
-	gn = vars->token->group_num;
+	gn = current->group_num;
 	n = false;
-	token = vars->token->next;
-	while (token && is_n(remove_quotes(token->cont)))
+	current = current->next;
+	while (current && is_n(remove_quotes(current->cont)))
 	{
 		n = true;
-		token = token->next;
+		current = current->next;
 	}
-	while (token && token->group_num == gn && ft_strcmp(token->cont, "|") != 0)
+	while (current && current->group_num == gn && ft_strcmp(current->cont, "|") != 0)
 	{
-		ft_putstr_fd(remove_quotes(check_var(token->cont)), 1);
-		if (token->next != NULL)
+		ft_putstr_fd(remove_quotes(check_var(current->cont)), 1);
+		if (current->next != NULL)
 			write(1, " ", 1);
-		token = token->next;
+		current = current->next;
 	}
 	if (n == true)
 		return (0);
