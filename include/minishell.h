@@ -8,7 +8,6 @@
 
 // STRUCTS
 
-
 typedef struct s_token
 {
 	int				group_num;
@@ -20,9 +19,9 @@ typedef struct s_token
 
 typedef struct s_vars
 {
-	int		ac; //use?
-	char	**av; //params for execve
-	char 	**env;
+	int		ac;
+	char	**av;
+	char	**env;
 	char	*path;
 	char	**path_array;
 	int		heredoc_count;
@@ -34,7 +33,7 @@ typedef struct s_vars
 	int		pid[32768];
 	int		pid_count;
 	int		status;
-	char 	*cd_oldpwd;
+	char	*cd_oldpwd;
 }	t_vars;
 
 // FUNCTIONS (SELON FILENAME)----------------------
@@ -57,7 +56,7 @@ char	*remove_quotes(char *str);
 t_token	*last_token(t_token *current, t_vars *vars);
 
 //CHECK_HEREDOC.C
-void*	check_heredocs(t_token *current, t_vars *vars);
+void	*check_heredocs(t_token *current, t_vars *vars);
 
 //SYNTAX_ERROR.c
 int		syntax_error(char *token);
@@ -66,8 +65,8 @@ int		check_quotes(char *str);
 char	*ft_getenv(char **env, char *varname);
 
 // VARIABLES.c
-char 	*check_var(char *line);
-char 	*check_var_heredoc(char *line, t_vars *vars);
+char	*check_var(char *line);
+char	*check_var_heredoc(char *line, t_vars *vars);
 char	*add_varcontent(char *line, char *var_name, char *var_value);
 
 //QUIT.C
@@ -78,7 +77,7 @@ void	free2d(char **split);
 // PIPES.C
 int		is_builtin(t_token *current, t_vars *vars, char **env, int fdi);
 void	fd_catch(t_vars *vars, t_token *current, char **env);
-t_token	*group_skip(t_token *current_token); 
+t_token	*group_skip(t_token *current_token);
 
 // SET_GROUPS.C
 int		init_groups(t_vars *vars);
@@ -87,7 +86,7 @@ int		parsing_pipes(t_vars *vars);
 //	REDIRECTION.C
 int		redirect_input(t_token *token, int fd_init);
 int		redirect_output(t_token *token, int fd_init);
-t_token *rm_redir(t_token *token, t_vars *vars);
+t_token	*rm_redir(t_token *token, t_vars *vars);
 
 //NOTE: PARSING
 // PARSING_UTILS.C
