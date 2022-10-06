@@ -20,6 +20,11 @@ int	is_builtin(t_token *current, t_vars *vars, char **env)
 		return (builtin_unset(vars, remove_quotes(current->next->cont)));
 	else if (current && !ft_strcmp(remove_quotes(current->cont), "cd"))
 		return (builtin_cd(vars, env));
+	else if (current && !ft_strcmp(remove_quotes(current->cont), "exit"))
+	{
+		quit_shell(vars);
+		return (0);
+	}
 	return (-1);
 }
 
@@ -60,7 +65,8 @@ t_token	*skip_group(t_token *current_token)
 	return (current_token);
 }
 
-
+// if 1 cmd-> fork and redir
+// if 1 cmd built-in 
 int	forking(t_token *current, int fdi, t_vars *vars, char **env)
 {
 	int	pipefd[2];
@@ -72,15 +78,9 @@ int	forking(t_token *current, int fdi, t_vars *vars, char **env)
 	// 		close(fdi);
 	// 	quit_shell(vars);
 	// }
-	if (vars->pipe_count == 0)
-	{
-		if (is_builtin(current, vars, env) == -1)
-			ft_putstr_fd("command not found\n", 2);
-		ft_putstr_fd("here!\n", 2);
+
+		// ft_putstr_fd("here!\n", 2);
 /* TOFIX */		// fork if access = 0 and do redirs here too :)
-	}
-	else
-	{
 	if (current->group_num < (vars->pipe_count + 1))
 	{
 		pipe(pipefd);
@@ -101,13 +101,37 @@ int	forking(t_token *current, int fdi, t_vars *vars, char **env)
 		// close(pipefd[0]);
 		return (pipefd[0]);
 	}
-	/*else if (fdi != -1 && !accessing(vars, current))
-	{*/
-		// printf("fdi: %d\nfdo: %d\n", fdi, fdo);
+	else if (vars->pipe_count == 0)
+	{
+		if (accessing(vars, current) != -1)
+		{
+			vars->pid[vars->pid_count] = fork();
+			if (vars->pid[vars->pid_count++] == 0)
+			{
+			// debug_print_tokens(vars);
+				dup2(fdi, 0);
+				if (fdi != 0)
+					close(fdi);
+				dup2(fdo, 1);
+				if (fdo != 1)
+					close(fdo);
+				format_execve(vars, current);
+				free(vars->av);
+				exit(0);
+			}
+		}
+		else if (is_builtin(current, vars, env) == -1)
+		{
+			ft_putstr_fd(remove_quotes(current->cont), 2);
+			ft_putstr_fd(": cmd not found\n", 2);
+			exit(0);
+		}
+	}
+	else
+	{
 		vars->pid[vars->pid_count] = fork();
 		if (vars->pid[vars->pid_count++] == 0)
 		{
-		// debug_print_tokens(vars);
 			dup2(fdi, 0);
 			if (fdi != 0)
 				close(fdi);
@@ -128,12 +152,11 @@ int	forking(t_token *current, int fdi, t_vars *vars, char **env)
 			free(vars->av);
 			exit(0);
 		}
-		if (fdi != 0)
-			close(fdi);
-		if (fdo != 1)
-			close(fdo);
 	}
-	// }
+	if (fdi != 0)
+		close(fdi);
+	if (fdo != 1)
+		close(fdo);
 	return (pipefd[0]);
 }
 
@@ -147,7 +170,7 @@ void	fd_catch(t_vars *vars, t_token *current, char **env)
 	fd = forking(current, redirect_input(current, 0), vars, env);
 	current = skip_group(current);
 	i = 0;
-	while ((i++ < (vars->pipe_count)) && ((vars->pid_count) < 32766))
+	while ((i++ < vars->pipe_count) && (vars->pid_count < 32766))
 	{
 		finding_paths(vars);
 		fd = forking(current, redirect_input(current, fd), vars, env);

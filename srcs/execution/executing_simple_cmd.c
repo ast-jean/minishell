@@ -26,7 +26,7 @@ int	accessing(t_vars *vars, t_token *token)
 	int		yes_or_no;
 	char	*cmd;
 	int		i;
- // "cat -e" "file.txt"
+
 	if (!token)
 		return (-1);
 	if (access(remove_quotes(token->cont), F_OK | X_OK) == 0)
@@ -49,7 +49,6 @@ int	accessing(t_vars *vars, t_token *token)
 		i++;
 	}
 	free(cmd);
-	// print_error(vars, 1);
 	return (-1);
 }
 
