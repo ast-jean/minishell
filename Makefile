@@ -8,18 +8,18 @@ SRCS_FILES 		=	built_ins/cd.c						\
 					built_ins/unset+export.c			\
 					execution/check_heredoc.c			\
 					execution/executing_simple_cmd.c	\
-					execution/minishell.c				\
-					execution/quit.c					\
 					execution/heredocs.c 				\
-					execution/set_groups.c 				\
-					execution/redirection.c				\
+					execution/minishell.c				\
 					execution/pipes.c					\
-					execution/variables.c 				\
+					execution/quit.c					\
+					execution/redirection.c				\
+					execution/set_groups.c 				\
 					execution/syntax_error.c			\
+					execution/variables.c 				\
 					parsing/init_token.c				\
+					parsing/newtoken.c					\
 					parsing/token_op.c					\
 					parsing/tokenize.c					\
-					parsing/newtoken.c					\
 
 INCLUDE_FILES	= 	minishell.h
 
