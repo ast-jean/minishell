@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_addchar.c                                       :+:      :+:    :+:   */
+/*   ft_charadd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 14:51:16 by ast-jean          #+#    #+#             */
-/*   Updated: 2022/10/05 12:28:15 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/10/06 14:51:08 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	get_pos(char *str, char *s)
 		return (0);
 }
 
-char	*ft_addchar(char *str, char c, char *s)
+char	*ft_charadd(char *str, char c, char *s)
 {
 	char	*old_temp;
 	char	*new;
