@@ -1,10 +1,6 @@
 #include "../../include/minishell.h"
 
 // NOTE: CREATES PIPES
-// TOKNOW: - if redirection to file before end of cmd line, redirection overwrites dup2 to pipe and pipe is empty. Next cmd will forking with empty imput.
-
-//forking has to call redirect_output and pipe anyways
-//redirect output becomes stdout and overrides pipefd[1]);
 
 int	close_fds(int fdi, int fdo, int to_return)
 {
@@ -15,12 +11,14 @@ int	close_fds(int fdi, int fdo, int to_return)
 	return (to_return);
 }
 
-int	is_bi_nopipes(t_token *current, t_vars *vars, char **env, int fdi, int fdo)
+int	is_bi_nopipes(t_token *current, t_vars *vars, char **env)
 {
 	if (vars->pipe_count > 0)
 	{
-		if (current && (!ft_strcmp(remove_quotes(current->cont), "export") || !ft_strcmp(remove_quotes(current->cont), "unset") 
-			|| !ft_strcmp(remove_quotes(current->cont), "cd") || !ft_strcmp(remove_quotes(current->cont), "exit")))
+		if (current && (!ft_strcmp(remove_quotes(current->cont), "export")
+				|| !ft_strcmp(remove_quotes(current->cont), "unset")
+				|| !ft_strcmp(remove_quotes(current->cont), "cd")
+				|| !ft_strcmp(remove_quotes(current->cont), "exit")))
 			return (-2);
 		return (-1);
 	}
@@ -33,7 +31,7 @@ int	is_bi_nopipes(t_token *current, t_vars *vars, char **env, int fdi, int fdo)
 	else if (current && !ft_strcmp(remove_quotes(current->cont), "exit"))
 	{
 		ft_putstr_fd("exit\n", 2);
-		close_fds(fdi, fdo, 0);
+		close_fds(vars->fdi, vars->fdo, 0);
 		quit_shell(vars);
 	}
 	return (-1);
@@ -52,8 +50,8 @@ int	is_builtin(t_token *current, t_vars *vars)
 
 void	format_execve(t_vars *vars, t_token *token)
 {
-	t_token *current;
-	int	i;
+	t_token	*current;
+	int		i;
 
 	current = token;
 	i = 0;
@@ -64,7 +62,7 @@ void	format_execve(t_vars *vars, t_token *token)
 		vars->ac++;
 		current = current->next;
 	}
-	vars->av = malloc(sizeof(char*) * (vars->ac + 1));
+	vars->av = malloc(sizeof(char *) * (vars->ac + 1));
 	vars->av[i] = remove_quotes(token->cont);
 	while (++i < vars->ac)
 	{
@@ -86,8 +84,7 @@ t_token	*skip_group(t_token *current_token)
 	return (current_token);
 }
 
-
-void actually_forking(t_token *current, t_vars *vars, char **env)
+void	actually_forking(t_token *current, t_vars *vars, char **env)
 {
 	vars->pid[vars->pid_count] = fork();
 	if (vars->pid[vars->pid_count++] == 0)
@@ -97,7 +94,8 @@ void actually_forking(t_token *current, t_vars *vars, char **env)
 		close_fds(vars->fdi, vars->fdo, 0);
 		if (is_builtin(current, vars) == -1)
 		{
-			if (accessing(vars, current) == -1 && is_bi_nopipes(current, vars, env, vars->fdi, vars->fdo) == -1)
+			if (accessing(vars, current) == -1
+				&& is_bi_nopipes(current, vars, env) == -1)
 			{
 				ft_putstr_fd(remove_quotes(current->cont), 2);
 				ft_putstr_fd(": cmd not found\n", 2);
@@ -127,8 +125,8 @@ int	forking(t_token *current, int fdi, t_vars *vars, char **env)
 		write(pipefd[1], "", 0);
 		return (close_fds(vars->fdi, vars->fdo, pipefd[0]));
 	}
-	if(current && !is_bi_nopipes(current, vars, env, vars->fdi, vars->fdo))
-		return(close_fds(vars->fdi, vars->fdo, pipefd[0]));
+	if (current && !is_bi_nopipes(current, vars, env))
+		return (close_fds(vars->fdi, vars->fdo, pipefd[0]));
 	else
 		actually_forking(current, vars, env);
 	return (close_fds(vars->fdi, vars->fdo, pipefd[0]));
@@ -138,8 +136,8 @@ void	fd_catch(t_vars *vars, t_token *current, char **env)
 {
 	int	fd;
 	int	i;
-	vars->pid_count = 0;
 
+	vars->pid_count = 0;
 	finding_paths(vars);
 	fd = forking(current, redirect_input(current, 0), vars, env);
 	current = skip_group(current);
