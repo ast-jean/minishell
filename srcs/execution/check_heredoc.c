@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:56:27 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/05 13:56:29 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/10/06 15:50:27 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	in_child(t_vars *vars, char *delim, int fd)
 	usleep(10);
 }
 
-void	*check_heredocs(t_token *current, t_vars *vars)
+t_token	*check_heredocs(t_token *current, t_vars *vars)
 {
 	char	*delim;
 	char	*name;

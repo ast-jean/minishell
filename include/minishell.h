@@ -7,6 +7,7 @@
 # include <signal.h>
 
 // STRUCTS
+struct s_vars;
 
 typedef struct s_token
 {
@@ -15,6 +16,7 @@ typedef struct s_token
 	struct s_token	*next;
 	struct s_token	*prev;
 	struct s_token	*first;
+	struct s_vars	*vars;
 }	t_token;
 
 typedef struct s_vars
@@ -56,7 +58,7 @@ char	*remove_quotes(char *str);
 t_token	*last_token(t_token *current, t_vars *vars);
 
 //CHECK_HEREDOC.C
-void	*check_heredocs(t_token *current, t_vars *vars);
+t_token *check_heredocs(t_token *current, t_vars *vars);
 
 //SYNTAX_ERROR.c
 int		syntax_error(char *token);
@@ -65,8 +67,8 @@ int		check_quotes(char *str);
 char	*ft_getenv(char **env, char *varname);
 
 // VARIABLES.c
-char	*check_var(char *line);
-char	*check_var_heredoc(char *line, t_vars *vars);
+char	*check_var(char *line, t_vars *vars);
+char 	*check_var_heredoc(char *line, t_vars *vars);
 char	*add_varcontent(char *line, char *var_name, char *var_value);
 
 //QUIT.C
@@ -75,6 +77,7 @@ void	free_tokens(t_vars *vars);
 void	free2d(char **split);
 
 // PIPES.C
+
 int		is_builtin(t_token *current, t_vars *vars, char **env, int fdi);
 void	fd_catch(t_vars *vars, t_token *current, char **env);
 t_token	*group_skip(t_token *current_token);
@@ -129,7 +132,7 @@ int	builtin_env(t_vars *vars);
 int	builtin_unset(t_vars *vars);
 int	builtin_export(t_vars *vars);
 // ECHO.C
-int	builtin_echo(t_token *current);
+int	builtin_echo(t_token *current, t_vars *vars);
 // CD.c
 int	builtin_cd(t_vars *vars, char **env);
 //NOTE: ------------------------------------------------

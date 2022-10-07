@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:12:27 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/05 17:45:53 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/06 15:53:16 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*remove_quotes(char *str)
 	return (new);
 }
 
-void	*check_herestrings(t_token *current, t_vars *vars)
+t_token	*check_herestrings(t_token *current, t_vars *vars)
 {
 	char	*name;
 	char	*line;

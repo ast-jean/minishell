@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:26:10 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/06 15:06:39 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/06 16:17:16 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ char	*save_varname(char *line)
 // printf("SAVE_VARNAME ------------------END\n");
 	return (var_name);
 }
-
+//$>echo a$USER
+//out a$USER should out aast-jean -> it is okay in quotes
 char	*find_var_inline(char *line)
 {
 	while (*line && *line != '$')
@@ -57,8 +58,7 @@ char	*find_var_inline(char *line)
 		else
 			line++;
 	}
-
-	// printf("isalnum = %d\n*line + 1= >%c<\n",  ft_isalnum(*(line + 1)), *(line + 1));
+	printf("isalnum = %d\n*line + 1= >%c<\n",  ft_isalnum(*(line + 1)), *(line + 1));
 	if (*line == '$' && ft_isalnum(*(line + 1)))
 		return ((char *)line);
 	else
@@ -112,7 +112,7 @@ char	*check_var(char *line, t_vars *vars)
 	char	*var_value;
 	char	*newline;
 
-	newline = malloc(ft_strlen(line) + 1* sizeof(char));
+	newline = calloc(ft_strlen(line) + 1, sizeof(char));
 	newline = ft_strcpy(newline, line);
 	printf("------START-----\n");
 	var_name = NULL;
@@ -127,8 +127,8 @@ char	*check_var(char *line, t_vars *vars)
 		newline = add_varcontent(newline, var_name, var_value);
 		printf("newline = %s\n", newline);
 		// printf("LINE AFTER = %s\n", newline);
-		free(var_name);
-		free(var_value);
+		// free(var_name);
+		// free(var_value);
 	}
 	printf("------END-----\n");
 	return (newline);
