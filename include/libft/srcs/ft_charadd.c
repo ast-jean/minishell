@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_addchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 14:51:16 by ast-jean          #+#    #+#             */
-/*   Updated: 2022/09/20 14:50:03 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/05 12:28:15 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int	get_pos(char *str, char *s)
 	int	pos;
 
 	pos = 0;
-	while(s[pos])
+	while (s[pos])
 		pos++;
-	if(str)
-		return(ft_strlen(str) - pos + 1);
+	if (str)
+		return (ft_strlen(str) - pos + 1);
 	else
 		return (0);
 }
@@ -41,7 +41,7 @@ char	*ft_addchar(char *str, char c, char *s)
 	old_temp = str;
 	i = 0;
 	j = 0;
-	if(!str)
+	if (!str)
 	{
 		new = ft_calloc(2, sizeof(char));
 		new[0] = c;
@@ -49,10 +49,10 @@ char	*ft_addchar(char *str, char c, char *s)
 	else
 	{
 		new = ft_calloc((int)(ft_strlen(str)) + 2, sizeof(char));
-		while(old_temp[i] && i < get_pos(str, s))
+		while (old_temp[i] && i < get_pos(str, s))
 			new[j++] = old_temp[i++];
 		new[j++] = c;
-		while(old_temp[i])
+		while (old_temp[i])
 			new[j++] = old_temp[i++];
 		new[j] = '\0';
 	}

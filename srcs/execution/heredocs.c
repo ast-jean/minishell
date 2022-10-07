@@ -1,42 +1,58 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredocs.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/05 13:12:27 by xchouina          #+#    #+#             */
+/*   Updated: 2022/10/05 13:12:30 by xchouina         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char *remove_quotes(char *str)
+t_token	*last_token(t_token *current, t_vars *vars)
 {
-	int i;
-	char quote;
-	char *new;
+	current = vars->token;
+	while (current->next)
+		current = current->next;
+	return (current);
+}
+
+char	*remove_quotes(char *str)
+{
+	int		i;
+	char	quote;
+	char	*new;
 
 	new = malloc(ft_strlen(str) * sizeof(char));
 	new = str;
 	i = 0;
-	while( new && new[i])
+	while (new && new[i])
 	{
-		if(new[i] == '\"' || new[i] == '\'')
+		if (new[i] == '\"' || new[i] == '\'')
 		{
 			quote = new[i];
 			new = ft_rmchar(new, &new[i]);
 			while (new[i] && new[i] != quote)
 			{
-				if (!new[i])
+				if (!new[i++])
 					break ;
-				i++;
 			}
 			if (new[i])
 				new = ft_rmchar(new, &new[i--]);
-
 		}
 		i++;
 	}
 	return (new);
 }
 
-void*	check_herestrings(t_token *current, t_vars *vars)
+void	*check_herestrings(t_token *current, t_vars *vars)
 {
-	char *name;
-	char *line;
-	int fd;
+	char	*name;
+	char	*line;
+	int		fd;
 
 	if (!is_exception(current))
 		return (NULL);
@@ -49,52 +65,14 @@ void*	check_herestrings(t_token *current, t_vars *vars)
 	ft_putstr_fd(line, fd);
 	current = remove_token(current, vars);
 	current = remove_token(current->next, vars);
-	return (current);
-}
-
-void*	check_heredocs(t_token *current, t_vars *vars)
-{
-	char	*line;
-	char	*delim;
-	char	*name;
-	int		fd;
-
-	line = " ";
-	if (!is_exception(current))
-		return (NULL);
-	name = ft_strjoin(".tmp/temp_heredoc", ft_itoa(vars->heredoc_count));
-	delim = remove_quotes(current->next->cont);
-	fd = open(name, O_RDWR | O_CREAT | O_TRUNC, 0777);
-	new_token_after(current, name);
-
-	f_hds()->in_heredoc = 1;
-	while (ft_strcmp(delim, line) && f_hds()->end != 1)
-	{	
-		if (ft_strcmp(" ", line))
-		{
-			line = ft_strjoin(check_var(line), "\n");
-			ft_putstr_fd(line, fd);
-		}
-		rl_on_new_line();
-		line = readline(ft_strjoin(delim,"> "));
-		 if (!line)
-			line = delim;
-		rl_redisplay();
-	}
-	if (f_hds()->end == 1)
-		vars->line = " ";
-	f_hds()->in_heredoc = 0;
-	f_hds()->end = 0;
-	// printf("hello\n");
-	rl_redisplay();
-	current = remove_token(current, vars);
-	current = remove_token(current->next, vars);
+	if (current == NULL)
+		current = last_token(current, vars);
 	return (current);
 }
 
 int	check_here(t_vars *vars)
 {
-	t_token *current;
+	t_token	*current;
 
 	current = vars->token->first;
 	vars->heredoc_count = 0;
@@ -112,7 +90,8 @@ int	check_here(t_vars *vars)
 			if (!current)
 				return (0);
 		}
-		else if (current && current->cont && (current->cont[0] == '<') && ft_strlen(current->cont) > 3)
+		else if (current && current->cont && (current->cont[0] == '<')
+			&& ft_strlen(current->cont) > 3)
 			return (syntax_error("<"));
 		else
 			current = current->next;

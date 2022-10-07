@@ -1,4 +1,15 @@
-// (xchouina)
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   executing_simple_cmd.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/05 12:59:02 by xchouina          #+#    #+#             */
+/*   Updated: 2022/10/05 13:08:46 by xchouina         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
 void	finding_paths(t_vars *vars)
@@ -23,7 +34,6 @@ void	finding_paths(t_vars *vars)
 
 int	accessing(t_vars *vars, t_token *token)
 {
-	int		yes_or_no;
 	char	*cmd;
 	int		i;
 
@@ -38,23 +48,14 @@ int	accessing(t_vars *vars, t_token *token)
 	i = 0;
 	while (vars->path_array[i] != NULL)
 	{
-		vars->path = ft_strjoin(vars->path_array[i], cmd);
-		yes_or_no = access(vars->path, F_OK | X_OK);
-		if (yes_or_no == 0)
+		vars->path = ft_strjoin(vars->path_array[i++], cmd);
+		if (access(vars->path, F_OK | X_OK) == 0)
 		{
 			free(cmd);
 			return (0);
 		}
 		free(vars->path);
-		i++;
 	}
 	free(cmd);
 	return (-1);
-}
-
-void	executing_simple_cmds(t_vars *vars, t_token *token)
-{
-	finding_paths(vars);
-	accessing(vars, token);
-	// execve(vars->path, CMD+FLAGS, NULL); // send env instead of NULL
 }

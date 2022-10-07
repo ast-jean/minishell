@@ -2,25 +2,24 @@
 ###-------------------------# VARIABLES ##-------------------------###
 NAME = minishell
 
-SRCS_FILES 		=	execution/minishell.c				\
-					execution/execution.c				\
-					execution/executing_simple_cmd.c	\
-					parsing/init_token.c				\
-					parsing/token_op.c					\
-					parsing/tokenize.c					\
-					parsing/newtoken.c					\
+SRCS_FILES 		=	built_ins/cd.c						\
 					built_ins/echo.c					\
-					built_ins/cd.c						\
 					built_ins/pwd+env.c					\
 					built_ins/unset+export.c			\
-					execution/quit.c					\
+					execution/check_heredoc.c			\
+					execution/executing_simple_cmd.c	\
 					execution/heredocs.c 				\
-					execution/set_groups.c 				\
-					execution/redirection.c				\
+					execution/minishell.c				\
 					execution/pipes.c					\
-					execution/variables.c 				\
+					execution/quit.c					\
+					execution/redirection.c				\
+					execution/set_groups.c 				\
 					execution/syntax_error.c			\
-
+					execution/variables.c 				\
+					parsing/init_token.c				\
+					parsing/newtoken.c					\
+					parsing/token_op.c					\
+					parsing/tokenize.c					\
 
 INCLUDE_FILES	= 	minishell.h
 
@@ -38,6 +37,7 @@ SRCS 		= $(addprefix $(SRCS_DIR), $(SRCS_FILES))
 INCLUDE 	= $(addprefix $(INCLUDE_DIR), $(INCLUDE_FILES))
 
 ### Colour var ###
+CLEAR_LINE		= \033[2K
 CURSOR_UP_1		= \033[1A
 CURSOR_UP		= \033[2A
 CURSOR_DOWN		= \033[1B
@@ -73,31 +73,34 @@ VALGRING = valgrind --track-fds=yes --track-origins=yes  --leak-check=full ./min
 ###--------------------------## REGLES ##--------------------------###
 all: $(NAME)
 
-$(NAME) : $(OBJS_IN_DIR)
-	@echo "$(CURSOR_UP_1)$(SELECTED)MINISHELL$(END)                                     "
-	@echo "$(GREEN)Compiling DONE! ✅                                 $(END)"
+$(NAME) : libft $(OBJS_IN_DIR)
+	@echo "$(CURSOR_UP_1)$(CLEAR_LINE)$(GREEN)Compiling DONE! ✅$(END)"
 	@$(CC) $(CFLAGS) $(OBJS_IN_DIR) $(LIBS) $(READLINE) -o $@ 
-	@echo "$(BLUE)Executable $(NAME) created                 $(END)"
+	@echo "$(BLUE)$(CLEAR_LINE)Executable $(NAME) created$(END)"
 	@echo "----------------------------"
 
 $(OBJS_DIR)%.o : $(SRCS_DIR)%.c
-	@$(MAKE) -C include/libft
+# @echo "$(CLEAR_LINE)$(SELECTED)MINISHELL$(END)"
+	@echo "$(CURSOR_UP_1)$(CLEAR_LINE)Compiling $<"
+	@$(CC) -I ~/.brew/opt/readline/include -I /usr/local/opt/readline/include $(CFLAGS) -c $< -o $@
+
+libft:
 	@mkdir -p .tmp
 	@mkdir -p $(OBJS_DIR)
 	@mkdir -p $(OBJS_DIR)/parsing
 	@mkdir -p $(OBJS_DIR)/execution
 	@mkdir -p $(OBJS_DIR)/built_ins
-	@echo "$(CURSOR_UP)Compiling $< ..           "
-	@$(CC) -I ~/.brew/opt/readline/include -I /usr/local/opt/readline/include $(CFLAGS) -c $< -o $@
-
+	@$(MAKE) -sC include/libft
+	@echo "$(CURSOR_UP)$(CLEAR_LINE)$(SELECTED)MINISHELL$(END)"
+	@echo " "
 clean:
-	@$(MAKE) -C include/libft clean
+	@$(MAKE) -sC include/libft clean
 	@rm -f *.o
 	@rm -rf $(OBJS_DIR)
 	@echo "MINISHELL	| STATUS: $(CYAN)OBJECTS	CLEANED$(END)"
 
 fclean:	clean
-	@$(MAKE) -C include/libft fclean
+	@$(MAKE) -sC include/libft fclean
 	@rm -rf $(NAME)
 	@echo "MINISHELL	| STATUS: $(BLUE)EXECUTABLE	CLEANED$(END)"
 
@@ -112,10 +115,11 @@ re:	fclean all
 
 rew: 
 	@echo " "
+	@echo " "
 	@rm -rf $(NAME)
 	@rm -f *.o
 	@rm -rf $(OBJS_DIR)
-	@$(MAKE) $(NAME)
+	@$(MAKE) -s $(NAME)
 	./$(NAME)
 
 help:

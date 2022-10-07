@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_groups.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/05 13:22:59 by xchouina          #+#    #+#             */
+/*   Updated: 2022/10/05 13:23:01 by xchouina         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
 int	init_groups(t_vars *vars)
@@ -18,7 +30,6 @@ int	init_groups(t_vars *vars)
 		if (copy && ft_strcmp(copy->cont, "|") == 0)
 		{
 			(vars->pipe_count)++;
-			// copy = copy->next;
 			copy = remove_token(copy, vars);
 		}
 		i++;
@@ -28,36 +39,29 @@ int	init_groups(t_vars *vars)
 	return (0);
 }
 
+int	parsing_error(void)
+{
+	write(2, "Error.\n", 7);
+	return (-1);
+}
+
 int	parsing_pipes(t_vars *vars)
 {
-	t_token *cpy;
+	t_token	*cpy;
 
 	cpy = vars->token->first;
 	if (cpy->cont[0] == '|')
-	{
-		write(2, "Error.\n", 7);
-		return (-1);
-	}
+		parsing_error();
 	while (cpy->next)
 	{
-		if ((ft_strcmp(cpy->cont, "|") == 0 && ft_strcmp(cpy->next->cont, "|") == 0))
-		{
-			write(2, "Error.\n", 7);
-			return (-1);
-		}
+		if ((ft_strcmp(cpy->cont, "|") == 0
+				&& ft_strcmp(cpy->next->cont, "|") == 0))
+			parsing_error();
 		else if (cpy->cont[0] == '|' && cpy->cont[1] == '|')
-		{
-			write(2, "Error.\n", 7);
-			return (-1);
-		}
+			parsing_error();
 		cpy = cpy->next;
 	}
 	if (init_groups(vars) == -1)
-	{
-		write(2, "Error.\n", 7);
-		return (-1);
-	}
+		parsing_error();
 	return (0);
 }
-
-// 

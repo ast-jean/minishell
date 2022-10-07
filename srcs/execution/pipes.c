@@ -8,16 +8,16 @@
 int	is_bi_nopipes(t_token *current, t_vars *vars, char **env, int fdi)
 {
 	if (current && !ft_strcmp(remove_quotes(current->cont), "export"))
-		return (builtin_export(current, vars));
+		return (builtin_export(vars));
 	else if(current && !ft_strcmp(remove_quotes(current->cont), "unset"))
-		return (builtin_unset(vars, remove_quotes(current->next->cont)));
+		return (builtin_unset(vars));
 	else if (current && !ft_strcmp(remove_quotes(current->cont), "cd"))
 		return (builtin_cd(vars, env));
 	else if(current && !ft_strcmp(remove_quotes(current->cont), "exit"))
 	{
+		ft_putstr_fd("exit\n", 2);
 		if (fdi != 0)
 			close(fdi);
-		ft_putstr_fd("exit\n", 2);
 		quit_shell(vars);
 	}
 	return (-1);
@@ -32,7 +32,7 @@ int	is_builtin(t_token *current, t_vars *vars)
 	else if (current && !ft_strcmp(remove_quotes(current->cont), "env"))
 		return (builtin_env(vars));
 	else if (current && !ft_strcmp(remove_quotes(current->cont), "echo"))
-		return (builtin_echo(vars));
+		return (builtin_echo(current));
 	// else if(current && !ft_strcmp(remove_quotes(current->cont), "unset"))
 	// 	return (builtin_unset(vars, remove_quotes(current->next->cont)));
 	// else if (current && !ft_strcmp(remove_quotes(current->cont), "cd"))
@@ -55,7 +55,7 @@ void	format_execve(t_vars *vars, t_token *token)
 	i = 0;
 	vars->ac = 0;
 	vars->av = NULL;
-	debug_print_tokens(vars);
+	// debug_print_tokens(vars);
 	while (current && current->group_num == token->group_num)
 	{
 		vars->ac++;
@@ -93,13 +93,6 @@ int	forking(t_token *current, int fdi, t_vars *vars, char **env)
 	// int	yes_or_no;
 	// (void)env;
 
-	if(current && !is_bi_nopipes(current, vars, env, fdi) && vars->pipe_count == 0)
-	{
-		if (fdi != 0)
-			close(fdi);
-		// quit_shell(vars);
-		return (pipefd[0]);
-	}
 		// ft_putstr_fd("here!\n", 2);
 		// fork if access = 0 and do redirs here too :)
 	// yes_or_no = accessing(vars, current);
@@ -121,6 +114,14 @@ int	forking(t_token *current, int fdi, t_vars *vars, char **env)
 		if (fdo != 1)
 			close(fdo);
 		// close(pipefd[0]);
+		return (pipefd[0]);
+	}
+	debug_print_tokens(vars);
+	if(current && !is_bi_nopipes(current, vars, env, fdi) && vars->pipe_count == 0)
+	{
+		if (fdi != 0)
+			close(fdi);
+		// quit_shell(vars);
 		return (pipefd[0]);
 	}
 	// else if (vars->pipe_count == 0)
@@ -175,7 +176,7 @@ int	forking(t_token *current, int fdi, t_vars *vars, char **env)
 				{
 					// printf("current : %s\n", current->cont);
 					ft_putstr_fd(remove_quotes(current->cont), 2);
-					// ft_putstr_fd(": cmd not found\n", 2);
+					ft_putstr_fd(": cmd not found\n", 2);
 					exit(0);
 				}
 			}
