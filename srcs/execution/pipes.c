@@ -17,6 +17,7 @@ int	is_bi_nopipes(t_token *current, t_vars *vars, char **env, int fdi)
 	{
 		if (fdi != 0)
 			close(fdi);
+		ft_putstr_fd("exit\n", 2);
 		quit_shell(vars);
 	}
 	return (-1);
@@ -54,6 +55,7 @@ void	format_execve(t_vars *vars, t_token *token)
 	i = 0;
 	vars->ac = 0;
 	vars->av = NULL;
+	debug_print_tokens(vars);
 	while (current && current->group_num == token->group_num)
 	{
 		vars->ac++;
@@ -173,7 +175,7 @@ int	forking(t_token *current, int fdi, t_vars *vars, char **env)
 				{
 					// printf("current : %s\n", current->cont);
 					ft_putstr_fd(remove_quotes(current->cont), 2);
-					ft_putstr_fd(": cmd not found\n", 2);
+					// ft_putstr_fd(": cmd not found\n", 2);
 					exit(0);
 				}
 			}
