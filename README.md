@@ -14,8 +14,8 @@ TODO:
 [ ] Gérer $?
 [X] Add $Vars and remove_quotes()
 [ ] Créer les buitins
-	[X] echo (with -n) (xchouina)
-	[ ] cd (xchouina)
+	[X] echo
+	[X] cd
 	[ ] export (no flag)	-started-
 	[ ] unset (no flag)		-started-
 	[X] pwd (no flag)
@@ -40,3 +40,7 @@ TOKNOW:
 	- Herestring broken with token changes
 	- DANS CD : $>pwd | cd srcs
 	- Echo: doesnt work with only one char as first argument
+	- in:	$>cat<.s
+	  out:	Segmentation fault: 11
+	- TODO: Fix cat with << and <<< doesnt work after token changes
+	
