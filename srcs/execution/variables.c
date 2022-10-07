@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:26:10 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/06 16:17:16 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/07 15:46:01 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,20 @@ char	*save_varname(char *line)
 	int		count;
 	char	*var_name;
 
-// printf("SAVE_VARNAME -----------------START\n");
 	i = 0;
 	count = 0;
+	var_name = ft_calloc(count + 1, sizeof(char));
 	while (line[count] && ft_isalnum(line[count]))
 		count++;
-	var_name = ft_calloc(count + 1, sizeof(char));
 	while (line[i] && ft_isalnum(line[i]))
 	{
 		// printf("vn >%c< = l >%c<\n", var_name[i], line[i]);
 		var_name[i] = line[i];
 		i++;
 	}
-// printf("SAVE_VARNAME ------------------END\n");
 	return (var_name);
 }
-//$>echo a$USER
-//out a$USER should out aast-jean -> it is okay in quotes
+
 char	*find_var_inline(char *line)
 {
 	while (*line && *line != '$')
@@ -58,32 +55,33 @@ char	*find_var_inline(char *line)
 		else
 			line++;
 	}
-	printf("isalnum = %d\n*line + 1= >%c<\n",  ft_isalnum(*(line + 1)), *(line + 1));
 	if (*line == '$' && ft_isalnum(*(line + 1)))
 		return ((char *)line);
 	else
 		return (NULL);
 }
 
-char	*delete_var_name(int pos2, char *newline)
+char	*delete_var_name(int pos2, char *str)
 {
 	int		i;
-	char	*temp;
-
+	char	*newline;
 	i = pos2;
+
+	newline = calloc(ft_strlen(str) + 1, sizeof(char));
+	newline = ft_strcpy(newline, str);
+
 	while (i >= 0)
 	{
 		if (newline[i] == '$')
 		{
-			newline = ft_rmchar(newline, &newline[i--]);
+			newline = ft_charrm(newline, &newline[i--]);
 			break ;
 		}
 		else
-			newline = ft_rmchar(newline, &newline[i--]);
+			newline = ft_charrm(newline, &newline[i--]);
 	}
-	temp = newline;
-	free(newline);
-	return (temp);
+	free(str);
+	return (newline);
 }
 
 char	*add_varcontent(char *line, char *var_name, char *var_value)
@@ -93,10 +91,9 @@ char	*add_varcontent(char *line, char *var_name, char *var_value)
 	int		pos2;
 	int		i;
 
-	// pos = ft_strlen(find_var_inline(line));
-	newline = line;
+	newline = calloc(ft_strlen(line) + 1, sizeof(char));
+	newline = ft_strcpy(newline, line);
 	i = -1;
-	// pos--;
 	pos = ft_strlen(line) - ft_strlen(find_var_inline(line)) + ft_strlen(var_name);
 	pos2 = pos;
 	if (var_value)
@@ -111,25 +108,17 @@ char	*check_var(char *line, t_vars *vars)
 	char	*var_name;
 	char	*var_value;
 	char	*newline;
+	// char	*temp;
 
 	newline = calloc(ft_strlen(line) + 1, sizeof(char));
 	newline = ft_strcpy(newline, line);
-	printf("------START-----\n");
-	var_name = NULL;
-	var_value = NULL;
-	while (printf("var_inline in while:\n") && find_var_inline(newline))
+	while (find_var_inline(newline))
 	{
-		// printf("LINE BEFORE = %s\n", newline);
 		var_name = save_varname(find_var_inline(newline) + 1);
-		printf("var_name = %s\n", var_name);
 		var_value = ft_getenv(vars->env, var_name);
-		printf("var_value = %s\n", var_value);
 		newline = add_varcontent(newline, var_name, var_value);
-		printf("newline = %s\n", newline);
-		// printf("LINE AFTER = %s\n", newline);
 		// free(var_name);
 		// free(var_value);
 	}
-	printf("------END-----\n");
 	return (newline);
 }

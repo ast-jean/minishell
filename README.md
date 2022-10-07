@@ -43,3 +43,7 @@ TOKNOW:
 	- Echo: should display a space between arguments ex: $>echo aa aa% out: aa aa% instead of: aaaa
 	- $VAR double quotes -> first doesn't work [X]
 	- Herestring broken with token changes
+	- DANS CD : $>pwd | cd srcs
+	- ECHO : space at the end to remove ex echo test | cat -e should be "test$"
+	- CD : weird error : "cd minishell" gives error messahe when minishell/ does exist and command does its job anyways
+	- REDIRECTIONS : when one infile and one outfile not separated by pipe, segfaults

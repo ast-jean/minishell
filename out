@@ -2,24 +2,24 @@
 ###-------------------------# VARIABLES ##-------------------------###
 NAME = minishell
 
-SRCS_FILES 		=	built_ins/cd.c					\
-					built_ins/echo.c				\
-					built_ins/pwd+env.c				\
-					built_ins/unset+export.c		\
-					execution/check_heredoc.c		\
-					execution/exec_simp_cmd.c		\
-					execution/heredocs.c 			\
-					execution/minishell.c			\
-					execution/pipes.c				\
-					execution/quit.c				\
-					execution/redirection.c			\
-					execution/set_groups.c 			\
-					execution/syntax_error.c		\
-					execution/variables.c 			\
-					parsing/init_token.c			\
-					parsing/newtoken.c				\
-					parsing/token_op.c				\
-					parsing/tokenize.c				\
+SRCS_FILES 		=	built_ins/cd.c						\
+					built_ins/echo.c					\
+					built_ins/pwd+env.c					\
+					built_ins/unset+export.c			\
+					execution/check_heredoc.c			\
+					execution/executing_simple_cmd.c	\
+					execution/heredocs.c 				\
+					execution/minishell.c				\
+					execution/pipes.c					\
+					execution/quit.c					\
+					execution/redirection.c				\
+					execution/set_groups.c 				\
+					execution/syntax_error.c			\
+					execution/variables.c 				\
+					parsing/init_token.c				\
+					parsing/newtoken.c					\
+					parsing/token_op.c					\
+					parsing/tokenize.c					\
 
 INCLUDE_FILES	= 	minishell.h
 
@@ -97,18 +97,18 @@ clean:
 	@$(MAKE) -sC include/libft clean
 	@rm -f *.o
 	@rm -rf $(OBJS_DIR)
-	@echo "MINISHELL	| $(CYAN)OBJECTS CLEANED$(END)"
+	@echo "MINISHELL	| STATUS: $(CYAN)OBJECTS	CLEANED$(END)"
 
 fclean:	clean
 	@$(MAKE) -sC include/libft fclean
 	@rm -rf $(NAME)
-	@echo "MINISHELL	| $(BLUE)EXECUTABLE CLEANED$(END)"
+	@echo "MINISHELL	| STATUS: $(BLUE)EXECUTABLE	CLEANED$(END)"
 
 leak:
 	$(LEAK)
 
 valgrind:
-	valgrind --track-fds=yes --track-origins=yes  --leak-check=full ./minishell
+	$(VALGRIND)
 
 re:	fclean all 
 	./$(NAME)
@@ -120,7 +120,7 @@ rew:
 	@rm -f *.o
 	@rm -rf $(OBJS_DIR)
 	@$(MAKE) -s $(NAME)
-# ./$(NAME)
+	./$(NAME)
 
 help:
 	@echo "Rules: all clean fclean re"

@@ -41,7 +41,7 @@ SRC =	ft_arrayadd.c			\
 		ft_putendl_fd.c			\
 		ft_putnbr_fd.c			\
 		ft_putstr_fd.c			\
-		ft_rmchar.c				\
+		ft_charrm.c				\
 		ft_split.c				\
 		ft_strchr.c				\
 		ft_strcmp.c				\

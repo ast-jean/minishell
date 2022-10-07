@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_rmchar.c                                        :+:      :+:    :+:   */
+/*   ft_charrm.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 14:51:16 by ast-jean          #+#    #+#             */
-/*   Updated: 2022/10/05 13:52:06 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/10/07 15:43:32 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 //NOTE: Out: AAAA
 #include "../include/libft.h"
 
-char	*ft_rmchar(char *str, char *s)
+char	*ft_charrm(char *str, char *s)
 {
 	char	*new;
 	int		i;
@@ -41,6 +41,6 @@ char	*ft_rmchar(char *str, char *s)
 		j++;
 	}
 	new[j] = '\0';
-	// free(str);
+	free(str);
 	return (new);
 }

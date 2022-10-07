@@ -34,6 +34,8 @@ typedef struct s_vars
 	int		pipe_count;
 	int		pid[32768];
 	int		pid_count;
+	int		fdi;
+	int		fdo;
 	int		status;
 	char	*cd_oldpwd;
 }	t_vars;
@@ -77,8 +79,7 @@ void	free_tokens(t_vars *vars);
 void	free2d(char **split);
 
 // PIPES.C
-
-int		is_builtin(t_token *current, t_vars *vars, char **env, int fdi);
+int		is_builtin(t_token *current, t_vars *vars);
 void	fd_catch(t_vars *vars, t_token *current, char **env);
 t_token	*group_skip(t_token *current_token);
 

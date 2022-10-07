@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executing_simple_cmd.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 12:59:02 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/05 13:08:46 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/10/07 14:47:35 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

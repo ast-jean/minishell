@@ -31,9 +31,9 @@ void	quit_shell(t_vars *vars)
 		free2d(vars->env);
 	if (vars->path_array)
 		free2d(vars->path_array);
-	// free(vars->line);
+	free(vars->line);
 	// if (vars->token)
-	// 	temp = vars->token->first;
+		// temp = vars->token->first;
 	// while (temp)
 	// {
 	// 	vars->token = temp;
@@ -41,9 +41,8 @@ void	quit_shell(t_vars *vars)
 	// 	temp = vars->token->next;
 	// 	// free(vars->token);
 	// }
-	// free(vars);
-	//delete history
-
+	free(vars);
+	rl_clear_history();
 	exit(0);
 	// kill(SIGABRT, 0);
 }
