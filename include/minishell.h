@@ -32,6 +32,8 @@ typedef struct s_vars
 	int		pipe_count;
 	int		pid[32768];
 	int		pid_count;
+	int		fdi;
+	int		fdo;
 	int		status;
 	char	*cd_oldpwd;
 }	t_vars;
