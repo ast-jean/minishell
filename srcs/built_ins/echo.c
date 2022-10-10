@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:59 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/06 15:44:05 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/10 10:44:53 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	is_n(char *str)
 
 int	builtin_echo(t_token *current, t_vars *vars)
 {
-	// t_token	*token;
 	bool	n;
 	int		gn;
 
@@ -45,7 +44,7 @@ int	builtin_echo(t_token *current, t_vars *vars)
 	while (current && current->group_num == gn && ft_strcmp(current->cont, "|") != 0)
 	{
 		ft_putstr_fd(remove_quotes(check_var(current->cont, vars)), 1);
-		if (current->next != NULL)
+		if (current->next != NULL && current->next->group_num == gn)
 			write(1, " ", 1);
 		current = current->next;
 	}
