@@ -21,7 +21,15 @@ TODO:
 	[X] pwd (no flag)
 	[X] env (no flag)
 	[X] exit (no flag)
-
+[ ] General debugging
+[ ] Freeing
+	[ ] built_ins
+	[ ] execution
+	[ ] parsing
+[ ] Norminette
+	[ ] built_ins
+	[ ] execution
+	[ ] parsing
 TOKNOW: 
 	- Ne pas interpréter de quotes (guillemets) non fermés ou de caractères spéciaux non demandés dans le sujet, tels que \ (le backslash) ou ; (le point-virgule).
 	- Ne pas gérer les fuites avec readline
