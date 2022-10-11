@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:17:42 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/11 13:23:43 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/11 15:02:48 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@ int	redirect_input(t_token *token, int fd_init)
 {
 	int	group;
 	int	fd;
-	char *temp;
+	// char *temp;
 
-	temp = remove_quotes(token->next->cont);
+	// temp = remove_quotes(token->next->cont);
+
 	group = token->group_num;
 	fd = fd_init;
 	while (token && token->next && token->group_num == group)
@@ -28,13 +29,13 @@ int	redirect_input(t_token *token, int fd_init)
 		{
 			if (fd != 0)
 				close(fd);
-			fd = open(temp, O_RDONLY);
+			fd = open(/*temp*/remove_quotes(token->next->cont), O_RDONLY);
 			if (fd == -1)
-				ft_putstr_fd(temp, 2);
+				ft_putstr_fd(/*temp*/remove_quotes(token->next->cont), 2);
 		}
 			token = token->next;
 	}
-	free(temp);
+	// free(temp);
 	return (fd);
 }
 
@@ -46,9 +47,9 @@ int	redirect_output(t_token *token, int fd_init)
 
 	group = token->group_num;
 	fd = fd_init;
-	temp = remove_quotes(token->next->cont);
 	while (token && token->next && token->group_num == group)
 	{
+	temp = remove_quotes(token->next->cont);
 		if (ft_strcmp(token->cont, ">") == 0)
 		{
 			if (fd != 1)
