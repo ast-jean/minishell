@@ -46,7 +46,7 @@ t_token	*new_token_after(t_token *after_this_one, char *file_name)
 	return (new);
 }
 
-void	*access_ptr(t_vars *vars, int i) //dont know if it works
+void	*access_ptr(t_vars *vars, int i)
 {
 	int	count;
 
@@ -58,17 +58,6 @@ void	*access_ptr(t_vars *vars, int i) //dont know if it works
 	}
 	return (vars->token);
 }
-
-// void	push_tk(char *cont, t_token *token, t_token *first, t_token *prev, int i, int count) // TOFIX TOO MANY ARGUMENTS
-// {
-// 	token->cont = cont;
-// 	token->prev = prev;
-// 	token->first = first;
-// 	if (i < count)
-// 		token->next = malloc(sizeof(t_token));
-// 	else
-// 		token->next = NULL;
-// }
 
 void	debug_print_tokens(t_vars *vars)
 {

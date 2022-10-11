@@ -64,6 +64,7 @@ SRC =	ft_arrayadd.c			\
 		ft_toupper.c			\
 		get_next_line.c			\
 		get_next_line_utils.c	\
+		ft_free2d.c				\
 
 NAME = libft.a
 CC = gcc

@@ -27,7 +27,6 @@ typedef struct s_vars
 	char	*path;
 	char	**path_array;
 	int		heredoc_count;
-	char	*pwd;
 	char	*oldpwd;
 	char	*line;
 	t_token	*token;
@@ -76,7 +75,6 @@ char	*add_varcontent(char *line, char *var_name, char *var_value);
 //QUIT.C
 void	quit_shell(t_vars *vars);
 void	free_tokens(t_vars *vars);
-void	free2d(char **split);
 
 // PIPES.C
 int		is_builtin(t_token *current, t_vars *vars);

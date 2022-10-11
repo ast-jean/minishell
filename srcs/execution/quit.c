@@ -12,16 +12,6 @@ void	free_tokens(t_vars *vars)
 	}
 }
 
-void	free2d(char **split)
-{
-	int	i;
-
-	i = 0;
-	while (split[i])
-		free(split[i++]);
-	free(split);
-}
-
 void	quit_shell(t_vars *vars)
 {
 	// t_token *temp;

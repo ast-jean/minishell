@@ -27,7 +27,7 @@ TODO:
 	[ ] execution
 	[ ] parsing
 [ ] Norminette
-	[ ] built_ins
+	[X] built_ins
 	[ ] execution
 	[ ] parsing
 TOKNOW: 

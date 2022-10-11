@@ -73,6 +73,7 @@ char	*ft_strcpy(char *dest, char *src);
 void	ft_swap(int a, int b);
 void	ft_pt_swap(int *a, int *b);
 long	ft_atol(const char *str);
+void	free2d(char **split);
 
 char	*get_next_line(int fd);
 char	*ft_get_temp(char *rmd);

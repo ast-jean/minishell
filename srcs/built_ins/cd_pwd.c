@@ -6,7 +6,7 @@
 /*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:36 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/10 11:17:42 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/10/10 13:28:34 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 
 int	builtin_pwd(t_vars *vars)
 {
-	vars->pwd = ft_arraysrch(vars->env, "PWD=") + 4;
-	ft_putstr_fd(vars->pwd, 1);
+	char	*pwd;
+	pwd = ft_arraysrch(vars->env, "PWD=") + 4;
+	ft_putstr_fd(pwd, 1);
 	ft_putstr_fd("\n", 1);
 	return (1);
 }
@@ -76,6 +77,7 @@ int	builtin_cd(t_vars *vars, char **env)
 	}
 	else if (token && chdir(token->cont) != 0)
 		return (dprintf(2, "cd: no such file or directory: %s\n", token->cont));
+		free2d(vars->env);
 	vars->env = ft_arraycpy(env);
 	new_oldpwd = ft_strjoin("OLDPWD=", s);
 	changing_oldpwd(vars, new_oldpwd);
