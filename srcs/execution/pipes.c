@@ -90,6 +90,8 @@ void	actually_forking(t_token *current, t_vars *vars, char **env)
 	if (vars->pid[vars->pid_count++] == 0)
 	{
 		dup2(vars->fdi, 0);
+			// printf("here!!!\n");
+		printf("fdi : %d ||| fdo : %d\n", vars->fdi, vars->fdo);
 		dup2(vars->fdo, 1);
 		close_fds(vars->fdi, vars->fdo, 0);
 		if (is_builtin(current, vars) == -1)
