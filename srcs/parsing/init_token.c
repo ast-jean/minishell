@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_token.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 12:51:20 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/05 12:51:23 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/10/06 15:29:26 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	creating_tokens(char *line, t_vars *vars)
 	}
 	vars->token = malloc(sizeof(t_token));
 	current = vars->token;
+	current->vars = vars;
 	current->cont = split[i++];
 	current->first = current;
 	current->prev = NULL;

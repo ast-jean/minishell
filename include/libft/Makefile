@@ -41,7 +41,7 @@ SRC =	ft_arrayadd.c			\
 		ft_putendl_fd.c			\
 		ft_putnbr_fd.c			\
 		ft_putstr_fd.c			\
-		ft_rmchar.c				\
+		ft_charrm.c				\
 		ft_split.c				\
 		ft_strchr.c				\
 		ft_strcmp.c				\
@@ -132,9 +132,9 @@ re: fclean
 	
 clean:
 	@rm -rf $(OBJS_DIR)
-	@echo "LIBFT		| STATUS: $(CYAN)OBJECTS 	CLEANED$(END)"
+	@echo "LIBFT		| $(CYAN)OBJECTS CLEANED$(END)"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "$(CURSOR_UP_1)LIBFT		| STATUS: $(BLUE)LIBRARY 	CLEANED$(END)"
+	@echo "$(CURSOR_UP_1)LIBFT		| $(BLUE)LIBRARY CLEANED$(END)"
 re: fclean all

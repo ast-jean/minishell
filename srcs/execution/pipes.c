@@ -44,7 +44,7 @@ int	is_builtin(t_token *current, t_vars *vars)
 	else if (current && !ft_strcmp(remove_quotes(current->cont), "env"))
 		return (builtin_env(vars));
 	else if (current && !ft_strcmp(remove_quotes(current->cont), "echo"))
-		return (builtin_echo(current));
+		return (builtin_echo(current, vars));
 	return (-1);
 }
 

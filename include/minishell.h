@@ -7,6 +7,7 @@
 # include <signal.h>
 
 // STRUCTS
+struct	s_vars;
 
 typedef struct s_token
 {
@@ -15,6 +16,7 @@ typedef struct s_token
 	struct s_token	*next;
 	struct s_token	*prev;
 	struct s_token	*first;
+	struct s_vars	*vars;
 }	t_token;
 
 typedef struct s_vars
@@ -58,7 +60,7 @@ char	*remove_quotes(char *str);
 t_token	*last_token(t_token *current, t_vars *vars);
 
 //CHECK_HEREDOC.C
-void	*check_heredocs(t_token *current, t_vars *vars);
+t_token	*check_heredocs(t_token *current, t_vars *vars);
 
 //SYNTAX_ERROR.c
 int		syntax_error(char *token);
@@ -67,7 +69,7 @@ int		check_quotes(char *str);
 char	*ft_getenv(char **env, char *varname);
 
 // VARIABLES.c
-char	*check_var(char *line);
+char	*check_var(char *line, t_vars *vars);
 char	*check_var_heredoc(char *line, t_vars *vars);
 char	*add_varcontent(char *line, char *var_name, char *var_value);
 
@@ -101,14 +103,13 @@ int		nbr_of_letters(char *s, int i, int code);
 
 //INIT_TOKEN.C
 int		creating_tokens(char *line, t_vars *vars);
-void	push_tk(char *cont, t_token *token, t_token *first, t_token *prev, int i, int count);
 void	executing_command(char *line, t_vars *vars, char **env);
 
 //TOKEN_OP.C
 void	debug_print_tokens(t_vars *vars); //temp_function
 void	*access_ptr(t_vars *vars, int i);
-t_token	*new_token_after(t_token *after_this_one, char* file_name);
-t_token *remove_token(t_token *remove, t_vars *vars);
+t_token	*new_token_after(t_token *after_this_one, char *file_name);
+t_token	*remove_token(t_token *remove, t_vars *vars);
 
 //NEWTOKEN.C
 char	*newtoken_q(char *line, int *i, char c);
@@ -121,18 +122,14 @@ char	**tokenize(char *line);
 char	**nullify_str(char *line, char *delims, int len, int count);
 int		cnt_delims(char *line, char *delims);
 
-
-
 //NOTE: BUILT INS
-// PWD_ENV.C
-int	builtin_pwd(t_vars *vars);
-int	builtin_env(t_vars *vars);
-// EXPORT_UNSET.C
-int	builtin_unset(t_vars *vars);
-int	builtin_export(t_vars *vars);
-// ECHO.C
-int	builtin_echo(t_token *current);
-// CD.c
-int	builtin_cd(t_vars *vars, char **env);
+// CD_PWD.C
+int		builtin_cd(t_vars *vars, char **env);
+int		builtin_pwd(t_vars *vars);
+// EXPORT_UNSET_EV_ECHO.C
+int		builtin_env(t_vars *vars);
+int		builtin_unset(t_vars *vars);
+int		builtin_export(t_vars *vars);
+int		builtin_echo(t_token *current, t_vars *vars);
 //NOTE: ------------------------------------------------
 #endif

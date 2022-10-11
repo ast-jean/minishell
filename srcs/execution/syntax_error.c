@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:23:33 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/05 13:25:55 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/10/06 14:52:00 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,12 @@ char	*ft_getenv(char **env, char *varname)
 {
 	int		i;
 	int		j;
+	int		k;
 	char	*var_value;
 
-	var_value = NULL;
 	i = -1;
+		// printf("FT_GETENV var_name >%s<\n", varname);
+	var_value = NULL;
 	while (env[++i])
 	{
 		j = 0;
@@ -47,14 +49,13 @@ char	*ft_getenv(char **env, char *varname)
 			j++;
 		if (env[i][j] == '=')
 		{
+			k = 0;
 			j = (int)ft_strlen(varname) + 1;
+			var_value = ft_calloc(ft_strlen(&env[i][j]), sizeof(char));
 			while (env[i][j])
-			{	
-				var_value = ft_addchar(var_value, env[i][j], &var_value[j]);
-				j++;
-			}
-			return (var_value);
+				var_value = ft_charadd(var_value, env[i][j++], &var_value[k++]);
+			return (/*printf("FT_GETENV = >%s< ---1---\n", var_value),*/ var_value);
 		}
 	}
-	return (var_value);
+	return (/*printf("FT_GETENV = >%s< ---2---\n", var_value),*/ var_value);
 }

@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   cd_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:36 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/03 11:35:44 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/10/10 11:17:42 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
 // NOTE: Built-ins 4/4 (cd)
+
+int	builtin_pwd(t_vars *vars)
+{
+	vars->pwd = ft_arraysrch(vars->env, "PWD=") + 4;
+	ft_putstr_fd(vars->pwd, 1);
+	ft_putstr_fd("\n", 1);
+	return (1);
+}
 
 int	finding_index(t_vars *vars, char *str, int n)
 {

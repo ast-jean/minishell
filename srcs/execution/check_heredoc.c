@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:56:27 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/05 13:56:29 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/10/06 15:50:27 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	in_child(t_vars *vars, char *delim, int fd)
 	{	
 		if (ft_strcmp(" ", vars->line))
 		{
-			vars->line = ft_strjoin(check_var(vars->line), "\n");
+			vars->line = ft_strjoin(check_var(vars->line, vars), "\n");
 			ft_putstr_fd(vars->line, fd);
 		}
 		rl_on_new_line();
@@ -43,11 +43,10 @@ void	in_child(t_vars *vars, char *delim, int fd)
 	usleep(10);
 }
 
-void	*check_heredocs(t_token *current, t_vars *vars)
+t_token	*check_heredocs(t_token *current, t_vars *vars)
 {
 	char	*delim;
 	char	*name;
-	int		fd;
 	int		pid;
 	int		stat;
 
@@ -56,12 +55,11 @@ void	*check_heredocs(t_token *current, t_vars *vars)
 		return (NULL);
 	name = ft_strjoin(".tmp/temp_heredoc", ft_itoa(vars->heredoc_count));
 	delim = remove_quotes(current->next->cont);
-	fd = open(name, O_RDWR | O_CREAT | O_TRUNC, 0777);
 	new_token_after(current, name);
 	pid = fork();
 	signal(2, SIG_IGN);
 	if (pid == 0)
-		in_child(vars, delim, fd);
+		in_child(vars, delim, open(name, O_RDWR | O_CREAT | O_TRUNC, 0777));
 	else
 		waitpid(pid, &stat, 0);
 	if (pid == 0)
