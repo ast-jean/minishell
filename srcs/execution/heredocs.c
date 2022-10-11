@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:12:27 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/07 15:55:07 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:33:53 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ t_token	*check_herestrings(t_token *current, t_vars *vars)
 	line = ft_strjoin(check_var(line, vars), "\n");
 	line = remove_quotes(line);
 	ft_putstr_fd(line, fd);
+	// close(fd);
 	current = remove_token(current, vars);
 	current = remove_token(current->next, vars);
 	if (current == NULL)

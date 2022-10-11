@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:26:10 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/07 15:46:01 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:20:59 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ char	*save_varname(char *line)
 		count++;
 	while (line[i] && ft_isalnum(line[i]))
 	{
-		// printf("vn >%c< = l >%c<\n", var_name[i], line[i]);
 		var_name[i] = line[i];
 		i++;
 	}
@@ -117,8 +116,8 @@ char	*check_var(char *line, t_vars *vars)
 		var_name = save_varname(find_var_inline(newline) + 1);
 		var_value = ft_getenv(vars->env, var_name);
 		newline = add_varcontent(newline, var_name, var_value);
-		// free(var_name);
-		// free(var_value);
+		free(var_name);
+		free(var_value);
 	}
 	return (newline);
 }

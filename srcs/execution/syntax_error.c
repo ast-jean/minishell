@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:23:33 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/06 14:52:00 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:19:07 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ char	*ft_getenv(char **env, char *varname)
 	char	*var_value;
 
 	i = -1;
-		// printf("FT_GETENV var_name >%s<\n", varname);
 	var_value = NULL;
 	while (env[++i])
 	{
@@ -54,8 +53,8 @@ char	*ft_getenv(char **env, char *varname)
 			var_value = ft_calloc(ft_strlen(&env[i][j]), sizeof(char));
 			while (env[i][j])
 				var_value = ft_charadd(var_value, env[i][j++], &var_value[k++]);
-			return (/*printf("FT_GETENV = >%s< ---1---\n", var_value),*/ var_value);
+			return (var_value);
 		}
 	}
-	return (/*printf("FT_GETENV = >%s< ---2---\n", var_value),*/ var_value);
+	return (var_value);
 }

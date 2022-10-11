@@ -13,38 +13,70 @@ int	close_fds(int fdi, int fdo, int to_return)
 
 int	is_bi_nopipes(t_token *current, t_vars *vars, char **env)
 {
+	char	*temp;
+
+	temp = remove_quotes(current->cont);
 	if (vars->pipe_count > 0)
 	{
-		if (current && (!ft_strcmp(remove_quotes(current->cont), "export")
-				|| !ft_strcmp(remove_quotes(current->cont), "unset")
-				|| !ft_strcmp(remove_quotes(current->cont), "cd")
-				|| !ft_strcmp(remove_quotes(current->cont), "exit")))
-			return (-2);
+		if (current && (!ft_strcmp(temp, "export")
+				|| !ft_strcmp(temp, "unset")
+				|| !ft_strcmp(temp, "cd")
+				|| !ft_strcmp(temp, "exit")))
+			{
+				free(temp);
+				return (-2);
+			}
+		free(temp);
 		return (-1);
 	}
-	if (current && !ft_strcmp(remove_quotes(current->cont), "export"))
-		return (builtin_export(vars));
-	else if (current && !ft_strcmp(remove_quotes(current->cont), "unset"))
-		return (builtin_unset(vars));
-	else if (current && !ft_strcmp(remove_quotes(current->cont), "cd"))
-		return (builtin_cd(vars, env));
-	else if (current && !ft_strcmp(remove_quotes(current->cont), "exit"))
+	if (current && !ft_strcmp(temp, "export"))
 	{
+		free(temp);
+		return (builtin_export(vars));
+	}
+	else if (current && !ft_strcmp(temp, "unset"))
+	{
+		free(temp);
+		return (builtin_unset(vars));
+	}
+	else if (current && !ft_strcmp(temp, "cd"))
+	{
+		free(temp);
+		return (builtin_cd(vars, env));
+	}
+	else if (current && !ft_strcmp(temp, "exit"))
+	{
+		free(temp);
+
 		ft_putstr_fd("exit\n", 2);
 		close_fds(vars->fdi, vars->fdo, 0);
 		quit_shell(vars);
 	}
+		free(temp);
+
 	return (-1);
 }
 
 int	is_builtin(t_token *current, t_vars *vars)
 {
-	if (current && !ft_strcmp(remove_quotes(current->cont), "pwd"))
+	char	*temp;
+
+	temp = remove_quotes(current->cont);
+	if (current && !ft_strcmp(temp, "pwd"))
+	{
+		free(temp);
 		return (builtin_pwd(vars));
-	else if (current && !ft_strcmp(remove_quotes(current->cont), "env"))
+	}
+	else if (current && !ft_strcmp(temp, "env"))
+	{
+		free(temp);
 		return (builtin_env(vars));
-	else if (current && !ft_strcmp(remove_quotes(current->cont), "echo"))
+	}
+	else if (current && !ft_strcmp(temp, "echo"))
+	{
+		free(temp);
 		return (builtin_echo(current, vars));
+	}
 	return (-1);
 }
 
