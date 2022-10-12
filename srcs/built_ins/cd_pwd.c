@@ -6,7 +6,7 @@
 /*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:36 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/10 13:28:34 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/10/12 11:09:25 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	builtin_cd(t_vars *vars, char **env)
 	{
 	}
 	else if (token && chdir(token->cont) != 0)
-		return (dprintf(2, "cd: no such file or directory: %s\n", token->cont));
+		return (1/*dprintf(2, "cd: no such file or directory: %s\n", token->cont)*/);
 		free2d(vars->env);
 	vars->env = ft_arraycpy(env);
 	new_oldpwd = ft_strjoin("OLDPWD=", s);
