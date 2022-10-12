@@ -3,6 +3,10 @@ Custom shell in C
 TODO:
 [ ] Gérer les Variables d'env $ (attention a juste "=")
 [ ] Gérer $?
+<<<<<<< HEAD
+=======
+NEXT PHASE: 
+>>>>>>> main
 [ ] General debugging
 [ ] Freeing
 	[ ] built_ins
@@ -20,20 +24,9 @@ TOKNOW:
  TOFIX  
 	- exit with exit code
 	- Added Include/readline/ so people dont have to download on brew (we should link it in minishell.h)
-	- $Variables 
-		- $VAR if it's a $ with an exception(!<>|'"?#+-% ) maybe ft_alnum following
-			Ex: in: "hello$" -> out: hello$
-			Ex: in: "hello$v" -> out: hello
-			Ex: in: "hello$@" -> out: hello
+	- $Variables
 		- $>$USER"$HOME" $USER  ->  out: HOMEjean ast-jean
-	- Echo: doesnt work with only one char as first argument [X]
-	- Herestring broken with token changes [X]
 	- DANS CD : $>pwd | cd srcs
 	- in:	$>cat<.s -> out:	Segmentation fault: 11
-	- Echo: should display a space between arguments ex: $>echo aa aa% out: aa aa% instead of: aaaa [X]
-	- $VAR double quotes -> first doesn't work [X]
-	- Herestring broken with token changes
-	- DANS CD : $>pwd | cd srcs
-	- ECHO : space at the end to remove ex echo test | cat -e should be "test$" [X]
 	- CD : weird error : "cd minishell" gives error messahe when minishell/ does exist and command does its job anyways
 	- REDIRECTIONS : when one infile and one outfile not separated by pipe, segfaults

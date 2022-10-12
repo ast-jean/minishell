@@ -4,18 +4,20 @@ t_token	*remove_token(t_token *remove, t_vars *vars)
 {
 	t_token	*nex;
 
+	if (!remove)
+		return (NULL);
 	if (remove->next && remove->prev)
 	{
 		remove->prev->next = remove->next;
 		remove->next->prev = remove->prev;
 		nex = remove->next;
 	}
-	else if (!remove->next)
+	else if (!remove->next && remove->prev)
 	{
 		remove->prev->next = NULL;
 		nex = NULL;
 	}
-	else
+	else if (remove->next && !remove->prev)
 	{
 		remove->next->prev = NULL;
 		nex = remove->next;
@@ -27,8 +29,13 @@ t_token	*remove_token(t_token *remove, t_vars *vars)
 		vars->token = remove->next;
 		nex = remove->next;
 	}
-	free(remove->cont);
-	free(remove);
+	else
+		nex = NULL;
+	if (remove)
+	{
+		free(remove->cont);
+		free(remove);
+	}
 	return (nex);
 } // TOFIX TOO LONG
 

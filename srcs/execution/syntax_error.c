@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:23:33 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/12 14:30:12 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/12 15:33:53 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ char	*ft_getenv(char **env, char *varname)
 	int		k;
 	char	*var_value;
 
-	printf("\033]31mvvvvvvvvvv\033]0m\n");
-
 	i = -1;
 	var_value = NULL;
 	while (env[++i])
@@ -48,7 +46,7 @@ char	*ft_getenv(char **env, char *varname)
 		j = 0;
 		while (env[i][j] && env[i][j] == varname[j])
 			j++;
-		if (env[i][j] == '=')
+		if (env[i][j] == '=' && !varname[j])
 		{
 			k = 0;
 			j = (int)ft_strlen(varname) + 1;
@@ -58,6 +56,5 @@ char	*ft_getenv(char **env, char *varname)
 			return (var_value);
 		}
 	}
-	printf("\033]31m^^^^^^^^^^^^^\033]0m\n");
 	return (var_value);
 }

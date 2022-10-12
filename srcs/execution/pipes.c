@@ -106,14 +106,14 @@ void	format_execve(t_vars *vars, t_token *token)
 	exit(0);
 }
 
-t_token	*skip_group(t_token *current_token)
+t_token	*skip_group(int group, t_vars *vars)
 {
-	int	t;
+	t_token *current;
 
-	t = current_token->group_num;
-	while (current_token->next != NULL && current_token->group_num == t)
-		current_token = current_token->next;
-	return (current_token);
+	current = vars->token->first;
+	while (current && current->group_num <= group)
+		current = current->next;
+	return (current);
 }
 
 void	actually_forking(t_token *current, t_vars *vars, char **env)
@@ -133,12 +133,14 @@ void	actually_forking(t_token *current, t_vars *vars, char **env)
 				ft_putstr_fd(": cmd not found\n", 2);
 				exit(0);
 			}
+			else if (is_bi_nopipes(current, vars, env) == -1)
+				format_execve(vars, current);
 		}
-		format_execve(vars, current);
+		exit(0);
 	}
 }
 
-int	forking(t_token *current, int fdi, t_vars *vars, char **env)
+int	finding_redirs(t_token *current, int fdi, t_vars *vars, char **env)
 {
 	int	pipefd[2];
 
@@ -164,23 +166,30 @@ int	forking(t_token *current, int fdi, t_vars *vars, char **env)
 	return (close_fds(vars->fdi, vars->fdo, pipefd[0]));
 }
 
+//when no_pipes executes, execve still does its thing!!!
 void	fd_catch(t_vars *vars, t_token *current, char **env)
 {
 	int	fd;
 	int	i;
+	int	group;
 
 	vars->pid_count = 0;
 	finding_paths(vars);
-	fd = forking(current, redirect_input(current, 0), vars, env);
-	current = skip_group(current);
+	group = current->group_num;
+	fd = finding_redirs(current, redirect_input(current, 0), vars, env);
+	current = skip_group(group, vars);
 	i = 0;
 	while ((i++ < vars->pipe_count) && (vars->pid_count < 32766))
 	{
+		ft_putstr_fd("herreeee\n", 2);
+		group = current->group_num;
 		finding_paths(vars);
-		fd = forking(current, redirect_input(current, fd), vars, env);
-		current = skip_group(current);
+		fd = finding_redirs(current, redirect_input(current, fd), vars, env);
+		current = skip_group(group, vars);
 	}
 	i = 0;
 	while (i <= (vars->pid_count - 1))
 		waitpid(vars->pid[i++], &vars->status, 0);
+	// close(fd);
+	// free_tokens()
 }

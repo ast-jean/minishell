@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:17:42 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/12 14:03:02 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/12 14:33:04 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ t_token	*rm_redir(t_token *token, t_vars *vars)
 			token = token->next;
 	}
 	token = vars->token->first;
-	while (token->group_num != group)
+	while (token && token->group_num != group)
 		token = token->next;
 	// free(temp);
 	return (token);
