@@ -2,12 +2,10 @@
 ###-------------------------# VARIABLES ##-------------------------###
 NAME = minishell
 
-SRCS_FILES 		=	built_ins/cd.c						\
-					built_ins/echo.c					\
-					built_ins/pwd+env.c					\
-					built_ins/unset+export.c			\
+SRCS_FILES 		=	built_ins/cd_pwd.c					\
+					built_ins/unset_export_env_echo.c	\
 					execution/check_heredoc.c			\
-					execution/executing_simple_cmd.c	\
+					execution/exec_simp_cmd.c			\
 					execution/heredocs.c 				\
 					execution/minishell.c				\
 					execution/pipes.c					\
@@ -97,18 +95,18 @@ clean:
 	@$(MAKE) -sC include/libft clean
 	@rm -f *.o
 	@rm -rf $(OBJS_DIR)
-	@echo "MINISHELL	| STATUS: $(CYAN)OBJECTS	CLEANED$(END)"
+	@echo "MINISHELL	| $(CYAN)OBJECTS CLEANED$(END)"
 
 fclean:	clean
 	@$(MAKE) -sC include/libft fclean
 	@rm -rf $(NAME)
-	@echo "MINISHELL	| STATUS: $(BLUE)EXECUTABLE	CLEANED$(END)"
+	@echo "MINISHELL	| $(BLUE)EXECUTABLE CLEANED$(END)"
 
 leak:
 	$(LEAK)
 
 valgrind:
-	$(VALGRIND)
+	valgrind --track-fds=yes --track-origins=yes  --leak-check=full ./minishell
 
 re:	fclean all 
 	./$(NAME)
@@ -120,7 +118,7 @@ rew:
 	@rm -f *.o
 	@rm -rf $(OBJS_DIR)
 	@$(MAKE) -s $(NAME)
-	./$(NAME)
+# ./$(NAME)
 
 help:
 	@echo "Rules: all clean fclean re"
