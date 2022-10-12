@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:26:10 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/11 14:20:59 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/12 14:19:56 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,17 +107,21 @@ char	*check_var(char *line, t_vars *vars)
 	char	*var_name;
 	char	*var_value;
 	char	*newline;
-	// char	*temp;
 
 	newline = calloc(ft_strlen(line) + 1, sizeof(char));
 	newline = ft_strcpy(newline, line);
 	while (find_var_inline(newline))
 	{
+				printf("<><><><><><><><><><>\n");
 		var_name = save_varname(find_var_inline(newline) + 1);
+		printf("var_name =	>%s<\n", var_name);
 		var_value = ft_getenv(vars->env, var_name);
+		printf("var_value =	>%s<\n", var_value);
 		newline = add_varcontent(newline, var_name, var_value);
-		free(var_name);
-		free(var_value);
+		printf("newline =	>%s<\n", newline);
+				printf("<><><><><><><><><><>\n");
+		// free(var_name);
+		// free(var_value);
 	}
 	return (newline);
 }

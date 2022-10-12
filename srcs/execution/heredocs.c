@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:12:27 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/11 14:44:44 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/12 14:08:10 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*remove_quotes(char *str)
 		}
 		i++;
 	}
-	new[i] = '\0';
+	// new[i] = '\0';
 	// if (str)
 	// 	free(str);
 	return (new);
