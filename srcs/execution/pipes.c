@@ -101,12 +101,14 @@ void	actually_forking(t_token *current, t_vars *vars, char **env)
 				ft_putstr_fd(": cmd not found\n", 2);
 				exit(0);
 			}
+			else if (is_bi_nopipes(current, vars, env) == -1)
+				format_execve(vars, current);
 		}
-		format_execve(vars, current);
+		exit(0);
 	}
 }
 
-int	forking(t_token *current, int fdi, t_vars *vars, char **env)
+int	finding_redirs(t_token *current, int fdi, t_vars *vars, char **env)
 {
 	int	pipefd[2];
 
@@ -142,19 +144,20 @@ void	fd_catch(t_vars *vars, t_token *current, char **env)
 	vars->pid_count = 0;
 	finding_paths(vars);
 	group = current->group_num;
-	fd = forking(current, redirect_input(current, 0), vars, env);
+	fd = finding_redirs(current, redirect_input(current, 0), vars, env);
 	current = skip_group(group, vars);
-	// debug_print_tokens(vars);
-	// ft_putstr_fd("here!!!!!\n", 2);
 	i = 0;
 	while ((i++ < vars->pipe_count) && (vars->pid_count < 32766))
 	{
+		ft_putstr_fd("herreeee\n", 2);
 		group = current->group_num;
 		finding_paths(vars);
-		fd = forking(current, redirect_input(current, fd), vars, env);
+		fd = finding_redirs(current, redirect_input(current, fd), vars, env);
 		current = skip_group(group, vars);
 	}
 	i = 0;
 	while (i <= (vars->pid_count - 1))
 		waitpid(vars->pid[i++], &vars->status, 0);
+	// close(fd);
+	// free_tokens()
 }
