@@ -33,7 +33,7 @@ int	is_bi_nopipes(t_token *current, t_vars *vars, char **env)
 		ft_putstr_fd("exit\n", 2);
 		close_fds(vars->fdi, vars->fdo, 0);
 		quit_shell(vars);
-	}
+	} 
 	return (-1);
 }
 
