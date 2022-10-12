@@ -23,36 +23,36 @@ int	is_bi_nopipes(t_token *current, t_vars *vars, char **env)
 				|| !ft_strcmp(temp, "cd")
 				|| !ft_strcmp(temp, "exit")))
 			{
-				free(temp);
+				// free(temp);
 				return (-2);
 			}
-		free(temp);
+		// free(temp);
 		return (-1);
 	}
 	if (current && !ft_strcmp(temp, "export"))
 	{
-		free(temp);
+		// free(temp);
 		return (builtin_export(vars));
 	}
 	else if (current && !ft_strcmp(temp, "unset"))
 	{
-		free(temp);
+		// free(temp);
 		return (builtin_unset(vars));
 	}
 	else if (current && !ft_strcmp(temp, "cd"))
 	{
-		free(temp);
+		// free(temp);
 		return (builtin_cd(vars, env));
 	}
 	else if (current && !ft_strcmp(temp, "exit"))
 	{
-		free(temp);
+		// free(temp);
 
 		ft_putstr_fd("exit\n", 2);
 		close_fds(vars->fdi, vars->fdo, 0);
 		quit_shell(vars);
 	}
-		free(temp);
+		// free(temp);
 
 	return (-1);
 }
@@ -64,17 +64,17 @@ int	is_builtin(t_token *current, t_vars *vars)
 	temp = remove_quotes(current->cont);
 	if (current && !ft_strcmp(temp, "pwd"))
 	{
-		free(temp);
+		// free(temp);
 		return (builtin_pwd(vars));
 	}
 	else if (current && !ft_strcmp(temp, "env"))
 	{
-		free(temp);
+		// free(temp);
 		return (builtin_env(vars));
 	}
 	else if (current && !ft_strcmp(temp, "echo"))
 	{
-		free(temp);
+		// free(temp);
 		return (builtin_echo(current, vars));
 	}
 	return (-1);

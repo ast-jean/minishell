@@ -1,26 +1,8 @@
 # minishell
 Custom shell in C
 TODO:
-[X] Splitamary
-[X] check <<
-	[X] $Var within <<
-	[X] Signal ctrl-C close heredoc
-[X] Redirections
-	[X] <	rediriger l’entrée
-	[X] >	rediriger la sortie
-	[X] >>	rediriger la sortie en mode append
-[X] Pipes: looper les pipes (et ajouter dans le parsing)
 [ ] Gérer les Variables d'env $ (attention a juste "=")
 [ ] Gérer $?
-[X] Add $Vars and remove_quotes()
-[X] Créer les buitins
-	[X] echo
-	[X] cd
-	[X] export (no flag)	-started-
-	[X] unset (no flag)		-started-
-	[X] pwd (no flag)
-	[X] env (no flag)
-	[X] exit (no flag)
 [ ] General debugging
 [ ] Freeing
 	[ ] built_ins

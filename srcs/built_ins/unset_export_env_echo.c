@@ -6,12 +6,11 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:59 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/11 14:36:22 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/11 16:50:26 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-// NOTE: Built-ins 3/4 (Echo)
 
 int	builtin_unset(t_vars *vars)
 {
