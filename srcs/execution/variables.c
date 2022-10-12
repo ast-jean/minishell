@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:26:10 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/12 15:49:51 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/12 15:51:50 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,15 @@ char	*find_var_inline(char *line)
 	{	
 		if (*line == '\"')
 		{	
-			printf("char1 >%c< is %zu\n", *line, ft_strlen(line));
-
 			while (*line++ && *line != '\"')
 			{
 				if (*line == '$' && ft_isalnum(*(line + 1)))
-				{
-					printf("yes\n");
 					return ((char *)line);
-				}
 			}
-			printf("char2 >%c< is %zu\n", *line, ft_strlen(line));
 		}
 		if (*line == '\'')
 		{
-			line++;
-			while (*line && *line != '\'')
+			while (*line++ && *line != '\'')
 				line++;
 			if (!*line)
 				return (NULL);
