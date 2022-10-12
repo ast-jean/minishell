@@ -13,7 +13,7 @@ void	init_shell(t_vars *vars, char **env)
 
 
 // TOFIX : rename for check_token_type
-void	executing_command(char *line, t_vars *vars, char **env)
+void	parse_and_exec(char *line, t_vars *vars, char **env)
 {
 	if (ft_strlen(line) == 0)
 		return ;
@@ -79,7 +79,7 @@ int	main(int argc, char **argv, char **env)
 			quit_shell(&vars);
 		else if (ft_strcmp(line, "") != 0)
 			add_history(line);
-		executing_command(line, &vars, env);
+		parse_and_exec(line, &vars, env);
 		remove_tmp_files(&vars);
 	}
 	quit_shell(&vars);

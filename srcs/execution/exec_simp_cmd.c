@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executing_simple_cmd.c                             :+:      :+:    :+:   */
+/*   exec_simp_cmd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 12:59:02 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/07 14:47:35 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/11 10:22:47 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	finding_paths(t_vars *vars)
 	}
 	if (path_str == NULL)
 		return ;
-	if (vars->path_array != NULL)
-		free2d(vars->path_array);
+	// if (vars->path_array != NULL)
+	// 	free2d(vars->path_array);
 	vars->path_array = ft_split(path_str, ':');
 }
 
@@ -36,7 +36,7 @@ int	accessing(t_vars *vars, t_token *token)
 {
 	char	*cmd;
 	int		i;
-
+	
 	if (!token)
 		return (-1);
 	if (access(remove_quotes(token->cont), F_OK | X_OK) == 0)
