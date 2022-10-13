@@ -3,17 +3,14 @@ Custom shell in C
 TODO:
 [ ] Gérer les Variables d'env $ (attention a juste "=")
 [ ] Gérer $?
-<<<<<<< HEAD
-=======
 NEXT PHASE: 
->>>>>>> main
 [ ] General debugging
 [ ] Freeing
 	[ ] built_ins
 	[ ] execution
 	[ ] parsing
 [ ] Norminette
-	[X] built_ins
+	[ ] built_ins
 	[ ] execution
 	[ ] parsing
 TOKNOW: 
