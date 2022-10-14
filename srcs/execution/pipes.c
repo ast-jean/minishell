@@ -127,7 +127,7 @@ int	finding_redirs(t_token *current, int fdi, t_vars *vars, char **env)
 		write(pipefd[1], "", 0);
 		return (close_fds(vars->fdi, vars->fdo, pipefd[0]));
 	}
-	if (current && !is_bi_nopipes(current, vars, env))
+	if (current && is_bi_nopipes(current, vars, env) == 1)
 		return (close_fds(vars->fdi, vars->fdo, pipefd[0]));
 	else
 		actually_forking(current, vars, env);
@@ -149,7 +149,7 @@ void	fd_catch(t_vars *vars, t_token *current, char **env)
 	i = 0;
 	while ((i++ < vars->pipe_count) && (vars->pid_count < 32766))
 	{
-		ft_putstr_fd("herreeee\n", 2);
+		// ft_putstr_fd("herreeee\n", 2);
 		group = current->group_num;
 		finding_paths(vars);
 		fd = finding_redirs(current, redirect_input(current, fd), vars, env);
