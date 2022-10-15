@@ -2,7 +2,7 @@
 Custom shell in C
 TODO:
 [ ] Gérer les Variables d'env $ (attention a juste "=")
-[ ] Gérer $?
+[ ] Gérer $? - WIP
 NEXT PHASE: 
 [ ] General debugging
 [ ] Freeing
@@ -21,9 +21,7 @@ TOKNOW:
  TOFIX  
 	- exit with exit code
 	- Added Include/readline/ so people dont have to download on brew (we should link it in minishell.h)
-	- $Variables
-		- $>$USER"$HOME" $USER  ->  out: HOMEjean ast-jean
 	- DANS CD : $>pwd | cd srcs
 	- in:	$>cat<.s -> out:	Segmentation fault: 11
-	- CD : weird error : "cd minishell" gives error messahe when minishell/ does exist and command does its job anyways
+	- CD : weird error : "cd minishell" gives error message when minishell/ does exist and command does its job anyways
 	- REDIRECTIONS : when one infile and one outfile not separated by pipe, segfaults
