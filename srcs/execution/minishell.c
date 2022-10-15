@@ -6,6 +6,7 @@ void	init_shell(t_vars *vars, char **env)
 	vars->oldpwd = getenv("OLDPWD");
 	vars->path_array = NULL;
 	vars->token = NULL;
+	vars->last_output = 0;
 	printf("*******************************\n");
 	printf("*          MINISHELL          *\n");
 	printf("*******************************\n");
@@ -74,12 +75,17 @@ int	main(int argc, char **argv, char **env)
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
+
 		line = readline(prompt);
 		if (!line)
-			quit_shell(&vars);
+			{quit_shell(&vars);
+			printf("errno1 = %d\n", errno);}
 		else if (ft_strcmp(line, "") != 0)
 			add_history(line);
+		printf("errno2 = %d\n", errno);
+				printf("----hello----\n");
 		parse_and_exec(line, &vars, env);
+				printf("Check = %d\n", vars.last_output);
 		remove_tmp_files(&vars);
 	}
 	quit_shell(&vars);

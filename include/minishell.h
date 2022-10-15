@@ -5,6 +5,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
+# include <errno.h>
 
 // STRUCTS
 struct	s_vars;
@@ -37,6 +38,7 @@ typedef struct s_vars
 	int		fdo;
 	int		status;
 	char	*cd_oldpwd;
+	int		last_output;
 }	t_vars;
 
 // FUNCTIONS (SELON FILENAME)----------------------

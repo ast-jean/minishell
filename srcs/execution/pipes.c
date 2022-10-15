@@ -103,7 +103,8 @@ void	format_execve(t_vars *vars, t_token *token)
 	}
 	vars->av[i] = NULL;
 	execve(vars->path, vars->av, vars->env);
-	exit(0);
+printf("errno right after execve= >%d<\n", errno);
+	// exit(0);
 }
 
 t_token	*skip_group(int group, t_vars *vars)
@@ -131,13 +132,17 @@ void	actually_forking(t_token *current, t_vars *vars, char **env)
 			{
 				ft_putstr_fd(remove_quotes(current->cont), 2);
 				ft_putstr_fd(": cmd not found\n", 2);
-				exit(0);
+				vars->last_output = 1;
+				printf("output CHILD= >%d<\n", vars->last_output);
+				exit(EXIT_FAILURE);
 			}
 			else if (is_bi_nopipes(current, vars, env) == -1)
 				format_execve(vars, current);
 		}
 		exit(0);
 	}
+	waitpid(vars->pid[vars->pid_count], &vars->status, 0);
+					printf("output PARENT= >%d<\n", vars->last_output);
 }
 
 int	finding_redirs(t_token *current, int fdi, t_vars *vars, char **env)
@@ -162,7 +167,12 @@ int	finding_redirs(t_token *current, int fdi, t_vars *vars, char **env)
 	if (current && !is_bi_nopipes(current, vars, env))
 		return (close_fds(vars->fdi, vars->fdo, pipefd[0]));
 	else
+	{
 		actually_forking(current, vars, env);
+		printf("errno execvedsa= >%d<\n", errno);
+
+	}
+	printf("errno = >%d<\n", errno);
 	return (close_fds(vars->fdi, vars->fdo, pipefd[0]));
 }
 
@@ -188,8 +198,16 @@ void	fd_catch(t_vars *vars, t_token *current, char **env)
 		current = skip_group(group, vars);
 	}
 	i = 0;
+		printf("output= >%d<\n", vars->last_output);
+
 	while (i <= (vars->pid_count - 1))
+	{
 		waitpid(vars->pid[i++], &vars->status, 0);
+		printf("output WOWOWOWOW= >%d<\n", vars->last_output);
+		printf("errno WOWOWOWOW= >%d<\n", errno);
+
+	}
+	
 	// close(fd);
 	// free_tokens()
 }
