@@ -23,8 +23,6 @@ void	parse_and_exec(char *line, t_vars *vars, char **env)
 		
 		if(!check_here(vars))
 			return ;
-// printf("---after checks---\n");
-// /*debug*/debug_print_tokens(vars);
 		if (parsing_pipes(vars) == -1)
 			return ;
 		fd_catch(vars, vars->token->first, env);
@@ -78,14 +76,10 @@ int	main(int argc, char **argv, char **env)
 
 		line = readline(prompt);
 		if (!line)
-			{quit_shell(&vars);
-			printf("errno1 = %d\n", errno);}
+			quit_shell(&vars);
 		else if (ft_strcmp(line, "") != 0)
 			add_history(line);
-		printf("errno2 = %d\n", errno);
-				printf("----hello----\n");
 		parse_and_exec(line, &vars, env);
-				printf("Check = %d\n", vars.last_output);
 		remove_tmp_files(&vars);
 	}
 	quit_shell(&vars);

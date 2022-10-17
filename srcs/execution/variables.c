@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:26:10 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/14 13:11:29 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/17 16:03:29 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,21 +114,22 @@ char	*check_var(char *line, t_vars *vars)
 	newline = ft_strcpy(newline, line);
 	while (find_var_inline(newline))
 	{
-		printf("<><><><><><><><><><>\n");
+		// printf("<><><><><><><><><><>\n");
 		var_name = save_varname(find_var_inline(newline) + 1);
-		printf("var_name =	>%s<\n", var_name);
+		// printf("var_name =	>%s<\n", var_name);
 		if (!ft_strcmp(var_name, "?"))
 			var_value = ft_itoa(vars->last_output);
 		else
 			var_value = ft_getenv(vars->env, var_name);
-		printf("var_value =	>%s<\n", var_value);
+		// printf("var_value =	>%s<\n", var_value);
 		newline = add_varcontent(newline, var_name, var_value);
-		printf("errno = %d\n", errno);
-		printf("last_output = %d\n", vars->last_output);
-		printf("newline =	>%s<\n", newline);
-		printf("<><><><><><><><><><>\n");
+		// printf("errno = %d\n", errno);
+		// printf("last_output = %d\n", vars->last_output);
+		// printf("newline =	>%s<\n", newline);
+		// printf("<><><><><><><><><><>\n");
 		// free(var_name);
 		// free(var_value);
 	}
+
 	return (newline);
 }

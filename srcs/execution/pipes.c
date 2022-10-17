@@ -10,73 +10,41 @@ int	close_fds(int fdi, int fdo, int to_return)
 		close(fdo);
 	return (to_return);
 }
-
 int	is_bi_nopipes(t_token *current, t_vars *vars, char **env)
 {
-	char	*temp;
-
-	temp = remove_quotes(current->cont);
 	if (vars->pipe_count > 0)
 	{
-		if (current && (!ft_strcmp(temp, "export")
-				|| !ft_strcmp(temp, "unset")
-				|| !ft_strcmp(temp, "cd")
-				|| !ft_strcmp(temp, "exit")))
-			{
-				// free(temp);
+		if (current && (!ft_strcmp(remove_quotes(current->cont), "export")
+				|| !ft_strcmp(remove_quotes(current->cont), "unset")
+				|| !ft_strcmp(remove_quotes(current->cont), "cd")
+				|| !ft_strcmp(remove_quotes(current->cont), "exit")))
 				return (-2);
-			}
-		// free(temp);
 		return (-1);
 	}
-	if (current && !ft_strcmp(temp, "export"))
-	{
-		// free(temp);
+	if (current && !ft_strcmp(remove_quotes(current->cont), "export"))
 		return (builtin_export(vars));
-	}
-	else if (current && !ft_strcmp(temp, "unset"))
-	{
-		// free(temp);
+	else if (current && !ft_strcmp(remove_quotes(current->cont), "unset"))
 		return (builtin_unset(vars));
-	}
-	else if (current && !ft_strcmp(temp, "cd"))
-	{
-		// free(temp);
+	else if (current && !ft_strcmp(remove_quotes(current->cont), "cd"))
 		return (builtin_cd(vars, env));
-	}
-	else if (current && !ft_strcmp(temp, "exit"))
+	else if (current && !ft_strcmp(remove_quotes(current->cont), "exit"))
 	{
-		// free(temp);
-
-		ft_putstr_fd("exit\n", 2);
 		close_fds(vars->fdi, vars->fdo, 0);
 		quit_shell(vars);
 	}
-		// free(temp);
 
 	return (-1);
 }
 
+
 int	is_builtin(t_token *current, t_vars *vars)
 {
-	char	*temp;
-
-	temp = remove_quotes(current->cont);
-	if (current && !ft_strcmp(temp, "pwd"))
-	{
-		// free(temp);
+	if (current && !ft_strcmp(remove_quotes(current->cont), "pwd"))
 		return (builtin_pwd(vars));
-	}
-	else if (current && !ft_strcmp(temp, "env"))
-	{
-		// free(temp);
+	else if (current && !ft_strcmp(remove_quotes(current->cont), "env"))
 		return (builtin_env(vars));
-	}
-	else if (current && !ft_strcmp(temp, "echo"))
-	{
-		// free(temp);
+	else if (current && !ft_strcmp(remove_quotes(current->cont), "echo"))
 		return (builtin_echo(current, vars));
-	}
 	return (-1);
 }
 
@@ -103,8 +71,7 @@ void	format_execve(t_vars *vars, t_token *token)
 	}
 	vars->av[i] = NULL;
 	execve(vars->path, vars->av, vars->env);
-printf("errno right after execve= >%d<\n", errno);
-	// exit(0);
+	exit(errno);
 }
 
 t_token	*skip_group(int group, t_vars *vars)
@@ -132,17 +99,13 @@ void	actually_forking(t_token *current, t_vars *vars, char **env)
 			{
 				ft_putstr_fd(remove_quotes(current->cont), 2);
 				ft_putstr_fd(": cmd not found\n", 2);
-				vars->last_output = 1;
-				printf("output CHILD= >%d<\n", vars->last_output);
 				exit(EXIT_FAILURE);
 			}
 			else if (is_bi_nopipes(current, vars, env) == -1)
 				format_execve(vars, current);
 		}
-		exit(0);
+		exit(EXIT_FAILURE);
 	}
-	waitpid(vars->pid[vars->pid_count], &vars->status, 0);
-					printf("output PARENT= >%d<\n", vars->last_output);
 }
 
 int	finding_redirs(t_token *current, int fdi, t_vars *vars, char **env)
@@ -164,15 +127,15 @@ int	finding_redirs(t_token *current, int fdi, t_vars *vars, char **env)
 		write(pipefd[1], "", 0);
 		return (close_fds(vars->fdi, vars->fdo, pipefd[0]));
 	}
-	if (current && !is_bi_nopipes(current, vars, env))
+	if (current && is_bi_nopipes(current, vars, env) == 1)
 		return (close_fds(vars->fdi, vars->fdo, pipefd[0]));
 	else
 	{
 		actually_forking(current, vars, env);
-		printf("errno execvedsa= >%d<\n", errno);
+		// printf("errno execve= >%d<\n", errno);
 
 	}
-	printf("errno = >%d<\n", errno);
+	// printf("errno = >%d<\n", errno);
 	return (close_fds(vars->fdi, vars->fdo, pipefd[0]));
 }
 
@@ -191,22 +154,15 @@ void	fd_catch(t_vars *vars, t_token *current, char **env)
 	i = 0;
 	while ((i++ < vars->pipe_count) && (vars->pid_count < 32766))
 	{
-		ft_putstr_fd("herreeee\n", 2);
 		group = current->group_num;
 		finding_paths(vars);
 		fd = finding_redirs(current, redirect_input(current, fd), vars, env);
 		current = skip_group(group, vars);
 	}
 	i = 0;
-		printf("output= >%d<\n", vars->last_output);
-
 	while (i <= (vars->pid_count - 1))
-	{
 		waitpid(vars->pid[i++], &vars->status, 0);
-		printf("output WOWOWOWOW= >%d<\n", vars->last_output);
-		printf("errno WOWOWOWOW= >%d<\n", errno);
-
-	}
+	vars->last_output = vars->status / 256;
 	
 	// close(fd);
 	// free_tokens()

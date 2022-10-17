@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:12:27 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/12 14:08:10 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/17 15:27:52 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ char	*remove_quotes(char *str)
 	char	quote;
 	char	*new;
 
-	new = calloc(ft_strlen(str) + 1, sizeof(char));
-	new = ft_strcpy(new, str);
+	if (!str)
+		return (NULL);
+	new = str;
 	i = 0;
 	while (new && new[i])
 	{
@@ -45,9 +46,6 @@ char	*remove_quotes(char *str)
 		}
 		i++;
 	}
-	// new[i] = '\0';
-	// if (str)
-	// 	free(str);
 	return (new);
 }
 

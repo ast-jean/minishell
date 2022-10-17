@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:59 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/15 14:00:21 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/17 16:04:08 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int	builtin_echo(t_token *current, t_vars *vars)
 	gn = current->group_num;
 	n = false;
 	current = current->next;
+	vars->last_output = 0;
 	while (current && is_n(remove_quotes(current->cont)))
 	{
 		n = true;
