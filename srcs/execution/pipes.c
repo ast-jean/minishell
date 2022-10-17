@@ -30,7 +30,7 @@ int	is_bi_nopipes(t_token *current, t_vars *vars, char **env)
 		return (builtin_cd(vars, env));
 	else if (current && !ft_strcmp(remove_quotes(current->cont), "exit"))
 	{
-		ft_putstr_fd("exit\n", 2);
+		// ft_putstr_fd("exit\n", 2);
 		close_fds(vars->fdi, vars->fdo, 0);
 		quit_shell(vars);
 	}
