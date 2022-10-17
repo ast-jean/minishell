@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:36 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/17 16:07:44 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/17 16:09:36 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,8 @@ int	builtin_cd(t_vars *vars, char **env)
 	}
 	else if (token && chdir(token->cont) != 0)
 	{
-		dprintf(2, "cd: no such file or directory: %s\n");
 		vars->last_output = 1;
-		return (token->cont);
+		return (dprintf(2, "cd: no such file or directory: %s\n", token->cont));
 	}
 	free2d(vars->env);
 	vars->env = ft_arraycpy(env);
