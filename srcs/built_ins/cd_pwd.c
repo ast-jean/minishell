@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:36 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/12 14:29:07 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/15 14:02:02 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	builtin_pwd(t_vars *vars)
 	pwd = ft_arraysrch(vars->env, "PWD=") + 4;
 	ft_putstr_fd(pwd, 1);
 	ft_putstr_fd("\n", 1);
+	vars->last_output = 0;
 	return (1);
 }
 
