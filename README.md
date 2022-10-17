@@ -25,3 +25,18 @@ TOKNOW:
 	- in:	$>cat<.s -> out:	Segmentation fault: 11
 	- CD : weird error : "cd minishell" gives error message when minishell/ does exist and command does its job anyways
 	- REDIRECTIONS : when one infile and one outfile not separated by pipe, segfaults
+
+
+
+
+ LOG:
+
+ Tests pour exam (what actually doenst work)
+ - make -n
+ - if command is only spaces and/or tabs
+ - anything with %? (WIP, ik ik)
+ - ctrl + C displays " $>^C " on the previous lign
+ - ctrl + C after a blocking command prints 2 x $>
+ - ctrl + \ after a blocking command (should quit the command?)
+ - cd sdfsdfsdf still sends 2 error reports
+ 
