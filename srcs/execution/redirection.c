@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:17:42 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/05 13:21:10 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/10/12 12:12:20 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ t_token	*rm_redir(t_token *token, t_vars *vars)
 			token = token->next;
 	}
 	token = vars->token->first;
-	while (token->group_num != group)
+	while (token && token->group_num != group)
 		token = token->next;
 	return (token);
 }

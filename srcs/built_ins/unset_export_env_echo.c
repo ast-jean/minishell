@@ -6,7 +6,7 @@
 /*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:59 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/10 11:17:32 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/10/14 11:43:14 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,8 @@ int	builtin_echo(t_token *current, t_vars *vars)
 		current = current->next;
 	}
 	if (n == true)
-		return (0);
+		return (1);
 	else
 		ft_putstr_fd("\n", 1);
-	return (0);
+	return (1);
 }

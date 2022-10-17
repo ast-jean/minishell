@@ -2,7 +2,7 @@
 Custom shell in C
 TODO:
 [ ] Gérer les Variables d'env $ (attention a juste "=")
-[ ] Gérer $?
+[ ] Gérer $? - WIP
 NEXT PHASE: 
 [ ] General debugging
 [ ] Freeing
