@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredocs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:12:27 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/17 11:04:59 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/17 14:22:00 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ char	*remove_quotes(char *str)
 
 	if (!str)
 		return (NULL);
-	// new = calloc(ft_strlen(str) + 1, sizeof(char));
 	new = str;
 	i = 0;
 	while (new && new[i])
@@ -47,8 +46,6 @@ char	*remove_quotes(char *str)
 		}
 		i++;
 	}
-	// if (str)
-	// free(new);
 	return (new);
 }
 
