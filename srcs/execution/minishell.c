@@ -27,6 +27,9 @@ void	parse_and_exec(char *line, t_vars *vars, char **env)
 		if (parsing_pipes(vars) == -1)
 			return ;
 		fd_catch(vars, vars->token->first, env);
+		// if (vars->path_array)
+		// 	free2d(vars->path_array);
+		// free_tokens(vars);
 	}
 }
 

@@ -7,6 +7,7 @@ void	free_tokens(t_vars *vars)
 	temp = vars->token->first;
 	while (vars && temp)
 	{
+		free(temp->cont);
 		temp = temp->next;
 		free((temp->prev));
 	}
