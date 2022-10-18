@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset_export_env_echo.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:59 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/14 11:43:14 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/10/18 12:39:05 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,7 @@ int	builtin_export(t_vars *vars)
 
 int	builtin_env(t_vars *vars)
 {
-	if (vars->env == NULL)
-		dprintf(2, "QUELQUE CHOSE\n");
-	else
+	if (vars->env)
 		ft_arrayprint(vars->env);
 	return (1);
 }
