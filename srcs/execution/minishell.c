@@ -31,12 +31,26 @@ void	parse_and_exec(char *line, t_vars *vars, char **env)
 
 void	handler(int sig)
 {
-	if (sig == SIGINT)
+	int	pid;
+
+	pid = getpid();
+	printf("\npid = %d\n", pid);
+	if (pid > 0)	
 	{
-		ft_putstr_fd("\n", 2);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
+		if (sig == SIGINT)
+		{
+			ft_putstr_fd("\n", 2);
+			rl_on_new_line();
+			rl_replace_line("", 0);
+			rl_redisplay();
+		}
+	}
+	else
+	{
+		if (sig == SIGINT)
+		{
+			ft_putstr_fd("----TEST----", 2);
+		}
 	}
 }
 
@@ -73,7 +87,8 @@ int	main(int argc, char **argv, char **env)
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
-
+		// signal(SIGINT, handler);
+		// signal(SIGQUIT, SIG_IGN);
 		line = readline(prompt);
 		if (!line)
 			quit_shell(&vars);

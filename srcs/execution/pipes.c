@@ -2,6 +2,23 @@
 
 // NOTE: CREATES PIPES
 
+
+void	handler_exec(int sig)
+{
+	int	pid;
+
+	pid = getpid();
+	// printf("pid = %d\n", pid);
+	if (sig == SIGINT)
+	{
+		// ft_putstr_fd("\rtest\n$>", 2);
+		printf("TEST\n");
+				// exit(EXIT_FAILURE);
+		// rl_on_new_line();
+		// rl_replace_line("", 0);
+		// rl_redisplay();
+	}
+}
 int	close_fds(int fdi, int fdo, int to_return)
 {
 	if (fdi != 0)
@@ -89,6 +106,9 @@ void	actually_forking(t_token *current, t_vars *vars, char **env)
 	vars->pid[vars->pid_count] = fork();
 	if (vars->pid[vars->pid_count++] == 0)
 	{
+		// signal(SIGINT, 	handler_exec);
+		// signal(SIGINT, SIG_IGN);
+		// signal(SIGQUIT, SIG_IGN);
 		dup2(vars->fdi, 0);
 		dup2(vars->fdo, 1);
 		close_fds(vars->fdi, vars->fdo, 0);
@@ -130,12 +150,7 @@ int	finding_redirs(t_token *current, int fdi, t_vars *vars, char **env)
 	if (current && is_bi_nopipes(current, vars, env) == 1)
 		return (close_fds(vars->fdi, vars->fdo, pipefd[0]));
 	else
-	{
 		actually_forking(current, vars, env);
-		// printf("errno execve= >%d<\n", errno);
-
-	}
-	// printf("errno = >%d<\n", errno);
 	return (close_fds(vars->fdi, vars->fdo, pipefd[0]));
 }
 
