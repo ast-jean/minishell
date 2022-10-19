@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset_export_env_echo.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:59 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/18 12:39:05 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/19 14:53:50 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,16 @@ int	builtin_export(t_vars *vars)
 {
 	t_token	*token;
 	char	*content;
+	int		i;
 
 	token = vars->token->first;
+	i = 0;
+	if (token && !token->next)
+	{
+		while (vars->env[i] != NULL)
+			printf("declare -x %s\n", vars->env[i++]);
+		return (1);
+	}
 	content = NULL;
 	while (token && token->next)
 	{
