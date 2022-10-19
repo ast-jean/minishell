@@ -30,7 +30,7 @@ int	is_bi_nopipes(t_token *current, t_vars *vars, char **env)
 		return (builtin_cd(vars, env));
 	else if (current && !ft_strcmp(remove_quotes(current->cont), "exit"))
 	{
-		ft_putstr_fd("exit\n", 2);
+		// ft_putstr_fd("exit\n", 2);
 		close_fds(vars->fdi, vars->fdo, 0);
 		quit_shell(vars);
 	}
@@ -101,7 +101,7 @@ void	actually_forking(t_token *current, t_vars *vars, char **env)
 				ft_putstr_fd(": cmd not found\n", 2);
 				exit(0);
 			}
-			else if (is_bi_nopipes(current, vars, env) == -1)
+			else
 				format_execve(vars, current);
 		}
 		exit(0);
@@ -113,7 +113,7 @@ int	finding_redirs(t_token *current, int fdi, t_vars *vars, char **env)
 	int	pipefd[2];
 
 	vars->fdi = fdi;
-	if (current->group_num < (vars->pipe_count + 1))
+	if (current->group_num < (vars->pipe_count + 1) && vars->pipe_count > 0)
 	{
 		pipe(pipefd);
 		vars->fdo = redirect_output(current, pipefd[1]);
@@ -127,7 +127,7 @@ int	finding_redirs(t_token *current, int fdi, t_vars *vars, char **env)
 		write(pipefd[1], "", 0);
 		return (close_fds(vars->fdi, vars->fdo, pipefd[0]));
 	}
-	if (current && is_bi_nopipes(current, vars, env) == 1)
+	if (current && is_bi_nopipes(current, vars, env) >= 1)
 		return (close_fds(vars->fdi, vars->fdo, pipefd[0]));
 	else
 		actually_forking(current, vars, env);
@@ -142,6 +142,7 @@ void	fd_catch(t_vars *vars, t_token *current, char **env)
 	int	group;
 
 	vars->pid_count = 0;
+	// free2d(vars->path_array);
 	finding_paths(vars);
 	group = current->group_num;
 	fd = finding_redirs(current, redirect_input(current, 0), vars, env);
@@ -158,6 +159,9 @@ void	fd_catch(t_vars *vars, t_token *current, char **env)
 	i = 0;
 	while (i <= (vars->pid_count - 1))
 		waitpid(vars->pid[i++], &vars->status, 0);
-	// close(fd);
-	// free_tokens()
+	if (vars->pipe_count > 0 && fd > 2)
+		close(fd);
+		// free_tokens()
 }
+
+// some fds not getting closed for some reason

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_token.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 12:51:20 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/06 15:29:26 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/19 09:19:34 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int	creating_tokens(char *line, t_vars *vars)
 	split = tokenize(line);
 	if (!split)
 	{
-		ft_putstr_fd("minishell: syntax error missing quote\n", 2);
-		return (0);
+		ft_putstr_fd("minishell: wrong input or missing quote\n", 2);
+		return (-1);
 	}
 	vars->token = malloc(sizeof(t_token));
 	current = vars->token;

@@ -7,6 +7,7 @@ void	free_tokens(t_vars *vars)
 	temp = vars->token->first;
 	while (vars && temp)
 	{
+		free(temp->cont);
 		temp = temp->next;
 		free((temp->prev));
 	}
@@ -14,6 +15,7 @@ void	free_tokens(t_vars *vars)
 
 void	quit_shell(t_vars *vars)
 {
+	ft_putstr_fd("exit\n", 2);
 	// t_token *temp;
 	// int	i = 0;
 	// (void)vars;
