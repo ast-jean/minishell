@@ -23,7 +23,6 @@ TOKNOW:
 	- Added Include/readline/ so people dont have to download on brew (we should link it in minishell.h)
 	- DANS CD : $>pwd | cd srcs
 	- in:	$>cat<.s -> out:	Segmentation fault: 11
-	- CD : weird error : "cd minishell" gives error message when minishell/ does exist and command does its job anyways
 	- REDIRECTIONS : when one infile and one outfile not separated by pipe, segfaults
 
 
@@ -32,15 +31,14 @@ TOKNOW:
  LOG:
 
  Tests pour exam (what actually doesnt work)
- - if command is only spaces and/or tabs
+ - if command is only spaces and/or tabs [X]
  - anything with %? (WIP, ik ik)
- - ctrl + C displays " $>^C " on the previous lign
- - ctrl + C after a blocking command prints 2 x $>
- - ctrl + \ after a blocking command (should quit the command?)
- - cd sdfsdfsdf still sends 2 error reports
- 
- - If PATH is unset, cmds still work
- - "cat | " crashes (empty pipes)
+ - ctrl + C displays " $>^C " on the previous line -> more like a feature
+ - ctrl + C after a blocking (hanging) command prints 2 x $> 
+ - ctrl + \ after a blocking command (should quit a hanging command but should never quit shell)
+ - cd sdfsdfsdf still sends 2 error reports [X]
+ - If PATH is unset, cmds still work [X]
+ - "cat | " crashes (empty pipes) [X]
 
 
 
