@@ -24,7 +24,7 @@ TOKNOW:
 	- DANS CD : $>pwd | cd srcs
 	- in:	$>cat<.s -> out:	Segmentation fault: 11
 	- REDIRECTIONS : when one infile and one outfile not separated by pipe, segfaults
-
+	- "echo '"
 
 
 
@@ -62,7 +62,7 @@ Use 'make' then execute './minishell' to start the program. You may use differen
 
 Commands like 'cat', 'ls', 'grep', 'wc', etc. can be used to test the project.<br>
 Single quotes and double quotes works the same as bash.<br>
-Redirections ('<', '>', '>>', '<<') and pipes ('|') work as well.<br>
+Redirections ('<', '>', '<<', '>>') and pipes ('|') work as well.<br>
 Built-ins were also made from scratch (cd, echo, env, export, exit, pwd, unset).<br>
 Ctrl+C, Ctrl+D and Ctrl+\ are implemented the same way as bash.<br>
 
