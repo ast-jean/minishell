@@ -66,8 +66,8 @@ CFLAGS 		= -g -Wall -Wextra -Werror
 ### Autres Fonctions ###
 NORMINETTE 	= norminette
 ###------------------------## LEAK CHECK ##------------------------###
-LEAK = leaks -q --atExit -- ./minishell
-VALGRING = valgrind --track-fds=yes --track-origins=yes  --leak-check=full ./minishell
+#LEAK = leaks -q --atExit -- ./minishell
+#VALGRING = valgrind --track-fds=yes --track-origins=yes  --leak-check=full ./minishell
 ###--------------------------## REGLES ##--------------------------###
 all: $(NAME)
 
@@ -81,6 +81,7 @@ $(OBJS_DIR)%.o : $(SRCS_DIR)%.c
 # @echo "$(CLEAR_LINE)$(SELECTED)MINISHELL$(END)"
 	@echo "$(CURSOR_UP_1)$(CLEAR_LINE)Compiling $<"
 	@$(CC) -I ~/.brew/opt/readline/include -I /usr/local/opt/readline/include $(CFLAGS) -c $< -o $@
+
 
 libft:
 	@mkdir -p .tmp
@@ -102,11 +103,12 @@ fclean:	clean
 	@rm -rf $(NAME)
 	@echo "MINISHELL	| $(BLUE)EXECUTABLE CLEANED$(END)"
 
-leak:
-	$(LEAK)
+# leak:
+# 	$(LEAK)
 
-valgrind:
-	valgrind --track-fds=yes --track-origins=yes  --leak-check=full ./minishell
+valgrind: $(NAME)
+	valgrind --suppressions=ignore_rdl_leaks.txt --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes ./minishell
+	
 
 re:	fclean all 
 	./$(NAME)

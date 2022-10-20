@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:59 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/17 16:04:08 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/18 14:51:37 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,7 @@ int	builtin_export(t_vars *vars)
 
 int	builtin_env(t_vars *vars)
 {
-	if (vars->env == NULL)
-		dprintf(2, "QUELQUE CHOSE\n");
-	else
+	if (vars->env)
 		ft_arrayprint(vars->env);
 	return (1);
 }

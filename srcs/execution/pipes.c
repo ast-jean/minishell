@@ -12,7 +12,7 @@ void	handler_exec(int sig)
 	if (sig == SIGINT)
 	{
 		// ft_putstr_fd("\rtest\n$>", 2);
-		printf("TEST\n");
+		// printf("TEST\n");
 				// exit(EXIT_FAILURE);
 		// rl_on_new_line();
 		// rl_replace_line("", 0);
@@ -121,7 +121,7 @@ void	actually_forking(t_token *current, t_vars *vars, char **env)
 				ft_putstr_fd(": cmd not found\n", 2);
 				exit(EXIT_FAILURE);
 			}
-			else if (is_bi_nopipes(current, vars, env) == -1)
+			else
 				format_execve(vars, current);
 		}
 		exit(EXIT_FAILURE);
@@ -162,6 +162,7 @@ void	fd_catch(t_vars *vars, t_token *current, char **env)
 	int	group;
 
 	vars->pid_count = 0;
+	// free2d(vars->path_array);
 	finding_paths(vars);
 	group = current->group_num;
 	fd = finding_redirs(current, redirect_input(current, 0), vars, env);
@@ -176,9 +177,20 @@ void	fd_catch(t_vars *vars, t_token *current, char **env)
 	}
 	i = 0;
 	while (i <= (vars->pid_count - 1))
+	{
+		printf("vars->status bef= %d\n",vars->status );
+
 		waitpid(vars->pid[i++], &vars->status, 0);
-	vars->last_output = vars->status / 256;
-	
-	// close(fd);
-	// free_tokens()
+		printf("vars->status = %d\n",vars->status );
+		if (vars->status)
+			{vars->last_output = vars->status / 256;
+					printf("vars->last_output = %d\n",vars->last_output);}
+		else
+			vars->last_output = 0;
+	}
+	if (vars->pipe_count > 0 && fd > 2)
+		close(fd);
+		// free_tokens()
 }
+
+// some fds not getting closed for some reason

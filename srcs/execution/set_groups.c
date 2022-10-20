@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_groups.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:22:59 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/05 13:23:01 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/10/18 12:15:26 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,17 @@ int	parsing_pipes(t_vars *vars)
 
 	cpy = vars->token->first;
 	if (cpy->cont[0] == '|')
-		parsing_error();
+		return (parsing_error());
 	while (cpy->next)
 	{
 		if ((ft_strcmp(cpy->cont, "|") == 0
 				&& ft_strcmp(cpy->next->cont, "|") == 0))
-			parsing_error();
+			return (parsing_error());
 		else if (cpy->cont[0] == '|' && cpy->cont[1] == '|')
-			parsing_error();
+			return (parsing_error());
 		cpy = cpy->next;
 	}
 	if (init_groups(vars) == -1)
-		parsing_error();
+		return (parsing_error());
 	return (0);
 }
