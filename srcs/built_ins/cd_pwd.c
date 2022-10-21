@@ -6,7 +6,7 @@
 /*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:36 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/12 14:29:07 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/19 10:46:44 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ void	changing_oldpwd(t_vars *vars, char *oldpwd)
 	if (o != -1)
 		vars->env[o] = oldpwd;
 	else
+	{	
 		ft_arrayadd(vars->env, ft_strjoin("OLDPWD=", vars->cd_oldpwd));
+	}
 }
 
 void	changing_pwd(t_vars *vars)
