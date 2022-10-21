@@ -39,7 +39,7 @@ typedef struct s_vars
 	char	*cd_oldpwd;
 }	t_vars;
 
-// FUNCTIONS (SELON FILENAME)----------------------
+// FONCTIONS (SELON FILENAME)----------------------
 
 // NOTE: EXECUTION
 
@@ -124,6 +124,7 @@ int		cnt_delims(char *line, char *delims);
 // CD_PWD.C
 int		builtin_cd(t_vars *vars, char **env);
 int		builtin_pwd(t_vars *vars);
+
 // EXPORT_UNSET_EV_ECHO.C
 int		builtin_env(t_vars *vars);
 int		builtin_unset(t_vars *vars);
