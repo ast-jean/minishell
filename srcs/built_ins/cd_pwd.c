@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:36 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/17 10:49:54 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/10/21 12:44:56 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ void	changing_oldpwd(t_vars *vars, char *oldpwd)
 	if (o != -1)
 		vars->env[o] = oldpwd;
 	else
+	{	
 		ft_arrayadd(vars->env, ft_strjoin("OLDPWD=", vars->cd_oldpwd));
+	}
 }
 
 void	changing_pwd(t_vars *vars)

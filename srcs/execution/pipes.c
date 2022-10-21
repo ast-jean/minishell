@@ -11,6 +11,16 @@ int	close_fds(int fdi, int fdo, int to_return)
 	return (to_return);
 }
 
+t_token	*skip_group(int group, t_vars *vars)
+{
+	t_token *current;
+
+	current = vars->token->first;
+	while (current && current->group_num <= group)
+		current = remove_token(current, vars);
+	return (current);
+}
+
 int	is_bi_nopipes(t_token *current, t_vars *vars, char **env)
 {
 	if (vars->pipe_count > 0)
@@ -32,6 +42,7 @@ int	is_bi_nopipes(t_token *current, t_vars *vars, char **env)
 	{
 		// ft_putstr_fd("exit\n", 2);
 		close_fds(vars->fdi, vars->fdo, 0);
+		current = skip_group(current->group_num, vars);
 		quit_shell(vars);
 	}
 	return (-1);
@@ -71,17 +82,9 @@ void	format_execve(t_vars *vars, t_token *token)
 	}
 	vars->av[i] = NULL;
 	execve(vars->path, vars->av, vars->env);
+	printf("here\n");
+	current = skip_group(current->group_num, vars);
 	exit(0);
-}
-
-t_token	*skip_group(int group, t_vars *vars)
-{
-	t_token *current;
-
-	current = vars->token->first;
-	while (current && current->group_num <= group)
-		current = current->next;
-	return (current);
 }
 
 void	actually_forking(t_token *current, t_vars *vars, char **env)
@@ -99,11 +102,13 @@ void	actually_forking(t_token *current, t_vars *vars, char **env)
 			{
 				ft_putstr_fd(remove_quotes(current->cont), 2);
 				ft_putstr_fd(": cmd not found\n", 2);
-				exit(0);
+				current = skip_group(current->group_num, vars);
+				exit(127);
 			}
 			else
 				format_execve(vars, current);
 		}
+		current = skip_group(current->group_num, vars);
 		exit(0);
 	}
 }
@@ -134,7 +139,6 @@ int	finding_redirs(t_token *current, int fdi, t_vars *vars, char **env)
 	return (close_fds(vars->fdi, vars->fdo, pipefd[0]));
 }
 
-//when no_pipes executes, execve still does its thing!!!
 void	fd_catch(t_vars *vars, t_token *current, char **env)
 {
 	int	fd;
@@ -156,6 +160,7 @@ void	fd_catch(t_vars *vars, t_token *current, char **env)
 		fd = finding_redirs(current, redirect_input(current, fd), vars, env);
 		current = skip_group(group, vars);
 	}
+	// debug_print_tokens(vars);
 	i = 0;
 	while (i <= (vars->pid_count - 1))
 		waitpid(vars->pid[i++], &vars->status, 0);
