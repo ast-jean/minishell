@@ -12,7 +12,6 @@ void	init_shell(t_vars *vars, char **env)
 	printf("*******************************\n");
 }
 
-
 // TOFIX : rename for check_token_type
 void	parse_and_exec(char *line, t_vars *vars, char **env)
 {
@@ -32,12 +31,25 @@ void	parse_and_exec(char *line, t_vars *vars, char **env)
 	}
 }
 
+int	get_error(int status)
+{
+	if(!status)
+	{
+		if (errno)
+			return (errno);
+	}
+	else
+	{
+			return (status / 256);
+	}
+	return (0);
+}
+
 void	handler(int sig)
 {
 	int	pid;
 
 	pid = getpid();
-	printf("\npid = %d\n", pid);
 	if (pid > 0)	
 	{
 		if (sig == SIGINT)
@@ -46,13 +58,6 @@ void	handler(int sig)
 			rl_on_new_line();
 			rl_replace_line("", 0);
 			rl_redisplay();
-		}
-	}
-	else
-	{
-		if (sig == SIGINT)
-		{
-			ft_putstr_fd("----TEST----", 2);
 		}
 	}
 }
@@ -90,8 +95,6 @@ int	main(int argc, char **argv, char **env)
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
-		// signal(SIGINT, handler);
-		// signal(SIGQUIT, SIG_IGN);
 		line = readline(prompt);
 		if (!line)
 			quit_shell(&vars);

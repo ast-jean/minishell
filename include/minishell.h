@@ -41,13 +41,15 @@ typedef struct s_vars
 	int		last_output;
 }	t_vars;
 
-// FUNCTIONS (SELON FILENAME)----------------------
+// FONCTIONS (SELON FILENAME)----------------------
 
 // NOTE: EXECUTION
 
 // MINISHELL.C
 void	init_shell(t_vars *vars, char **env);
 void	handler(int sig);
+int		get_error(int get);
+
 // int		is_builtin(t_token *current, t_vars *vars, char **env);
 
 // EXECUTION_CMD.C
@@ -126,6 +128,7 @@ int		cnt_delims(char *line, char *delims);
 // CD_PWD.C
 int		builtin_cd(t_vars *vars, char **env);
 int		builtin_pwd(t_vars *vars);
+
 // EXPORT_UNSET_EV_ECHO.C
 int		builtin_env(t_vars *vars);
 int		builtin_unset(t_vars *vars);

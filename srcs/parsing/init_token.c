@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 12:51:20 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/14 13:09:53 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/20 12:37:00 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ int	creating_tokens(char *line, t_vars *vars)
 	split = tokenize(line);
 	if (!split)
 	{
-		ft_putstr_fd("minishell: syntax error missing quote\n", 2);
+		ft_putstr_fd("minishell: wrong input or missing quote\n", 2);
 		vars->last_output = 22;
 		printf("last_output = %d\n", vars->last_output);
-		return (1);
+		return (-1);
 	}
 	vars->token = malloc(sizeof(t_token));
 	current = vars->token;

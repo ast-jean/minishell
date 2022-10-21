@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:59 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/18 14:51:37 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/20 12:35:57 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,16 @@ int	builtin_export(t_vars *vars)
 {
 	t_token	*token;
 	char	*content;
+	int		i;
 
 	token = vars->token->first;
+	i = 0;
+	if (token && !token->next)
+	{
+		while (vars->env[i] != NULL)
+			printf("declare -x %s\n", vars->env[i++]);
+		return (1);
+	}
 	content = NULL;
 	while (token && token->next)
 	{

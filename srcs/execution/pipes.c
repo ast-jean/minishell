@@ -5,20 +5,9 @@
 
 void	handler_exec(int sig)
 {
-	int	pid;
-
-	pid = getpid();
-	// printf("pid = %d\n", pid);
-	if (sig == SIGINT)
-	{
-		// ft_putstr_fd("\rtest\n$>", 2);
-		// printf("TEST\n");
-				// exit(EXIT_FAILURE);
-		// rl_on_new_line();
-		// rl_replace_line("", 0);
-		// rl_redisplay();
-	}
+	(void)sig;
 }
+
 int	close_fds(int fdi, int fdo, int to_return)
 {
 	if (fdi != 0)
@@ -106,9 +95,9 @@ void	actually_forking(t_token *current, t_vars *vars, char **env)
 	vars->pid[vars->pid_count] = fork();
 	if (vars->pid[vars->pid_count++] == 0)
 	{
-		// signal(SIGINT, 	handler_exec);
-		// signal(SIGINT, SIG_IGN);
-		// signal(SIGQUIT, SIG_IGN);
+		// signal(SIGINT, 	SIG_IGN);
+		signal(SIGINT, 	handler_exec);
+		signal(SIGQUIT, SIG_DFL);
 		dup2(vars->fdi, 0);
 		dup2(vars->fdo, 1);
 		close_fds(vars->fdi, vars->fdo, 0);
@@ -119,13 +108,15 @@ void	actually_forking(t_token *current, t_vars *vars, char **env)
 			{
 				ft_putstr_fd(remove_quotes(current->cont), 2);
 				ft_putstr_fd(": cmd not found\n", 2);
-				exit(EXIT_FAILURE);
+				exit(1);
 			}
 			else
 				format_execve(vars, current);
 		}
-		exit(EXIT_FAILURE);
+		exit(0);
 	}
+	else	
+		signal(SIGINT, SIG_IGN);
 }
 
 int	finding_redirs(t_token *current, int fdi, t_vars *vars, char **env)
@@ -133,7 +124,7 @@ int	finding_redirs(t_token *current, int fdi, t_vars *vars, char **env)
 	int	pipefd[2];
 
 	vars->fdi = fdi;
-	if (current->group_num < (vars->pipe_count + 1))
+	if (current->group_num < (vars->pipe_count + 1) && vars->pipe_count > 0)
 	{
 		pipe(pipefd);
 		vars->fdo = redirect_output(current, pipefd[1]);
@@ -147,14 +138,13 @@ int	finding_redirs(t_token *current, int fdi, t_vars *vars, char **env)
 		write(pipefd[1], "", 0);
 		return (close_fds(vars->fdi, vars->fdo, pipefd[0]));
 	}
-	if (current && is_bi_nopipes(current, vars, env) == 1)
+	if (current && is_bi_nopipes(current, vars, env) >= 1)
 		return (close_fds(vars->fdi, vars->fdo, pipefd[0]));
 	else
 		actually_forking(current, vars, env);
 	return (close_fds(vars->fdi, vars->fdo, pipefd[0]));
 }
 
-//when no_pipes executes, execve still does its thing!!!
 void	fd_catch(t_vars *vars, t_token *current, char **env)
 {
 	int	fd;
@@ -178,16 +168,23 @@ void	fd_catch(t_vars *vars, t_token *current, char **env)
 	i = 0;
 	while (i <= (vars->pid_count - 1))
 	{
+		printf("vars->last_output = %d\n",vars->last_output);
 		printf("vars->status bef= %d\n",vars->status );
-
-		waitpid(vars->pid[i++], &vars->status, 0);
-		printf("vars->status = %d\n",vars->status );
-		if (vars->status)
-			{vars->last_output = vars->status / 256;
-					printf("vars->last_output = %d\n",vars->last_output);}
+		printf("\033[31merrno bef= %d\033[0m\n",errno);
+		printf("waitpid= %d\n", waitpid(vars->pid[i++], &vars->status, 0));
+		printf("\033[31merrno= %d\033[0m\n",errno);
+		printf("vars->status = %d\n",vars->status);
+		if (get_error(vars->status))
+		{
+			vars->last_output = get_error(vars->status);
+			printf("vars->last_output = %d\n",vars->last_output);
+		}
+		else if (errno)
+			vars->last_output = errno;
 		else
 			vars->last_output = 0;
 	}
+	signal(SIGINT, handler);
 	if (vars->pipe_count > 0 && fd > 2)
 		close(fd);
 		// free_tokens()
