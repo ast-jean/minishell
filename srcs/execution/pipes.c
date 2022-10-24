@@ -172,27 +172,10 @@ void	fd_catch(t_vars *vars, t_token *current, char **env)
 	i = 0;
 	while (i <= (vars->pid_count - 1))
 	{
-		printf("vars->last_output1 = %d\n",vars->last_output);
-		printf("vars->status bef= %d\n",vars->status );
-		printf("\033[31merrno bef= %d\033[0m\n",errno);
-		printf("waitpid= %d\n", waitpid(vars->pid[i++], &vars->status, 0));
-		printf("vars->last_output2 = %d\n",vars->last_output);
-
-		printf("\033[31merrno= %d\033[0m\n",errno);
-		printf("vars->status = %d\n",vars->status);
-		if (get_error(vars->status))
-		{
-			printf("get_error = %d\n", get_error(vars->status));
-			vars->last_output = get_error(vars->status);
-			printf("vars->last_output3 = %d\n",vars->last_output);
-		}
-		else if (errno)
-			vars->last_output = errno;
-		else
-			vars->last_output = 0;
+		waitpid(vars->pid[i++], &vars->status, 0);
+		vars->last_output = get_error(vars->status);
 	}
 	signal(SIGINT, handler);
 	if (vars->pipe_count > 0 && fd > 2)
 		close(fd);
-		// free_tokens()
 }

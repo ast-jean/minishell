@@ -8,6 +8,7 @@ void	init_shell(t_vars *vars, char **env)
 	vars->token = NULL;
 	vars->last_output = 0;
 	vars->heredoc_count = 0;
+	vars->pid_count = 0;
 	printf("*******************************\n");
 	printf("*          MINISHELL          *\n");
 	printf("*******************************\n");
@@ -40,9 +41,7 @@ int	get_error(int status)
 			return (errno);
 	}
 	else
-	{
 			return (status / 256);
-	}
 	return (0);
 }
 

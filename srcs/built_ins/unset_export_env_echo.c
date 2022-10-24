@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:59 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/20 12:35:57 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/24 14:27:03 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ int	builtin_echo(t_token *current, t_vars *vars)
 	gn = current->group_num;
 	n = false;
 	current = current->next;
-	vars->last_output = 0;
 	while (current && is_n(remove_quotes(current->cont)))
 	{
 		n = true;
@@ -102,6 +101,7 @@ int	builtin_echo(t_token *current, t_vars *vars)
 			write(1, " ", 1);
 		current = current->next;
 	}
+	vars->last_output = 0;
 	if (n == true)
 		return (1);
 	else

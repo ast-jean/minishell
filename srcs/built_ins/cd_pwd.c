@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:36 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/21 13:55:04 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/24 13:30:20 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@ int	builtin_pwd(t_vars *vars)
 	char	*pwd;
 
 	pwd = ft_arraysrch(vars->env, "PWD=") + 4;
+	if (pwd == NULL)
+	{
+		ft_putstr_fd("NULL\n", 1);
+		return (1);
+	}
 	ft_putstr_fd(pwd, 1);
 	ft_putstr_fd("\n", 1);
 	vars->last_output = 0;
@@ -41,13 +46,18 @@ int	finding_index(t_vars *vars, char *str, int n)
 void	changing_oldpwd(t_vars *vars, char *oldpwd)
 {
 	int	o;
+	char *str;
 
 	o = finding_index(vars, "OLDPWD=", 7);
 	if (o != -1)
+	{
+		free(vars->env[o]);
 		vars->env[o] = oldpwd;
+	}
 	else
 	{	
-		ft_arrayadd(vars->env, ft_strjoin("OLDPWD=", vars->cd_oldpwd));
+		str = ft_strjoin("OLDPWD=", vars->cd_oldpwd);
+		vars->env = ft_arrayadd(vars->env, str);
 	}
 }
 
@@ -59,6 +69,7 @@ void	changing_pwd(t_vars *vars)
 	if (finding_index(vars, "PWD=", 4) != -1)
 	{
 		p = finding_index(vars, "PWD=", 4);
+		free(vars->env[p]);
 		vars->env[p] = ft_strjoin("PWD=", getcwd(s, 1000));
 	}
 }
