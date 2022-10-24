@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:17:42 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/18 15:20:08 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/24 14:38:28 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,13 @@ int	redirect_input(t_token *token, int fd_init)
 			if (fd == -1)
 				ft_putstr_fd(remove_quotes(token->next->cont), 2);
 		}
-			token = token->next;
+		else if (ft_strncmp(token->cont, ".tmp/temp_heredoc", 17) == 0)
+		{
+			if (fd != 0)
+				close(fd);
+			fd = open(remove_quotes(token->cont), O_RDONLY);
+		}
+		token = token->next;
 	}
 	return (fd);
 }
@@ -58,7 +64,7 @@ int	redirect_output(t_token *token, int fd_init)
 			fd = open(remove_quotes(token->next->cont),
 					O_APPEND | O_CREAT | O_RDWR, 0777);
 		}
-			token = token->next;
+		token = token->next;
 	}
 	return (fd);
 }
@@ -77,6 +83,8 @@ t_token	*rm_redir(t_token *token, t_vars *vars)
 	group = token->group_num;
 	while (token && token->next && token->next->group_num == group)
 	{
+		if (ft_strncmp(token->cont, ".tmp/temp_heredoc", 17) == 0)
+			token = remove_token(token, vars);
 		if (ft_strcmp(token->cont, "<") == 0)
 			token = rm2tokens(token, vars);
 		else if (ft_strcmp(remove_quotes(token->cont), ">") == 0)

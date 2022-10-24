@@ -9,6 +9,7 @@ void	init_shell(t_vars *vars, char **env)
 	vars->last_output = 0;
 	vars->heredoc_count = 0;
 	vars->pid_count = 0;
+	vars->pipe_count = 0;
 	printf("*******************************\n");
 	printf("*          MINISHELL          *\n");
 	printf("*******************************\n");

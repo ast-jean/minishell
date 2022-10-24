@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_charrm.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 14:51:16 by ast-jean          #+#    #+#             */
-/*   Updated: 2022/10/07 15:43:32 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/24 12:11:07 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ char	*ft_charrm(char *str, char *s)
 		j++;
 	}
 	new[j] = '\0';
-	free(str);
-	return (new);
+	str = ft_strcpy(str, new);
+	free(new);
+	return (str);
 }
