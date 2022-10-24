@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_arraysrch.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 13:12:02 by xchouina          #+#    #+#             */
-/*   Updated: 2022/08/22 13:14:37 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/10/24 11:28:34 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ char	*ft_arraysrch(char **tab, char *str_to_find)
 		if (!ft_strncmp(tab[i], str_to_find, ft_strlen(str_to_find)))
 			return (tab[i]);
 	}
-	return ("");
+	return (NULL);
 }
