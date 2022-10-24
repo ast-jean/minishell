@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:56:27 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/06 15:50:27 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/24 11:59:49 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,16 @@ t_token	*check_heredocs(t_token *current, t_vars *vars)
 {
 	char	*delim;
 	char	*name;
+	char	*num;
 	int		pid;
 	int		stat;
 
 	vars->line = " ";
 	if (!is_exception(current))
 		return (NULL);
-	name = ft_strjoin(".tmp/temp_heredoc", ft_itoa(vars->heredoc_count));
+	num = ft_itoa(vars->heredoc_count);
+	name = ft_strjoin(".tmp/temp_heredoc", num);
+	free(num);
 	delim = remove_quotes(current->next->cont);
 	new_token_after(current, name);
 	pid = fork();
