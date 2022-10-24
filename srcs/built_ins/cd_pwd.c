@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:36 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/20 12:35:53 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/21 13:55:04 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ void	changing_oldpwd(t_vars *vars, char *oldpwd)
 	if (o != -1)
 		vars->env[o] = oldpwd;
 	else
+	{	
 		ft_arrayadd(vars->env, ft_strjoin("OLDPWD=", vars->cd_oldpwd));
+	}
 }
 
 void	changing_pwd(t_vars *vars)

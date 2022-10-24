@@ -16,6 +16,17 @@ int	close_fds(int fdi, int fdo, int to_return)
 		close(fdo);
 	return (to_return);
 }
+
+t_token	*skip_group(int group, t_vars *vars)
+{
+	t_token *current;
+
+	current = vars->token->first;
+	while (current && current->group_num <= group)
+		current = remove_token(current, vars);
+	return (current);
+}
+
 int	is_bi_nopipes(t_token *current, t_vars *vars, char **env)
 {
 	if (vars->pipe_count > 0)
@@ -36,6 +47,7 @@ int	is_bi_nopipes(t_token *current, t_vars *vars, char **env)
 	else if (current && !ft_strcmp(remove_quotes(current->cont), "exit"))
 	{
 		close_fds(vars->fdi, vars->fdo, 0);
+		current = skip_group(current->group_num, vars);
 		quit_shell(vars);
 	}
 
@@ -77,17 +89,8 @@ void	format_execve(t_vars *vars, t_token *token)
 	}
 	vars->av[i] = NULL;
 	execve(vars->path, vars->av, vars->env);
+	current = skip_group(current->group_num, vars);
 	exit(errno);
-}
-
-t_token	*skip_group(int group, t_vars *vars)
-{
-	t_token *current;
-
-	current = vars->token->first;
-	while (current && current->group_num <= group)
-		current = current->next;
-	return (current);
 }
 
 void	actually_forking(t_token *current, t_vars *vars, char **env)
@@ -95,7 +98,6 @@ void	actually_forking(t_token *current, t_vars *vars, char **env)
 	vars->pid[vars->pid_count] = fork();
 	if (vars->pid[vars->pid_count++] == 0)
 	{
-		// signal(SIGINT, 	SIG_IGN);
 		signal(SIGINT, 	handler_exec);
 		signal(SIGQUIT, SIG_DFL);
 		dup2(vars->fdi, 0);
@@ -108,11 +110,13 @@ void	actually_forking(t_token *current, t_vars *vars, char **env)
 			{
 				ft_putstr_fd(remove_quotes(current->cont), 2);
 				ft_putstr_fd(": cmd not found\n", 2);
+				current = skip_group(current->group_num, vars);
 				exit(1);
 			}
 			else
 				format_execve(vars, current);
 		}
+		current = skip_group(current->group_num, vars);
 		exit(0);
 	}
 	else	
@@ -168,16 +172,19 @@ void	fd_catch(t_vars *vars, t_token *current, char **env)
 	i = 0;
 	while (i <= (vars->pid_count - 1))
 	{
-		printf("vars->last_output = %d\n",vars->last_output);
+		printf("vars->last_output1 = %d\n",vars->last_output);
 		printf("vars->status bef= %d\n",vars->status );
 		printf("\033[31merrno bef= %d\033[0m\n",errno);
 		printf("waitpid= %d\n", waitpid(vars->pid[i++], &vars->status, 0));
+		printf("vars->last_output2 = %d\n",vars->last_output);
+
 		printf("\033[31merrno= %d\033[0m\n",errno);
 		printf("vars->status = %d\n",vars->status);
 		if (get_error(vars->status))
 		{
+			printf("get_error = %d\n", get_error(vars->status));
 			vars->last_output = get_error(vars->status);
-			printf("vars->last_output = %d\n",vars->last_output);
+			printf("vars->last_output3 = %d\n",vars->last_output);
 		}
 		else if (errno)
 			vars->last_output = errno;
@@ -189,5 +196,3 @@ void	fd_catch(t_vars *vars, t_token *current, char **env)
 		close(fd);
 		// free_tokens()
 }
-
-// some fds not getting closed for some reason
