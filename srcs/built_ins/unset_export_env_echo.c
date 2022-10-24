@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset_export_env_echo.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:59 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/19 14:53:50 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/10/24 12:59:51 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int	builtin_echo(t_token *current, t_vars *vars)
 {
 	bool	n;
 	int		gn;
+	char	*varstr;
 
 	gn = current->group_num;
 	n = false;
@@ -97,7 +98,9 @@ int	builtin_echo(t_token *current, t_vars *vars)
 	while (current && current->group_num == gn
 		&& ft_strcmp(current->cont, "|") != 0)
 	{
-		ft_putstr_fd(remove_quotes(check_var(current->cont, vars)), 1);
+		varstr = check_var(current->cont, vars);
+		ft_putstr_fd(remove_quotes(varstr), 1);
+		free(varstr);
 		if (current->next != NULL && current->next->group_num == gn)
 			write(1, " ", 1);
 		current = current->next;

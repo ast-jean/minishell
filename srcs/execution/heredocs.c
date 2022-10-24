@@ -6,7 +6,7 @@
 /*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:12:27 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/17 11:04:59 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/24 13:41:18 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ char	*remove_quotes(char *str)
 
 	if (!str)
 		return (NULL);
-	// new = calloc(ft_strlen(str) + 1, sizeof(char));
 	new = str;
 	i = 0;
 	while (new && new[i])
@@ -47,10 +46,9 @@ char	*remove_quotes(char *str)
 		}
 		i++;
 	}
-	// if (str)
-	// free(new);
 	return (new);
 }
+
 
 t_token	*check_herestrings(t_token *current, t_vars *vars)
 {

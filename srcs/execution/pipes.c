@@ -82,13 +82,13 @@ void	format_execve(t_vars *vars, t_token *token)
 	}
 	vars->av[i] = NULL;
 	execve(vars->path, vars->av, vars->env);
-	printf("here\n");
 	current = skip_group(current->group_num, vars);
 	exit(0);
 }
 
 void	actually_forking(t_token *current, t_vars *vars, char **env)
 {
+	int acc;
 	vars->pid[vars->pid_count] = fork();
 	if (vars->pid[vars->pid_count++] == 0)
 	{
@@ -97,18 +97,25 @@ void	actually_forking(t_token *current, t_vars *vars, char **env)
 		close_fds(vars->fdi, vars->fdo, 0);
 		if (is_builtin(current, vars) == -1)
 		{
-			if (accessing(vars, current) == -1
-				&& is_bi_nopipes(current, vars, env) == -1)
+			acc = accessing(vars, current);
+			if ( acc == -1 && is_bi_nopipes(current, vars, env) == -1)
 			{
 				ft_putstr_fd(remove_quotes(current->cont), 2);
 				ft_putstr_fd(": cmd not found\n", 2);
 				current = skip_group(current->group_num, vars);
 				exit(127);
 			}
-			else
+			else if (acc == 0)
 				format_execve(vars, current);
 		}
-		current = skip_group(current->group_num, vars);
+		// {
+		// current = skip_group(vars->pipe_count + 1, vars);
+		// free2d(vars->env);
+		// free2d(vars->av);
+		// free2d(vars->path_array);
+		// free(vars->oldpwd);
+		// free(vars->path);
+		// }
 		exit(0);
 	}
 }
@@ -117,6 +124,7 @@ int	finding_redirs(t_token *current, int fdi, t_vars *vars, char **env)
 {
 	int	pipefd[2];
 
+	pipefd[0] = 0;
 	vars->fdi = fdi;
 	if (current->group_num < (vars->pipe_count + 1) && vars->pipe_count > 0)
 	{
@@ -168,5 +176,14 @@ void	fd_catch(t_vars *vars, t_token *current, char **env)
 		close(fd);
 		// free_tokens()
 }
+
+// 42 bytes in 1 blocks are definitely lost in loss record 35 of 117
+// ==16518==    at 0x100128545: malloc (in /Users/mjarry/.brew/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+// ==16518==    by 0x100006BB0: ft_calloc (in ./minishell)
+// ==16518==    by 0x1000065B4: nullify_str (tokenize.c:66)
+// ==16518==    by 0x100006747: tokenize (tokenize.c:95)
+// ==16518==    by 0x10000593F: creating_tokens (init_token.c:35)
+// ==16518==    by 0x100003C78: parse_and_exec (minishell.c:22)
+// ==16518==    by 0x100003EA0: main (minishell.c:87)
 
 // some fds not getting closed for some reason
