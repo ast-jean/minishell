@@ -6,7 +6,7 @@
 /*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 12:59:02 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/24 13:54:02 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/25 09:56:44 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	accessing(t_vars *vars, t_token *token)
 {
 	char	*cmd;
 	int		i;
-	
+
 	if (!token)
 		return (-1);
 	if (access(remove_quotes(token->cont), F_OK | X_OK) == 0)

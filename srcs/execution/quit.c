@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   quit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/25 10:42:14 by mjarry            #+#    #+#             */
+/*   Updated: 2022/10/25 10:42:30 by mjarry           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
 void	free_tokens(t_vars *vars)
 {
-	t_token *temp;
+	t_token	*temp;
 
 	temp = vars->token->first;
 	while (vars && temp)
@@ -16,24 +28,10 @@ void	free_tokens(t_vars *vars)
 void	quit_shell(t_vars *vars)
 {
 	ft_putstr_fd("exit\n", 2);
-	// t_token *temp;
-	// int	i = 0;
-	// (void)vars;
 	if (vars->env)
 		free2d(vars->env);
 	if (vars->path_array)
 		free2d(vars->path_array);
-	// free(vars->line);
-	// if (vars->token)
-		// temp = vars->token->first;
-	// while (temp)
-	// {
-	// 	vars->token = temp;
-	// 	free(vars->token->cont);
-	// 	temp = vars->token->next;
-	// 	// free(vars->token);
-	// }
 	rl_clear_history();
 	exit(0);
-	// kill(SIGABRT, 0);
 }

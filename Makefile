@@ -8,7 +8,9 @@ SRCS_FILES 		=	built_ins/cd_pwd.c					\
 					execution/exec_simp_cmd.c			\
 					execution/heredocs.c 				\
 					execution/minishell.c				\
+					execution/main.c					\
 					execution/pipes.c					\
+					execution/pipes_util.c				\
 					execution/quit.c					\
 					execution/redirection.c				\
 					execution/set_groups.c 				\

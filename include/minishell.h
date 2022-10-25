@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/25 09:38:00 by mjarry            #+#    #+#             */
+/*   Updated: 2022/10/25 10:51:41 by xchouina         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -39,6 +51,7 @@ typedef struct s_vars
 	int		status;
 	char	*cd_oldpwd;
 	int		last_output;
+	int		gn;
 }	t_vars;
 
 // FONCTIONS (SELON FILENAME)----------------------
@@ -49,7 +62,7 @@ typedef struct s_vars
 void	init_shell(t_vars *vars, char **env);
 void	handler(int sig);
 int		get_error(int get);
-
+void	parse_and_exec(char *line, t_vars *vars, char **env);
 // int		is_builtin(t_token *current, t_vars *vars, char **env);
 
 // EXECUTION_CMD.C
@@ -82,8 +95,13 @@ void	free_tokens(t_vars *vars);
 
 // PIPES.C
 int		is_builtin(t_token *current, t_vars *vars);
+int		close_fds(int fdi, int fdo, int to_return);
+int		finding_redirs(t_token *current, int fdi, t_vars *vars, char **env);
+int		is_bi_nopipes(t_token *current, t_vars *vars, char **env);
 void	fd_catch(t_vars *vars, t_token *current, char **env);
-t_token	*group_skip(t_token *current_token);
+void	format_execve(t_vars *vars, t_token *token);
+void	actually_forking(t_token *current, t_vars *vars, char **env);
+t_token	*skip_group(int group, t_vars *vars);
 
 // SET_GROUPS.C
 int		init_groups(t_vars *vars);
