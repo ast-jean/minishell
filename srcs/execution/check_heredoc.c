@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:56:27 by xchouina          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/10/17 17:11:18 by ast-jean         ###   ########.fr       */
-=======
-/*   Updated: 2022/10/24 11:59:49 by mjarry           ###   ########.fr       */
->>>>>>> main
+/*   Updated: 2022/10/25 12:02:21 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +40,25 @@ void	in_child(t_vars *vars, char *delim, int fd)
 		if (!vars->line)
 			vars->line = delim;
 	}
-	usleep(10);
+}
+
+void	forking(t_vars *vars, char *delim, char *name)
+{
+	int	pid;
+	int	stat;
+	int	fd;
+
+	pid = fork();
+	fd = open(name, O_RDWR | O_CREAT | O_TRUNC, 0777);
+	signal(2, SIG_IGN);
+	if (pid == 0)
+	{
+		in_child(vars, delim, fd);
+		close(fd);
+		exit(0);
+	}
+	else
+		waitpid(pid, &stat, 0);
 }
 
 t_token	*check_heredocs(t_token *current, t_vars *vars)
@@ -52,8 +66,6 @@ t_token	*check_heredocs(t_token *current, t_vars *vars)
 	char	*delim;
 	char	*name;
 	char	*num;
-	int		pid;
-	int		stat;
 
 	vars->line = " ";
 	if (!is_exception(current))
@@ -63,14 +75,7 @@ t_token	*check_heredocs(t_token *current, t_vars *vars)
 	free(num);
 	delim = remove_quotes(current->next->cont);
 	new_token_after(current, name);
-	pid = fork();
-	signal(2, SIG_IGN);
-	if (pid == 0)
-		in_child(vars, delim, open(name, O_RDWR | O_CREAT | O_TRUNC, 0777));
-	else
-		waitpid(pid, &stat, 0);
-	if (pid == 0)
-		exit(0);
+	forking(vars, delim, name);
 	signal(2, handler);
 	current = remove_token(current, vars);
 	current = remove_token(current->next, vars);
