@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variables.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:26:10 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/25 10:44:31 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/25 14:40:21 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ char	*save_varname(char *line)
 		var_name[i] = line[i];
 		i++;
 	}
-	return (var_name);
+	line = ft_strcpy(line, var_name);
+	free(var_name);
+	return (line);
 }
 
 char	*find_var_inline(char *line)
@@ -100,6 +102,8 @@ char	*add_varcontent(char *line, char *var_name, char *var_value)
 		while (var_value[++i])
 			newline = ft_charadd(newline, var_value[i], &newline[pos++]);
 	newline = delete_var_name(pos2, newline);
+	printf("line >%s<\nnewline >%s<\n", line, newline);
+	free(line);
 	return (newline);
 }
 
@@ -119,6 +123,9 @@ char	*check_var(char *line, t_vars *vars)
 		else
 			var_value = ft_getenv(vars->env, var_name);
 		newline = add_varcontent(newline, var_name, var_value);
+		free(var_value);
 	}
-	return (newline);
+	line = ft_strcpy(line, newline);
+	free(newline);
+	return (line);
 }
