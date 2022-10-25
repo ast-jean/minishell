@@ -6,7 +6,7 @@
 /*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:38:00 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/25 10:51:41 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/10/25 14:16:22 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_token
 typedef struct s_vars
 {
 	int		ac;
+	int		i;
 	char	**av;
 	char	**env;
 	char	*path;

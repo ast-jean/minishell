@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   token_op.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/25 11:09:16 by mjarry            #+#    #+#             */
+/*   Updated: 2022/10/25 11:09:53 by mjarry           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
 t_token	*remove_token(t_token *remove, t_vars *vars)
@@ -37,7 +49,7 @@ t_token	*remove_token(t_token *remove, t_vars *vars)
 		free(remove);
 	}
 	return (nex);
-} // TOFIX TOO LONG
+}
 
 t_token	*new_token_after(t_token *after_this_one, char *file_name)
 {

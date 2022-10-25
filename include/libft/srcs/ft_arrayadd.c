@@ -6,7 +6,7 @@
 /*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 12:34:26 by xchouina          #+#    #+#             */
-/*   Updated: 2022/08/31 11:16:22 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/25 12:10:40 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	**ft_arrayadd(char **tab, char *str_to_add)
 	char	**new;
 	int		i;
 
+	if (str_to_add == NULL)
+		return (tab);
 	new = malloc(sizeof(char *) * (ft_arraylen(tab) + 2));
 	i = 0;
 	while (tab && tab[i])
