@@ -6,7 +6,7 @@
 /*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 11:11:14 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/25 11:14:36 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/25 13:47:50 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,11 +99,9 @@ char	**nullify_str(char *line, char *delims, int len, int count)
 
 char	**tokenize(char *line)
 {
-	int	i;
 	int	len;
 	int	count;
 
-	i = 0;
 	if (!line)
 		return (NULL);
 	count = cnt_delims(line, " <>|");
