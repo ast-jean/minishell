@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variables.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:26:10 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/24 14:38:33 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/25 10:44:31 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ char	*save_varname(char *line)
 
 	i = 0;
 	count = 0;
-	if(line[count] == '?')
-		return("?");
+	if (line[count] == '?')
+		return ("?");
 	while (line[count] && ft_isalnum(line[count]))
 		count++;
 	var_name = ft_calloc(count + 1, sizeof(char));
@@ -41,7 +41,8 @@ char	*find_var_inline(char *line)
 		{	
 			while (*line++ && *line != '\"')
 			{
-				if (*line == '$' && (ft_isalnum(*(line + 1)) || *(line + 1) == '?'))
+				if (*line == '$' && (ft_isalnum(*(line + 1)) 
+					|| *(line + 1) == '?'))
 					return ((char *)line);
 			}
 		}
@@ -51,10 +52,8 @@ char	*find_var_inline(char *line)
 				line++;
 			if (!*line)
 				return (NULL);
-			line++;
 		}
-		else
-			line++;
+		line++;
 	}
 	if (*line == '$' && (ft_isalnum(*(line + 1)) || *(line + 1) == '?'))
 		return ((char *)line);

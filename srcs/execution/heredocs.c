@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredocs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:12:27 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/24 14:38:05 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/25 10:36:31 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ char	*remove_quotes(char *str)
 	return (new);
 }
 
-
 t_token	*check_herestrings(t_token *current, t_vars *vars)
 {
 	char	*name;
@@ -65,7 +64,7 @@ t_token	*check_herestrings(t_token *current, t_vars *vars)
 	line = ft_strjoin(check_var(line, vars), "\n");
 	line = remove_quotes(line);
 	ft_putstr_fd(line, fd);
-	// close(fd);
+	close(fd);
 	current = remove_token(current, vars);
 	current = remove_token(current->next, vars);
 	if (current == NULL)

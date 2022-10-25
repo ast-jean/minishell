@@ -73,7 +73,10 @@ char	**nullify_str(char *line, char *delims, int len, int count)
 				i++;
 		}
 		if (!line[i])
+		{
+			free(d_found);
 			return (NULL);
+		}
 		else if (ft_strchr(delims, line[i]))
 		{
 			d_found[j++] = line[i];

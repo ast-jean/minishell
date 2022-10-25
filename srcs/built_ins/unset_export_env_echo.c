@@ -3,17 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset_export_env_echo.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
-/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/03 10:54:59 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/24 14:27:03 by ast-jean         ###   ########.fr       */
-=======
 /*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:59 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/24 12:59:51 by mjarry           ###   ########.fr       */
->>>>>>> main
+/*   Updated: 2022/10/25 09:45:02 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +107,6 @@ int	builtin_echo(t_token *current, t_vars *vars)
 	vars->last_output = 0;
 	if (n == true)
 		return (1);
-	else
-		ft_putstr_fd("\n", 1);
+	ft_putstr_fd("\n", 1);
 	return (1);
 }
