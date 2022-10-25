@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset_export_env_echo.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:59 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/25 09:45:02 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/25 10:52:13 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,9 @@ int	is_n(char *str)
 int	builtin_echo(t_token *current, t_vars *vars)
 {
 	bool	n;
-	int		gn;
 	char	*varstr;
 
-	gn = current->group_num;
+	vars->gn = current->group_num;
 	n = false;
 	current = current->next;
 	while (current && is_n(remove_quotes(current->cont)))
@@ -94,19 +93,18 @@ int	builtin_echo(t_token *current, t_vars *vars)
 		n = true;
 		current = current->next;
 	}
-	while (current && current->group_num == gn
+	while (current && current->group_num == vars->gn
 		&& ft_strcmp(current->cont, "|") != 0)
 	{
 		varstr = check_var(current->cont, vars);
 		ft_putstr_fd(remove_quotes(varstr), 1);
 		free(varstr);
-		if (current->next != NULL && current->next->group_num == gn)
+		if (current->next != NULL && current->next->group_num == vars->gn)
 			write(1, " ", 1);
 		current = current->next;
 	}
 	vars->last_output = 0;
-	if (n == true)
-		return (1);
-	ft_putstr_fd("\n", 1);
+	if (n == false)
+		ft_putstr_fd("\n", 1);
 	return (1);
 }
