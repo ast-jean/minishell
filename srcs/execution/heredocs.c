@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:12:27 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/24 14:38:05 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/25 10:44:13 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ char	*remove_quotes(char *str)
 	}
 	return (new);
 }
-
 
 t_token	*check_herestrings(t_token *current, t_vars *vars)
 {
