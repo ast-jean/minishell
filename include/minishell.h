@@ -6,7 +6,7 @@
 /*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:38:00 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/25 10:29:18 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/25 11:13:18 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_token
 typedef struct s_vars
 {
 	int		ac;
+	int		i;
 	char	**av;
 	char	**env;
 	char	*path;

@@ -6,7 +6,7 @@
 /*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 11:18:02 by mjarry            #+#    #+#             */
-/*   Updated: 2022/09/20 19:34:29 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/25 12:08:11 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,14 @@ int	quote_len(char *str, char c)
 char	*newtoken_q(char *line, int *i, char c)
 {
 	char	*str;
+	char	*str2;
 	int		len;
 	int		x;
 
 	x = 1;
 	len = quote_len(line + (*i), c);
+	if (len == -1)
+		return (NULL);
 	str = malloc(sizeof(char) * (len + 1));
 	str[0] = line[(*i)++];
 	while (--len)
@@ -42,11 +45,17 @@ char	*newtoken_q(char *line, int *i, char c)
 	while (line[*i])
 	{
 		if (line[*i] == 34 || line[*i] == 39)
-			str = ft_strjoin(str, newtoken_q(line, i, line[*i]));
+		{
+			str2 = ft_strjoin(str, newtoken_q(line, i, line[*i]));
+			free(str);
+		}
 		else if (line[*i])
-			str = ft_strjoin(str, newtoken_s(line, i));
+		{
+			str2 = ft_strjoin(str, newtoken_s(line, i));
+			free(str);
+		}
 	}
-	return (str);
+	return (str2);
 }
 
 char	*newtoken_s(char *line, int *i)
