@@ -6,7 +6,7 @@
 /*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 11:18:02 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/25 12:08:11 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/25 12:15:17 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ char	*newtoken_q(char *line, int *i, char c)
 	while (--len)
 		str[x++] = line[(*i)++];
 	str[x] = 0;
+	str2 = str;
 	while (line[*i])
 	{
 		if (line[*i] == 34 || line[*i] == 39)
