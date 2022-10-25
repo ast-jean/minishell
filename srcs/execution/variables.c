@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:26:10 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/25 14:40:21 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/25 14:50:59 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ char	*find_var_inline(char *line)
 		{	
 			while (*line++ && *line != '\"')
 			{
-				if (*line == '$' && (ft_isalnum(*(line + 1)) 
-					|| *(line + 1) == '?'))
+				if (*line == '$' && (ft_isalnum(*(line + 1))
+						|| *(line + 1) == '?'))
 					return ((char *)line);
 			}
 		}
@@ -67,11 +67,10 @@ char	*delete_var_name(int pos2, char *str)
 {
 	int		i;
 	char	*newline;
-	i = pos2;
 
+	i = pos2;
 	newline = calloc(ft_strlen(str) + 1, sizeof(char));
 	newline = ft_strcpy(newline, str);
-
 	while (i >= 0)
 	{
 		if (newline[i] == '$')
@@ -96,7 +95,8 @@ char	*add_varcontent(char *line, char *var_name, char *var_value)
 	newline = calloc(ft_strlen(line) + 1, sizeof(char));
 	newline = ft_strcpy(newline, line);
 	i = -1;
-	pos = ft_strlen(line) - ft_strlen(find_var_inline(line)) + ft_strlen(var_name);
+	pos = ft_strlen(line) - ft_strlen(find_var_inline(line));
+	pos += ft_strlen(var_name);
 	pos2 = pos;
 	if (var_value)
 		while (var_value[++i])

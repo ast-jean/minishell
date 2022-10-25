@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:38:31 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/25 09:40:04 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/25 13:17:27 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,6 @@ char	*ft_strtoupper(char *str);
 int		ft_is_str_alnum(char *str);
 char	*ft_charrm(char *str, char *s);
 char	*ft_charadd(char *str, char c, char *s);
+char	*ft_strjoinf2(char *s1, char *s2);
 
 #endif
