@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:56:27 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/25 12:05:37 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/25 12:14:56 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ void	forking(t_vars *vars, char *delim, char *name)
 	int	fd;
 
 	pid = fork();
-	fd = open(name, O_RDWR | O_CREAT | O_TRUNC, 0777);
 	signal(2, SIG_IGN);
 	if (pid == 0)
 	{
+		fd = open(name, O_RDWR | O_CREAT | O_TRUNC, 0777);
 		in_child(vars, delim, fd);
 		close(fd);
 		exit(0);
