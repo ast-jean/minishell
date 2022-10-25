@@ -6,7 +6,7 @@
 /*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 11:18:02 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/25 12:15:17 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/25 13:16:31 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ char	*newtoken_q(char *line, int *i, char c)
 	{
 		if (line[*i] == 34 || line[*i] == 39)
 		{
-			str2 = ft_strjoin(str, newtoken_q(line, i, line[*i]));
+			str2 = ft_strjoinf2(str, newtoken_q(line, i, line[*i]));
 			free(str);
 		}
 		else if (line[*i])
 		{
-			str2 = ft_strjoin(str, newtoken_s(line, i));
+			str2 = ft_strjoinf2(str, newtoken_s(line, i));
 			free(str);
 		}
 	}
@@ -77,7 +77,7 @@ char	*newtoken_s(char *line, int *i)
 	{
 		if (line[*i] == 34 || line[*i] == 39)
 		{
-			str = ft_strjoin(str2, newtoken_q(line, i, line[*i]));
+			str = ft_strjoinf2(str2, newtoken_q(line, i, line[*i]));
 			free(str2);
 		}
 	}
