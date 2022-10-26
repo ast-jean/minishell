@@ -1,5 +1,18 @@
 #include "../../include/minishell.h"
 
+void	if_first_token(t_token *remove, t_vars *vars, t_token *nex)
+{
+	remove->next->prev = NULL;
+	nex = remove->next;
+	while (nex)
+	{
+		nex->first = remove->next;
+		nex = nex->next;
+	}
+	vars->token = remove->next;
+	nex = remove->next;
+}
+
 t_token	*remove_token(t_token *remove, t_vars *vars)
 {
 	t_token	*nex;
@@ -18,17 +31,7 @@ t_token	*remove_token(t_token *remove, t_vars *vars)
 		nex = NULL;
 	}
 	else if (remove->next && !remove->prev)
-	{
-		remove->next->prev = NULL;
-		nex = remove->next;
-		while (nex)
-		{
-			nex->first = remove->next;
-			nex = nex->next;
-		}
-		vars->token = remove->next;
-		nex = remove->next;
-	}
+		if_first_token(remove, vars, nex);
 	else
 		nex = NULL;
 	if (remove)
@@ -37,7 +40,7 @@ t_token	*remove_token(t_token *remove, t_vars *vars)
 		free(remove);
 	}
 	return (nex);
-} // TOFIX TOO LONG
+}
 
 t_token	*new_token_after(t_token *after_this_one, char *file_name)
 {
