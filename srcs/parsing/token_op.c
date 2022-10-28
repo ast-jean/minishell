@@ -6,16 +6,17 @@
 /*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 11:09:16 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/25 11:09:53 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/28 16:37:43 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	if_first_token(t_token *remove, t_vars *vars, t_token *nex)
+t_token	*if_first_token(t_token *remove, t_vars *vars, t_token *nex)
 {
 	remove->next->prev = NULL;
 	nex = remove->next;
+	vars->token->first = nex;
 	while (nex)
 	{
 		nex->first = remove->next;
@@ -23,6 +24,7 @@ void	if_first_token(t_token *remove, t_vars *vars, t_token *nex)
 	}
 	vars->token = remove->next;
 	nex = remove->next;
+	return (nex);
 }
 
 t_token	*remove_token(t_token *remove, t_vars *vars)
@@ -31,6 +33,7 @@ t_token	*remove_token(t_token *remove, t_vars *vars)
 
 	if (!remove)
 		return (NULL);
+	nex = remove->next;
 	if (remove->next && remove->prev)
 	{
 		remove->prev->next = remove->next;
@@ -43,9 +46,12 @@ t_token	*remove_token(t_token *remove, t_vars *vars)
 		nex = NULL;
 	}
 	else if (remove->next && !remove->prev)
-		if_first_token(remove, vars, nex);
+		nex = if_first_token(remove, vars, nex);
 	else
+	{
+		vars->token->first = NULL;
 		nex = NULL;
+	}
 	if (remove)
 	{
 		free(remove->cont);

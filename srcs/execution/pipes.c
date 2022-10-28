@@ -6,7 +6,7 @@
 /*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:02:56 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/28 10:46:31 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/28 16:44:18 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,8 @@ void	fd_catch(t_vars *vars, t_token *current, char **env)
 {
 	int	i;
 	int	group;
-	int	act;
 	
 	vars->pid_count = 0;
-	act = 0;
-	if (vars->pipe_count > 0)
-		act = WNOHANG;
 	finding_paths(vars);
 	group = current->group_num;
 	vars->fdrd[0] = finding_redirs(current, redirect_input(current, 0), vars, env);
@@ -113,18 +109,10 @@ void	fd_catch(t_vars *vars, t_token *current, char **env)
 	while (i > 0)
 		close(vars->fdrd[--i]);
 	i = 0;
-	// dprintf(2, "pidcount = %d\n", vars->pid_count);
 	while (i <= (vars->pid_count - 1))
 	{
-		// close_fds(vars->fdi, vars->fdo, 0);
-		if (i == vars->pipe_count)
-			act = 0;
-		// dprintf(2, "i :%d\n", i);
-		// dprintf(2, "act: %d\n", act);
-		// dprintf(2, "token: %s\n", current->cont);
-		waitpid(vars->pid[i++], &vars->status, act);
+		waitpid(vars->pid[i++], &vars->status, 0);
 		vars->last_output = get_error(vars->status);
 	}
-	// close_fds(vars->fdi, vars->fdo, 0);
 	signal(SIGINT, handler);
 }
