@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 14:51:16 by ast-jean          #+#    #+#             */
-/*   Updated: 2022/10/06 14:51:08 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/25 13:45:48 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,10 @@ int	get_pos(char *str, char *s)
 
 char	*ft_charadd(char *str, char c, char *s)
 {
-	char	*old_temp;
 	char	*new;
 	int		i;
 	int		j;
 
-	old_temp = str;
 	i = 0;
 	j = 0;
 	if (!str)
@@ -49,12 +47,15 @@ char	*ft_charadd(char *str, char c, char *s)
 	else
 	{
 		new = ft_calloc((int)(ft_strlen(str)) + 2, sizeof(char));
-		while (old_temp[i] && i < get_pos(str, s))
-			new[j++] = old_temp[i++];
+		while (str[i] && i < get_pos(str, s))
+			new[j++] = str[i++];
 		new[j++] = c;
-		while (old_temp[i])
-			new[j++] = old_temp[i++];
+		while (str[i])
+			new[j++] = str[i++];
 		new[j] = '\0';
 	}
-	return (new);
+	str = ft_strcpy(str, new);
+	free(new);
+	return (str);
+
 }

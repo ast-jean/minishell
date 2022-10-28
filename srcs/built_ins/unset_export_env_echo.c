@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:59 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/28 16:53:31 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/28 17:32:52 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,37 +83,30 @@ int	is_n(char *str)
 int	builtin_echo(t_token *current, t_vars *vars)
 {
 	bool	n;
-	int		gn;
 	char	*varstr;
 	char	*str;
 
-	gn = current->group_num;
+	vars->gn = current->group_num;
 	n = false;
 	current = current->next;
-	debug_print_tokens(vars);
 	str = ft_strdup(current->cont);
 	while (current && is_n(remove_quotes(current->cont)))
 	{
 		n = true;
 		current = current->next;
 	}
-	debug_print_tokens(vars);
-	while (current && current->group_num == gn
+	while (current && current->group_num == vars->gn
 		&& ft_strcmp(current->cont, "|") != 0)
 	{
 		varstr = check_var(str, vars);
-		printf("in builtin >%s<\n", varstr);
 		ft_putstr_fd(remove_quotes(varstr), 1);
-		free(varstr);
-		if (current->next != NULL && current->next->group_num == gn)
+		if (current->next != NULL && current->next->group_num == vars->gn)
 			write(1, " ", 1);
 		current = current->next;
 	}
 	free(str);
 	vars->last_output = 0;
-	if (n == true)
-		return (1);
-	else
+	if (n == false)
 		ft_putstr_fd("\n", 1);
 	return (1);
 }

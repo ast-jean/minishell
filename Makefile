@@ -8,7 +8,9 @@ SRCS_FILES 		=	built_ins/cd_pwd.c					\
 					execution/exec_simp_cmd.c			\
 					execution/heredocs.c 				\
 					execution/minishell.c				\
+					execution/main.c					\
 					execution/pipes.c					\
+					execution/pipes_util.c				\
 					execution/quit.c					\
 					execution/redirection.c				\
 					execution/set_groups.c 				\
@@ -108,7 +110,7 @@ fclean:	clean
 
 valgrind: $(NAME)
 	valgrind --suppressions=ignore_rdl_leaks.txt --leak-check=full --trace-children=yes --track-fds=yes ./minishell
-# valgrind --suppressions=ignore_rdl_leaks.txt --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes ./minishell
+#	valgrind --suppressions=ignore_rdl_leaks.txt --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes ./minishell
 	
 re:	fclean all 
 	./$(NAME)

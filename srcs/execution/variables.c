@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:26:10 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/28 16:38:00 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/28 17:30:57 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ char	*save_varname(char *line)
 
 	i = 0;
 	count = 0;
-	if(line[count] == '?')
-		return("?");
+	if (line[count] == '?')
+		return ("?");
 	while (line[count] && ft_isalnum(line[count]))
 		count++;
 	var_name = ft_calloc(count + 1, sizeof(char));
@@ -30,19 +30,21 @@ char	*save_varname(char *line)
 		var_name[i] = line[i];
 		i++;
 	}
-	return (var_name);
+	line = ft_strcpy(line, var_name);
+	free(var_name);
+	return (line);
 }
 
 char	*find_var_inline(char *line)
 {
-	printf("checked char = %c \n", *line);
 	while (*line && *line != '$')
 	{	
 		if (*line == '\"')
 		{	
 			while (*line++ && *line != '\"')
 			{
-				if (*line == '$' && (ft_isalnum(*(line + 1)) || *(line + 1) == '?'))
+				if (*line == '$' && (ft_isalnum(*(line + 1))
+						|| *(line + 1) == '?'))
 					return ((char *)line);
 			}
 		}
@@ -65,11 +67,10 @@ char	*delete_var_name(int pos2, char *str)
 {
 	int		i;
 	char	*newline;
-	i = pos2;
 
+	i = pos2;
 	newline = calloc(ft_strlen(str) + 1, sizeof(char));
 	newline = ft_strcpy(newline, str);
-
 	while (i >= 0)
 	{
 		if (newline[i] == '$')
@@ -94,12 +95,14 @@ char	*add_varcontent(char *line, char *var_name, char *var_value)
 	newline = calloc(ft_strlen(line) + 1, sizeof(char));
 	newline = ft_strcpy(newline, line);
 	i = -1;
-	pos = ft_strlen(line) - ft_strlen(find_var_inline(line)) + ft_strlen(var_name);
+	pos = ft_strlen(line) - ft_strlen(find_var_inline(line));
+	pos += ft_strlen(var_name);
 	pos2 = pos;
 	if (var_value)
 		while (var_value[++i])
 			newline = ft_charadd(newline, var_value[i], &newline[pos++]);
 	newline = delete_var_name(pos2, newline);
+	free(line);
 	return (newline);
 }
 
@@ -109,22 +112,19 @@ char	*check_var(char *line, t_vars *vars)
 	char	*var_value;
 	char	*newline;
 
-printf("line = %s\n", line);
 	newline = calloc(ft_strlen(line) + 1, sizeof(char));
 	newline = ft_strcpy(newline, line);
 	while (find_var_inline(newline))
 	{
-/*debug*/printf("<><><><><><><><><><>\n");
 		var_name = save_varname(find_var_inline(newline) + 1);
-/*debug*/printf("var_name =	>%s<\n", var_name);
 		if (!ft_strcmp(var_name, "?"))
 			var_value = ft_itoa(vars->last_output);
 		else
 			var_value = ft_getenv(vars->env, var_name);
-/*debug*/printf("var_value =	>%s<\n", var_value);
 		newline = add_varcontent(newline, var_name, var_value);
-/*debug*/printf("newline =	>%s<\n", newline);
-/*debug*/printf("<><><><><><><><><><>\n");
+		free(var_value);
 	}
-	return (newline);
+	line = ft_strcpy(line, newline);
+	free(newline);
+	return (line);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   token_op.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/25 11:09:16 by mjarry            #+#    #+#             */
+/*   Updated: 2022/10/28 17:29:02 by ast-jean         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
 t_token	*remove_token(t_token *remove, t_vars *vars)
@@ -6,6 +18,7 @@ t_token	*remove_token(t_token *remove, t_vars *vars)
 
 	if (!remove)
 		return (NULL);
+	nex = remove->next;
 	if (remove->next && remove->prev)
 	{
 		remove->prev->next = remove->next;
@@ -30,7 +43,10 @@ t_token	*remove_token(t_token *remove, t_vars *vars)
 		nex = remove->next;
 	}
 	else
+	{
+		vars->token->first = NULL;
 		nex = NULL;
+	}
 	if (remove)
 	{
 		free(remove->cont);

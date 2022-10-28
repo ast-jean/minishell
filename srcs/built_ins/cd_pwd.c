@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:36 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/24 13:30:20 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/25 09:41:53 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int	finding_index(t_vars *vars, char *str, int n)
 
 void	changing_oldpwd(t_vars *vars, char *oldpwd)
 {
-	int	o;
-	char *str;
+	int		o;
+	char	*str;
 
 	o = finding_index(vars, "OLDPWD=", 7);
 	if (o != -1)

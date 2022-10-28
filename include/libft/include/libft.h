@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/25 09:38:31 by mjarry            #+#    #+#             */
+/*   Updated: 2022/10/25 13:17:27 by xchouina         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
@@ -8,7 +19,6 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdbool.h>
-
 
 typedef struct s_list
 {
@@ -89,13 +99,14 @@ void	ft_arrayfree(char **tab);
 int		ft_arraylen(char **tab);
 int		ft_arrayintsrch(char **tab, char *str_to_find);
 char	*ft_arraysrch(char **tab, char *str_to_find);
-char 	**ft_arraycpy(char **tab);
+char	**ft_arraycpy(char **tab);
 char	**ft_arrayadd(char **tab, char *str_to_add);
 char	**ft_arrayrm(char **tab, char *str_to_rm);
 
-char 	*ft_strtoupper(char *str);
+char	*ft_strtoupper(char *str);
 int		ft_is_str_alnum(char *str);
 char	*ft_charrm(char *str, char *s);
 char	*ft_charadd(char *str, char c, char *s);
+char	*ft_strjoinf2(char *s1, char *s2);
 
 #endif

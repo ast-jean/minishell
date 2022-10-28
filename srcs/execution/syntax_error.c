@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:23:33 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/13 15:35:38 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/25 14:35:56 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,11 @@ char	*ft_getenv(char **env, char *varname)
 	int		i;
 	int		j;
 	int		k;
+	char	*temp;
 	char	*var_value;
 
 	i = -1;
+	temp = NULL;
 	var_value = NULL;
 	while (env[++i])
 	{

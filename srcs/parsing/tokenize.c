@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tokenize.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/25 11:11:14 by mjarry            #+#    #+#             */
+/*   Updated: 2022/10/26 13:18:18 by ast-jean         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
@@ -73,7 +84,10 @@ char	**nullify_str(char *line, char *delims, int len, int count)
 				i++;
 		}
 		if (!line[i])
+		{
+			free(d_found);
 			return (NULL);
+		}
 		else if (ft_strchr(delims, line[i]))
 		{
 			d_found[j++] = line[i];
@@ -85,11 +99,11 @@ char	**nullify_str(char *line, char *delims, int len, int count)
 
 char	**tokenize(char *line)
 {
-	int	i;
 	int	len;
 	int	count;
 
-	i = 0;
+	if (!line)
+		return (NULL);
 	count = cnt_delims(line, " <>|");
 	len = ft_strlen(line);
 	return (nullify_str(line, " <>|", len, count));
