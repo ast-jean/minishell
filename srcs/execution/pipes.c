@@ -6,7 +6,7 @@
 /*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:02:56 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/25 10:40:28 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/28 10:46:31 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,12 @@ void	actually_forking(t_token *current, t_vars *vars, char **env)
 	{
 		signal(SIGINT, handler_exec);
 		signal(SIGQUIT, SIG_DFL);
-		dup2(vars->fdi, 0);
-		dup2(vars->fdo, 1);
+		// dprintf(2, "fdi: %d\n", vars->fdi);
+		// dprintf(2, "fdo: %d\n", vars->fdo);
+		if (vars->fdi != 0)
+			dup2(vars->fdi, 0);
+		if (vars->fdo != 1)
+			dup2(vars->fdo, 1);
 		close_fds(vars->fdi, vars->fdo, 0);
 		if (is_builtin(current, vars) == -1)
 		{
@@ -85,29 +89,42 @@ void	actually_forking(t_token *current, t_vars *vars, char **env)
 
 void	fd_catch(t_vars *vars, t_token *current, char **env)
 {
-	int	fd;
 	int	i;
 	int	group;
-
+	int	act;
+	
+	vars->pid_count = 0;
+	act = 0;
+	if (vars->pipe_count > 0)
+		act = WNOHANG;
 	finding_paths(vars);
 	group = current->group_num;
-	fd = finding_redirs(current, redirect_input(current, 0), vars, env);
+	vars->fdrd[0] = finding_redirs(current, redirect_input(current, 0), vars, env);
 	current = skip_group(group, vars);
 	i = 0;
-	while ((i++ < vars->pipe_count) && (vars->pid_count < 32766))
+	while ((i < vars->pipe_count) && (vars->pid_count < 32766))
 	{
 		group = current->group_num;
 		finding_paths(vars);
-		fd = finding_redirs(current, redirect_input(current, fd), vars, env);
+		vars->fdrd[i + 1] = finding_redirs(current, redirect_input(current, vars->fdrd[i]), vars, env);
 		current = skip_group(group, vars);
-		close_fds(fd, 1, 0);
+		i++;
 	}
+	while (i > 0)
+		close(vars->fdrd[--i]);
 	i = 0;
+	// dprintf(2, "pidcount = %d\n", vars->pid_count);
 	while (i <= (vars->pid_count - 1))
 	{
-		waitpid(vars->pid[i++], &vars->status, 0);
+		// close_fds(vars->fdi, vars->fdo, 0);
+		if (i == vars->pipe_count)
+			act = 0;
+		// dprintf(2, "i :%d\n", i);
+		// dprintf(2, "act: %d\n", act);
+		// dprintf(2, "token: %s\n", current->cont);
+		waitpid(vars->pid[i++], &vars->status, act);
 		vars->last_output = get_error(vars->status);
 	}
-	close_fds(fd, 1, 0);
+	// close_fds(vars->fdi, vars->fdo, 0);
 	signal(SIGINT, handler);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:38:00 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/25 14:16:22 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/10/28 10:48:39 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_vars
 	char	*line;
 	t_token	*token;
 	int		pipe_count;
+	int		fdrd[50];
 	int		pid[32768];
 	int		pid_count;
 	int		fdi;
