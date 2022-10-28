@@ -1,18 +1,5 @@
 #include "../../include/minishell.h"
 
-void	if_first_token(t_token *remove, t_vars *vars, t_token *nex)
-{
-	remove->next->prev = NULL;
-	nex = remove->next;
-	while (nex)
-	{
-		nex->first = remove->next;
-		nex = nex->next;
-	}
-	vars->token = remove->next;
-	nex = remove->next;
-}
-
 t_token	*remove_token(t_token *remove, t_vars *vars)
 {
 	t_token	*nex;
@@ -31,7 +18,17 @@ t_token	*remove_token(t_token *remove, t_vars *vars)
 		nex = NULL;
 	}
 	else if (remove->next && !remove->prev)
-		if_first_token(remove, vars, nex);
+	{
+		remove->next->prev = NULL;
+		nex = remove->next;
+		while (nex)
+		{
+			nex->first = remove->next;
+			nex = nex->next;
+		}
+		vars->token = remove->next;
+		nex = remove->next;
+	}
 	else
 		nex = NULL;
 	if (remove)
@@ -40,7 +37,49 @@ t_token	*remove_token(t_token *remove, t_vars *vars)
 		free(remove);
 	}
 	return (nex);
-}
+} // TOFIX TOO LONG
+
+// void	if_first_token(t_token *remove, t_vars *vars, t_token *nex)
+// {
+// 	remove->next->prev = NULL;
+// 	nex = remove->next;
+// 	while (nex)
+// 	{
+// 		nex->first = remove->next;
+// 		nex = nex->next;
+// 	}
+// 	vars->token = remove->next;
+// 	nex = remove->next;
+// }
+
+// t_token	*remove_token(t_token *remove, t_vars *vars)
+// {
+// 	t_token	*nex;
+
+// 	if (!remove)
+// 		return (NULL);
+// 	if (remove->next && remove->prev)
+// 	{
+// 		remove->prev->next = remove->next;
+// 		remove->next->prev = remove->prev;
+// 		nex = remove->next;
+// 	}
+// 	else if (!remove->next && remove->prev)
+// 	{
+// 		remove->prev->next = NULL;
+// 		nex = NULL;
+// 	}
+// 	else if (remove->next && !remove->prev)
+// 		if_first_token(remove, vars, nex);
+// 	else
+// 		nex = NULL;
+// 	if (remove)
+// 	{
+// 		free(remove->cont);
+// 		free(remove);
+// 	}
+// 	return (nex);
+// }
 
 t_token	*new_token_after(t_token *after_this_one, char *file_name)
 {
