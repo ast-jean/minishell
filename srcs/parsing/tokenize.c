@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 11:11:14 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/26 13:18:18 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/28 14:45:14 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,35 +65,43 @@ char	**split_del(char *line, char *d_found, int len)
 	return (split);
 }
 
+char	*nullify_loop(char *line, int *i, char *d_found, char *delims)
+{
+	char	c;
+	int		j;
+
+	j = 0;
+	if (line[*i] == 34 || line[*i] == 39)
+	{
+		c = line[(*i)++];
+		while (line[*i] && line[*i] != c)
+			(*i)++;
+	}
+	if (!line[*i])
+	{
+		free(d_found);
+		return (NULL);
+	}
+	else if (ft_strchr(delims, line[*i]))
+	{
+		d_found[j++] = line[*i];
+		line[*i] = '\0';
+	}
+	return (line);
+}
+
 char	**nullify_str(char *line, char *delims, int len, int count)
 {
 	char	*d_found;
-	char	c;
 	int		i;
-	int		j;
+	char	*res;
 
 	i = -1;
-	j = 0;
 	d_found = ft_calloc(sizeof(char) * (count + 1), count);
 	while (++i < len)
-	{
-		if (line[i] == 34 || line[i] == 39)
-		{
-			c = line[i++];
-			while (line[i] && line[i] != c)
-				i++;
-		}
-		if (!line[i])
-		{
-			free(d_found);
-			return (NULL);
-		}
-		else if (ft_strchr(delims, line[i]))
-		{
-			d_found[j++] = line[i];
-			line[i] = '\0';
-		}
-	}
+		res = nullify_loop(line, &i, d_found, delims);
+	if (res == NULL)
+		return (NULL);
 	return (split_del(line, d_found, len));
 }
 
