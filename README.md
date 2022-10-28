@@ -145,7 +145,8 @@ cat <"./test_files/infile" | grep hello
 
 
 <h1 align="center">MINISHELL</h1>
-<h2 align="center">Un shell minimaliste</h2>
+<p align="center">Un shell minimaliste</p>
+
 ## Why:
 
 Minishell is a school team-working project aiming to recreate our own bash.
