@@ -6,7 +6,7 @@
 /*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 11:09:16 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/25 11:09:53 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/28 10:50:30 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_token	*remove_token(t_token *remove, t_vars *vars)
 
 	if (!remove)
 		return (NULL);
+	nex = remove->next;
 	if (remove->next && remove->prev)
 	{
 		remove->prev->next = remove->next;
