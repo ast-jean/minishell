@@ -80,6 +80,15 @@ void	remove_tmp_files(t_vars *vars)
 	}
 }
 
+void	disable_echo()
+{
+	struct termios	attributes;
+
+	tcgetattr(STDIN_FILENO, &attributes);
+	attributes.c_lflag &= ~ECHOCTL;
+	tcsetattr(STDIN_FILENO, TCSANOW, &attributes);
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_vars	vars;	
@@ -94,6 +103,7 @@ int	main(int argc, char **argv, char **env)
 	init_shell(&vars, env);
 	signal(SIGINT, handler);
 	signal(SIGQUIT, SIG_IGN);
+	disable_echo();
 	while (1)
 	{
 		line = readline(prompt);
