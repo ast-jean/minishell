@@ -144,8 +144,7 @@ cat <"./test_files/infile" | grep hello
 
 
 
-
-# MINISHELL
+<h1 align="center">MINISHELL</h1>
 
 ## Why:
 
