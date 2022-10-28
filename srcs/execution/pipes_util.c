@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:16:51 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/26 11:54:56 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/28 15:32:30 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,30 @@ int	finding_redirs(t_token *current, int fdi, t_vars *vars, char **env)
 	else
 		actually_forking(current, vars, env);
 	return (close_fds(vars->fdi, vars->fdo, pipefd[0]));
+}
+
+int	is_bi_nopipes(t_token *current, t_vars *vars, char **env)
+{
+	if (vars->pipe_count > 0)
+	{
+		if (current && (!ft_strcmp(remove_quotes(current->cont), "export")
+				|| !ft_strcmp(remove_quotes(current->cont), "unset")
+				|| !ft_strcmp(remove_quotes(current->cont), "cd")
+				|| !ft_strcmp(remove_quotes(current->cont), "exit")))
+			return (-2);
+		return (-1);
+	}
+	if (current && !ft_strcmp(remove_quotes(current->cont), "export"))
+		return (builtin_export(vars));
+	else if (current && !ft_strcmp(remove_quotes(current->cont), "unset"))
+		return (builtin_unset(vars));
+	else if (current && !ft_strcmp(remove_quotes(current->cont), "cd"))
+		return (builtin_cd(vars, env));
+	else if (current && !ft_strcmp(remove_quotes(current->cont), "exit"))
+	{
+		close_fds(vars->fdi, vars->fdo, 0);
+		current = skip_group(current->group_num, vars);
+		quit_shell(vars);
+	}
+	return (-1);
 }
