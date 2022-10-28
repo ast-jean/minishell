@@ -6,7 +6,7 @@
 /*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:38:00 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/25 11:13:18 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/26 11:42:08 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_vars
 	char	*line;
 	t_token	*token;
 	int		pipe_count;
+	int		fdrd[50];
 	int		pid[32768];
 	int		pid_count;
 	int		fdi;
