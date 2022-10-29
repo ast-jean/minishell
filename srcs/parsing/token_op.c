@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   token_op.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marie-soleiljarry <marie-soleiljarry@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 11:09:16 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/28 16:37:43 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/29 11:01:01 by marie-solei      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+void	free_token(t_token *remove)
+{
+	if (!remove)
+		return ;
+	free(remove->cont);
+	free(remove);
+}
 
 t_token	*if_first_token(t_token *remove, t_vars *vars, t_token *nex)
 {
@@ -52,11 +60,7 @@ t_token	*remove_token(t_token *remove, t_vars *vars)
 		vars->token->first = NULL;
 		nex = NULL;
 	}
-	if (remove)
-	{
-		free(remove->cont);
-		free(remove);
-	}
+	free_token(remove)
 	return (nex);
 }
 
@@ -87,26 +91,26 @@ void	*access_ptr(t_vars *vars, int i)
 	return (vars->token);
 }
 
-void	debug_print_tokens(t_vars *vars)
-{
-	t_token	*current;
-	int		i;
+// void	debug_print_tokens(t_vars *vars)
+// {
+// 	t_token	*current;
+// 	int		i;
 
-	i = 0;
-	current = vars->token->first;
-	if (!current)
-		return ;
-	while (current)
-	{
-		printf("----------------\n");
-		printf("Token %d\n", i);
-		printf("Cont=	->%s<-\n", current->cont);
-		printf("Ptr=	->%p<-\n", current);
-		printf("First=	->%p<-\n", current->first);
-		printf("Prev=	->%p<-\n", current->prev);
-		printf("Next=	->%p<-\n", current->next);
-		current = current->next;
-		i++;
-	}
-	printf("-------END-------\n");
-}
+// 	i = 0;
+// 	current = vars->token->first;
+// 	if (!current)
+// 		return ;
+// 	while (current)
+// 	{
+// 		printf("----------------\n");
+// 		printf("Token %d\n", i);
+// 		printf("Cont=	->%s<-\n", current->cont);
+// 		printf("Ptr=	->%p<-\n", current);
+// 		printf("First=	->%p<-\n", current->first);
+// 		printf("Prev=	->%p<-\n", current->prev);
+// 		printf("Next=	->%p<-\n", current->next);
+// 		current = current->next;
+// 		i++;
+// 	}
+// 	printf("-------END-------\n");
+// }
