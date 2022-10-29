@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   newtoken.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: marie-soleiljarry <marie-soleiljarry@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 11:18:02 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/26 13:15:40 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/29 11:13:40 by marie-solei      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,9 @@ char	*newtoken_q(char *line, int *i, char c)
 	while (line[*i])
 	{
 		if (line[*i] == 34 || line[*i] == 39)
-		{
 			str2 = ft_strjoinf2(str, newtoken_q(line, i, line[*i]));
-			free(str);
-		}
 		else if (line[*i])
-		{
 			str2 = ft_strjoinf2(str, newtoken_s(line, i));
-			free(str);
-		}
 	}
 	return (str2);
 }
@@ -76,10 +70,7 @@ char	*newtoken_s(char *line, int *i)
 	while (line[*i])
 	{
 		if (line[*i] == 34 || line[*i] == 39)
-		{
 			str = ft_strjoinf2(str2, newtoken_q(line, i, line[*i]));
-			free(str2);
-		}
 	}
 	return (str);
 }
