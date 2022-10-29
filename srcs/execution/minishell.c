@@ -6,7 +6,7 @@
 /*   By: marie-soleiljarry <marie-soleiljarry@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:58:05 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/29 11:23:18 by marie-solei      ###   ########.fr       */
+/*   Updated: 2022/10/29 11:30:22 by marie-solei      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,15 @@ void	parse_and_exec(char *line, t_vars *vars, char **env)
 	if (!creating_tokens(line, vars))
 	{
 		if (!check_here(vars))
+		{
+			free_tokens(vars);
 			return ;
+		}
 		if (parsing_pipes(vars) == -1)
+		{
+			free_tokens(vars);
 			return ;
+		}
 		fd_catch(vars, vars->token->first, env);
 	}
 }
