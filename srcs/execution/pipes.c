@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marie-soleiljarry <marie-soleiljarry@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:02:56 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/28 16:44:18 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/29 08:28:28 by marie-solei      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,8 @@ void	actually_forking(t_token *current, t_vars *vars, char **env)
 	{
 		signal(SIGINT, handler_exec);
 		signal(SIGQUIT, SIG_DFL);
-		// dprintf(2, "fdi: %d\n", vars->fdi);
-		// dprintf(2, "fdo: %d\n", vars->fdo);
-		if (vars->fdi != 0)
-			dup2(vars->fdi, 0);
-		if (vars->fdo != 1)
-			dup2(vars->fdo, 1);
+		dup2(vars->fdi, 0);
+		dup2(vars->fdo, 1);
 		close_fds(vars->fdi, vars->fdo, 0);
 		if (is_builtin(current, vars) == -1)
 		{
@@ -91,7 +87,7 @@ void	fd_catch(t_vars *vars, t_token *current, char **env)
 {
 	int	i;
 	int	group;
-	
+
 	vars->pid_count = 0;
 	finding_paths(vars);
 	group = current->group_num;
