@@ -6,7 +6,7 @@
 /*   By: marie-soleiljarry <marie-soleiljarry@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 11:11:14 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/29 11:08:11 by marie-solei      ###   ########.fr       */
+/*   Updated: 2022/10/29 11:26:08 by marie-solei      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,14 @@ int	cnt_delims(char *line, char *delims)
 	return (count);
 }
 
-char	**split_del(char *line, char *d_found, int len)
+char	**split_del(char **split, char *line, char *d_found, int len)
 {
-	char	**split;
 	int		i;
 	int		j;
 	char	c;
 
 	i = 0;
 	j = 0;
-	split = NULL;
 	while (i < len)
 	{
 		if (line[i] == 34 || line[i] == 39)
@@ -92,17 +90,19 @@ char	*nullify_loop(char *line, int *i, char *d_found, char *delims)
 
 char	**nullify_str(char *line, char *delims, int len, int count)
 {
+	char	**split;
 	char	*d_found;
 	int		i;
 	char	*res;
 
 	i = -1;
+	split = NULL;
 	d_found = ft_calloc(sizeof(char) * (count + 1), count);
 	while (++i < len)
 		res = nullify_loop(line, &i, d_found, delims);
 	if (res == NULL)
 		return (NULL);
-	return (split_del(line, d_found, len));
+	return (split_del(split, line, d_found, len));
 }
 
 char	**tokenize(char *line)
