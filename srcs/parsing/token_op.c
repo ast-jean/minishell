@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_op.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marie-soleiljarry <marie-soleiljarry@st    +#+  +:+       +#+        */
+/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 11:09:16 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/29 11:01:01 by marie-solei      ###   ########.fr       */
+/*   Updated: 2022/10/31 09:43:49 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_token	*remove_token(t_token *remove, t_vars *vars)
 		vars->token->first = NULL;
 		nex = NULL;
 	}
-	free_token(remove)
+	free_token(remove);
 	return (nex);
 }
 
