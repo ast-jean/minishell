@@ -6,7 +6,7 @@
 /*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:59 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/31 13:51:15 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/31 14:42:36 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,9 @@ int	builtin_export(t_vars *vars)
 	{
 		if (ft_strchr(token->next->cont, '='))
 		{
-			content = remove_quotes(token->next->cont);
+			content = ft_strdup(remove_quotes(token->next->cont));
 			vars->env = ft_arrayadd(vars->env, content);
+			ft_arrayprint(vars->env);
 		}
 		token = token->next;
 	}
