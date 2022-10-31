@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   token_op.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 11:09:16 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/28 16:37:43 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/28 17:29:02 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-t_token	*if_first_token(t_token *remove, t_vars *vars, t_token *nex)
-{
-	remove->next->prev = NULL;
-	nex = remove->next;
-	vars->token->first = nex;
-	while (nex)
-	{
-		nex->first = remove->next;
-		nex = nex->next;
-	}
-	vars->token = remove->next;
-	nex = remove->next;
-	return (nex);
-}
 
 t_token	*remove_token(t_token *remove, t_vars *vars)
 {
@@ -46,7 +31,17 @@ t_token	*remove_token(t_token *remove, t_vars *vars)
 		nex = NULL;
 	}
 	else if (remove->next && !remove->prev)
-		nex = if_first_token(remove, vars, nex);
+	{
+		remove->next->prev = NULL;
+		nex = remove->next;
+		while (nex)
+		{
+			nex->first = remove->next;
+			nex = nex->next;
+		}
+		vars->token = remove->next;
+		nex = remove->next;
+	}
 	else
 	{
 		vars->token->first = NULL;
@@ -58,7 +53,49 @@ t_token	*remove_token(t_token *remove, t_vars *vars)
 		free(remove);
 	}
 	return (nex);
-}
+} // TOFIX TOO LONG
+
+// void	if_first_token(t_token *remove, t_vars *vars, t_token *nex)
+// {
+// 	remove->next->prev = NULL;
+// 	nex = remove->next;
+// 	while (nex)
+// 	{
+// 		nex->first = remove->next;
+// 		nex = nex->next;
+// 	}
+// 	vars->token = remove->next;
+// 	nex = remove->next;
+// }
+
+// t_token	*remove_token(t_token *remove, t_vars *vars)
+// {
+// 	t_token	*nex;
+
+// 	if (!remove)
+// 		return (NULL);
+// 	if (remove->next && remove->prev)
+// 	{
+// 		remove->prev->next = remove->next;
+// 		remove->next->prev = remove->prev;
+// 		nex = remove->next;
+// 	}
+// 	else if (!remove->next && remove->prev)
+// 	{
+// 		remove->prev->next = NULL;
+// 		nex = NULL;
+// 	}
+// 	else if (remove->next && !remove->prev)
+// 		if_first_token(remove, vars, nex);
+// 	else
+// 		nex = NULL;
+// 	if (remove)
+// 	{
+// 		free(remove->cont);
+// 		free(remove);
+// 	}
+// 	return (nex);
+// }
 
 t_token	*new_token_after(t_token *after_this_one, char *file_name)
 {

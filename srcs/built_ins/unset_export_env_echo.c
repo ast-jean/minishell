@@ -6,7 +6,7 @@
 /*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:59 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/31 13:39:59 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/31 13:51:15 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,12 @@ int	builtin_echo(t_token *current, t_vars *vars)
 {
 	bool	n;
 	char	*varstr;
+	char	*str;
 
 	vars->gn = current->group_num;
 	n = false;
 	current = current->next;
+	str = ft_strdup(current->cont);
 	while (current && is_n(remove_quotes(current->cont)))
 	{
 		n = true;
@@ -103,6 +105,7 @@ int	builtin_echo(t_token *current, t_vars *vars)
 			write(1, " ", 1);
 		current = current->next;
 	}
+	free(str);
 	vars->last_output = 0;
 	if (n == false)
 		ft_putstr_fd("\n", 1);

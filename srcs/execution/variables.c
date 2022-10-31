@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:26:10 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/26 13:04:12 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/28 17:30:57 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ char	*add_varcontent(char *line, char *var_name, char *var_value)
 		while (var_value[++i])
 			newline = ft_charadd(newline, var_value[i], &newline[pos++]);
 	newline = delete_var_name(pos2, newline);
-	printf("line >%s<\nnewline >%s<\n", line, newline);
 	free(line);
 	return (newline);
 }
