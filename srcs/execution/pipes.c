@@ -6,7 +6,7 @@
 /*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:02:56 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/28 16:44:18 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/31 12:04:50 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ void	actually_forking(t_token *current, t_vars *vars, char **env)
 	{
 		signal(SIGINT, handler_exec);
 		signal(SIGQUIT, SIG_DFL);
-		// dprintf(2, "fdi: %d\n", vars->fdi);
-		// dprintf(2, "fdo: %d\n", vars->fdo);
 		if (vars->fdi != 0)
 			dup2(vars->fdi, 0);
 		if (vars->fdo != 1)
@@ -91,18 +89,19 @@ void	fd_catch(t_vars *vars, t_token *current, char **env)
 {
 	int	i;
 	int	group;
-	
 	vars->pid_count = 0;
 	finding_paths(vars);
 	group = current->group_num;
-	vars->fdrd[0] = finding_redirs(current, redirect_input(current, 0), vars, env);
+	vars->fdrd[0] = finding_redirs(current,
+			redirect_input(current, 0), vars, env);
 	current = skip_group(group, vars);
 	i = 0;
 	while ((i < vars->pipe_count) && (vars->pid_count < 32766))
 	{
 		group = current->group_num;
 		finding_paths(vars);
-		vars->fdrd[i + 1] = finding_redirs(current, redirect_input(current, vars->fdrd[i]), vars, env);
+		vars->fdrd[i + 1] = finding_redirs(current,
+				redirect_input(current, vars->fdrd[i]), vars, env);
 		current = skip_group(group, vars);
 		i++;
 	}

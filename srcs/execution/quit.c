@@ -6,7 +6,7 @@
 /*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:42:14 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/25 10:42:30 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/31 12:27:57 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 void	free_tokens(t_vars *vars)
 {
 	t_token	*temp;
+	t_token	*temp2;
 
 	temp = vars->token->first;
 	while (vars && temp)
 	{
 		free(temp->cont);
+		temp2 = temp;
 		temp = temp->next;
-		free((temp->prev));
+		free((temp2));
 	}
 }
 
