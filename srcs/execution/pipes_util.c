@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:16:51 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/26 11:54:56 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/31 15:04:31 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,15 @@ int	finding_redirs(t_token *current, int fdi, t_vars *vars, char **env)
 	else
 		actually_forking(current, vars, env);
 	return (close_fds(vars->fdi, vars->fdo, pipefd[0]));
+}
+
+int	is_builtin(t_token *current, t_vars *vars)
+{
+	if (current && !ft_strcmp(remove_quotes(current->cont), "pwd"))
+		return (builtin_pwd(vars));
+	else if (current && !ft_strcmp(remove_quotes(current->cont), "env"))
+		return (builtin_env(vars));
+	else if (current && !ft_strcmp(remove_quotes(current->cont), "echo"))
+		return (builtin_echo(current, vars));
+	return (-1);
 }

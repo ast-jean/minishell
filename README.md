@@ -29,8 +29,6 @@ TOKNOW:
 	- REDIRECTIONS : when one infile and one outfile not separated by pipe, segfaults
 	- "echo '"
 
-
-
  LOG:
 
  Tests pour exam (what actually doesnt work)
