@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:02:56 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/28 16:53:32 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/10/31 11:56:31 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	actually_forking(t_token *current, t_vars *vars, char **env)
 void	catch_loops(t_vars *vars, t_token *current, char **env, int group)
 {
 	int	i;
-
 	i = 0;
 	while ((i < vars->pipe_count) && (vars->pid_count < 32766))
 	{
@@ -80,13 +79,13 @@ void	catch_loops(t_vars *vars, t_token *current, char **env, int group)
 void	fd_catch(t_vars *vars, t_token *current, char **env)
 {
 	int	group;
-	int	act;
+	// int	act;
 	int	i;
 
 	vars->pid_count = 0;
-	act = 0;
-	if (vars->pipe_count > 0)
-		act = WNOHANG;
+	// act = 0;
+	// if (vars->pipe_count > 0)
+	// 	act = WNOHANG;
 	finding_paths(vars);
 	group = current->group_num;
 	vars->fdrd[0] = finding_redirs(current,
@@ -96,9 +95,7 @@ void	fd_catch(t_vars *vars, t_token *current, char **env)
 	i = 0;
 	while (i <= (vars->pid_count - 1))
 	{
-		if (i == vars->pipe_count)
-			act = 0;
-		waitpid(vars->pid[i++], &vars->status, act);
+		waitpid(vars->pid[i++], &vars->status, 0);
 		vars->last_output = get_error(vars->status);
 	}
 	signal(SIGINT, handler);
