@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:17:42 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/28 10:53:58 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/31 18:26:41 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ t_token	*rm_redir(t_token *token, t_vars *vars)
 			token = rm2tokens(token, vars);
 		else
 			token = token->next;
-		printf("%p\n", token);
 	}
 	token = vars->token->first;
 	while (token && token->group_num != group)
