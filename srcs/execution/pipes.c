@@ -6,7 +6,7 @@
 /*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:02:56 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/31 13:43:21 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/31 16:16:30 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	actually_forking(t_token *current, t_vars *vars, char **env)
 				ft_putstr_fd(remove_quotes(current->cont), 2);
 				ft_putstr_fd(": cmd not found\n", 2);
 				current = skip_group(current->group_num, vars);
-				exit(1);
+				exit(127);
 			}
 			else
 				format_execve(vars, current);
@@ -116,3 +116,5 @@ void	fd_catch(t_vars *vars, t_token *current, char **env)
 	}
 	signal(SIGINT, handler);
 }
+
+

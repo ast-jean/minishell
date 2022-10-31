@@ -6,7 +6,7 @@
 /*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:16:51 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/26 11:54:56 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/31 16:26:56 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,11 @@ void	format_execve(t_vars *vars, t_token *token)
 	vars->av[i] = remove_quotes(token->cont);
 	while (++i < vars->ac)
 	{
-		vars->av[i] = remove_quotes(token->next->cont);
+		vars->av[i] = remove_quotes(check_var(token->next->cont, vars));
 		token = token->next;
 	}
 	vars->av[i] = NULL;
 	execve(vars->path, vars->av, vars->env);
-	current = skip_group(current->group_num, vars);
 	exit(errno);
 }
 
