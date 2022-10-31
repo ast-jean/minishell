@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:58:05 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/28 17:30:19 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/31 13:48:21 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,15 @@ void	parse_and_exec(char *line, t_vars *vars, char **env)
 	if (!creating_tokens(line, vars))
 	{
 		if (!check_here(vars))
+		{
+			free_tokens(vars);
 			return ;
+		}
 		if (parsing_pipes(vars) == -1)
+		{
+			free_tokens(vars);
 			return ;
+		}
 		fd_catch(vars, vars->token->first, env);
 	}
 }

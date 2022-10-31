@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:59 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/28 17:32:52 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/31 13:48:12 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,9 @@ int	builtin_echo(t_token *current, t_vars *vars)
 	while (current && current->group_num == vars->gn
 		&& ft_strcmp(current->cont, "|") != 0)
 	{
-		varstr = check_var(str, vars);
-		ft_putstr_fd(remove_quotes(varstr), 1);
+		varstr = check_var(current->cont, vars);//
+		ft_putstr_fd(varstr, 1);//
+		free(varstr);// HAVE TO DO THIS ONLY ONCE!
 		if (current->next != NULL && current->next->group_num == vars->gn)
 			write(1, " ", 1);
 		current = current->next;
