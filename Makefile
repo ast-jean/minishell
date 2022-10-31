@@ -3,7 +3,8 @@
 NAME = minishell
 
 SRCS_FILES 		=	built_ins/cd_pwd.c					\
-					built_ins/unset_export_env_echo.c	\
+					built_ins/unset_export_env.c		\
+					built_ins/echo.c					\
 					execution/check_heredoc.c			\
 					execution/exec_simp_cmd.c			\
 					execution/heredocs.c 				\

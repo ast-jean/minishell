@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:38:00 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/28 10:48:39 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/31 18:23:04 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,10 +150,12 @@ int		cnt_delims(char *line, char *delims);
 int		builtin_cd(t_vars *vars, char **env);
 int		builtin_pwd(t_vars *vars);
 
-// EXPORT_UNSET_EV_ECHO.C
+//ECHO.C
+int		builtin_echo(t_token *current, t_vars *vars);
+
+// EXPORT_UNSET_ENV
 int		builtin_env(t_vars *vars);
 int		builtin_unset(t_vars *vars);
 int		builtin_export(t_vars *vars);
-int		builtin_echo(t_token *current, t_vars *vars);
 //NOTE: ------------------------------------------------
 #endif

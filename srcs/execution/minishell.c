@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:58:05 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/31 13:51:10 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/31 15:01:05 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,25 @@ void	init_shell(t_vars *vars, char **env)
 	printf("*******************************\n");
 }
 
-void	quotes_and_var(t_vars *vars)
+int	just_space(char *str)
 {
-	char	*varstr;
-	t_token	*current;
-	
-	current = vars->token->first;
-	while (current)
-	{
-		varstr = check_var(current->cont, vars);
-		remove_quotes(varstr);
-		// free(varstr);
-		current = current->next;
-	}
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (-1);
+	while (str[i] && (str[i] == ' ' || str[i] == 9))
+		i++;
+	if (!str[i])
+		return (1);
+	return (0);
 }
 
 void	parse_and_exec(char *line, t_vars *vars, char **env)
 {
 	if (ft_strlen(line) == 0)
+		return ;
+	if (just_space(line) == 1)
 		return ;
 	if (!creating_tokens(line, vars))
 	{
@@ -58,7 +59,6 @@ void	parse_and_exec(char *line, t_vars *vars, char **env)
 			free_tokens(vars);
 			return ;
 		}
-		// quotes_and_var(vars);
 		fd_catch(vars, vars->token->first, env);
 	}
 }

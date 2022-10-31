@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:26:10 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/28 17:30:57 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/31 17:40:03 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,8 @@ char	*check_var(char *line, t_vars *vars)
 		newline = add_varcontent(newline, var_name, var_value);
 		free(var_value);
 	}
+	free(line);
+	line = malloc(((int)(ft_strlen(newline)) + 1) * sizeof(char));
 	line = ft_strcpy(line, newline);
 	free(newline);
 	return (line);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_op.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 11:09:16 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/31 15:33:13 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/31 18:23:12 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,26 +91,26 @@ void	*access_ptr(t_vars *vars, int i)
 	return (vars->token);
 }
 
-void	debug_print_tokens(t_vars *vars)
-{
-	t_token	*current;
-	int		i;
+// void	debug_print_tokens(t_vars *vars)
+// {
+// 	t_token	*current;
+// 	int		i;
 
-	i = 0;
-	current = vars->token->first;
-	if (!current)
-		return ;
-	while (current)
-	{
-		printf("----------------\n");
-		printf("Token %d\n", i);
-		printf("Cont=	->%s<-\n", current->cont);
-		printf("Ptr=	->%p<-\n", current);
-		printf("First=	->%p<-\n", current->first);
-		printf("Prev=	->%p<-\n", current->prev);
-		printf("Next=	->%p<-\n", current->next);
-		current = current->next;
-		i++;
-	}
-	printf("-------END-------\n");
-}
+// 	i = 0;
+// 	current = vars->token->first;
+// 	if (!current)
+// 		return ;
+// 	while (current)
+// 	{
+// 		printf("----------------\n");
+// 		printf("Token %d\n", i);
+// 		printf("Cont=	->%s<-\n", current->cont);
+// 		printf("Ptr=	->%p<-\n", current);
+// 		printf("First=	->%p<-\n", current->first);
+// 		printf("Prev=	->%p<-\n", current->prev);
+// 		printf("Next=	->%p<-\n", current->next);
+// 		current = current->next;
+// 		i++;
+// 	}
+// 	printf("-------END-------\n");
+// }

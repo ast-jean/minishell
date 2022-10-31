@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:17:42 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/24 14:38:28 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/31 18:26:41 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ t_token	*rm_redir(t_token *token, t_vars *vars)
 	{
 		if (ft_strncmp(token->cont, ".tmp/temp_heredoc", 17) == 0)
 			token = remove_token(token, vars);
-		if (ft_strcmp(token->cont, "<") == 0)
+		else if (ft_strcmp(token->cont, "<") == 0)
 			token = rm2tokens(token, vars);
 		else if (ft_strcmp(remove_quotes(token->cont), ">") == 0)
 			token = rm2tokens(token, vars);
