@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_charadd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: marie-soleiljarry <marie-soleiljarry@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 14:51:16 by ast-jean          #+#    #+#             */
-/*   Updated: 2022/10/25 13:45:48 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/29 10:51:47 by marie-solei      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,4 @@ char	*ft_charadd(char *str, char c, char *s)
 	str = ft_strcpy(str, new);
 	free(new);
 	return (str);
-
 }

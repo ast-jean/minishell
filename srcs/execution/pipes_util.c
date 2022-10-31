@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:16:51 by mjarry            #+#    #+#             */
 /*   Updated: 2022/10/28 15:32:30 by xchouina         ###   ########.fr       */
+=======
+/*   By: marie-soleiljarry <marie-soleiljarry@st    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/25 10:16:51 by mjarry            #+#    #+#             */
+/*   Updated: 2022/10/29 10:56:03 by marie-solei      ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,28 +92,13 @@ int	finding_redirs(t_token *current, int fdi, t_vars *vars, char **env)
 	return (close_fds(vars->fdi, vars->fdo, pipefd[0]));
 }
 
-int	is_bi_nopipes(t_token *current, t_vars *vars, char **env)
+int	is_builtin(t_token *current, t_vars *vars)
 {
-	if (vars->pipe_count > 0)
-	{
-		if (current && (!ft_strcmp(remove_quotes(current->cont), "export")
-				|| !ft_strcmp(remove_quotes(current->cont), "unset")
-				|| !ft_strcmp(remove_quotes(current->cont), "cd")
-				|| !ft_strcmp(remove_quotes(current->cont), "exit")))
-			return (-2);
-		return (-1);
-	}
-	if (current && !ft_strcmp(remove_quotes(current->cont), "export"))
-		return (builtin_export(vars));
-	else if (current && !ft_strcmp(remove_quotes(current->cont), "unset"))
-		return (builtin_unset(vars));
-	else if (current && !ft_strcmp(remove_quotes(current->cont), "cd"))
-		return (builtin_cd(vars, env));
-	else if (current && !ft_strcmp(remove_quotes(current->cont), "exit"))
-	{
-		close_fds(vars->fdi, vars->fdo, 0);
-		current = skip_group(current->group_num, vars);
-		quit_shell(vars);
-	}
+	if (current && !ft_strcmp(remove_quotes(current->cont), "pwd"))
+		return (builtin_pwd(vars));
+	else if (current && !ft_strcmp(remove_quotes(current->cont), "env"))
+		return (builtin_env(vars));
+	else if (current && !ft_strcmp(remove_quotes(current->cont), "echo"))
+		return (builtin_echo(current, vars));
 	return (-1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: marie-soleiljarry <marie-soleiljarry@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:58:05 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/26 13:29:02 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/29 11:30:22 by marie-solei      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,38 @@ void	init_shell(t_vars *vars, char **env)
 	printf("*******************************\n");
 }
 
-// TOFIX : rename for check_token_type
+int	just_space(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (-1);
+	while (str[i] && (str[i] == ' ' || str[i] == 9))
+		i++;
+	if (!str[i])
+		return (1);
+	return (0);
+}
+
 void	parse_and_exec(char *line, t_vars *vars, char **env)
 {
 	if (ft_strlen(line) == 0)
 		return ;
+	if (just_space(line) == 1)
+		return ;
 	if (!creating_tokens(line, vars))
 	{
 		if (!check_here(vars))
+		{
+			free_tokens(vars);
 			return ;
+		}
 		if (parsing_pipes(vars) == -1)
+		{
+			free_tokens(vars);
 			return ;
+		}
 		fd_catch(vars, vars->token->first, env);
 	}
 }

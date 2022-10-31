@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset_export_env_echo.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:59 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/25 12:05:44 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/31 11:09:18 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: marie-soleiljarry <marie-soleiljarry@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:23:33 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/25 14:35:56 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/29 10:34:09 by marie-solei      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,9 @@ char	*ft_getenv(char **env, char *varname)
 	int		i;
 	int		j;
 	int		k;
-	char	*temp;
 	char	*var_value;
 
 	i = -1;
-	temp = NULL;
 	var_value = NULL;
 	while (env[++i])
 	{
