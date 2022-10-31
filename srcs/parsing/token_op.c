@@ -6,7 +6,7 @@
 /*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 11:09:16 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/31 11:24:09 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/10/31 15:01:53 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,48 @@ t_token	*remove_token(t_token *remove, t_vars *vars)
 	free_token(remove);
 	return (nex);
 }
+
+// void	if_first_token(t_token *remove, t_vars *vars, t_token *nex)
+// {
+// 	remove->next->prev = NULL;
+// 	nex = remove->next;
+// 	while (nex)
+// 	{
+// 		nex->first = remove->next;
+// 		nex = nex->next;
+// 	}
+// 	vars->token = remove->next;
+// 	nex = remove->next;
+// }
+
+// t_token	*remove_token(t_token *remove, t_vars *vars)
+// {
+// 	t_token	*nex;
+
+// 	if (!remove)
+// 		return (NULL);
+// 	if (remove->next && remove->prev)
+// 	{
+// 		remove->prev->next = remove->next;
+// 		remove->next->prev = remove->prev;
+// 		nex = remove->next;
+// 	}
+// 	else if (!remove->next && remove->prev)
+// 	{
+// 		remove->prev->next = NULL;
+// 		nex = NULL;
+// 	}
+// 	else if (remove->next && !remove->prev)
+// 		if_first_token(remove, vars, nex);
+// 	else
+// 		nex = NULL;
+// 	if (remove)
+// 	{
+// 		free(remove->cont);
+// 		free(remove);
+// 	}
+// 	return (nex);
+// }
 
 t_token	*new_token_after(t_token *after_this_one, char *file_name)
 {

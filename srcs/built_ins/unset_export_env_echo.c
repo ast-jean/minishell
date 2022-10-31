@@ -6,7 +6,7 @@
 /*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:59 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/31 11:09:18 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/10/31 15:00:14 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,9 @@ int	builtin_export(t_vars *vars)
 	{
 		if (ft_strchr(token->next->cont, '='))
 		{
-			content = remove_quotes(token->next->cont);
+			content = ft_strdup(remove_quotes(token->next->cont));
 			vars->env = ft_arrayadd(vars->env, content);
+			ft_arrayprint(vars->env);
 		}
 		token = token->next;
 	}
@@ -84,10 +85,12 @@ int	builtin_echo(t_token *current, t_vars *vars)
 {
 	bool	n;
 	char	*varstr;
+	char	*str;
 
 	vars->gn = current->group_num;
 	n = false;
 	current = current->next;
+	str = ft_strdup(current->cont);
 	while (current && is_n(remove_quotes(current->cont)))
 	{
 		n = true;
@@ -96,13 +99,14 @@ int	builtin_echo(t_token *current, t_vars *vars)
 	while (current && current->group_num == vars->gn
 		&& ft_strcmp(current->cont, "|") != 0)
 	{
-		varstr = check_var(current->cont, vars);
-		ft_putstr_fd(remove_quotes(varstr), 1);
-		free(varstr);
+		varstr = check_var(current->cont, vars);//
+		ft_putstr_fd(varstr, 1);// remove_quotes(varstr);
+		free(varstr);// HAVE TO DO THIS ONLY ONCE!
 		if (current->next != NULL && current->next->group_num == vars->gn)
 			write(1, " ", 1);
 		current = current->next;
 	}
+	free(str);
 	vars->last_output = 0;
 	if (n == false)
 		ft_putstr_fd("\n", 1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marie-soleiljarry <marie-soleiljarry@st    +#+  +:+       +#+        */
+/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:42:14 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/29 11:31:15 by marie-solei      ###   ########.fr       */
+/*   Updated: 2022/10/31 15:02:05 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 void	free_tokens(t_vars *vars)
 {
 	t_token	*temp;
+	t_token	*temp2;
 
 	temp = vars->token->first;
 	while (temp)
 	{
 		free(temp->cont);
+		temp2 = temp;
 		temp = temp->next;
-		free((temp->prev));
+		free((temp2));
 	}
 }
 

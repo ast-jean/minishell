@@ -18,6 +18,7 @@
 # include <readline/history.h>
 # include <signal.h>
 # include <errno.h>
+# include <termios.h>
 
 // STRUCTS
 struct	s_vars;
