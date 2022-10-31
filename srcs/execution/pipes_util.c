@@ -3,17 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
 /*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:16:51 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/28 15:32:30 by xchouina         ###   ########.fr       */
-=======
-/*   By: marie-soleiljarry <marie-soleiljarry@st    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 10:16:51 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/29 10:56:03 by marie-solei      ###   ########.fr       */
->>>>>>> main
+/*   Updated: 2022/10/31 15:04:31 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
