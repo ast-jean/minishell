@@ -6,7 +6,7 @@
 /*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:02:56 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/31 12:04:50 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/31 13:43:21 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void	fd_catch(t_vars *vars, t_token *current, char **env)
 {
 	int	i;
 	int	group;
+
 	vars->pid_count = 0;
 	finding_paths(vars);
 	group = current->group_num;

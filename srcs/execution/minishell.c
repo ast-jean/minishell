@@ -6,7 +6,7 @@
 /*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:58:05 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/31 12:28:36 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/10/31 13:44:01 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,21 @@ void	init_shell(t_vars *vars, char **env)
 	printf("*******************************\n");
 }
 
-// TOFIX : rename for check_token_type
+void	quotes_and_var(t_vars *vars)
+{
+	char	*varstr;
+	t_token	*current;
+	
+	current = vars->token->first;
+	while (current)
+	{
+		varstr = check_var(current->cont, vars);
+		remove_quotes(varstr);
+		// free(varstr);
+		current = current->next;
+	}
+}
+
 void	parse_and_exec(char *line, t_vars *vars, char **env)
 {
 	if (ft_strlen(line) == 0)
@@ -44,6 +58,7 @@ void	parse_and_exec(char *line, t_vars *vars, char **env)
 			free_tokens(vars);
 			return ;
 		}
+		// quotes_and_var(vars);
 		fd_catch(vars, vars->token->first, env);
 	}
 }
