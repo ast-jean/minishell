@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:59 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/31 18:21:04 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/11/01 15:32:04 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,26 +28,31 @@ int	is_n(char *str)
 	return (1);
 }
 
-int	builtin_echo(t_token *current, t_vars *vars)
+t_token	*is_n_bool(t_token *current, t_vars *vars)
 {
-	bool	n;
-	char	*varstr;
-	char	*str;
 	char	*n_dup;
 
-	vars->gn = current->group_num;
-	n = false;
+	vars->n = false;
 	current = current->next;
-	str = ft_strdup(current->cont);
 	n_dup = ft_strdup(current->cont);
-	while (current && is_n(remove_quotes(n_dup)))
+	remove_quotes(n_dup);
+	while (current->next && is_n(n_dup))
 	{
-		n = true;
+		vars->n = true;
 		current = current->next;
 	}
 	free(n_dup);
-	while (current && current->group_num == vars->gn
-		&& ft_strcmp(current->cont, "|") != 0)
+	return (current);
+}
+
+int	builtin_echo(t_token *current, t_vars *vars)
+{
+	char	*varstr;
+
+	vars->gn = current->group_num;
+	current = is_n_bool(current, vars);
+	while (current && current->group_num == vars->gn \
+	&& ft_strcmp(current->cont, "|") != 0)
 	{
 		varstr = check_var(current->cont, vars);
 		ft_putstr_fd(remove_quotes(varstr), 1);
@@ -56,9 +61,8 @@ int	builtin_echo(t_token *current, t_vars *vars)
 			write(1, " ", 1);
 		current = current->next;
 	}
-	free(str);
 	vars->last_output = 0;
-	if (n == false)
+	if (vars->n == false)
 		ft_putstr_fd("\n", 1);
 	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:01:25 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/26 12:13:52 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/11/01 13:11:54 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	prompt = "$>";
 	line = NULL;
+	disable_echo();
 	init_shell(&vars, env);
 	signal(SIGINT, handler);
 	signal(SIGQUIT, SIG_IGN);
