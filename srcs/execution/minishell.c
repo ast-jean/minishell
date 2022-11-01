@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:58:05 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/31 15:01:05 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/11/01 13:19:16 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,6 @@ void	parse_and_exec(char *line, t_vars *vars, char **env)
 	}
 }
 
-int	get_error(int status)
-{
-	if (!status)
-	{
-		if (errno)
-			return (errno);
-	}
-	else
-		return (status / 256);
-	return (0);
-}
-
 void	handler(int sig)
 {
 	int	pid;
@@ -92,7 +80,7 @@ void	handler(int sig)
 	}
 }
 
-void	disable_echo()
+void	disable_echo(void)
 {
 	struct termios	attributes;
 
