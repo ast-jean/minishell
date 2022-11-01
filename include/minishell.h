@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:38:00 by mjarry            #+#    #+#             */
-/*   Updated: 2022/11/01 13:20:22 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/11/01 15:28:47 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_vars
 	char	*cd_oldpwd;
 	int		last_output;
 	int		gn;
+	bool	n;
 }	t_vars;
 
 // FONCTIONS (SELON FILENAME)----------------------

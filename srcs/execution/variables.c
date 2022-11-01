@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:26:10 by xchouina          #+#    #+#             */
-/*   Updated: 2022/11/01 13:36:46 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/11/01 15:33:34 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ char	*add_varcontent(char *line, char *var_name, char *var_value)
 	int		pos;
 	int		pos2;
 	int		i;
-	newline = ft_calloc(ft_strlen(line) + 1, sizeof(char));
-	newline = ft_strcpy(newline, line);
+
+	newline = ft_strdup(newline, line);
 	i = -1;
 	pos = ft_strlen(line) - ft_strlen(find_var_inline(line));
 	pos += ft_strlen(var_name);
@@ -109,8 +109,7 @@ char	*check_var(char *line, t_vars *vars)
 	char	*var_value;
 	char	*newline;
 
-	newline = ft_calloc(ft_strlen(line) + 1, sizeof(char));
-	newline = ft_strcpy(newline, line);
+	newline = ft_strdup(newline, line);
 	while (find_var_inline(newline))
 	{
 		var_name = save_varname(find_var_inline(newline) + 1);
@@ -118,7 +117,6 @@ char	*check_var(char *line, t_vars *vars)
 		{
 			var_value = ft_itoa(vars->last_output);
 			newline = add_varcontent(newline, var_name, var_value);
-		
 		}
 		else
 		{
@@ -129,8 +127,7 @@ char	*check_var(char *line, t_vars *vars)
 		free(var_value);
 	}
 	free(line);
-	line = malloc(((int)(ft_strlen(newline)) + 1) * sizeof(char));
-	line = ft_strcpy(line, newline);
+	line = ft_strdup(line, newline);
 	free(newline);
 	return (line);
 }
