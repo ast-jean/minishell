@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:38:00 by mjarry            #+#    #+#             */
-/*   Updated: 2022/11/02 14:31:09 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/11/02 14:52:58 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,19 @@ typedef struct s_vars
 	int		gn;
 	bool	n;
 }	t_vars;
+
+typedef struct s_norm
+{
+	char	*line;
+	char	*delims;
+	int		len;
+	int		count;
+	char	**split;
+	char	*d_found;
+	char	c;
+	int		i;
+	int		j;
+}	t_norm;
 
 // FONCTIONS (SELON FILENAME)----------------------
 
@@ -144,7 +157,7 @@ void	increm(int *i, int *j);
 
 //TOKENIZE.C
 char	**tokenize(char *line);
-char	**nullify_str(char *line, char *delims, int len, int count);
+char	**nullify_str(t_norm *norm);
 int		cnt_delims(char *line, char *delims);
 
 //NOTE: BUILT INS
