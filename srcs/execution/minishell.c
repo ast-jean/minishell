@@ -6,7 +6,7 @@
 /*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:58:05 by mjarry            #+#    #+#             */
-/*   Updated: 2022/11/02 11:31:29 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/11/02 13:02:04 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,18 +61,6 @@ void	parse_and_exec(char *line, t_vars *vars, char **env)
 		}
 		fd_catch(vars, vars->token->first, env);
 	}
-}
-
-int	get_error(int status)
-{
-	if (!status)
-	{
-		if (errno)
-			return (errno);
-	}
-	else
-		return (status / 256);
-	return (0);
 }
 
 void	handler(int sig)

@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:38:00 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/31 18:23:04 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/11/01 15:28:47 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_vars
 	char	*cd_oldpwd;
 	int		last_output;
 	int		gn;
+	bool	n;
 }	t_vars;
 
 // FONCTIONS (SELON FILENAME)----------------------
@@ -65,8 +66,8 @@ typedef struct s_vars
 void	init_shell(t_vars *vars, char **env);
 void	handler(int sig);
 int		get_error(int get);
+void	disable_echo(void);
 void	parse_and_exec(char *line, t_vars *vars, char **env);
-// int		is_builtin(t_token *current, t_vars *vars, char **env);
 
 // EXECUTION_CMD.C
 void	finding_paths(t_vars *vars);
@@ -86,6 +87,7 @@ int		syntax_error(char *token);
 int		is_exception(t_token *token);
 int		check_quotes(char *str);
 char	*ft_getenv(char **env, char *varname);
+int		get_error(int status);
 
 // VARIABLES.c
 char	*check_var(char *line, t_vars *vars);

@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marie-soleiljarry <marie-soleiljarry@st    +#+  +:+       +#+        */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:23:33 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/29 10:34:09 by marie-solei      ###   ########.fr       */
+/*   Updated: 2022/11/01 13:20:32 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+int	get_error(int status)
+{
+	if (!status)
+	{
+		if (errno)
+			return (errno);
+	}
+	else
+		return (status / 256);
+	return (0);
+}
 
 int	syntax_error(char *token)
 {

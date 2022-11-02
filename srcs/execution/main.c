@@ -6,7 +6,7 @@
 /*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:01:25 by mjarry            #+#    #+#             */
-/*   Updated: 2022/11/02 11:31:16 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/11/02 13:01:50 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	prompt = "$>";
 	line = NULL;
+	disable_echo();
 	init_shell(&vars, env);
 	signal(SIGINT, handler);
 	signal(SIGQUIT, SIG_IGN);
