@@ -21,6 +21,7 @@ SRCS_FILES 		=	built_ins/cd_pwd.c					\
 					parsing/newtoken.c					\
 					parsing/token_op.c					\
 					parsing/tokenize.c					\
+					parsing/token_util.c				\
 
 INCLUDE_FILES	= 	minishell.h
 

@@ -6,7 +6,7 @@
 /*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 11:18:02 by mjarry            #+#    #+#             */
-/*   Updated: 2022/11/02 11:29:27 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/11/02 14:19:56 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,27 @@ int	quote_len(char *str, char c)
 	return (i + 1);
 }
 
+char	*recurse(char *line, int *i, char *str)
+{
+	char	*str2;
+
+	str2 = str;
+	while (line[*i])
+	{
+		if (line[*i] == 34 || line[*i] == 39)
+		{
+			str2 = ft_strjoinf2(str, newtoken_q(line, i, line[*i]));
+			free(str);
+		}
+		else if (line[*i])
+		{
+			str2 = ft_strjoinf2(str, newtoken_s(line, i));
+			free(str);
+		}
+	}
+	return (str2);
+}
+
 char	*newtoken_q(char *line, int *i, char c)
 {
 	char	*str;
@@ -42,20 +63,7 @@ char	*newtoken_q(char *line, int *i, char c)
 	while (--len)
 		str[x++] = line[(*i)++];
 	str[x] = 0;
-	str2 = str;
-	while (line[*i])
-	{
-		if (line[*i] == 34 || line[*i] == 39)
-		{
-			str2 = ft_strjoinf2(str, newtoken_q(line, i, line[*i]));
-			free(str);
-		}
-		else if (line[*i])
-		{
-			str2 = ft_strjoinf2(str, newtoken_s(line, i));
-			free(str);
-		}
-	}
+	str2 = recurse(line, i, str);
 	return (str2);
 }
 
@@ -102,10 +110,4 @@ char	*newtoken_d(char *line, char *delims, int i, int j)
 	str[x] = 0;
 	(j)++;
 	return (str);
-}
-
-void	increm(int *i, int *j)
-{
-	(*i)++;
-	(*j)++;
 }
