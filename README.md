@@ -1,5 +1,5 @@
 
-<h3 align="center">MINISHELL</h3>
+<h3 align="center"><ins>MINISHELL</ins></h3>
 <p align="center">A Minimalist Shell</p>
 
 ## Why:
@@ -14,11 +14,11 @@ Use 'make' then execute './minishell' to start the program. You may use differen
 
 ## Examples:
 
-Commands like 'cat', 'ls', 'grep', 'wc', etc. can be used to test the project.<br>
-Single quotes and double quotes works the same as bash.<br>
+*Commands like 'cat', 'ls', 'grep', 'wc', etc. can be used to test the project.<br>
+*Single quotes and double quotes works the same as bash.<br>
 Redirections ('<', '>', '<<', '>>') and pipes ('|') work as well.<br>
-Built-ins were also made from scratch (cd, echo, env, export, exit, pwd, unset).<br>
-Ctrl+C, Ctrl+D and Ctrl+\ are implemented the same way as bash.<br>
+*Built-ins were also made from scratch (cd, echo, env, export, exit, pwd, unset).<br>
+*Ctrl+C, Ctrl+D and Ctrl+\ are implemented the same way as bash.<br>
 
 
 ## Credits:
