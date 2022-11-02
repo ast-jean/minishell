@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variables.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:26:10 by xchouina          #+#    #+#             */
-/*   Updated: 2022/11/02 14:23:10 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/11/02 17:13:31 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,5 @@ char	*check_var(char *line, t_vars *vars)
 		}
 		free(var_value);
 	}
-	free(line);
-	line = ft_strdup(newline);
-	free(newline);
-	return (line);
+	return (newline);
 }

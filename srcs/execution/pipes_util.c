@@ -6,7 +6,7 @@
 /*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:16:51 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/31 18:27:25 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/11/02 17:03:00 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	format_execve(t_vars *vars, t_token *token)
 		current = current->next;
 	}
 	vars->av = malloc(sizeof(char *) * (vars->ac + 1));
-	vars->av[i] = remove_quotes(token->cont);
+	vars->av[i] = remove_quotes(check_var(token->next->cont, vars));
 	while (++i < vars->ac)
 	{
 		vars->av[i] = remove_quotes(check_var(token->next->cont, vars));

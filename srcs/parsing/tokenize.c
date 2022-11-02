@@ -6,7 +6,7 @@
 /*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 11:11:14 by mjarry            #+#    #+#             */
-/*   Updated: 2022/11/02 14:55:23 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/11/02 15:44:20 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,9 @@ char	**tokenize(char *line)
 {
 	t_norm	norm;
 
+	norm.line = line;
 	if (!(norm.line))
 		return (NULL);
-	norm.line = line;
 	norm.delims = " <>|";
 	norm.count = cnt_delims(norm.line, norm.delims);
 	norm.len = ft_strlen(norm.line);
