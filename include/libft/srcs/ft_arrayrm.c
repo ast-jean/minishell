@@ -6,7 +6,7 @@
 /*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:13:13 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/05 12:02:23 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/11/02 13:59:33 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ char	**ft_arrayrm(char **tab, char *str_to_rm)
 		if (ft_strcmp(tab[i], str_to_rm))
 			new[j++] = tab[i++];
 		else
+		{
+			free(tab[i]);
 			i++;
+		}
 	}
 	new[j] = NULL;
 	free(tab);

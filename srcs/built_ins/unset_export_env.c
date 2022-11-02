@@ -6,7 +6,7 @@
 /*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:59 by xchouina          #+#    #+#             */
-/*   Updated: 2022/11/02 12:45:13 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/11/02 14:04:17 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,7 @@ int	builtin_export(t_vars *vars)
 		if (ft_strchr(token->next->cont, '='))
 		{
 			export_unsetting(vars);
-			content = ft_strdup(remove_quotes(token->next->cont));
-			vars->env = ft_arrayadd(vars->env, content);
-			ft_arrayprint(vars->env);
+			vars->env = ft_arrayadd(vars->env, ft_strdup(remove_quotes(token->next->cont)));
 		}
 		token = token->next;
 	}
