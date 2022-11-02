@@ -1,6 +1,5 @@
 
-<h1 align="center">MINISHELL</h1>
-<p align="center">A Minimalist Shell</p>
+<h1 align="center">MINISHELL<p align="center">A Minimalist Shell</p></h1>
 
 ## Why:
 
