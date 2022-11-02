@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:59 by xchouina          #+#    #+#             */
-/*   Updated: 2022/11/02 13:16:05 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/11/02 14:23:15 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,20 @@ t_token	*is_n_bool(t_token *current, t_vars *vars)
 
 	vars->n = false;
 	current = current->next;
-	n_dup = ft_strdup(current->cont);
-	remove_quotes(n_dup);
-	while (current->next && is_n(n_dup))
+	if (current)
 	{
-		vars->n = true;
-		current = current->next;
+		n_dup = ft_strdup(current->cont);
+		remove_quotes(n_dup);
+		while (current && is_n(n_dup))
+		{
+		// printf("current->cont = %s\n", current->cont);
+			vars->n = true;
+			current = current->next;
+			free(n_dup);
+			n_dup = ft_strdup(current->cont);
+		}
+		free(n_dup);
 	}
-	free(n_dup);
 	return (current);
 }
 
