@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 11:11:14 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/31 11:24:26 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/11/02 11:29:04 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,16 @@ int	cnt_delims(char *line, char *delims)
 	return (count);
 }
 
-char	**split_del(char **split, char *line, char *d_found, int len)
+char	**split_del(char *line, char *d_found, int len)
 {
+	char	**split;
 	int		i;
 	int		j;
 	char	c;
 
 	i = 0;
 	j = 0;
+	split = NULL;
 	while (i < len)
 	{
 		if (line[i] == 34 || line[i] == 39)
@@ -63,46 +65,36 @@ char	**split_del(char **split, char *line, char *d_found, int len)
 	return (split);
 }
 
-char	*nullify_loop(char *line, int *i, char *d_found, char *delims)
-{
-	char	c;
-	int		j;
-
-	j = 0;
-	if (line[*i] == 34 || line[*i] == 39)
-	{
-		c = line[(*i)++];
-		while (line[*i] && line[*i] != c)
-			(*i)++;
-	}
-	if (!line[*i])
-	{
-		free(d_found);
-		return (NULL);
-	}
-	else if (ft_strchr(delims, line[*i]))
-	{
-		d_found[j++] = line[*i];
-		line[*i] = '\0';
-	}
-	return (line);
-}
-
 char	**nullify_str(char *line, char *delims, int len, int count)
 {
-	char	**split;
 	char	*d_found;
+	char	c;
 	int		i;
-	char	*res;
+	int		j;
 
 	i = -1;
-	split = NULL;
+	j = 0;
 	d_found = ft_calloc(sizeof(char) * (count + 1), count);
 	while (++i < len)
-		res = nullify_loop(line, &i, d_found, delims);
-	if (res == NULL)
-		return (NULL);
-	return (split_del(split, line, d_found, len));
+	{
+		if (line[i] == 34 || line[i] == 39)
+		{
+			c = line[i++];
+			while (line[i] && line[i] != c)
+				i++;
+		}
+		if (!line[i])
+		{
+			free(d_found);
+			return (NULL);
+		}
+		else if (ft_strchr(delims, line[i]))
+		{
+			d_found[j++] = line[i];
+			line[i] = '\0';
+		}
+	}
+	return (split_del(line, d_found, len));
 }
 
 char	**tokenize(char *line)

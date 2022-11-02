@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:58:05 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/31 15:01:05 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/11/02 11:31:29 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,4 @@ void	handler(int sig)
 			rl_redisplay();
 		}
 	}
-}
-
-void	disable_echo()
-{
-	struct termios	attributes;
-
-	tcgetattr(STDIN_FILENO, &attributes);
-	attributes.c_lflag &= ~ECHOCTL;
-	tcsetattr(STDIN_FILENO, TCSANOW, &attributes);
 }

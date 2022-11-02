@@ -6,7 +6,7 @@
 /*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:01:25 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/26 12:13:52 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/11/02 11:31:16 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,15 @@ void	remove_tmp_files(t_vars *vars)
 		free(num);
 		free(filename);
 	}
+}
+
+void	disable_echo(void)
+{
+	struct termios	attributes;
+
+	tcgetattr(STDIN_FILENO, &attributes);
+	attributes.c_lflag &= ~ECHOCTL;
+	tcsetattr(STDIN_FILENO, TCSANOW, &attributes);
 }
 
 int	main(int argc, char **argv, char **env)

@@ -6,7 +6,7 @@
 /*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:02:56 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/31 18:27:33 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/11/02 11:30:52 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,3 @@ void	fd_catch(t_vars *vars, t_token *current, char **env)
 	}
 	signal(SIGINT, handler);
 }
-
-
