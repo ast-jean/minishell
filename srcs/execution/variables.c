@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variables.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:26:10 by xchouina          #+#    #+#             */
-/*   Updated: 2022/11/01 15:33:34 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/11/02 12:56:27 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char	*add_varcontent(char *line, char *var_name, char *var_value)
 	int		pos2;
 	int		i;
 
-	newline = ft_strdup(newline, line);
+	newline = ft_strdup(line);
 	i = -1;
 	pos = ft_strlen(line) - ft_strlen(find_var_inline(line));
 	pos += ft_strlen(var_name);
@@ -109,7 +109,7 @@ char	*check_var(char *line, t_vars *vars)
 	char	*var_value;
 	char	*newline;
 
-	newline = ft_strdup(newline, line);
+	newline = ft_strdup(line);
 	while (find_var_inline(newline))
 	{
 		var_name = save_varname(find_var_inline(newline) + 1);
@@ -127,7 +127,7 @@ char	*check_var(char *line, t_vars *vars)
 		free(var_value);
 	}
 	free(line);
-	line = ft_strdup(line, newline);
+	line = ft_strdup(newline);
 	free(newline);
 	return (line);
 }
