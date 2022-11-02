@@ -6,7 +6,7 @@
 /*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 11:11:14 by mjarry            #+#    #+#             */
-/*   Updated: 2022/11/02 14:31:25 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/11/02 14:55:23 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,48 +64,43 @@ char	**split_del(char **split, char *line, char *d_found, int len)
 	return (split);
 }
 
-char	**nullify_str(char *line, char *delims, int len, int count)
+char	**nullify_str(t_norm *norm)
 {
-	char	**split;
-	char	*d_found;
-	char	c;
-	int		i;
-	int		j;
-
-	i = -1;
-	j = 0;
-	split = NULL;
-	d_found = ft_calloc(sizeof(char) * (count + 1), count);
-	while (++i < len)
+	norm->i = -1;
+	norm->j = 0;
+	norm->split = NULL;
+	norm->d_found = ft_calloc(sizeof(char) * (norm->count + 1), norm->count);
+	while (++(norm->i) < norm->len)
 	{
-		if (line[i] == 34 || line[i] == 39)
+		if (norm->line[norm->i] == 34 || norm->line[norm->i] == 39)
 		{
-			c = line[i++];
-			while (line[i] && line[i] != c)
-				i++;
+			norm->c = norm->line[(norm->i)++];
+			while (norm->line[norm->i] && norm->line[norm->i] != norm->c)
+				(norm->i)++;
 		}
-		if (!line[i])
+		if (!(norm->line[norm->i]))
 		{
-			free(d_found);
+			free(norm->d_found);
 			return (NULL);
 		}
-		else if (ft_strchr(delims, line[i]))
+		else if (ft_strchr(norm->delims, norm->line[norm->i]))
 		{
-			d_found[j++] = line[i];
-			line[i] = '\0';
+			norm->d_found[(norm->j)++] = norm->line[norm->i];
+			norm->line[norm->i] = '\0';
 		}
 	}
-	return (split_del(split, line, d_found, len));
+	return (split_del(norm->split, norm->line, norm->d_found, norm->len));
 }
 
 char	**tokenize(char *line)
 {
-	int	len;
-	int	count;
+	t_norm	norm;
 
-	if (!line)
+	if (!(norm.line))
 		return (NULL);
-	count = cnt_delims(line, " <>|");
-	len = ft_strlen(line);
-	return (nullify_str(line, " <>|", len, count));
+	norm.line = line;
+	norm.delims = " <>|";
+	norm.count = cnt_delims(norm.line, norm.delims);
+	norm.len = ft_strlen(norm.line);
+	return (nullify_str(&norm));
 }
