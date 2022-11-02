@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variables.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:26:10 by xchouina          #+#    #+#             */
-/*   Updated: 2022/11/02 17:13:31 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/11/02 18:17:35 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,10 @@ char	*find_var_inline(char *line)
 					return ((char *)line);
 			}
 		}
-		if (*line == '\'')
+		else if (*line == '\'')
 		{
-			while (*line++ && *line != '\'')
+			line++;
+			while (*line && *line != '\'')
 				line++;
 			if (!*line)
 				return (NULL);
