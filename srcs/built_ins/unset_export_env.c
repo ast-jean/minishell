@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset_export_env.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:59 by xchouina          #+#    #+#             */
-/*   Updated: 2022/11/02 14:04:17 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/11/02 14:08:01 by mjarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ int	builtin_export(t_vars *vars)
 		if (ft_strchr(token->next->cont, '='))
 		{
 			export_unsetting(vars);
-			vars->env = ft_arrayadd(vars->env, ft_strdup(remove_quotes(token->next->cont)));
+			vars->env = ft_arrayadd(vars->env,
+					ft_strdup(remove_quotes(token->next->cont)));
 		}
 		token = token->next;
 	}
