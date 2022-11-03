@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:01:25 by mjarry            #+#    #+#             */
-/*   Updated: 2022/11/02 13:01:50 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/11/03 11:58:14 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ int	main(int argc, char **argv, char **env)
 	{
 		line = readline(prompt);
 		if (!line)
-			quit_shell(&vars);
+			quit_shell(&vars, 0);
 		else if (ft_strcmp(line, "") != 0)
 			add_history(line);
 		parse_and_exec(line, &vars, env);
 		remove_tmp_files(&vars);
 	}
-	quit_shell(&vars);
+	quit_shell(&vars, 0);
 	return (0);
 }

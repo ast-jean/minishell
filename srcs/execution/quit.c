@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:42:14 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/31 15:02:05 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/11/03 12:11:13 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,14 @@ void	free_tokens(t_vars *vars)
 	}
 }
 
-void	quit_shell(t_vars *vars)
+void	quit_shell(t_vars *vars, int exit_code)
 {
+	free_tokens(vars);
 	ft_putstr_fd("exit\n", 2);
 	if (vars->env)
 		free2d(vars->env);
 	if (vars->path_array)
 		free2d(vars->path_array);
 	rl_clear_history();
-	exit(0);
+	exit(exit_code);
 }

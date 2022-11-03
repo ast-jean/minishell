@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:02:56 by mjarry            #+#    #+#             */
-/*   Updated: 2022/11/03 11:33:56 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/11/03 12:11:33 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ int	is_bi_nopipes(t_token *current, t_vars *vars, char **env)
 	else if (current && !ft_strcmp(remove_quotes(current->cont), "exit"))
 	{
 		close_fds(vars->fdi, vars->fdo, 0);
-		current = skip_group(current->group_num, vars);
-		quit_shell(vars);
+		if (current && current->next)
+			quit_shell(vars, ft_atoi(current->next->cont));
+		else
+			quit_shell(vars, 0);
 	}
 	return (-1);
 }

@@ -111,8 +111,8 @@ fclean:	clean
 # 	$(LEAK)
 
 valgrind: $(NAME)
-	valgrind --suppressions=ignore_rdl_leaks.txt --leak-check=full --trace-children=yes --track-fds=yes ./minishell
-#	valgrind --suppressions=ignore_rdl_leaks.txt --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes ./minishell
+	valgrind --suppressions=ignore_rdl_leaks.txt --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes ./minishell
+	# valgrind --suppressions=ignore_rdl_leaks.txt --leak-check=full --trace-children=yes --track-fds=yes ./minishell
 	
 re:	fclean all 
 	./$(NAME)

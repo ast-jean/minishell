@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:38:00 by mjarry            #+#    #+#             */
-/*   Updated: 2022/11/03 11:29:03 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/11/03 11:57:32 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ char	*check_var_heredoc(char *line, t_vars *vars);
 char	*add_varcontent(char *line, char *var_name, char *var_value);
 
 //QUIT.C
-void	quit_shell(t_vars *vars);
+void	quit_shell(t_vars *vars, int exit_code);
 void	free_tokens(t_vars *vars);
 
 // PIPES.C
