@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:38:00 by mjarry            #+#    #+#             */
-/*   Updated: 2022/11/02 14:52:58 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/11/03 11:29:03 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	handler(int sig);
 int		get_error(int get);
 void	disable_echo(void);
 void	parse_and_exec(char *line, t_vars *vars, char **env);
+void	handler_exec(int sig);
 
 // EXECUTION_CMD.C
 void	finding_paths(t_vars *vars);

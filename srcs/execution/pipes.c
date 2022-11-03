@@ -6,16 +6,11 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:02:56 by mjarry            #+#    #+#             */
-/*   Updated: 2022/11/02 18:18:28 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/11/03 11:33:56 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-void	handler_exec(int sig)
-{
-	(void)sig;
-}
 
 int	is_bi_nopipes(t_token *current, t_vars *vars, char **env)
 {
@@ -43,6 +38,17 @@ int	is_bi_nopipes(t_token *current, t_vars *vars, char **env)
 	return (-1);
 }
 
+void	put_cmd_not_found(t_token *current, t_vars *vars)
+{
+	char	*line;
+
+	line = check_var(current->cont, vars);
+	ft_putstr_fd(remove_quotes(line), 2);
+	ft_putstr_fd(": cmd not found\n", 2);
+	free(line);
+	exit(127);
+}
+
 void	actually_forking(t_token *current, t_vars *vars, char **env)
 {
 	vars->pid[vars->pid_count] = fork();
@@ -55,13 +61,9 @@ void	actually_forking(t_token *current, t_vars *vars, char **env)
 		close_fds(vars->fdi, vars->fdo, 0);
 		if (is_builtin(current, vars) == -1)
 		{
-			if (accessing(vars, current) == -1
-				&& is_bi_nopipes(current, vars, env) == -1)
-			{
-				ft_putstr_fd(remove_quotes(current->cont), 2);
-				ft_putstr_fd(": cmd not found\n", 2);
-				exit(127);
-			}
+			if (accessing(vars, current) == -1 \
+			&& is_bi_nopipes(current, vars, env) == -1)
+				put_cmd_not_found(current, vars);
 			else
 				format_execve(vars, current);
 		}
@@ -84,6 +86,7 @@ void	catch_loops(t_vars *vars, t_token *current, char **env)
 		vars->fdrd[i + 1] = finding_redirs(current,
 				redirect_input(current, vars->fdrd[i]), vars, env);
 		i++;
+		current = skip_group(group, vars);
 	}
 	while (i > 0)
 		close(vars->fdrd[--i]);

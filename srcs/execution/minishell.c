@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:58:05 by mjarry            #+#    #+#             */
-/*   Updated: 2022/11/02 13:02:04 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/11/03 11:32:32 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,9 @@ void	handler(int sig)
 			rl_redisplay();
 		}
 	}
+}
+
+void	handler_exec(int sig)
+{
+	(void)sig;
 }
