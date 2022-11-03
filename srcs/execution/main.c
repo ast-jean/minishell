@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:01:25 by mjarry            #+#    #+#             */
-/*   Updated: 2022/11/03 11:58:14 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/11/03 13:49:31 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,12 @@ void	disable_echo(void)
 	tcsetattr(STDIN_FILENO, TCSANOW, &attributes);
 }
 
+void	ctrl_d(t_vars *vars)
+{
+	vars->token = NULL;
+	quit_shell(vars, 0);
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_vars	vars;	
@@ -57,7 +63,7 @@ int	main(int argc, char **argv, char **env)
 	{
 		line = readline(prompt);
 		if (!line)
-			quit_shell(&vars, 0);
+			ctrl_d(&vars);
 		else if (ft_strcmp(line, "") != 0)
 			add_history(line);
 		parse_and_exec(line, &vars, env);

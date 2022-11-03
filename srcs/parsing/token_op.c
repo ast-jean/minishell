@@ -6,18 +6,21 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 11:09:16 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/31 18:23:12 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/11/03 13:36:12 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	free_token(t_token *remove)
+t_token	*free_token(t_token *remove)
 {
 	if (!remove)
-		return ;
+		return (NULL);
 	free(remove->cont);
+	remove->cont = NULL;
 	free(remove);
+	remove = NULL;
+	return (NULL);
 }
 
 t_token	*if_first_token(t_token *remove, t_vars *vars, t_token *nex)
@@ -60,7 +63,7 @@ t_token	*remove_token(t_token *remove, t_vars *vars)
 		vars->token->first = NULL;
 		nex = NULL;
 	}
-	free_token(remove);
+	remove = free_token(remove);
 	return (nex);
 }
 
@@ -91,26 +94,26 @@ void	*access_ptr(t_vars *vars, int i)
 	return (vars->token);
 }
 
-// void	debug_print_tokens(t_vars *vars)
-// {
-// 	t_token	*current;
-// 	int		i;
+void	debug_print_tokens(t_vars *vars)
+{
+	t_token	*current;
+	int		i;
 
-// 	i = 0;
-// 	current = vars->token->first;
-// 	if (!current)
-// 		return ;
-// 	while (current)
-// 	{
-// 		printf("----------------\n");
-// 		printf("Token %d\n", i);
-// 		printf("Cont=	->%s<-\n", current->cont);
-// 		printf("Ptr=	->%p<-\n", current);
-// 		printf("First=	->%p<-\n", current->first);
-// 		printf("Prev=	->%p<-\n", current->prev);
-// 		printf("Next=	->%p<-\n", current->next);
-// 		current = current->next;
-// 		i++;
-// 	}
-// 	printf("-------END-------\n");
-// }
+	i = 0;
+	current = vars->token->first;
+	if (!current)
+		return ;
+	while (current)
+	{
+		printf("----------------\n");
+		printf("Token %d\n", i);
+		printf("Cont=	->%s<-\n", current->cont);
+		printf("Ptr=	->%p<-\n", current);
+		printf("First=	->%p<-\n", current->first);
+		printf("Prev=	->%p<-\n", current->prev);
+		printf("Next=	->%p<-\n", current->next);
+		current = current->next;
+		i++;
+	}
+	printf("-------END-------\n");
+}

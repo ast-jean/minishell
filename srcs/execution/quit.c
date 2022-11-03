@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:42:14 by mjarry            #+#    #+#             */
-/*   Updated: 2022/11/03 12:11:13 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/11/03 13:50:18 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ void	free_tokens(t_vars *vars)
 	t_token	*temp;
 	t_token	*temp2;
 
-	temp = vars->token->first;
+	if(vars && vars->token)
+		temp = vars->token->first;
+	else 
+		temp = vars->token;
 	while (temp)
 	{
 		free(temp->cont);
@@ -29,7 +32,8 @@ void	free_tokens(t_vars *vars)
 
 void	quit_shell(t_vars *vars, int exit_code)
 {
-	free_tokens(vars);
+	while (vars && vars->token)
+		vars->token = remove_token(vars->token, vars);
 	ft_putstr_fd("exit\n", 2);
 	if (vars->env)
 		free2d(vars->env);
