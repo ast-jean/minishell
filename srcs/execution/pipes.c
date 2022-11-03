@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:02:56 by mjarry            #+#    #+#             */
-/*   Updated: 2022/11/03 11:32:43 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/11/03 11:33:56 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	catch_loops(t_vars *vars, t_token *current, char **env)
 		vars->fdrd[i + 1] = finding_redirs(current,
 				redirect_input(current, vars->fdrd[i]), vars, env);
 		i++;
+		current = skip_group(group, vars);
 	}
 	while (i > 0)
 		close(vars->fdrd[--i]);
