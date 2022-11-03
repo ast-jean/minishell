@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:16:51 by mjarry            #+#    #+#             */
-/*   Updated: 2022/11/02 17:03:00 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/11/03 11:14:00 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	format_execve(t_vars *vars, t_token *token)
 		current = current->next;
 	}
 	vars->av = malloc(sizeof(char *) * (vars->ac + 1));
-	vars->av[i] = remove_quotes(check_var(token->next->cont, vars));
+	vars->av[i] = remove_quotes(check_var(token->cont, vars));
 	while (++i < vars->ac)
 	{
 		vars->av[i] = remove_quotes(check_var(token->next->cont, vars));
