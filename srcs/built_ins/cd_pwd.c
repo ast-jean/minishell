@@ -6,13 +6,11 @@
 /*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:36 by xchouina          #+#    #+#             */
-/*   Updated: 2022/11/03 11:58:38 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/11/03 12:30:50 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-// NOTE: Built-ins 4/4 (cd)
 
 int	builtin_pwd(t_vars *vars)
 {
