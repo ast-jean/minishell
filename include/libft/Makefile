@@ -5,6 +5,7 @@ SRC =	ft_arrayadd.c			\
 		ft_arraylen.c			\
 		ft_arrayprint.c			\
 		ft_arrayrm.c			\
+		ft_arrayrm2.c			\
 		ft_arraysrch.c			\
 		ft_atoi.c				\
 		ft_atol.c				\

@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_arrayrm.c                                       :+:      :+:    :+:   */
+/*   ft_arrayrm2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/01 12:13:13 by xchouina          #+#    #+#             */
-/*   Updated: 2022/11/03 11:43:43 by xchouina         ###   ########.fr       */
+/*   Created: 2022/11/03 11:42:29 by xchouina          #+#    #+#             */
+/*   Updated: 2022/11/03 11:51:11 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
-// NOTE: "ft_arrayrm" removes a str (2nd param.) in a double array (1st param.).
 
-char	**ft_arrayrm(char **tab, char *str_to_rm)
+char	**ft_arrayrm2(char **tab, char *str_to_rm, int n)
 {
 	char	**new;
 	int		i;
@@ -24,7 +23,7 @@ char	**ft_arrayrm(char **tab, char *str_to_rm)
 	j = 0;
 	while (tab[i] != NULL)
 	{
-		if (ft_strcmp(tab[i], str_to_rm))
+		if (ft_strncmp(tab[i], str_to_rm, n))
 			new[j++] = tab[i++];
 		else
 		{
