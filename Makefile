@@ -64,7 +64,7 @@ VIOLET			= \033[35m
 CYAN			= \033[36m
 WHITE			= \033[37m
 
-READLINE = -lreadline -I /usr/local/opt/readline/include -L ~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include
+READLINE = include/readline/libreadline.a include/readline/libhistory.a -lreadline -lcurses
 ### Compilations et archivage ###
 CC 			= gcc
 CFLAGS 		= -g -Wall -Wextra -Werror 
@@ -85,7 +85,7 @@ $(NAME) : libft $(OBJS_IN_DIR)
 $(OBJS_DIR)%.o : $(SRCS_DIR)%.c
 # @echo "$(CLEAR_LINE)$(SELECTED)MINISHELL$(END)"
 	@echo "$(CURSOR_UP_1)$(CLEAR_LINE)Compiling $<"
-	@$(CC) -I ~/.brew/opt/readline/include -I /usr/local/opt/readline/include $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 
 libft:
