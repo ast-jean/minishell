@@ -2,8 +2,9 @@
 ###-------------------------# VARIABLES ##-------------------------###
 NAME = minishell
 
-SRCS_FILES 		=	built_ins/cd_pwd.c					\
-					built_ins/unset_export_env.c		\
+SRCS_FILES 		=	built_ins/pwd_env_unset.c			\
+					built_ins/cd.c						\
+					built_ins/export.c					\
 					built_ins/echo.c					\
 					execution/check_heredoc.c			\
 					execution/exec_simp_cmd.c			\
