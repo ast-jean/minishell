@@ -76,7 +76,7 @@ NORMINETTE 	= norminette
 ###--------------------------## REGLES ##--------------------------###
 all: $(NAME)
 
-$(NAME) : libft $(OBJS_IN_DIR)
+$(NAME) : libft readline $(OBJS_IN_DIR)
 	@echo "$(CURSOR_UP_1)$(CLEAR_LINE)$(GREEN)Compiling DONE! ✅$(END)"
 	@$(CC) $(CFLAGS) $(OBJS_IN_DIR) $(LIBS) $(READLINE) -o $@ 
 	@echo "$(BLUE)$(CLEAR_LINE)Executable $(NAME) created$(END)"
@@ -114,7 +114,13 @@ fclean:	clean
 valgrind: $(NAME)
 	valgrind --suppressions=ignore_rdl_leaks.txt --leak-check=full --trace-children=yes --track-fds=yes ./minishell
 	# valgrind --suppressions=ignore_rdl_leaks.txt --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes ./minishell
-	
+
+readline: 
+ifeq ($(wildcard include/readline/libreadline.a),)
+	@ cd include/readline && ./configure
+	@$(MAKE) -sC include/readline everything
+endif
+
 re:	fclean all 
 	./$(NAME)
 
