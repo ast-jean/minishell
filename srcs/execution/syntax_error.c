@@ -6,11 +6,23 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:23:33 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/25 14:35:56 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/11/01 13:20:32 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+int	get_error(int status)
+{
+	if (!status)
+	{
+		if (errno)
+			return (errno);
+	}
+	else
+		return (status / 256);
+	return (0);
+}
 
 int	syntax_error(char *token)
 {
@@ -37,11 +49,9 @@ char	*ft_getenv(char **env, char *varname)
 	int		i;
 	int		j;
 	int		k;
-	char	*temp;
 	char	*var_value;
 
 	i = -1;
-	temp = NULL;
 	var_value = NULL;
 	while (env[++i])
 	{

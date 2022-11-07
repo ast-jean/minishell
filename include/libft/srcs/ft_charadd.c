@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 14:51:16 by ast-jean          #+#    #+#             */
-/*   Updated: 2022/10/25 13:45:48 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/10/31 18:23:16 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	get_pos(char *str, char *s)
 		return (0);
 }
 
-char	*ft_charadd(char *str, char c, char *s)
+char	*if_string(char *str, char c, char *s)
 {
 	char	*new;
 	int		i;
@@ -39,23 +39,29 @@ char	*ft_charadd(char *str, char c, char *s)
 
 	i = 0;
 	j = 0;
+	new = ft_calloc((int)(ft_strlen(str)) + 2, sizeof(char));
+	while (str[i] && i < get_pos(str, s))
+		new[j++] = str[i++];
+	new[j++] = c;
+	while (str[i])
+		new[j++] = str[i++];
+	new[j] = '\0';
+	return (new);
+}
+
+char	*ft_charadd(char *str, char c, char *s)
+{
+	char	*new;
+
 	if (!str)
 	{
 		new = ft_calloc(2, sizeof(char));
 		new[0] = c;
 	}
 	else
-	{
-		new = ft_calloc((int)(ft_strlen(str)) + 2, sizeof(char));
-		while (str[i] && i < get_pos(str, s))
-			new[j++] = str[i++];
-		new[j++] = c;
-		while (str[i])
-			new[j++] = str[i++];
-		new[j] = '\0';
-	}
-	str = ft_strcpy(str, new);
+		new = if_string(str, c, s);
+	free(str);
+	str = ft_strdup(new);
 	free(new);
 	return (str);
-
 }

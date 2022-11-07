@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:02:56 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/31 13:43:21 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/11/03 12:11:33 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-void	handler_exec(int sig)
-{
-	(void)sig;
-}
 
 int	is_bi_nopipes(t_token *current, t_vars *vars, char **env)
 {
@@ -37,21 +32,23 @@ int	is_bi_nopipes(t_token *current, t_vars *vars, char **env)
 	else if (current && !ft_strcmp(remove_quotes(current->cont), "exit"))
 	{
 		close_fds(vars->fdi, vars->fdo, 0);
-		current = skip_group(current->group_num, vars);
-		quit_shell(vars);
+		if (current && current->next)
+			quit_shell(vars, ft_atoi(current->next->cont));
+		else
+			quit_shell(vars, 0);
 	}
 	return (-1);
 }
 
-int	is_builtin(t_token *current, t_vars *vars)
+void	put_cmd_not_found(t_token *current, t_vars *vars)
 {
-	if (current && !ft_strcmp(remove_quotes(current->cont), "pwd"))
-		return (builtin_pwd(vars));
-	else if (current && !ft_strcmp(remove_quotes(current->cont), "env"))
-		return (builtin_env(vars));
-	else if (current && !ft_strcmp(remove_quotes(current->cont), "echo"))
-		return (builtin_echo(current, vars));
-	return (-1);
+	char	*line;
+
+	line = check_var(current->cont, vars);
+	ft_putstr_fd(remove_quotes(line), 2);
+	ft_putstr_fd(": cmd not found\n", 2);
+	free(line);
+	exit(127);
 }
 
 void	actually_forking(t_token *current, t_vars *vars, char **env)
@@ -61,21 +58,14 @@ void	actually_forking(t_token *current, t_vars *vars, char **env)
 	{
 		signal(SIGINT, handler_exec);
 		signal(SIGQUIT, SIG_DFL);
-		if (vars->fdi != 0)
-			dup2(vars->fdi, 0);
-		if (vars->fdo != 1)
-			dup2(vars->fdo, 1);
+		dup2(vars->fdi, 0);
+		dup2(vars->fdo, 1);
 		close_fds(vars->fdi, vars->fdo, 0);
 		if (is_builtin(current, vars) == -1)
 		{
-			if (accessing(vars, current) == -1
-				&& is_bi_nopipes(current, vars, env) == -1)
-			{
-				ft_putstr_fd(remove_quotes(current->cont), 2);
-				ft_putstr_fd(": cmd not found\n", 2);
-				current = skip_group(current->group_num, vars);
-				exit(1);
-			}
+			if (accessing(vars, current) == -1 \
+			&& is_bi_nopipes(current, vars, env) == -1)
+				put_cmd_not_found(current, vars);
 			else
 				format_execve(vars, current);
 		}
@@ -83,6 +73,25 @@ void	actually_forking(t_token *current, t_vars *vars, char **env)
 	}
 	else
 		signal(SIGINT, SIG_IGN);
+}
+
+void	catch_loops(t_vars *vars, t_token *current, char **env)
+{
+	int	i;
+	int	group;
+
+	i = 0;
+	while ((i < vars->pipe_count) && (vars->pid_count < 32766))
+	{
+		group = current->group_num;
+		finding_paths(vars);
+		vars->fdrd[i + 1] = finding_redirs(current,
+				redirect_input(current, vars->fdrd[i]), vars, env);
+		i++;
+		current = skip_group(group, vars);
+	}
+	while (i > 0)
+		close(vars->fdrd[--i]);
 }
 
 void	fd_catch(t_vars *vars, t_token *current, char **env)
@@ -96,18 +105,7 @@ void	fd_catch(t_vars *vars, t_token *current, char **env)
 	vars->fdrd[0] = finding_redirs(current,
 			redirect_input(current, 0), vars, env);
 	current = skip_group(group, vars);
-	i = 0;
-	while ((i < vars->pipe_count) && (vars->pid_count < 32766))
-	{
-		group = current->group_num;
-		finding_paths(vars);
-		vars->fdrd[i + 1] = finding_redirs(current,
-				redirect_input(current, vars->fdrd[i]), vars, env);
-		current = skip_group(group, vars);
-		i++;
-	}
-	while (i > 0)
-		close(vars->fdrd[--i]);
+	catch_loops(vars, current, env);
 	i = 0;
 	while (i <= (vars->pid_count - 1))
 	{

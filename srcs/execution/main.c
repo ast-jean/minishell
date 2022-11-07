@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:01:25 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/26 12:13:52 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/11/03 13:49:31 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,21 @@ void	remove_tmp_files(t_vars *vars)
 	}
 }
 
+void	disable_echo(void)
+{
+	struct termios	attributes;
+
+	tcgetattr(STDIN_FILENO, &attributes);
+	attributes.c_lflag &= ~ECHOCTL;
+	tcsetattr(STDIN_FILENO, TCSANOW, &attributes);
+}
+
+void	ctrl_d(t_vars *vars)
+{
+	vars->token = NULL;
+	quit_shell(vars, 0);
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_vars	vars;	
@@ -40,6 +55,7 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	prompt = "$>";
 	line = NULL;
+	disable_echo();
 	init_shell(&vars, env);
 	signal(SIGINT, handler);
 	signal(SIGQUIT, SIG_IGN);
@@ -47,12 +63,12 @@ int	main(int argc, char **argv, char **env)
 	{
 		line = readline(prompt);
 		if (!line)
-			quit_shell(&vars);
+			ctrl_d(&vars);
 		else if (ft_strcmp(line, "") != 0)
 			add_history(line);
 		parse_and_exec(line, &vars, env);
 		remove_tmp_files(&vars);
 	}
-	quit_shell(&vars);
+	quit_shell(&vars, 0);
 	return (0);
 }

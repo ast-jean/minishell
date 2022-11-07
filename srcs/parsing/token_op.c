@@ -3,108 +3,69 @@
 /*                                                        :::      ::::::::   */
 /*   token_op.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 11:09:16 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/31 15:22:21 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/11/03 15:37:23 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void    free_token(t_token *remove)
+t_token	*free_token(t_token *remove)
 {
-    if (!remove)
-        return ;
-    free(remove->cont);
-    free(remove);
+	if (!remove)
+		return (NULL);
+	free(remove->cont);
+	remove->cont = NULL;
+	free(remove);
+	remove = NULL;
+	return (NULL);
 }
 
-t_token    *if_first_token(t_token *remove, t_vars *vars, t_token *nex)
+t_token	*if_first_token(t_token *remove, t_vars *vars, t_token *nex)
 {
-    remove->next->prev = NULL;
-    nex = remove->next;
-    vars->token->first = nex;
-    while (nex)
-    {
-        nex->first = remove->next;
-        nex = nex->next;
-    }
-    vars->token = remove->next;
-    nex = remove->next;
-    return (nex);
+	remove->next->prev = NULL;
+	nex = remove->next;
+	vars->token->first = nex;
+	while (nex)
+	{
+		nex->first = remove->next;
+		nex = nex->next;
+	}
+	vars->token = remove->next;
+	nex = remove->next;
+	return (nex);
 }
 
-t_token    *remove_token(t_token *remove, t_vars *vars)
+t_token	*remove_token(t_token *remove, t_vars *vars)
 {
-    t_token    *nex;
+	t_token	*nex;
 
-    if (!remove)
-        return (NULL);
-    nex = remove->next;
-    if (remove->next && remove->prev)
-    {
-        remove->prev->next = remove->next;
-        remove->next->prev = remove->prev;
-        nex = remove->next;
-    }
-    else if (!remove->next && remove->prev)
-    {
-        remove->prev->next = NULL;
-        nex = NULL;
-    }
-    else if (remove->next && !remove->prev)
-        nex = if_first_token(remove, vars, nex);
-    else
-    {
-        vars->token->first = NULL;
-        nex = NULL;
-    }
-    free_token(remove);
-    return (nex);
+	if (!remove)
+		return (NULL);
+	nex = remove->next;
+	if (remove->next && remove->prev)
+	{
+		remove->prev->next = remove->next;
+		remove->next->prev = remove->prev;
+		nex = remove->next;
+	}
+	else if (!remove->next && remove->prev)
+	{
+		remove->prev->next = NULL;
+		nex = NULL;
+	}
+	else if (remove->next && !remove->prev)
+		nex = if_first_token(remove, vars, nex);
+	else
+	{
+		vars->token->first = NULL;
+		nex = NULL;
+	}
+	remove = free_token(remove);
+	return (nex);
 }
-
-// void	if_first_token(t_token *remove, t_vars *vars, t_token *nex)
-// {
-// 	remove->next->prev = NULL;
-// 	nex = remove->next;
-// 	while (nex)
-// 	{
-// 		nex->first = remove->next;
-// 		nex = nex->next;
-// 	}
-// 	vars->token = remove->next;
-// 	nex = remove->next;
-// }
-
-// t_token	*remove_token(t_token *remove, t_vars *vars)
-// {
-// 	t_token	*nex;
-
-// 	if (!remove)
-// 		return (NULL);
-// 	if (remove->next && remove->prev)
-// 	{
-// 		remove->prev->next = remove->next;
-// 		remove->next->prev = remove->prev;
-// 		nex = remove->next;
-// 	}
-// 	else if (!remove->next && remove->prev)
-// 	{
-// 		remove->prev->next = NULL;
-// 		nex = NULL;
-// 	}
-// 	else if (remove->next && !remove->prev)
-// 		if_first_token(remove, vars, nex);
-// 	else
-// 		nex = NULL;
-// 	if (remove)
-// 	{
-// 		free(remove->cont);
-// 		free(remove);
-// 	}
-// 	return (nex);
-// }
 
 t_token	*new_token_after(t_token *after_this_one, char *file_name)
 {
@@ -131,28 +92,4 @@ void	*access_ptr(t_vars *vars, int i)
 		vars->token = vars->token->next;
 	}
 	return (vars->token);
-}
-
-void	debug_print_tokens(t_vars *vars)
-{
-	t_token	*current;
-	int		i;
-
-	i = 0;
-	current = vars->token->first;
-	if (!current)
-		return ;
-	while (current)
-	{
-		printf("----------------\n");
-		printf("Token %d\n", i);
-		printf("Cont=	->%s<-\n", current->cont);
-		printf("Ptr=	->%p<-\n", current);
-		printf("First=	->%p<-\n", current->first);
-		printf("Prev=	->%p<-\n", current->prev);
-		printf("Next=	->%p<-\n", current->next);
-		current = current->next;
-		i++;
-	}
-	printf("-------END-------\n");
 }

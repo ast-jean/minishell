@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:42:14 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/31 12:27:57 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/11/03 15:37:23 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ void	free_tokens(t_vars *vars)
 	t_token	*temp;
 	t_token	*temp2;
 
-	temp = vars->token->first;
-	while (vars && temp)
+	if (vars && vars->token)
+		temp = vars->token->first;
+	else
+		temp = vars->token;
+	while (temp)
 	{
 		free(temp->cont);
 		temp2 = temp;
@@ -27,13 +30,15 @@ void	free_tokens(t_vars *vars)
 	}
 }
 
-void	quit_shell(t_vars *vars)
+void	quit_shell(t_vars *vars, int exit_code)
 {
+	while (vars && vars->token)
+		vars->token = remove_token(vars->token, vars);
 	ft_putstr_fd("exit\n", 2);
 	if (vars->env)
 		free2d(vars->env);
 	if (vars->path_array)
 		free2d(vars->path_array);
 	rl_clear_history();
-	exit(0);
+	exit(exit_code);
 }

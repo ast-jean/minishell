@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset_export_env_echo.c                            :+:      :+:    :+:   */
+/*   unset_export_env.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:59 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/31 14:42:36 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/11/07 10:05:49 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,46 @@ int	builtin_unset(t_vars *vars)
 		if (p != 0)
 			vars->env = ft_arrayrm(vars->env, vars->env[p]);
 		token = token->next;
+		free(name_to_find);
+	}
+	return (1);
+}
+
+int	export_unsetting(t_vars *vars)
+{
+	t_token	*token;
+	char	*name_to_find;
+	int		p;
+
+	token = vars->token->first->next;
+	while (token != NULL)
+	{
+		name_to_find = ft_substr(token->cont, 0, ft_strlen(token->cont)
+				- ft_strlen(ft_strchr(token->cont, '=')) + 1);
+		p = ft_arrayintsrch(vars->env, name_to_find);
+		if (p != 0)
+			vars->env = ft_arrayrm(vars->env, vars->env[p]);
+		token = token->next;
+		free(name_to_find);
+	}
+	return (1);
+}
+
+int	export_parse(t_vars *vars)
+{
+	t_token	*token;
+
+	token = vars->token->first->next;
+	if (!token)
+		return (-1);
+	while (token)
+	{
+		if (ft_strchr(token->cont, '=') == NULL)
+		{
+			ft_putstr_fd("Invalid arguments.\n", 2);
+			return (-1);
+		}
+		token = token->next;
 	}
 	return (1);
 }
@@ -33,7 +73,6 @@ int	builtin_unset(t_vars *vars)
 int	builtin_export(t_vars *vars)
 {
 	t_token	*token;
-	char	*content;
 	int		i;
 
 	token = vars->token->first;
@@ -44,14 +83,16 @@ int	builtin_export(t_vars *vars)
 			printf("declare -x %s\n", vars->env[i++]);
 		return (1);
 	}
-	content = NULL;
+	if (export_parse(vars) == -1)
+		return (1);
+	if (ft_strchr(token->next->cont, '='))
+		export_unsetting(vars);
 	while (token && token->next)
 	{
 		if (ft_strchr(token->next->cont, '='))
 		{
-			content = ft_strdup(remove_quotes(token->next->cont));
-			vars->env = ft_arrayadd(vars->env, content);
-			ft_arrayprint(vars->env);
+			vars->env = ft_arrayadd(vars->env,
+					ft_strdup(remove_quotes(token->next->cont)));
 		}
 		token = token->next;
 	}
@@ -62,53 +103,5 @@ int	builtin_env(t_vars *vars)
 {
 	if (vars->env)
 		ft_arrayprint(vars->env);
-	return (1);
-}
-
-int	is_n(char *str)
-{
-	int	i;
-
-	i = 1;
-	if (str[0] != '-')
-		return (0);
-	while (str[i])
-	{
-		if (str[i] != 'n')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int	builtin_echo(t_token *current, t_vars *vars)
-{
-	bool	n;
-	char	*varstr;
-	char	*str;
-
-	vars->gn = current->group_num;
-	n = false;
-	current = current->next;
-	str = ft_strdup(current->cont);
-	while (current && is_n(remove_quotes(current->cont)))
-	{
-		n = true;
-		current = current->next;
-	}
-	while (current && current->group_num == vars->gn
-		&& ft_strcmp(current->cont, "|") != 0)
-	{
-		varstr = check_var(current->cont, vars);//
-		ft_putstr_fd(varstr, 1);// remove_quotes(varstr);
-		free(varstr);// HAVE TO DO THIS ONLY ONCE!
-		if (current->next != NULL && current->next->group_num == vars->gn)
-			write(1, " ", 1);
-		current = current->next;
-	}
-	free(str);
-	vars->last_output = 0;
-	if (n == false)
-		ft_putstr_fd("\n", 1);
 	return (1);
 }

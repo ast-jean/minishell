@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:38:00 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/28 10:48:39 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/11/03 11:57:32 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define MINISHELL_H
 
 # include "libft/include/libft.h"
-# include <readline/readline.h>
-# include <readline/history.h>
+# include "readline/readline.h"
+# include "readline/history.h"
 # include <signal.h>
 # include <errno.h>
 # include <termios.h>
@@ -55,7 +55,21 @@ typedef struct s_vars
 	char	*cd_oldpwd;
 	int		last_output;
 	int		gn;
+	bool	n;
 }	t_vars;
+
+typedef struct s_norm
+{
+	char	*line;
+	char	*delims;
+	int		len;
+	int		count;
+	char	**split;
+	char	*d_found;
+	char	c;
+	int		i;
+	int		j;
+}	t_norm;
 
 // FONCTIONS (SELON FILENAME)----------------------
 
@@ -65,8 +79,9 @@ typedef struct s_vars
 void	init_shell(t_vars *vars, char **env);
 void	handler(int sig);
 int		get_error(int get);
+void	disable_echo(void);
 void	parse_and_exec(char *line, t_vars *vars, char **env);
-// int		is_builtin(t_token *current, t_vars *vars, char **env);
+void	handler_exec(int sig);
 
 // EXECUTION_CMD.C
 void	finding_paths(t_vars *vars);
@@ -86,6 +101,7 @@ int		syntax_error(char *token);
 int		is_exception(t_token *token);
 int		check_quotes(char *str);
 char	*ft_getenv(char **env, char *varname);
+int		get_error(int status);
 
 // VARIABLES.c
 char	*check_var(char *line, t_vars *vars);
@@ -93,7 +109,7 @@ char	*check_var_heredoc(char *line, t_vars *vars);
 char	*add_varcontent(char *line, char *var_name, char *var_value);
 
 //QUIT.C
-void	quit_shell(t_vars *vars);
+void	quit_shell(t_vars *vars, int exit_code);
 void	free_tokens(t_vars *vars);
 
 // PIPES.C
@@ -142,7 +158,7 @@ void	increm(int *i, int *j);
 
 //TOKENIZE.C
 char	**tokenize(char *line);
-char	**nullify_str(char *line, char *delims, int len, int count);
+char	**nullify_str(t_norm *norm);
 int		cnt_delims(char *line, char *delims);
 
 //NOTE: BUILT INS
@@ -150,10 +166,12 @@ int		cnt_delims(char *line, char *delims);
 int		builtin_cd(t_vars *vars, char **env);
 int		builtin_pwd(t_vars *vars);
 
-// EXPORT_UNSET_EV_ECHO.C
+//ECHO.C
+int		builtin_echo(t_token *current, t_vars *vars);
+
+// EXPORT_UNSET_ENV
 int		builtin_env(t_vars *vars);
 int		builtin_unset(t_vars *vars);
 int		builtin_export(t_vars *vars);
-int		builtin_echo(t_token *current, t_vars *vars);
 //NOTE: ------------------------------------------------
 #endif

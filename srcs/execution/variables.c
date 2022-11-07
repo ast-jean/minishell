@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:26:10 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/28 17:30:57 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/11/03 11:11:26 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ char	*save_varname(char *line)
 		var_name[i] = line[i];
 		i++;
 	}
-	line = ft_strcpy(line, var_name);
-	free(var_name);
-	return (line);
+	return (var_name);
 }
 
 char	*find_var_inline(char *line)
@@ -48,9 +46,10 @@ char	*find_var_inline(char *line)
 					return ((char *)line);
 			}
 		}
-		if (*line == '\'')
+		else if (*line == '\'')
 		{
-			while (*line++ && *line != '\'')
+			line++;
+			while (*line && *line != '\'')
 				line++;
 			if (!*line)
 				return (NULL);
@@ -69,7 +68,7 @@ char	*delete_var_name(int pos2, char *str)
 	char	*newline;
 
 	i = pos2;
-	newline = calloc(ft_strlen(str) + 1, sizeof(char));
+	newline = ft_calloc(ft_strlen(str) + 1, sizeof(char));
 	newline = ft_strcpy(newline, str);
 	while (i >= 0)
 	{
@@ -92,8 +91,7 @@ char	*add_varcontent(char *line, char *var_name, char *var_value)
 	int		pos2;
 	int		i;
 
-	newline = calloc(ft_strlen(line) + 1, sizeof(char));
-	newline = ft_strcpy(newline, line);
+	newline = ft_strdup(line);
 	i = -1;
 	pos = ft_strlen(line) - ft_strlen(find_var_inline(line));
 	pos += ft_strlen(var_name);
@@ -112,19 +110,22 @@ char	*check_var(char *line, t_vars *vars)
 	char	*var_value;
 	char	*newline;
 
-	newline = calloc(ft_strlen(line) + 1, sizeof(char));
-	newline = ft_strcpy(newline, line);
+	newline = ft_strdup(line);
 	while (find_var_inline(newline))
 	{
 		var_name = save_varname(find_var_inline(newline) + 1);
 		if (!ft_strcmp(var_name, "?"))
+		{
 			var_value = ft_itoa(vars->last_output);
+			newline = add_varcontent(newline, var_name, var_value);
+		}
 		else
+		{
 			var_value = ft_getenv(vars->env, var_name);
-		newline = add_varcontent(newline, var_name, var_value);
+			newline = add_varcontent(newline, var_name, var_value);
+			free(var_name);
+		}
 		free(var_value);
 	}
-	line = ft_strcpy(line, newline);
-	free(newline);
-	return (line);
+	return (newline);
 }

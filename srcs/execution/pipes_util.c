@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjarry <mjarry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:16:51 by mjarry            #+#    #+#             */
-/*   Updated: 2022/10/26 11:54:56 by mjarry           ###   ########.fr       */
+/*   Updated: 2022/11/03 11:14:00 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,14 @@ void	format_execve(t_vars *vars, t_token *token)
 		current = current->next;
 	}
 	vars->av = malloc(sizeof(char *) * (vars->ac + 1));
-	vars->av[i] = remove_quotes(token->cont);
+	vars->av[i] = remove_quotes(check_var(token->cont, vars));
 	while (++i < vars->ac)
 	{
-		vars->av[i] = remove_quotes(token->next->cont);
+		vars->av[i] = remove_quotes(check_var(token->next->cont, vars));
 		token = token->next;
 	}
 	vars->av[i] = NULL;
 	execve(vars->path, vars->av, vars->env);
-	current = skip_group(current->group_num, vars);
 	exit(errno);
 }
 
@@ -83,4 +82,15 @@ int	finding_redirs(t_token *current, int fdi, t_vars *vars, char **env)
 	else
 		actually_forking(current, vars, env);
 	return (close_fds(vars->fdi, vars->fdo, pipefd[0]));
+}
+
+int	is_builtin(t_token *current, t_vars *vars)
+{
+	if (current && !ft_strcmp(remove_quotes(current->cont), "pwd"))
+		return (builtin_pwd(vars));
+	else if (current && !ft_strcmp(remove_quotes(current->cont), "env"))
+		return (builtin_env(vars));
+	else if (current && !ft_strcmp(remove_quotes(current->cont), "echo"))
+		return (builtin_echo(current, vars));
+	return (-1);
 }

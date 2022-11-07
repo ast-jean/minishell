@@ -3,7 +3,8 @@
 NAME = minishell
 
 SRCS_FILES 		=	built_ins/cd_pwd.c					\
-					built_ins/unset_export_env_echo.c	\
+					built_ins/unset_export_env.c		\
+					built_ins/echo.c					\
 					execution/check_heredoc.c			\
 					execution/exec_simp_cmd.c			\
 					execution/heredocs.c 				\
@@ -20,6 +21,7 @@ SRCS_FILES 		=	built_ins/cd_pwd.c					\
 					parsing/newtoken.c					\
 					parsing/token_op.c					\
 					parsing/tokenize.c					\
+					parsing/token_util.c				\
 
 INCLUDE_FILES	= 	minishell.h
 
@@ -110,7 +112,7 @@ fclean:	clean
 
 valgrind: $(NAME)
 	valgrind --suppressions=ignore_rdl_leaks.txt --leak-check=full --trace-children=yes --track-fds=yes ./minishell
-#	valgrind --suppressions=ignore_rdl_leaks.txt --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes ./minishell
+	# valgrind --suppressions=ignore_rdl_leaks.txt --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes ./minishell
 	
 re:	fclean all 
 	./$(NAME)

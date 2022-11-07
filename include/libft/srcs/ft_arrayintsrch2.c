@@ -1,38 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_arrayrm.c                                       :+:      :+:    :+:   */
+/*   ft_arrayintsrch2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/01 12:13:13 by xchouina          #+#    #+#             */
-/*   Updated: 2022/11/03 11:43:43 by xchouina         ###   ########.fr       */
+/*   Created: 2022/11/03 11:48:14 by xchouina          #+#    #+#             */
+/*   Updated: 2022/11/03 15:34:04 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+// NOTE:	"ft_arrayintsrch" searchs for a str (2nd param.) 
+// NOTE:	 in a double array (1st param.) and returns its index.
+
 #include "../include/libft.h"
-// NOTE: "ft_arrayrm" removes a str (2nd param.) in a double array (1st param.).
 
-char	**ft_arrayrm(char **tab, char *str_to_rm)
+int	ft_arrayintsrch(char **tab, char *str_to_find, int n)
 {
-	char	**new;
-	int		i;
-	int		j;
+	int	i;
 
-	new = malloc(sizeof(char *) * (ft_arraylen(tab)));
-	i = 0;
-	j = 0;
-	while (tab[i] != NULL)
+	i = -1;
+	while (tab[++i])
 	{
-		if (ft_strcmp(tab[i], str_to_rm))
-			new[j++] = tab[i++];
-		else
-		{
-			free(tab[i]);
-			i++;
-		}
+		if (!ft_strncmp(tab[i], str_to_find, ft_strlen(str_to_find)))
+			return (i);
 	}
-	new[j] = NULL;
-	free(tab);
-	return (new);
+	return (0);
 }

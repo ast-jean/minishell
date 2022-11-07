@@ -6,7 +6,7 @@
 /*   By: ast-jean <ast-jean@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:56:27 by xchouina          #+#    #+#             */
-/*   Updated: 2022/10/25 12:14:56 by ast-jean         ###   ########.fr       */
+/*   Updated: 2022/11/02 18:18:18 by ast-jean         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,26 @@ void	handler_here(int sig)
 
 void	in_child(t_vars *vars, char *delim, int fd)
 {
+	char	*line;
+	char	*prompt;
+
 	signal(2, handler_here);
 	while (ft_strcmp(delim, vars->line))
 	{	
 		if (ft_strcmp(" ", vars->line))
 		{
-			vars->line = ft_strjoin(check_var(vars->line, vars), "\n");
+			line = check_var(vars->line, vars);
+			vars->line = ft_strjoin(line, "\n");
 			ft_putstr_fd(vars->line, fd);
+			free(line);
+			free(vars->line);
 		}
 		rl_on_new_line();
-		vars->line = readline(ft_strjoin(delim, "> "));
+		prompt = ft_strjoin(delim, "> ");
+		vars->line = readline(prompt);
 		if (!vars->line)
 			vars->line = delim;
+		free(prompt);
 	}
 }
 
