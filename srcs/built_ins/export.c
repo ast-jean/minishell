@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset_export_env.c                                 :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:59 by xchouina          #+#    #+#             */
-/*   Updated: 2022/11/07 13:18:09 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/11/07 13:56:06 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	export_unsetting(t_vars *vars)
 		name_to_find = ft_substr(token->cont, 0, ft_strlen(token->cont)
 				- ft_strlen(ft_strchr(token->cont, '=')) + 1);
 		p = ft_arrayintsrch(vars->env, name_to_find);
-		if (p != 0)
+		if (p != -1)
 			vars->env = ft_arrayrm(vars->env, vars->env[p]);
 		token = token->next;
 		free(name_to_find);

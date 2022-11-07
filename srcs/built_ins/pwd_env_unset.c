@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd_pwd.c                                           :+:      :+:    :+:   */
+/*   pwd_env_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:54:36 by xchouina          #+#    #+#             */
-/*   Updated: 2022/11/07 13:18:15 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/11/07 13:55:27 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	builtin_unset(t_vars *vars)
 	{
 		name_to_find = ft_strjoin(token->cont, "=");
 		p = ft_arrayintsrch(vars->env, name_to_find);
-		if (p != 0)
+		if (p != -1)
 			vars->env = ft_arrayrm(vars->env, vars->env[p]);
 		token = token->next;
 		free(name_to_find);

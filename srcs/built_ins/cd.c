@@ -6,7 +6,7 @@
 /*   By: xchouina <xchouina@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:15:26 by xchouina          #+#    #+#             */
-/*   Updated: 2022/11/07 13:17:16 by xchouina         ###   ########.fr       */
+/*   Updated: 2022/11/07 13:52:08 by xchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,22 @@ void	changing_pwd(t_vars *vars)
 	}
 }
 
+int	cd_suite(t_vars *vars, char **env, char *s)
+{
+	char	*new_oldpwd;
+
+	vars->env = ft_arrayrm2(vars->env, "PWD=", 4);
+	vars->env = ft_arrayadd(vars->env,
+			ft_strdup(env[ft_arrayintsrch(env, "PWD=")]));
+	new_oldpwd = ft_strjoin("OLDPWD=", s);
+	changing_oldpwd(vars, new_oldpwd);
+	changing_pwd(vars);
+	return (1);
+}
+
 int	builtin_cd(t_vars *vars, char **env)
 {
 	t_token	*token;
-	char	*new_oldpwd;
 	char	s[100];
 
 	token = vars->token->first->next;
@@ -81,11 +93,5 @@ int	builtin_cd(t_vars *vars, char **env)
 		dprintf(2, "cd: no such file or directory: %s\n", token->cont);
 		return (1);
 	}
-	vars->env = ft_arrayrm2(vars->env, "PWD=", 4);
-	vars->env = ft_arrayadd(vars->env,
-			ft_strdup(env[ft_arrayintsrch(env, "PWD=")]));
-	new_oldpwd = ft_strjoin("OLDPWD=", s);
-	changing_oldpwd(vars, new_oldpwd);
-	changing_pwd(vars);
-	return (1);
+	return (cd_suite(vars, env, s));
 }
