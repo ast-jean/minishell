@@ -1,6 +1,7 @@
-
-<h3 align="center"><ins>MINISHELL</ins></h3>
-![hw](https://github.com/ast-jean/minishell/blob/main/hw.png)
+<div align="center">
+  
+![hw](/hw.png)
+ </div>
 <p align="center">A Minimalist Shell</p>
 
 Minishell is a lightweight, custom-built Unix shell implemented in C. It provides a minimalistic, user-friendly command-line interface, allowing users to execute common shell commands and navigate the file system. By implementing core shell functionalities from scratch, Minishell offers a unique opportunity to gain in-depth understanding of shell programming and Unix system calls. Perfect for educational purposes or as a foundation for more advanced shell projects, Minishell showcases the power of simplicity in a user-friendly package.
