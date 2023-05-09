@@ -28,4 +28,4 @@ Redirections ('```<```', '```>```', '```<<```', '```>>```') and pipes ('```|```'
 
 ## Credits:
 
-This project was made by the hard-work of Adam St-Jean Lejeune ([astjean](https://github.com/ast-jean)), Marie-Soleil Jarry ([mjarry](https://github.com/mariejarry)) and Xavier Chouinard ([xchouina](https://github.com/xchouina)).
+This project was made by the hard-work of <i>Adam St-Jean Lejeune</i> ([astjean](https://github.com/ast-jean)),  <i>Marie-Soleil Jarry</i> ([mjarry](https://github.com/mariejarry)) and  <i>Xavier Chouinard</i> ([xchouina](https://github.com/xchouina)).
