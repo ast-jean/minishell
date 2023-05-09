@@ -15,7 +15,8 @@ Minishell is a school team-working project aiming to recreate our own bash.
 ## How To Use:
 
 Use '$>```make```' then execute '$>```./minishell```' to start the program. You may use different commands to test the project (see examples below). 
-Readline needed for execution. "brew install readline"
+
+Readline needed for execution. "$>```brew install readline```"
 
 ## Examples:
 
